@@ -1,0 +1,63 @@
+name: MCP Registry status change
+
+# Sets the registry status of every version of the named servers
+# (active, deprecated or deleted). Signs in with GitHub OIDC, so it can only
+# change servers in the namespace of the account or org that owns this repo.
+on:
+  workflow_dispatch:
+    inputs:
+      servers:
+        description: "Space-separated server names, e.g. io.github.jrhite/web-monitoring"
+        required: true
+      status:
+        description: "active, deprecated or deleted"
+        required: true
+        default: deleted
+      message:
+        description: "Optional status message"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      MCP_PUBLISHER_VERSION: v1.8.1
+    steps:
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Download and verify mcp-publisher
+        run: |
+          set -euo pipefail
+          archive="mcp-publisher_linux_amd64.tar.gz"
+          base_url="https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}"
+          curl --fail --location --silent --show-error --output "$archive" "$base_url/$archive"
+          curl --fail --location --silent --show-error --output "$archive.sigstore.json" "$base_url/$archive.sigstore.json"
+          cosign verify-blob \
+            --bundle "$archive.sigstore.json" \
+            --certificate-identity "https://github.com/modelcontextprotocol/registry/.github/workflows/release.yml@refs/tags/${MCP_PUBLISHER_VERSION}" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            "$archive"
+          tar xzf "$archive" mcp-publisher
+          rm -f "$archive" "$archive.sigstore.json"
+
+      - name: Authenticate to MCP Registry
+        run: ./mcp-publisher login github-oidc
+
+      - name: Change status
+        env:
+          SERVERS: ${{ inputs.servers }}
+          STATUS: ${{ inputs.status }}
+          MESSAGE: ${{ inputs.message }}
+        run: |
+          set -euo pipefail
+          for s in $SERVERS; do
+            echo "Setting $s to $STATUS"
+            ./mcp-publisher status --status "$STATUS" ${MESSAGE:+--message "$MESSAGE"} --all-versions --yes "$s"
+          done
