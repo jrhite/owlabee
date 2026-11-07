@@ -2,6 +2,8 @@
 // input schema or dataset schema. Inline HTML is allowed in text fields; JSON fields are objects.
 // Inputs are validated against each Actor's input schema before publishing.
 
+import { courtTable } from './pacer-courts.mjs';
+
 export const pages = [
   {
     slug: 'building-permits-api',
@@ -626,7 +628,7 @@ export const pages = [
       'Every federal district and bankruptcy court running CM/ECF publishes a free RSS feed of its last 24 hours of docket activity. This Actor reads those feeds for the courts you choose, normalizes each entry, filters it, and on scheduled runs keeps only entries that are new since the last run. No PACER account is needed.',
     source: `
 <p>The feeds are the courts' own public endpoints, <code>https://ecf.&lt;court&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code>. Each entry has the case number, the case title (the lead parties), the docket text, the document number with a link, and the filing time. Documents are linked, never downloaded; opening a document on PACER is subject to PACER's own fees.</p>
-<p>Coverage differs per court. In the Actor's sweep of 2026-10-17, 94 courts published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests. The Actor still tries every court you name and reports what happened.</p>
+<p>Coverage differs per court. In the Actor's sweep of 2026-10-17, 94 courts published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests. The Actor still tries every court you name and reports what happened. The full list is on <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a>.</p>
 <p>For past dockets, the optional historical pass reads the RECAP archive through the Free Law Project's CourtListener API, in the same record shape with <code>source: "courtlistener-recap"</code>.</p>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -696,7 +698,316 @@ export const pages = [
       ['Can I get the judge or all parties?', 'Not from the feed. Open <code>docketUrl</code> on PACER. Historical RECAP records do include parties, nature of suit and the assigned judge when the archive has them.'],
       ['What if a court\'s feed is down?', 'That court produces one error item and the run continues with the others.'],
     ],
-    related: ['grants-gov-api', 'product-recalls-api'],
+    related: ['pacer-rss-feeds-by-court', 'patent-litigation-docket-monitor', 'bankruptcy-filings-monitor', 'sdny-securities-class-action-monitor'],
+  },
+
+  {
+    slug: 'pacer-rss-feeds-by-court',
+    kind: 'reference',
+    actor: 'federal-court-docket-monitor',
+    title: 'PACER RSS Feeds by Court: All 188 Federal Courts Listed',
+    nav: 'PACER RSS feeds by court',
+    description:
+      'Which federal district and bankruptcy courts publish a PACER RSS feed, and what each carries: CM/ECF code, court name, feed status and entry types for all 188 courts.',
+    lede:
+      'Every federal district and bankruptcy court on CM/ECF can publish a free RSS feed of its docket activity, but not all do, and many publish only some kinds of entries. This page lists all 188 courts with their CM/ECF code, whether the feed was live, and what it carries.',
+    input: { courts: ['nysd'], maxEntriesPerCourt: 100, onlyNewSinceLastRun: false },
+    guideLinks: ['patent-litigation-docket-monitor', 'bankruptcy-filings-monitor', 'sdny-securities-class-action-monitor', 'pacer-rss-docket-monitor'],
+    prompt: 'Which bankruptcy courts in Texas publish a PACER RSS feed with every entry type?',
+    faq: [
+      ['How do I read a court\'s PACER RSS feed directly?', 'Open <code>https://ecf.&lt;code&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code> with the code from the table, for example <code>https://ecf.nysd.uscourts.gov/cgi-bin/rss_outside.pl</code>. It is an RSS file of the last 24 hours of entries.'],
+      ['Do I need a PACER account?', 'Not to read the feeds. They are public, unauthenticated endpoints. Opening a linked document on PACER is subject to PACER\'s own fees.'],
+      ['Why do some courts publish only some entry types?', 'Each court chooses which CM/ECF entry types its feed includes. The table lists the types a partial feed advertises, as the feed states them.'],
+      ['What does "did not answer" mean?', 'During the sweep the court\'s server timed out, sent an empty reply or returned an HTTP error to a request from a datacenter IP. The feed may still work from another network.'],
+      ['How far back does a feed go?', 'Only the trailing 24 hours. To keep a running record, read the feeds at least daily; the Actor\'s README suggests hourly, since courts regenerate feeds every 30 to 60 minutes.'],
+      ['How current is this list?', `It reflects the Actor's registry, generated from a sweep on 2026-10-17. Feed settings change, so a court you name is always tried and each run reports what every court returned.`],
+    ],
+    related: ['pacer-rss-docket-monitor', 'patent-litigation-docket-monitor', 'bankruptcy-filings-monitor', 'sdny-securities-class-action-monitor'],
+  },
+
+  {
+    slug: 'patent-litigation-docket-monitor',
+    actor: 'federal-court-docket-monitor',
+    title: 'Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets',
+    nav: 'Patent cases: Delaware & Texas',
+    description:
+      'Watch new civil cases in the District of Delaware and the Eastern and Western Districts of Texas from their PACER RSS feeds, and find patent dockets in the RECAP archive.',
+    lede:
+      'This guide shows how to follow new cases in the District of Delaware (<code>ded</code>) and the Eastern and Western Districts of Texas (<code>txed</code>, <code>txwd</code>) from their public PACER RSS feeds, and how to narrow to patent cases. The live feeds do not say what a case is about, so the guide also covers the RECAP archive pass, which does.',
+    source: `
+<p>At the Actor's 2026-10-17 sweep, all three courts published every entry type:</p>
+${courtTable(['ded', 'txed', 'txwd'], '../pacer-rss-feeds-by-court/')}
+<h3>What the live feeds can and cannot tell you</h3>
+<p>Each feed entry has the case number, the case title (the lead parties, such as "Smith v. Acme Corp et al"), a short docket text in brackets, the document number with a link, and the filing time. <strong>Nature of suit, party lists, judges and the full docket text are not in the feeds.</strong> In the Actor's test data the docket text is the entry's label, such as <code>[Notice of Filing]</code>.</p>
+<p>So there are two ways to find patent cases:</p>
+<ul>
+<li><strong>New civil cases, then review.</strong> <code>caseTypes: ["civil"]</code> with <code>newCasesOnly</code> keeps document number 1 of each civil case (the complaint or notice of removal). You get every new civil case in the three courts, with the case title and docket link to review.</li>
+<li><strong>Keyword plus the RECAP archive.</strong> <code>entryKeywords</code> matches the docket text, case-insensitively. In the live feeds it matches only when a court's docket text contains the word. With <code>includeHistorical</code>, plain keywords (not regexes) are also sent to the RECAP archive's search of entry descriptions, through the Free Law Project's CourtListener API. Archive records carry <code>natureOfSuit</code>, <code>cause</code>, <code>parties</code> and <code>assignedTo</code>.</li>
+</ul>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Each live feed covers only the trailing 24 hours. Schedule at least daily; hourly is a good default.</li>
+<li>The RECAP archive holds what RECAP users and the Free Law Project have fetched from PACER, so coverage of a given case varies.</li>
+<li>The CourtListener API allows 5 requests per minute, 50 per hour and 125 per day by default, shared by anonymous callers. A free CourtListener token gives a run its own allowance.</li>
+<li>This page describes public docket data and how to filter it. It is not legal advice.</li>
+</ul>`,
+    fields: [
+      ['court, courtName, caseNumber, caseTitle', 'Where and which case; the title names the lead parties'],
+      ['caseType', '<code>civil</code> for cv case numbers'],
+      ['entryText, entryCategory', 'The docket text in the feed and a heuristic category such as <code>complaint</code>'],
+      ['documentNumber, likelyNewCase', 'Document 1 marks the opening of a case'],
+      ['documentUrl, docketUrl', 'Links to the document and the docket on PACER'],
+      ['matchedFilters', 'Which filters the entry matched'],
+      ['natureOfSuit, cause, parties, assignedTo', 'Archive records only (<code>source: "courtlistener-recap"</code>)'],
+      ['recapUrl', 'The docket or entry on CourtListener, for archive records'],
+    ],
+    example: {
+      caption: 'Shape of a new-case record from the live feed (field names from the Actor; the case and its parties are placeholders):',
+      json: {
+        recordType: 'docket-entry',
+        court: 'txed',
+        courtName: 'U.S. District Court, Eastern District of Texas',
+        courtType: 'district',
+        state: 'TX',
+        caseNumber: '2:26-cv-01234',
+        caseNumberShort: '26-cv-1234',
+        caseTitle: 'Example Patent Holdings LLC v. Sample Devices Inc.',
+        caseType: 'civil',
+        entryText: 'Complaint',
+        entryCategory: 'complaint',
+        documentNumber: 1,
+        docketUrl: 'https://ecf.txed.uscourts.gov/cgi-bin/DktRpt.pl?000000',
+        likelyNewCase: true,
+        matchedFilters: ['caseType:civil', 'newCase'],
+        isNew: true,
+        source: 'pacer-rss',
+        recapUrl: null,
+      },
+    },
+    useCases: [
+      ['Hourly list of new civil cases', 'Run the first input below every hour with <code>onlyNewSinceLastRun</code>. Each run returns only cases opened since the previous one, with titles and docket links, ready to screen for patent matters.'],
+      ['30-day backfill of patent dockets', 'Run the second input to search the RECAP archive for patent-related dockets filed in the three courts in the last 30 days, with nature of suit and parties where the archive has them.'],
+      ['A company you follow', 'Add <code>partyKeywords</code> with the company\'s name to be told when a new case in these courts names it in the title, or in the party list of an archive record.'],
+    ],
+    input: {
+      courts: ['ded', 'txed', 'txwd'],
+      caseTypes: ['civil'],
+      newCasesOnly: true,
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'new-civil-ded-txed-txwd',
+      maxEntriesPerCourt: 200,
+      notifyOnlyOnResults: true,
+    },
+    inputCaption: 'Every new civil case in the three courts since the last run:',
+    moreInputs: [
+      {
+        caption: 'The second input adds the keyword "patent" and the RECAP archive pass for the last 30 days. The keyword applies to live entries too, so live complaints whose docket text lacks the word are left out:',
+        json: {
+          courts: ['ded', 'txed', 'txwd'],
+          caseTypes: ['civil'],
+          entryKeywords: ['patent'],
+          newCasesOnly: true,
+          includeHistorical: true,
+          historicalSinceDays: 30,
+          maxHistoricalPerCourt: 100,
+          maxEntriesPerCourt: 200,
+        },
+      },
+    ],
+    prompt: 'List the new civil cases filed today in the District of Delaware and the Eastern and Western Districts of Texas, with case titles and docket links.',
+    faq: [
+      ['Can the live feed tell me which new cases are patent cases?', 'Not directly. The feeds carry no nature of suit, and the docket text is short. Review new cases by title and docket, or use the archive pass, whose records include <code>natureOfSuit</code>.'],
+      ['Why use a plain keyword instead of a regex for the archive?', 'Only plain keywords are sent to the archive\'s search. A regex is applied locally to the records the search returns.'],
+      ['How many archive dockets can a run read?', 'Up to <code>maxHistoricalPerCourt</code> per court (1 to 1,000, default 100), paced at one page of 20 dockets every 12 seconds. Without your own CourtListener token, plan on about 100 dockets per court and a handful of courts per run.'],
+      ['Does it download complaints?', 'No. Documents are linked, never downloaded. Opening one on PACER is subject to PACER\'s fees.'],
+      ['Is this legal advice?', 'No. It describes public docket data and how to filter it.'],
+    ],
+    related: ['pacer-rss-feeds-by-court', 'sdny-securities-class-action-monitor', 'bankruptcy-filings-monitor', 'pacer-rss-docket-monitor'],
+  },
+
+  {
+    slug: 'bankruptcy-filings-monitor',
+    actor: 'federal-court-docket-monitor',
+    title: 'New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds',
+    nav: 'New bankruptcy filings',
+    description:
+      'Get new Chapter 11 and Chapter 7 bankruptcy petitions from the public PACER RSS feeds of Delaware, S.D.N.Y. and Texas bankruptcy courts, filtered by chapter.',
+    lede:
+      'Bankruptcy courts publish their docket activity in public RSS feeds, and most put the chapter in front of each entry. This guide shows how to turn those feeds into a running list of new Chapter 11 and Chapter 7 petitions in Delaware, the Southern District of New York and the Texas bankruptcy courts.',
+    source: `
+<p>Courts used in this guide, from the Actor's registry (sweep of 2026-10-17):</p>
+${courtTable(['deb', 'nysb', 'txsb', 'txnb', 'njb', 'vaeb', 'ilnb'], '../pacer-rss-feeds-by-court/')}
+<p>The input below uses the four with feeds of every entry type. Of the others, the New Jersey feed's advertised types do not include a petition type, and the Eastern District of Virginia and Northern District of Illinois bankruptcy feeds did not answer from a datacenter IP at the sweep. The Actor still tries any court you name, and the run's summary says what each one returned.</p>
+<h3>How bankruptcy entries are read</h3>
+<ul>
+<li>Most bankruptcy courts put a prefix before the entry text, for example <code>Type: bk Office: 1 Chapter: 7 Trustee: …</code>. The Actor reads <code>bankruptcyChapter</code>, <code>trustee</code> and <code>office</code> from it, or the chapter from the entry text.</li>
+<li><code>bankruptcyChapters</code> keeps entries under the chapters you list (7, 9, 11, 12, 13 or 15). Entries without a chapter are dropped when it is set.</li>
+<li><code>newCasesOnly</code> keeps document number 1 of each case, which in a bankruptcy case is the petition. <code>caseTypes: ["bankruptcy"]</code> leaves out adversary proceedings, which have their own case type.</li>
+<li>Bankruptcy case numbers often have no type code (<code>26-11511</code>), and some courts append judge initials or the chapter. The Actor keeps the number as published and adds a normalized <code>caseNumberShort</code>.</li>
+</ul>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Each feed covers only the trailing 24 hours. Schedule hourly or at least daily.</li>
+<li>The feed carries the case title and the short docket text only; open <code>docketUrl</code> on PACER for the filing itself.</li>
+<li>This page describes public docket data and how to filter it. It is not legal or financial advice.</li>
+</ul>`,
+    fields: [
+      ['court, courtName, caseNumber, caseNumberShort', 'Where and which case'],
+      ['caseTitle', 'The case name as the court publishes it, usually the debtor'],
+      ['bankruptcyChapter, trustee, office', 'From the prefix the court publishes'],
+      ['entryText, entryCategory', 'Docket text and a heuristic category such as <code>petition</code>'],
+      ['documentNumber, likelyNewCase', 'Document 1 is the petition'],
+      ['filedAt', 'Filing time'],
+      ['documentUrl, docketUrl', 'Links to the document and docket on PACER'],
+      ['matchedFilters, isNew', 'Which filters matched, and the new-since-last-run flag'],
+    ],
+    example: {
+      caption: 'Shape of a new Chapter 11 petition record (field names from the Actor; the debtor and numbers are placeholders):',
+      json: {
+        recordType: 'docket-entry',
+        court: 'deb',
+        courtName: 'U.S. Bankruptcy Court, District of Delaware',
+        courtType: 'bankruptcy',
+        state: 'DE',
+        caseNumber: '26-10000',
+        caseNumberShort: '26-10000',
+        caseTitle: 'Example Holdings, Inc.',
+        caseType: 'bankruptcy',
+        bankruptcyChapter: 11,
+        trustee: null,
+        office: '1',
+        entryText: 'Voluntary Petition',
+        entryCategory: 'petition',
+        documentNumber: 1,
+        docketUrl: 'https://ecf.deb.uscourts.gov/cgi-bin/DktRpt.pl?000000',
+        likelyNewCase: true,
+        matchedFilters: ['caseType:bankruptcy', 'chapter:11', 'newCase'],
+        isNew: true,
+        source: 'pacer-rss',
+      },
+    },
+    useCases: [
+      ['Hourly Chapter 11 alerts', 'Schedule the input below hourly with a <code>webhookUrl</code>. Only petitions not seen on earlier runs are sent.'],
+      ['Chapter 7 only, one court', 'Set <code>courts: ["deb"]</code> and <code>bankruptcyChapters: ["7"]</code> for the README\'s ready-made Delaware Chapter 7 feed.'],
+      ['Every live court in a state', 'Use a state code such as <code>courts: ["TX"]</code>, which expands to every court in that state with a live feed at the last sweep, district courts included. <code>caseTypes: ["bankruptcy"]</code> keeps only bankruptcy cases.'],
+    ],
+    input: {
+      courts: ['deb', 'nysb', 'txsb', 'txnb'],
+      caseTypes: ['bankruptcy'],
+      bankruptcyChapters: ['11', '7'],
+      newCasesOnly: true,
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'new-ch11-ch7-petitions',
+      maxEntriesPerCourt: 500,
+      notifyOnlyOnResults: true,
+    },
+    inputCaption: 'New Chapter 11 and Chapter 7 petitions in four bankruptcy courts, new since the last run:',
+    prompt: 'Alert me every hour to new Chapter 11 petitions filed in Delaware (deb) and SDNY Bankruptcy (nysb), only ones not seen before.',
+    faq: [
+      ['Where does the chapter come from?', 'From the "Chapter:" prefix most bankruptcy courts publish before the entry text, or from the entry text itself.'],
+      ['Why are adversary proceedings left out?', 'They have their own case type, <code>adversary</code>. Remove <code>caseTypes</code>, or add <code>adversary</code>, to include them.'],
+      ['Does the first run send everything?', 'The first run with <code>onlyNewSinceLastRun</code> is a baseline. Later runs emit only entries not seen before.'],
+      ['Can I watch for a specific debtor?', 'Yes. <code>partyKeywords</code> matches the case title, and <code>caseNumbers</code> follows one case.'],
+      ['Is this legal or financial advice?', 'No. It describes public docket data and how to filter it.'],
+    ],
+    related: ['pacer-rss-feeds-by-court', 'patent-litigation-docket-monitor', 'sdny-securities-class-action-monitor', 'pacer-rss-docket-monitor'],
+  },
+
+  {
+    slug: 'sdny-securities-class-action-monitor',
+    actor: 'federal-court-docket-monitor',
+    title: 'S.D.N.Y. Securities and Class Action Complaint Alerts',
+    nav: 'S.D.N.Y. securities & class actions',
+    description:
+      'Follow new civil complaints in the Southern District of New York from its PACER RSS feed and find securities and class-action dockets with keywords and the RECAP archive.',
+    lede:
+      'The Southern District of New York publishes a large, partial PACER RSS feed that includes complaints. This guide shows how to get every new civil case opened there, and how to narrow to securities and class-action matters with keywords, party names and the RECAP archive.',
+    source: `
+<p>At the Actor's sweep of 2026-10-17, the S.D.N.Y. feed was live and published only the entry types below. <code>cmp</code> (complaints) is among them:</p>
+${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
+<h3>What the feed gives you, and what it does not</h3>
+<p>Each entry has the case number, the case title (lead parties), a short docket text in brackets such as <code>[Memorandum of Law in Support of Motion]</code>, the document number with a link, and the filing time. The feed has no nature of suit, party list or full docket text, so "securities" or "class action" appears in a live entry only if the court's docket text for it contains the phrase.</p>
+<ul>
+<li><code>caseTypes: ["civil"]</code> with <code>newCasesOnly</code> returns document number 1 of every new civil case: the complaint or notice of removal.</li>
+<li><code>entryKeywords</code> such as <code>class action</code> or <code>securities</code> narrow live entries whose docket text contains them. With <code>includeHistorical</code>, plain keywords are also sent to the RECAP archive's search of entry descriptions, and archive records carry <code>natureOfSuit</code>, <code>cause</code> and the full <code>parties</code> list.</li>
+<li><code>partyKeywords</code> matches the case title in live entries and the party list in archive records, so it also finds companies that are not first-named.</li>
+</ul>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>The feed covers the trailing 24 hours, and busy courts publish thousands of entries a day. Use filters and <code>maxEntriesPerCourt</code>.</li>
+<li>A party that is not first-named may be missing from a live case title; the archive pass and <code>docketUrl</code> have the rest.</li>
+<li>This page describes public docket data and how to filter it. It is not legal advice.</li>
+</ul>`,
+    fields: [
+      ['caseNumber, caseTitle, caseType', 'The case; the title names the lead parties'],
+      ['entryText, entryCategory', 'Docket text in the feed and a heuristic category'],
+      ['documentNumber, likelyNewCase', 'Document 1 opens the case'],
+      ['documentUrl, docketUrl', 'Links to the document and docket on PACER'],
+      ['matchedFilters, isNew', 'Which filters matched, and the new-since-last-run flag'],
+      ['natureOfSuit, cause, parties, assignedTo', 'Archive records only'],
+      ['moreEntriesInArchive, recapUrl', 'Archive records: more entries exist on CourtListener, and the link'],
+    ],
+    example: {
+      caption: 'Shape of a new civil case record from the live S.D.N.Y. feed (field names from the Actor; the case and parties are placeholders):',
+      json: {
+        recordType: 'docket-entry',
+        court: 'nysd',
+        courtName: 'U.S. District Court, Southern District of New York',
+        courtType: 'district',
+        state: 'NY',
+        caseNumber: '1:26-cv-09999',
+        caseNumberShort: '26-cv-9999',
+        caseTitle: 'Doe v. Example Corp. et al',
+        caseType: 'civil',
+        entryText: 'Complaint',
+        entryCategory: 'complaint',
+        documentNumber: 1,
+        docketUrl: 'https://ecf.nysd.uscourts.gov/cgi-bin/DktRpt.pl?000000',
+        likelyNewCase: true,
+        matchedFilters: ['caseType:civil', 'newCase'],
+        isNew: true,
+        source: 'pacer-rss',
+      },
+    },
+    useCases: [
+      ['Every new civil complaint, hourly', 'Run the first input on an hourly schedule. Each run lists cases opened since the previous one, to screen by title for securities and class-action matters.'],
+      ['Keyword search with the archive', 'Run the second input to combine live keyword matching with a 30-day RECAP archive search for "class action" and "securities", with nature of suit where the archive has it.'],
+      ['Issuers you follow', 'Put the companies you follow in <code>partyKeywords</code> with <code>newCasesOnly</code> to be told when a new S.D.N.Y. case names one of them.'],
+    ],
+    input: {
+      courts: ['nysd'],
+      caseTypes: ['civil'],
+      newCasesOnly: true,
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'new-civil-nysd',
+      maxEntriesPerCourt: 300,
+      notifyOnlyOnResults: true,
+    },
+    inputCaption: 'Every new civil case in S.D.N.Y. since the last run:',
+    moreInputs: [
+      {
+        caption: 'The second input adds the keywords and a 30-day RECAP archive pass. The keywords apply to live entries too, so live complaints whose docket text lacks them are left out:',
+        json: {
+          courts: ['nysd'],
+          caseTypes: ['civil'],
+          entryKeywords: ['class action', 'securities'],
+          newCasesOnly: true,
+          includeHistorical: true,
+          historicalSinceDays: 30,
+          maxHistoricalPerCourt: 100,
+          maxEntriesPerCourt: 300,
+        },
+      },
+    ],
+    prompt: 'Which new lawsuits were filed in the Southern District of New York today naming a bank? Give me case number, title and the docket link.',
+    faq: [
+      ['Does the S.D.N.Y. feed include complaints?', 'Yes. At the 2026-10-17 sweep its feed advertised <code>cmp</code> among its entry types.'],
+      ['Why might a securities complaint not match my keyword?', 'The live feed\'s docket text is short. If the text for a complaint does not contain your phrase, it will not match. The new-civil-cases input catches it regardless.'],
+      ['Can I search all parties, not just the lead ones?', 'In archive records, yes: <code>partyKeywords</code> matches the full party list. Live entries only have the case title.'],
+      ['Can I follow one case after it is filed?', 'Yes. Put its number in <code>caseNumbers</code>; <code>1:26-cv-03810</code>, <code>26-cv-3810</code> and similar forms all work.'],
+      ['Is this legal advice?', 'No. It describes public docket data and how to filter it.'],
+    ],
+    related: ['pacer-rss-feeds-by-court', 'patent-litigation-docket-monitor', 'bankruptcy-filings-monitor', 'pacer-rss-docket-monitor'],
   },
 
   {

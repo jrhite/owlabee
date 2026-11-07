@@ -5,6 +5,7 @@ import { mkdirSync, writeFileSync, readFileSync, copyFileSync } from 'node:fs';
 import { pages } from './site-content.mjs';
 import { actors, storeUrl, apiUrl, mcpUrl } from './actors.mjs';
 import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY } from './site-config.mjs';
+import { referenceSections } from './pacer-courts.mjs';
 
 const UPDATED = '2026-11-07';
 const root = new URL('../', import.meta.url);
@@ -93,16 +94,13 @@ function guidePage(p) {
   const store = storeUrl(a.name);
   const examples = `${REPO_URL}/tree/main/examples/${a.name}`;
   const fullTitle = `${p.title} | ${SITE_NAME}`;
-  const body = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> ${esc(p.nav)}</nav>
-<article>
-<h1>${esc(p.title)}</h1>
-<p class="lede">${p.lede}</p>
-<div class="cta">
-<a class="button" href="${store}">Open the Actor on Apify Store</a>
-<p class="note">${esc(a.title)}. Pay per result; see the Store page for current pricing.</p>
-</div>
-<nav class="toc" aria-label="On this page">
+  const middle = p.kind === 'reference'
+    ? `<nav class="toc" aria-label="On this page">
+<a href="#source">Source and date</a><a href="#courts">All courts</a><a href="#by-status">By status</a><a href="#monitor">Monitor a court</a><a href="#faq">FAQ</a>
+</nav>
+${referenceSections({ input: p.input, guideLinks: p.guideLinks.map((g) => `<a href="../${g}/">${esc(pageBySlug[g].nav)}</a>`).join(', ') })}
+`
+    : `<nav class="toc" aria-label="On this page">
 <a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
 </nav>
 
@@ -137,7 +135,7 @@ ${p.useCases.map(([h, t]) => `<h3>${esc(h)}</h3>\n<p>${t}</p>`).join('\n')}
 <p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
 <h3>With curl</h3>
 <p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. ${p.inputCaption}</p>
-${pre(curlFor(a.name, p.input), 'curl command')}
+${pre(curlFor(a.name, p.input), 'curl command')}${(p.moreInputs ?? []).map((m) => `\n<p>${m.caption}</p>\n${pre(JSON.stringify(m.json, null, 2), 'Actor input')}`).join('')}
 <h3>From an AI agent (MCP)</h3>
 <p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
 ${pre(mcpFor(a.name), 'MCP client configuration')}
@@ -146,7 +144,17 @@ ${pre(mcpFor(a.name), 'MCP client configuration')}
 <p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="${examples}">examples/${esc(a.name)}</a> on GitHub.</p>
 </section>
 
-<section id="faq">
+`;
+  const body = `
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> ${esc(p.nav)}</nav>
+<article>
+<h1>${esc(p.title)}</h1>
+<p class="lede">${p.lede}</p>
+<div class="cta">
+<a class="button" href="${store}">Open the Actor on Apify Store</a>
+<p class="note">${esc(a.title)}. Pay per result; see the Store page for current pricing.</p>
+</div>
+${middle}<section id="faq">
 <h2>FAQ</h2>
 ${p.faq.map(([q, t]) => `<h3>${q}</h3>\n<p>${t}</p>`).join('\n')}
 </section>
