@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jrhite/us-public-records",
+  "title": "US Public Records (permits, grants, OSHA/EPA, recalls)",
+  "description": "US public records as JSON: building permits, Grants.gov/SAM.gov, OSHA/EPA, recalls, licenses, PACER.",
+  "repository": {
+    "url": "https://github.com/jrhite/owlabee",
+    "source": "github",
+    "subfolder": "mcp/us-public-records"
+  },
+  "websiteUrl": "https://apify.com/owlabee",
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=owlabee/building-permits-scraper,owlabee/accela-energov-permit-scraper,owlabee/grants-gov-api,owlabee/gov-opportunity-fit-scorer,owlabee/osha-epa-enforcement-report,owlabee/product-recall-feed,owlabee/us-license-verifier,owlabee/federal-court-docket-monitor",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Apify API token, sent as 'Bearer <token>'. Runs are billed per result to your Apify account.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

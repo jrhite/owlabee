@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jrhite/documents-to-data",
+  "title": "Documents to Data (PDF to Markdown, document to JSON)",
+  "description": "Turn PDFs, documents, podcasts and drone photos into Markdown, structured JSON, summaries, reports.",
+  "repository": {
+    "url": "https://github.com/jrhite/owlabee",
+    "source": "github",
+    "subfolder": "mcp/documents-to-data"
+  },
+  "websiteUrl": "https://apify.com/owlabee",
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=owlabee/pdf-to-markdown,owlabee/document-to-json-extractor,owlabee/podcast-episode-summarizer,owlabee/drone-roof-inspection-report",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Apify API token, sent as 'Bearer <token>'. Runs are billed per result to your Apify account.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
