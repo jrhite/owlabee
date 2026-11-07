@@ -64,11 +64,11 @@ const meta = {
   },
   'federal-court-docket-monitor': {
     group: 'Government and public records',
-    returns: 'New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type',
+    returns: 'New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type',
     purpose:
-      'Reads the free public RSS feeds that federal district and bankruptcy courts publish from CM/ECF, normalizes every docket entry, and filters by party name, case number, case type, entry type, keyword or bankruptcy chapter. Monitor mode flags only entries that are new since the last run. An optional pass reads older dockets from the RECAP archive through the CourtListener API.',
+      'Reads the free public RSS feeds that federal district and bankruptcy courts, the Court of Federal Claims, the Court of International Trade and courts of appeals publish from CM/ECF, normalizes every docket entry, and filters by party name, case number, case type, entry type, keyword or bankruptcy chapter. Monitor mode flags only entries that are new since the last run. An optional pass reads older dockets from the RECAP archive through the CourtListener API.',
     keyInputs: [
-      ['courts', 'Required. CM/ECF court codes such as `nysd` or `deb`, `all`, `all-district`, `all-bankruptcy`, or state codes.'],
+      ['courts', 'Required. CM/ECF court codes such as `nysd`, `deb`, `ca4` or `cofc`; `all` (district and bankruptcy), `all-district`, `all-bankruptcy`, `all-appellate`, `all-national`; or state codes.'],
       ['partyKeywords', 'Keep entries whose case title contains any of these.'],
       ['entryTypes', 'For example `complaint`, `petition`, `motion`, `order`.'],
       ['newCasesOnly', 'Keep only document number 1 of a case.'],

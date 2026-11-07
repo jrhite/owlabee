@@ -96,7 +96,7 @@ function guidePage(p) {
   const fullTitle = `${p.title} | ${SITE_NAME}`;
   const middle = p.kind === 'reference'
     ? `<nav class="toc" aria-label="On this page">
-<a href="#source">Source and date</a><a href="#courts">All courts</a><a href="#by-status">By status</a><a href="#monitor">Monitor a court</a><a href="#faq">FAQ</a>
+<a href="#source">Source and date</a><a href="#courts">District &amp; bankruptcy</a><a href="#appellate">Courts of appeals</a><a href="#national">National courts</a><a href="#by-status">By status</a><a href="#monitor">Monitor a court</a><a href="#faq">FAQ</a>
 </nav>
 ${referenceSections({ input: p.input, guideLinks: p.guideLinks.map((g) => `<a href="../${g}/">${esc(pageBySlug[g].nav)}</a>`).join(', ') })}
 `
