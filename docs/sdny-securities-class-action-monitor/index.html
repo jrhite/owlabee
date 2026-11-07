@@ -56,7 +56,7 @@
 <p>Each entry has the case number, the case title (lead parties), a short docket text in brackets such as <code>[Memorandum of Law in Support of Motion]</code>, the document number with a link, and the filing time. The feed has no nature of suit, party list or full docket text, so "securities" or "class action" appears in a live entry only if the court's docket text for it contains the phrase.</p>
 <ul>
 <li><code>caseTypes: ["civil"]</code> with <code>newCasesOnly</code> returns document number 1 of every new civil case: the complaint or notice of removal.</li>
-<li><code>entryKeywords</code> such as <code>class action</code> or <code>securities</code> narrow live entries whose docket text contains them. With <code>includeHistorical</code>, plain keywords are also sent to the RECAP archive's search of entry descriptions, and archive records carry <code>natureOfSuit</code>, <code>cause</code> and the full <code>parties</code> list.</li>
+<li><code>entryKeywords</code> such as <code>class action</code> or <code>securities</code> narrow live entries whose docket text contains them. With <code>includeHistorical</code> and a free CourtListener API token in <code>courtListenerApiKey</code>, plain keywords are also sent to the RECAP archive's search of entry descriptions, and archive records carry <code>natureOfSuit</code>, <code>cause</code> and the full <code>parties</code> list.</li>
 <li><code>partyKeywords</code> matches the case title in live entries and the party list in archive records, so it also finds companies that are not first-named.</li>
 </ul>
 <h3>Limits worth knowing</h3>
@@ -158,6 +158,7 @@ curl -sS -X POST \
   ],
   &quot;newCasesOnly&quot;: true,
   &quot;includeHistorical&quot;: true,
+  &quot;courtListenerApiKey&quot;: &quot;&lt;your free CourtListener API token&gt;&quot;,
   &quot;historicalSinceDays&quot;: 30,
   &quot;maxHistoricalPerCourt&quot;: 100,
   &quot;maxEntriesPerCourt&quot;: 300

@@ -693,7 +693,7 @@ export const pages = [
     prompt: 'Every hour, check the Delaware and SDNY bankruptcy courts for new Chapter 11 filings and give me the case title, entry text and docket link.',
     faq: [
       ['Do I need a PACER account?', 'No. The RSS feeds are public, unauthenticated endpoints. Only opening a linked document on PACER is subject to PACER\'s fees.'],
-      ['How far back does it go?', 'The live feeds cover 24 hours. Turn on <code>includeHistorical</code> to also read dockets from the last 1 to 365 days in the RECAP archive.'],
+      ['How far back does it go?', 'The live feeds cover 24 hours. Turn on <code>includeHistorical</code> to also read dockets from the last 1 to 365 days in the RECAP archive. That needs a free CourtListener API token in <code>courtListenerApiKey</code>, since the CourtListener API no longer answers anonymous requests.'],
       ['Why does the same entry appear twice?', 'Some courts attach two event labels to one entry. Both are published with the same <code>entryId</code>; <code>entryKey</code> tells them apart.'],
       ['Can I get the judge or all parties?', 'Not from the feed. Open <code>docketUrl</code> on PACER. Historical RECAP records do include parties, nature of suit and the assigned judge when the archive has them.'],
       ['What if a court\'s feed is down?', 'That court produces one error item and the run continues with the others.'],
@@ -742,7 +742,7 @@ ${courtTable(['ded', 'txed', 'txwd'], '../pacer-rss-feeds-by-court/')}
 <p>So there are two ways to find patent cases:</p>
 <ul>
 <li><strong>New civil cases, then review.</strong> <code>caseTypes: ["civil"]</code> with <code>newCasesOnly</code> keeps document number 1 of each civil case (the complaint or notice of removal). You get every new civil case in the three courts, with the case title and docket link to review.</li>
-<li><strong>Keyword plus the RECAP archive.</strong> <code>entryKeywords</code> matches the docket text, case-insensitively. In the live feeds it matches only when a court's docket text contains the word. With <code>includeHistorical</code>, plain keywords (not regexes) are also sent to the RECAP archive's search of entry descriptions, through the Free Law Project's CourtListener API. Archive records carry <code>natureOfSuit</code>, <code>cause</code>, <code>parties</code> and <code>assignedTo</code>.</li>
+<li><strong>Keyword plus the RECAP archive.</strong> <code>entryKeywords</code> matches the docket text, case-insensitively. In the live feeds it matches only when a court's docket text contains the word. With <code>includeHistorical</code> and a free CourtListener API token in <code>courtListenerApiKey</code>, plain keywords (not regexes) are also sent to the RECAP archive's search of entry descriptions, through the Free Law Project's CourtListener API. Archive records carry <code>natureOfSuit</code>, <code>cause</code>, <code>parties</code> and <code>assignedTo</code>.</li>
 </ul>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -808,6 +808,7 @@ ${courtTable(['ded', 'txed', 'txwd'], '../pacer-rss-feeds-by-court/')}
           entryKeywords: ['patent'],
           newCasesOnly: true,
           includeHistorical: true,
+          courtListenerApiKey: '<your free CourtListener API token>',
           historicalSinceDays: 30,
           maxHistoricalPerCourt: 100,
           maxEntriesPerCourt: 200,
@@ -929,7 +930,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 <p>Each entry has the case number, the case title (lead parties), a short docket text in brackets such as <code>[Memorandum of Law in Support of Motion]</code>, the document number with a link, and the filing time. The feed has no nature of suit, party list or full docket text, so "securities" or "class action" appears in a live entry only if the court's docket text for it contains the phrase.</p>
 <ul>
 <li><code>caseTypes: ["civil"]</code> with <code>newCasesOnly</code> returns document number 1 of every new civil case: the complaint or notice of removal.</li>
-<li><code>entryKeywords</code> such as <code>class action</code> or <code>securities</code> narrow live entries whose docket text contains them. With <code>includeHistorical</code>, plain keywords are also sent to the RECAP archive's search of entry descriptions, and archive records carry <code>natureOfSuit</code>, <code>cause</code> and the full <code>parties</code> list.</li>
+<li><code>entryKeywords</code> such as <code>class action</code> or <code>securities</code> narrow live entries whose docket text contains them. With <code>includeHistorical</code> and a free CourtListener API token in <code>courtListenerApiKey</code>, plain keywords are also sent to the RECAP archive's search of entry descriptions, and archive records carry <code>natureOfSuit</code>, <code>cause</code> and the full <code>parties</code> list.</li>
 <li><code>partyKeywords</code> matches the case title in live entries and the party list in archive records, so it also finds companies that are not first-named.</li>
 </ul>
 <h3>Limits worth knowing</h3>
@@ -993,6 +994,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
           entryKeywords: ['class action', 'securities'],
           newCasesOnly: true,
           includeHistorical: true,
+          courtListenerApiKey: '<your free CourtListener API token>',
           historicalSinceDays: 30,
           maxHistoricalPerCourt: 100,
           maxEntriesPerCourt: 300,
