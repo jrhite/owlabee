@@ -13,7 +13,20 @@
 <meta property="og:description" content="Pull federal contract notices from the SAM.gov Get Opportunities API by keyword, NAICS code, set-aside and state, with points of contact and new-notice flags.">
 <meta property="og:url" content="https://owlabee.com/sam-gov-contract-opportunities/">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"SAM.gov Contract Opportunities API Feed by Keyword","description":"Pull federal contract notices from the SAM.gov Get Opportunities API by keyword, NAICS code, set-aside and state, with points of contact and new-notice flags.","url":"https://owlabee.com/sam-gov-contract-opportunities/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/grants-gov-api"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/grants-gov-api","name":"Grants.gov API & SAM.gov Scraper — Federal Grants Feed","description":"Grants.gov grant opportunities and SAM.gov contract notices by keyword, plus optional USAspending awards and six state and local bid datasets","url":"https://apify.com/owlabee/grants-gov-api","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is a SAM.gov key really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Any individual with a SAM.gov account can request a personal public API key from Account Details. Federal and entity-associated accounts get larger daily allowances."}},{"@type":"Question","name":"What do the ptype and setAside codes mean?","acceptedAnswer":{"@type":"Answer","text":"They are passed straight to SAM.gov. Notice types: o Solicitation, k Combined Synopsis/Solicitation, p Presolicitation, r Sources Sought, s Special Notice, a Award Notice (comma-separate several). Set-aside codes include SBA, 8A, HZC, SDVOSBC and WOSB; the input field lists them all."}},{"@type":"Question","name":"Does it read the sam.gov website?","acceptedAnswer":{"@type":"Answer","text":"No. Only the official API, with your key. No HTML scraping, proxies or login."}},{"@type":"Question","name":"What if my daily quota runs out?","acceptedAnswer":{"@type":"Answer","text":"SAM.gov answers with a rate-limit error and the Actor writes one SAM_RATE_LIMITED error item for that keyword; the other sources continue."}},{"@type":"Question","name":"Can it include recent awards?","acceptedAnswer":{"@type":"Answer","text":"Yes. includeRecentAwards adds USAspending.gov award records for the same keywords."}}]}]}</script>
 </head>
@@ -21,7 +34,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
 <div class="wrap wrap-wide header-row">
-<a class="brand" href="../"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 1.5 29 9v14L16 30.5 3 23V9z" fill="var(--honey)"/><circle cx="11.2" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="20.8" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="12.2" cy="13.8" r="1.5" fill="var(--honey)"/><circle cx="21.8" cy="13.8" r="1.5" fill="var(--honey)"/><path d="M16 18.2 14 21h4z" fill="var(--ink-on-honey)"/></svg><span>owlabee</span></a>
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>

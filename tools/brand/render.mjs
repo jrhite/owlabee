@@ -14,7 +14,6 @@ import { createRequire } from 'node:module';
 import { join } from 'node:path';
 
 const require = createRequire(import.meta.url);
-const { chromium } = require('playwright');
 
 export const C = {
     cream: '#FAF7F1', charcoal: '#2E2E2E', gold: '#C29A45', goldDeep: '#8C6A26',
@@ -116,6 +115,8 @@ const banner = () => `<div style="width:1500px;height:500px;box-sizing:border-bo
 </div>`;
 
 async function main() {
+    // Loaded here, not at the top, so tools/build-site.mjs can import mark() with zero dependencies.
+    const { chromium } = require('playwright');
     const OUT = new URL('../../brand/', import.meta.url).pathname;
     const ICONS = join(OUT, 'apify-icons');
     mkdirSync(ICONS, { recursive: true });

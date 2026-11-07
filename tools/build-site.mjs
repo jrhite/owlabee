@@ -6,6 +6,7 @@ import { pages } from './site-content.mjs';
 import { actors, storeUrl, apiUrl, mcpUrl } from './actors.mjs';
 import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY, MAKER_NAME, MAKER_URL } from './site-config.mjs';
 import { referenceSections } from './pacer-courts.mjs';
+import { mark, C } from './brand/render.mjs';
 
 const UPDATED = '2026-11-07';
 const root = new URL('../', import.meta.url);
@@ -20,8 +21,20 @@ const pre = (text, label) => `<pre tabindex="0"${label ? ` aria-label="${esc(lab
 const actorByName = Object.fromEntries(actors.map((a) => [a.name, a]));
 const pageBySlug = Object.fromEntries(pages.map((p) => [p.slug, p]));
 
-// The mark: one honeycomb cell with an owl's eyes. Inline, so it costs no request.
-const logo = `<svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 1.5 29 9v14L16 30.5 3 23V9z" fill="var(--honey)"/><circle cx="11.2" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="20.8" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="12.2" cy="13.8" r="1.5" fill="var(--honey)"/><circle cx="21.8" cy="13.8" r="1.5" fill="var(--honey)"/><path d="M16 18.2 14 21h4z" fill="var(--ink-on-honey)"/></svg>`;
+// The brand mark (tools/brand/render.mjs), inlined so it costs no request. Its lines take
+// currentColor, so CSS turns it charcoal on cream and cream on charcoal (the reversed mark);
+// the monocle and beak stay gold. Decorative: the wordmark next to it carries the name.
+const inlineMark = (cls, size, detail = 'full') => {
+  const svg = mark({ line: 'currentColor', accent: C.gold, size, detail });
+  const out = svg.replace(/ role="img" aria-label="[^"]*"><title>[^<]*<\/title>/, ` class="${cls}" aria-hidden="true" focusable="false">`);
+  if (out === svg) throw new Error('mark() markup changed; update inlineMark');
+  return out;
+};
+const logo = inlineMark('logo', 40, 'monocle');
+
+// Files from the brand kit (brand/) that the pages reference, copied to the site root.
+const BRAND_FILES = ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'og-image.png', 'icon-512.png'];
+const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap';
 
 const disclaimer = `owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.`;
 
@@ -43,7 +56,20 @@ ${absolute ? '<meta name="robots" content="noindex">' : `<link rel="canonical" h
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${esc(url)}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${BASE_URL}og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${BASE_URL}og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="${C.cream}" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="${C.charcoal}" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="${FONTS_URL}">
 <link rel="stylesheet" href="${href('style.css')}">
 ${jsonld ? ld(jsonld) : ''}
 </head>
@@ -51,7 +77,7 @@ ${jsonld ? ld(jsonld) : ''}
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
 <div class="wrap wrap-wide header-row">
-<a class="brand" href="${href('')}">${logo}<span>${SITE_NAME}</span></a>
+<a class="brand" href="${href('')}">${logo}<span class="wordmark">${SITE_NAME}</span></a>
 <nav aria-label="Site">
 <a href="${href('')}#guides">Guides</a>
 <a href="${href('')}#actors">All Actors</a>
@@ -223,10 +249,20 @@ function indexPage() {
   const body = `
 <section class="hero">
 <div class="wrap wrap-wide">
+<div class="hero-grid">
+<div class="lockup">
+${inlineMark('lockup-mark', 132)}
+<p class="lockup-word"><span class="lockup-name">${SITE_NAME}</span><span class="dotcom">.com</span></p>
+<p class="motto">Wise data. Honest work.</p>
+<p class="tagline">The owl sees clearly; the bee does the work.</p>
+</div>
+<div class="hero-copy">
 <p class="kicker">Apify Actors · pay per result · ready for AI agents</p>
 <h1>Public data sources, <span class="hl">as clean JSON</span></h1>
 <p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl or from an AI agent.</p>
 <p class="hero-cta"><a class="button" href="#guides">Browse the guides</a> <a class="button button-ghost" href="${STORE_PROFILE_URL}">See them on Apify Store</a></p>
+</div>
+</div>
 <ul class="stats">
 <li><strong>${actors.length}</strong><span>Actors on Apify Store</span></li>
 <li><strong>${pages.length}</strong><span>guides to the sources</span></li>
@@ -334,6 +370,7 @@ for (const p of pages) {
   writeFileSync(new URL('index.html', dir), guidePage(p));
 }
 copyFileSync(new URL('site.css', import.meta.url), new URL('style.css', docs));
+for (const f of BRAND_FILES) copyFileSync(new URL(`brand/${f}`, root), new URL(f, docs));
 writeFileSync(new URL('.nojekyll', docs), '');
 writeFileSync(new URL(`${INDEXNOW_KEY}.txt`, docs), `${INDEXNOW_KEY}\n`);
 // GitHub Pages custom domain: written when BASE_URL is not a github.io address.
