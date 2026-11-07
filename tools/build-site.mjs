@@ -20,9 +20,12 @@ const pre = (text, label) => `<pre tabindex="0"${label ? ` aria-label="${esc(lab
 const actorByName = Object.fromEntries(actors.map((a) => [a.name, a]));
 const pageBySlug = Object.fromEntries(pages.map((p) => [p.slug, p]));
 
+// The mark: one honeycomb cell with an owl's eyes. Inline, so it costs no request.
+const logo = `<svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 1.5 29 9v14L16 30.5 3 23V9z" fill="var(--honey)"/><circle cx="11.2" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="20.8" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="12.2" cy="13.8" r="1.5" fill="var(--honey)"/><circle cx="21.8" cy="13.8" r="1.5" fill="var(--honey)"/><path d="M16 18.2 14 21h4z" fill="var(--ink-on-honey)"/></svg>`;
+
 const disclaimer = `owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.`;
 
-function layout({ title, description, path, body, jsonld, prefix, type = 'article', absolute = false }) {
+function layout({ title, description, path, body, jsonld, prefix, type = 'article', absolute = false, home = false }) {
   const url = BASE_URL + path;
   const href = (p) => (absolute ? BASE_URL + p : prefix + p);
   return `<!doctype html>
@@ -47,20 +50,21 @@ ${jsonld ? ld(jsonld) : ''}
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="wrap header-row">
-<a class="brand" href="${href('')}">${SITE_NAME}</a>
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="${href('')}">${logo}<span>${SITE_NAME}</span></a>
 <nav aria-label="Site">
 <a href="${href('')}#guides">Guides</a>
 <a href="${href('')}#actors">All Actors</a>
 <a href="${REPO_URL}">GitHub</a>
+<a class="nav-store" href="${STORE_PROFILE_URL}">Apify Store</a>
 </nav>
 </div>
 </header>
-<main id="main" class="wrap">
+<main id="main"${home ? ' class="home"' : ' class="wrap"'}>
 ${body}
 </main>
 <footer class="site-footer">
-<div class="wrap">
+<div class="wrap wrap-wide">
 <p>${esc(disclaimer)}</p>
 <p><a href="${STORE_PROFILE_URL}">owlabee on Apify Store</a> · <a href="${REPO_URL}">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
 <p class="maker">© ${new Date().getUTCFullYear()} owlabee · <a href="${BASE_URL}">${esc(new URL(BASE_URL).hostname)}</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="${MAKER_URL}">${esc(MAKER_NAME)}</a></p>
@@ -147,13 +151,16 @@ ${pre(mcpFor(a.name), 'MCP client configuration')}
 
 `;
   const body = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> ${esc(p.nav)}</nav>
 <article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> ${esc(p.nav)}</nav>
+<p class="kicker">${esc(a.group)}</p>
 <h1>${esc(p.title)}</h1>
 <p class="lede">${p.lede}</p>
 <div class="cta">
 <a class="button" href="${store}">Open the Actor on Apify Store</a>
 <p class="note">${esc(a.title)}. Pay per result; see the Store page for current pricing.</p>
+</div>
 </div>
 ${middle}<section id="faq">
 <h2>FAQ</h2>
@@ -211,27 +218,50 @@ function indexPage() {
   const description =
     'Guides to public data (permits, grants, SAM.gov, OSHA, EPA, recalls, PACER, licenses, DNS, sitemaps, Shopify, podcasts, Bluesky, job boards) and documents as JSON.';
   const groups = [...new Set(actors.map((a) => a.group))];
+  const groupOf = (p) => actorByName[p.actor].group;
+  const guideGroups = groups.filter((g) => pages.some((p) => groupOf(p) === g));
   const body = `
-<h1>Public data sources as JSON</h1>
+<section class="hero">
+<div class="wrap wrap-wide">
+<p class="kicker">Apify Actors · pay per result · ready for AI agents</p>
+<h1>Public data sources, <span class="hl">as clean JSON</span></h1>
 <p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl or from an AI agent.</p>
-<p class="note">Every Actor is pay per result, billed to your own Apify account; see each Store page for current pricing.</p>
-
-<section id="guides">
-<h2>Guides</h2>
-<ul class="cards">
-${pages
-  .map(
-    (p) => `<li><a href="${p.slug}/"><strong>${esc(p.title)}</strong><span>${esc(p.description)}</span></a></li>`,
-  )
-  .join('\n')}
+<p class="hero-cta"><a class="button" href="#guides">Browse the guides</a> <a class="button button-ghost" href="${STORE_PROFILE_URL}">See them on Apify Store</a></p>
+<ul class="stats">
+<li><strong>${actors.length}</strong><span>Actors on Apify Store</span></li>
+<li><strong>${pages.length}</strong><span>guides to the sources</span></li>
+<li><strong>Per result</strong><span>billed to your own Apify account</span></li>
+<li><strong>MCP</strong><span>every Actor works as an agent tool</span></li>
 </ul>
+</div>
 </section>
 
-<section id="actors">
+<section id="guides" class="band">
+<div class="wrap wrap-wide">
+<h2>Guides</h2>
+<p class="note">Every Actor is pay per result, billed to your own Apify account; see each Store page for current pricing.</p>
+${guideGroups
+  .map(
+    (g) => `<h3 class="group-title">${esc(g)}</h3>
+<ul class="cards">
+${pages
+  .filter((p) => groupOf(p) === g)
+  .map((p) => `<li><a href="${p.slug}/"><strong>${esc(p.title)}</strong><span>${esc(p.description)}</span><em aria-hidden="true">Read the guide →</em></a></li>`)
+  .join('\n')}
+</ul>`,
+  )
+  .join('\n')}
+</div>
+</section>
+
+<section id="actors" class="band band-alt">
+<div class="wrap wrap-wide">
 <h2>All Actors</h2>
+<div class="actor-groups">
 ${groups
   .map(
-    (g) => `<h3>${esc(g)}</h3>
+    (g) => `<div class="actor-group">
+<h3>${esc(g)}</h3>
 <ul class="actor-list">
 ${actors
   .filter((a) => a.group === g)
@@ -240,19 +270,24 @@ ${actors
       `<li><a href="${storeUrl(a.name)}"><strong>${esc(a.title)}</strong></a><span>${esc(a.returns)}.</span><a class="small" href="${REPO_URL}/tree/main/examples/${a.name}">Examples on GitHub</a></li>`,
   )
   .join('\n')}
-</ul>`,
+</ul>
+</div>`,
   )
   .join('\n')}
+</div>
+</div>
 </section>
 
-<section id="how">
+<section id="how" class="band">
+<div class="wrap wrap-wide">
 <h2>How running an Actor works</h2>
-<ol>
+<ol class="steps">
 <li>Create an Apify account and copy your API token from Console → Settings → API &amp; Integrations.</li>
 <li>Send the Actor's input as JSON to <code>https://api.apify.com/v2/acts/owlabee~&lt;actor&gt;/run-sync-get-dataset-items</code> with <code>Authorization: Bearer &lt;token&gt;</code>, or use the Python and Node.js clients.</li>
 <li>Or connect an AI agent to <code>https://mcp.apify.com/?tools=owlabee/&lt;actor&gt;</code>, Apify's hosted MCP server.</li>
 </ol>
 <p>Each guide has a ready-to-run input. More examples, one folder per Actor, are on <a href="${REPO_URL}">GitHub</a>.</p>
+</div>
 </section>`;
 
   const jsonld = {
@@ -274,6 +309,7 @@ ${actors
     jsonld,
     prefix: '',
     type: 'website',
+    home: true,
   });
 }
 

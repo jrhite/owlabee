@@ -20,24 +20,28 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="wrap header-row">
-<a class="brand" href="../">owlabee</a>
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 1.5 29 9v14L16 30.5 3 23V9z" fill="var(--honey)"/><circle cx="11.2" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="20.8" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="12.2" cy="13.8" r="1.5" fill="var(--honey)"/><circle cx="21.8" cy="13.8" r="1.5" fill="var(--honey)"/><path d="M16 18.2 14 21h4z" fill="var(--ink-on-honey)"/></svg><span>owlabee</span></a>
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>
 <a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
 </nav>
 </div>
 </header>
 <main id="main" class="wrap">
 
-<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> SPF, DMARC &amp; DKIM checker</nav>
 <article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> SPF, DMARC &amp; DKIM checker</nav>
+<p class="kicker">Web and domains</p>
 <h1>Bulk SPF, DMARC and DKIM Checker for Domain Lists</h1>
 <p class="lede">Checking email authentication one domain at a time is slow. This Actor takes a list of domains and returns one record per domain with its SPF, DMARC, DKIM, MTA-STS and BIMI setup, an email security score, and optionally WHOIS, TLS and HTTP data.</p>
 <div class="cta">
 <a class="button" href="https://apify.com/owlabee/domain-intelligence">Open the Actor on Apify Store</a>
 <p class="note">SPF, DMARC &amp; DKIM Checker — Bulk Domain WHOIS, DNS &amp; SSL. Pay per result; see the Store page for current pricing.</p>
+</div>
 </div>
 <nav class="toc" aria-label="On this page">
 <a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
@@ -214,7 +218,7 @@ curl -sS -X POST \
 </article>
 </main>
 <footer class="site-footer">
-<div class="wrap">
+<div class="wrap wrap-wide">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
 <p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
 <p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
