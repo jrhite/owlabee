@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-document-to-json-extractor": {
+      "url": "https://mcp.apify.com/?tools=owlabee/document-to-json-extractor",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

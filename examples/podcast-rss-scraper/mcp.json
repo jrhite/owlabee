@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-podcast-rss-scraper": {
+      "url": "https://mcp.apify.com/?tools=owlabee/podcast-rss-scraper",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

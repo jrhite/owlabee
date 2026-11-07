@@ -1,0 +1,54 @@
+{
+  "companyProfile": {
+    "name": "Cascadia Civil Engineering",
+    "description": "Civil engineering firm with 40 staff, NAICS 541330, SBA small business, serving the Pacific Northwest; past EPA and USDA rural water and wastewater grants.",
+    "capabilities": [
+      "water infrastructure design",
+      "wastewater treatment",
+      "stormwater management",
+      "rural water systems",
+      "environmental engineering"
+    ],
+    "naicsCodes": [
+      "541330",
+      "237110"
+    ],
+    "setAsides": [
+      "SBA"
+    ],
+    "organizationType": "small business",
+    "businessSize": "small",
+    "locations": [
+      "WA",
+      "OR",
+      "ID"
+    ],
+    "keywords": [
+      "water",
+      "wastewater",
+      "infrastructure",
+      "drinking water",
+      "rural"
+    ],
+    "pastAwards": [
+      "EPA Water Infrastructure Improvements for the Nation",
+      "USDA Rural Development Water and Waste Disposal"
+    ],
+    "budgetRange": {
+      "min": 50000,
+      "max": 5000000
+    }
+  },
+  "searchTerms": [
+    "water infrastructure"
+  ],
+  "sources": [
+    "grantsGov"
+  ],
+  "oppStatuses": [
+    "posted"
+  ],
+  "postedWithinDays": 30,
+  "maxOpportunities": 25,
+  "scorer": "rules"
+}

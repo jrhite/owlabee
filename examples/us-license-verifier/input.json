@@ -1,0 +1,18 @@
+{
+  "queries": [
+    "npi:1003000126",
+    "name:John Smith:TX"
+  ],
+  "lookups": [],
+  "mode": "verify",
+  "sources": [
+    "TX_TDLR",
+    "FL_DBPR",
+    "CO_DORA",
+    "WA_DOH",
+    "NPI"
+  ],
+  "maxResultsPerQuery": 5,
+  "maxResults": 20,
+  "monitor": false
+}

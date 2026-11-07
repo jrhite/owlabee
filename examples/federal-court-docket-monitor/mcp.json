@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-federal-court-docket-monitor": {
+      "url": "https://mcp.apify.com/?tools=owlabee/federal-court-docket-monitor",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

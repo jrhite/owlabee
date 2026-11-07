@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-bluesky-monitor": {
+      "url": "https://mcp.apify.com/?tools=owlabee/bluesky-monitor",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

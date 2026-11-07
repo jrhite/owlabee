@@ -1,0 +1,8 @@
+{
+  "courts": [
+    "nysd"
+  ],
+  "newCasesOnly": false,
+  "maxEntriesPerCourt": 40,
+  "onlyNewSinceLastRun": false
+}

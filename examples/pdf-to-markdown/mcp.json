@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-pdf-to-markdown": {
+      "url": "https://mcp.apify.com/?tools=owlabee/pdf-to-markdown",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "agencies": [
+    "fda-drug",
+    "fda-device",
+    "fda-food",
+    "nhtsa",
+    "cpsc"
+  ],
+  "daysBack": 30,
+  "maxResultsPerSource": 5
+}

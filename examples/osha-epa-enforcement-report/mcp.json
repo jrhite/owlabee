@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-osha-epa-enforcement-report": {
+      "url": "https://mcp.apify.com/?tools=owlabee/osha-epa-enforcement-report",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

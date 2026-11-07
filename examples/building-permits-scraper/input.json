@@ -1,0 +1,10 @@
+{
+  "jurisdictions": [
+    "chicago",
+    "seattle"
+  ],
+  "issuedWithinDays": 7,
+  "maxResultsPerJurisdiction": 25,
+  "onlyNewSinceLastRun": false,
+  "includeRaw": false
+}

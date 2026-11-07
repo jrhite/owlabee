@@ -1,0 +1,7 @@
+{
+  "sites": [
+    "https://www.sitemaps.org/sitemap.xml"
+  ],
+  "mode": "discover",
+  "maxPages": 15
+}

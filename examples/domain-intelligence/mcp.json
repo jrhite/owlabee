@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-domain-intelligence": {
+      "url": "https://mcp.apify.com/?tools=owlabee/domain-intelligence",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}
