@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Podcast Summarizer: Chapters and Quotes from Transcripts","description":"Summarize podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items from published transcripts.","url":"https://owlabee.com/podcast-summarizer/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/podcast-episode-summarizer"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/podcast-episode-summarizer","name":"Podcast Episode Summarizer (AI) — Transcript to Summary","description":"Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes","url":"https://apify.com/owlabee/podcast-episode-summarizer","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it transcribe audio?","acceptedAnswer":{"@type":"Answer","text":"No. It uses the transcript file the podcast publishes, or the show notes when there is none."}},{"@type":"Question","name":"Can I pass an Apple Podcasts link or just a show name?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apple links and IDs are resolved with the iTunes Lookup API, and search:show name takes the top iTunes Search match with a public feed."}},{"@type":"Question","name":"Which summarizer should I use?","acceptedAnswer":{"@type":"Answer","text":"Extractive for bulk back catalogs, indexing and monitoring; a model mode when you want written abstracts and chapter titles in prose."}},{"@type":"Question","name":"Can I summarize specific episodes only?","acceptedAnswer":{"@type":"Answer","text":"Yes. List episode GUIDs, episode page URLs or audio URLs in episodes. GUIDs from the podcast RSS scraper work directly."}},{"@type":"Question","name":"What if a transcript cannot be downloaded?","acceptedAnswer":{"@type":"Answer","text":"The show notes are summarized instead, and an episode with neither produces a NO_TEXT error item."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Podcast Summarizer: Chapters and Quotes from Transcripts","description":"Summarize podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items from published transcripts.","url":"https://owlabee.com/podcast-summarizer/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/podcast-summarizer"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/podcast-summarizer","name":"Podcast Episode Summarizer (AI) — Transcript to Summary","description":"Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes","url":"https://apify.com/owlabee/podcast-summarizer","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it transcribe audio?","acceptedAnswer":{"@type":"Answer","text":"No. It uses the transcript file the podcast publishes, or the show notes when there is none."}},{"@type":"Question","name":"Can I pass an Apple Podcasts link or just a show name?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apple links and IDs are resolved with the iTunes Lookup API, and search:show name takes the top iTunes Search match with a public feed."}},{"@type":"Question","name":"Which summarizer should I use?","acceptedAnswer":{"@type":"Answer","text":"Extractive for bulk back catalogs, indexing and monitoring; a model mode when you want written abstracts and chapter titles in prose."}},{"@type":"Question","name":"Can I summarize specific episodes only?","acceptedAnswer":{"@type":"Answer","text":"Yes. List episode GUIDs, episode page URLs or audio URLs in episodes. GUIDs from the podcast RSS scraper work directly."}},{"@type":"Question","name":"What if a transcript cannot be downloaded?","acceptedAnswer":{"@type":"Answer","text":"The show notes are summarized instead, and an episode with neither produces a NO_TEXT error item."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@
 <h1>Podcast Summarizer: Chapters and Quotes from Transcripts</h1>
 <p class="lede">Many podcasts now publish a transcript file with each episode. This Actor reads it, falls back to the show notes when there is none, and writes a structured summary per episode: an abstract, key topics, chapters with timestamps, notable quotes, named guests and action items.</p>
 <div class="cta">
-<a class="button" href="https://apify.com/owlabee/podcast-episode-summarizer">Open the Actor on Apify Store</a>
+<a class="button" href="https://apify.com/owlabee/podcast-summarizer">Open the Actor on Apify Store</a>
 <p class="note">Podcast Episode Summarizer (AI) — Transcript to Summary. Pay per result; see the Store page for current pricing.</p>
 </div>
 </div>
@@ -165,7 +165,7 @@
 <pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
 
 curl -sS -X POST \
-  &quot;https://api.apify.com/v2/acts/owlabee~podcast-episode-summarizer/run-sync-get-dataset-items&quot; \
+  &quot;https://api.apify.com/v2/acts/owlabee~podcast-summarizer/run-sync-get-dataset-items&quot; \
   -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
   -H &quot;Content-Type: application/json&quot; \
   -d '{
@@ -180,8 +180,8 @@ curl -sS -X POST \
 <p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
 <pre tabindex="0" aria-label="MCP client configuration"><code>{
   &quot;mcpServers&quot;: {
-    &quot;owlabee-podcast-episode-summarizer&quot;: {
-      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/podcast-episode-summarizer&quot;,
+    &quot;owlabee-podcast-summarizer&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/podcast-summarizer&quot;,
       &quot;headers&quot;: {
         &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
       }
@@ -190,7 +190,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Summarize the two latest episodes of The Daily with chapters, notable quotes and the guests mentioned.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/podcast-episode-summarizer">examples/podcast-episode-summarizer</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/podcast-summarizer">examples/podcast-summarizer</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -210,7 +210,7 @@ curl -sS -X POST \
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
 <p>Podcast Episode Summarizer (AI) — Transcript to Summary. Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes.</p>
-<p><a class="button" href="https://apify.com/owlabee/podcast-episode-summarizer">Open on Apify Store</a></p>
+<p><a class="button" href="https://apify.com/owlabee/podcast-summarizer">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
 

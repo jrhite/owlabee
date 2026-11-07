@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-podcast-summarizer": {
+      "url": "https://mcp.apify.com/?tools=owlabee/podcast-summarizer",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

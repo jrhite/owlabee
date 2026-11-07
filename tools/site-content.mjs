@@ -261,7 +261,7 @@ export const pages = [
     faq: [
       ['Do I need a Grants.gov API key?', 'No. Grants.gov needs no key. Only the SAM.gov source needs a free personal key.'],
       ['How does "only new or updated" work?', 'For every source and keyword the Actor stores a fingerprint per opportunity in a named key-value store. Unchanged opportunities are skipped and not charged. Change <code>stateStoreName</code> to start over.'],
-      ['Can it rank opportunities for my organization?', 'Pass the results to the <a href="https://apify.com/owlabee/gov-opportunity-fit-scorer">Grant Matching and RFP Bid/No-Bid Scorer</a>, which scores each record against a profile you describe once.'],
+      ['Can it rank opportunities for my organization?', 'Pass the results to the <a href="https://apify.com/owlabee/grant-matching">Grant Matching and RFP Bid/No-Bid Scorer</a>, which scores each record against a profile you describe once.'],
       ['Does it scrape the grants.gov website?', 'No. It uses the official public APIs only, with no HTML scraping, proxies or login.'],
       ['Are state and local grants included?', 'No. The optional <code>sled</code> source reads six state and local procurement datasets (bids, not grants); it is not a nationwide state and local feed.'],
     ],
@@ -340,7 +340,7 @@ export const pages = [
     useCases: [
       ['Set-aside alerts for one NAICS code', 'Filter <code>samFilters</code> by NAICS, set-aside and state, schedule daily with <code>onlyNewSinceLastRun</code>, and send new notices to a webhook.'],
       ['Grants and contracts in one feed', 'Enable <code>grantsGov</code> and <code>samGov</code> together. Both share <code>title</code>, <code>agency</code>, <code>postedDate</code>, <code>closeDate</code> and <code>url</code>.'],
-      ['Bid/no-bid triage', 'Send the notices to the <a href="https://apify.com/owlabee/gov-opportunity-fit-scorer">Grant Matching and RFP Bid/No-Bid Scorer</a> to rank them against your company profile.'],
+      ['Bid/no-bid triage', 'Send the notices to the <a href="https://apify.com/owlabee/grant-matching">Grant Matching and RFP Bid/No-Bid Scorer</a> to rank them against your company profile.'],
     ],
     input: {
       keywords: ['cybersecurity'],
@@ -365,7 +365,7 @@ export const pages = [
 
   {
     slug: 'osha-inspections-by-company',
-    actor: 'osha-epa-enforcement-report',
+    actor: 'osha-epa-inspections',
     title: 'OSHA Inspections by Company: DOL Data API Lookup',
     nav: 'OSHA inspections',
     description:
@@ -454,7 +454,7 @@ export const pages = [
 
   {
     slug: 'epa-echo-enforcement',
-    actor: 'osha-epa-enforcement-report',
+    actor: 'osha-epa-inspections',
     title: 'EPA ECHO Enforcement Cases by Company or Facility',
     nav: 'EPA ECHO enforcement',
     description:
@@ -1022,7 +1022,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 
   {
     slug: 'professional-license-verification',
-    actor: 'us-license-verifier',
+    actor: 'license-verification-api',
     title: 'Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI',
     nav: 'License verification',
     description:
@@ -1119,7 +1119,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 
   {
     slug: 'spf-dmarc-dkim-checker',
-    actor: 'domain-intelligence',
+    actor: 'spf-dmarc-dkim-checker',
     title: 'Bulk SPF, DMARC and DKIM Checker for Domain Lists',
     nav: 'SPF, DMARC & DKIM checker',
     description:
@@ -1455,7 +1455,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 
   {
     slug: 'document-to-json',
-    actor: 'document-to-json-extractor',
+    actor: 'pdf-to-json',
     title: 'PDF to JSON with Your Own Schema: Invoices, Forms, Quotes',
     nav: 'Document to JSON',
     description:
@@ -1549,7 +1549,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 
   {
     slug: 'podcast-summarizer',
-    actor: 'podcast-episode-summarizer',
+    actor: 'podcast-summarizer',
     title: 'Podcast Summarizer: Chapters and Quotes from Transcripts',
     nav: 'Podcast summarizer',
     description:
@@ -1799,7 +1799,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 
   {
     slug: 'job-board-api-hiring-signals',
-    actor: 'ats-hiring-signals',
+    actor: 'job-postings-api',
     title: 'Greenhouse, Lever and Ashby Jobs API and Hiring Signals',
     nav: 'Job board API & hiring signals',
     description:

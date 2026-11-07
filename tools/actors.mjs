@@ -49,7 +49,7 @@ const meta = {
     ],
     page: 'grants-gov-api',
   },
-  'gov-opportunity-fit-scorer': {
+  'grant-matching': {
     group: 'Government and public records',
     returns: 'Grants.gov, SAM.gov and USAspending opportunities ranked by fit to your organization, with reasons and disqualifiers',
     purpose:
@@ -76,7 +76,7 @@ const meta = {
     ],
     page: 'pacer-rss-docket-monitor',
   },
-  'osha-epa-enforcement-report': {
+  'osha-epa-inspections': {
     group: 'Government and public records',
     returns: 'OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP',
     purpose:
@@ -104,7 +104,7 @@ const meta = {
     ],
     page: 'product-recalls-api',
   },
-  'us-license-verifier': {
+  'license-verification-api': {
     group: 'Government and public records',
     returns: 'Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry',
     purpose:
@@ -118,7 +118,7 @@ const meta = {
     ],
     page: 'professional-license-verification',
   },
-  'domain-intelligence': {
+  'spf-dmarc-dkim-checker': {
     group: 'Web and domains',
     returns: 'One record per domain: SPF, DMARC, DKIM, MTA-STS and BIMI with a 0-100 email security score, RDAP WHOIS, DNS, TLS and HTTP headers',
     purpose:
@@ -171,7 +171,7 @@ const meta = {
     ],
     page: 'bluesky-monitor',
   },
-  'ats-hiring-signals': {
+  'job-postings-api': {
     group: 'Web and domains',
     returns: 'Open roles from Greenhouse, Lever, Ashby, SmartRecruiters and Workable job boards, or new, removed and changed roles per company',
     purpose:
@@ -197,7 +197,7 @@ const meta = {
     ],
     page: 'podcast-rss-feed-scraper',
   },
-  'podcast-episode-summarizer': {
+  'podcast-summarizer': {
     group: 'Documents and media',
     returns: 'Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes',
     purpose:
@@ -223,7 +223,7 @@ const meta = {
     ],
     page: 'pdf-to-markdown-rag',
   },
-  'document-to-json-extractor': {
+  'pdf-to-json': {
     group: 'Documents and media',
     returns: 'One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence',
     purpose:

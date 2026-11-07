@@ -31,7 +31,7 @@
     }
   },
   {
-    "name": "ats-hiring-signals",
+    "name": "job-postings-api",
     "title": "Hiring Signals & ATS Jobs Scraper — Greenhouse, Lever, Ashby",
     "input": {
       "boards": [
@@ -110,7 +110,7 @@
     }
   },
   {
-    "name": "document-to-json-extractor",
+    "name": "pdf-to-json",
     "title": "PDF & Document to JSON Extractor (AI) — Invoices, Forms",
     "input": {
       "urls": [
@@ -190,7 +190,7 @@
     }
   },
   {
-    "name": "domain-intelligence",
+    "name": "spf-dmarc-dkim-checker",
     "title": "SPF, DMARC & DKIM Checker — Bulk Domain WHOIS, DNS & SSL",
     "input": {
       "domains": [
@@ -273,7 +273,7 @@
     }
   },
   {
-    "name": "gov-opportunity-fit-scorer",
+    "name": "grant-matching",
     "title": "Grant Matching & RFP Bid/No-Bid Scorer (AI) — Grants.gov",
     "input": {
       "companyProfile": {
@@ -379,7 +379,7 @@
     }
   },
   {
-    "name": "osha-epa-enforcement-report",
+    "name": "osha-epa-inspections",
     "title": "OSHA Inspections by Company + EPA Enforcement Report",
     "input": {
       "companies": [
@@ -431,7 +431,7 @@
     }
   },
   {
-    "name": "podcast-episode-summarizer",
+    "name": "podcast-summarizer",
     "title": "Podcast Episode Summarizer (AI) — Transcript to Summary",
     "input": {
       "feeds": [
@@ -566,7 +566,7 @@
     }
   },
   {
-    "name": "us-license-verifier",
+    "name": "license-verification-api",
     "title": "License Verification API — TDLR, DBPR, DORA, WA DOH, NPI",
     "input": {
       "queries": [

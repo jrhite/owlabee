@@ -9,11 +9,11 @@
     "subfolder": "mcp/documents-to-data"
   },
   "websiteUrl": "https://owlabee.com/",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=owlabee/pdf-to-markdown,owlabee/document-to-json-extractor,owlabee/podcast-episode-summarizer,owlabee/drone-roof-inspection-report",
+      "url": "https://mcp.apify.com/?tools=owlabee/pdf-to-markdown,owlabee/pdf-to-json,owlabee/podcast-summarizer,owlabee/drone-roof-inspection-report",
       "headers": [
         {
           "name": "Authorization",

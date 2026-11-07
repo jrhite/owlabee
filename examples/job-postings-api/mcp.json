@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-job-postings-api": {
+      "url": "https://mcp.apify.com/?tools=owlabee/job-postings-api",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

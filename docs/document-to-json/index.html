@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to JSON with Your Own Schema: Invoices, Forms, Quotes","description":"Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.","url":"https://owlabee.com/document-to-json/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/document-to-json-extractor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/document-to-json-extractor","name":"PDF & Document to JSON Extractor (AI) — Invoices, Forms","description":"One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence","url":"https://apify.com/owlabee/document-to-json-extractor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which extractor should I use?","acceptedAnswer":{"@type":"Answer","text":"Use rules for well-labeled documents with a known layout, bulk first passes, and data that must not go to a model. Use a model mode for fields that need reading comprehension or long, messy documents."}},{"@type":"Question","name":"How do I write the schema?","acceptedAnswer":{"@type":"Answer","text":"As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use format: \"date\" for ISO dates and enum for fixed choices."}},{"@type":"Question","name":"Is my Anthropic key safe in byok mode?","acceptedAnswer":{"@type":"Answer","text":"It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset."}},{"@type":"Question","name":"What happens if the model fails?","acceptedAnswer":{"@type":"Answer","text":"The document gets the rules extraction, marked rules-fallback with the reason, so a run does not fail because of the model."}},{"@type":"Question","name":"Does it work on scanned documents?","acceptedAnswer":{"@type":"Answer","text":"Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by kvs:// reference."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to JSON with Your Own Schema: Invoices, Forms, Quotes","description":"Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.","url":"https://owlabee.com/document-to-json/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pdf-to-json"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pdf-to-json","name":"PDF & Document to JSON Extractor (AI) — Invoices, Forms","description":"One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence","url":"https://apify.com/owlabee/pdf-to-json","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which extractor should I use?","acceptedAnswer":{"@type":"Answer","text":"Use rules for well-labeled documents with a known layout, bulk first passes, and data that must not go to a model. Use a model mode for fields that need reading comprehension or long, messy documents."}},{"@type":"Question","name":"How do I write the schema?","acceptedAnswer":{"@type":"Answer","text":"As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use format: \"date\" for ISO dates and enum for fixed choices."}},{"@type":"Question","name":"Is my Anthropic key safe in byok mode?","acceptedAnswer":{"@type":"Answer","text":"It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset."}},{"@type":"Question","name":"What happens if the model fails?","acceptedAnswer":{"@type":"Answer","text":"The document gets the rules extraction, marked rules-fallback with the reason, so a run does not fail because of the model."}},{"@type":"Question","name":"Does it work on scanned documents?","acceptedAnswer":{"@type":"Answer","text":"Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by kvs:// reference."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@
 <h1>PDF to JSON with Your Own Schema: Invoices, Forms, Quotes</h1>
 <p class="lede">Pass document URLs and a JSON Schema describing the object you want (invoice number, line items, totals, form fields, dates) and get back one JSON object per document in exactly that shape, with a confidence score per field and a list of fields that were not found.</p>
 <div class="cta">
-<a class="button" href="https://apify.com/owlabee/document-to-json-extractor">Open the Actor on Apify Store</a>
+<a class="button" href="https://apify.com/owlabee/pdf-to-json">Open the Actor on Apify Store</a>
 <p class="note">PDF &amp; Document to JSON Extractor (AI) — Invoices, Forms. Pay per result; see the Store page for current pricing.</p>
 </div>
 </div>
@@ -159,7 +159,7 @@
 <pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
 
 curl -sS -X POST \
-  &quot;https://api.apify.com/v2/acts/owlabee~document-to-json-extractor/run-sync-get-dataset-items&quot; \
+  &quot;https://api.apify.com/v2/acts/owlabee~pdf-to-json/run-sync-get-dataset-items&quot; \
   -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
   -H &quot;Content-Type: application/json&quot; \
   -d '{
@@ -196,8 +196,8 @@ curl -sS -X POST \
 <p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
 <pre tabindex="0" aria-label="MCP client configuration"><code>{
   &quot;mcpServers&quot;: {
-    &quot;owlabee-document-to-json-extractor&quot;: {
-      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/document-to-json-extractor&quot;,
+    &quot;owlabee-pdf-to-json&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/pdf-to-json&quot;,
       &quot;headers&quot;: {
         &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
       }
@@ -206,7 +206,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Extract the invoice number, invoice date, vendor, total and line items from these three PDF invoices as JSON.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/document-to-json-extractor">examples/document-to-json-extractor</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/pdf-to-json">examples/pdf-to-json</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -226,7 +226,7 @@ curl -sS -X POST \
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
 <p>PDF &amp; Document to JSON Extractor (AI) — Invoices, Forms. One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence.</p>
-<p><a class="button" href="https://apify.com/owlabee/document-to-json-extractor">Open on Apify Store</a></p>
+<p><a class="button" href="https://apify.com/owlabee/pdf-to-json">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
 
