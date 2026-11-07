@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PACER RSS Feeds: Monitor New Federal Court Filings | owlabee</title>
-<meta name="description" content="Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.">
+<meta name="description" content="Read the free public PACER RSS feeds of federal district, bankruptcy, appellate and national courts as JSON and filter filings by party, case number, entry type or chapter.">
 <link rel="canonical" href="https://owlabee.com/pacer-rss-docket-monitor/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="PACER RSS Feeds: Monitor New Federal Court Filings | owlabee">
-<meta property="og:description" content="Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.">
+<meta property="og:description" content="Read the free public PACER RSS feeds of federal district, bankruptcy, appellate and national courts as JSON and filter filings by party, case number, entry type or chapter.">
 <meta property="og:url" content="https://owlabee.com/pacer-rss-docket-monitor/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PACER RSS Feeds: Monitor New Federal Court Filings","description":"Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.","url":"https://owlabee.com/pacer-rss-docket-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/federal-court-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/federal-court-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/federal-court-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a PACER account?","acceptedAnswer":{"@type":"Answer","text":"No. The RSS feeds are public, unauthenticated endpoints. Only opening a linked document on PACER is subject to PACER's fees."}},{"@type":"Question","name":"How far back does it go?","acceptedAnswer":{"@type":"Answer","text":"The live feeds cover 24 hours. Turn on includeHistorical to also read dockets from the last 1 to 365 days in the RECAP archive. That needs a free CourtListener API token in courtListenerApiKey, since the CourtListener API no longer answers anonymous requests."}},{"@type":"Question","name":"Why does the same entry appear twice?","acceptedAnswer":{"@type":"Answer","text":"Some courts attach two event labels to one entry. Both are published with the same entryId; entryKey tells them apart."}},{"@type":"Question","name":"Can I get the judge or all parties?","acceptedAnswer":{"@type":"Answer","text":"Not from the feed. Open docketUrl on PACER. Historical RECAP records do include parties, nature of suit and the assigned judge when the archive has them."}},{"@type":"Question","name":"What if a court's feed is down?","acceptedAnswer":{"@type":"Answer","text":"That court produces one error item and the run continues with the others."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PACER RSS Feeds: Monitor New Federal Court Filings","description":"Read the free public PACER RSS feeds of federal district, bankruptcy, appellate and national courts as JSON and filter filings by party, case number, entry type or chapter.","url":"https://owlabee.com/pacer-rss-docket-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/federal-court-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/federal-court-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/federal-court-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a PACER account?","acceptedAnswer":{"@type":"Answer","text":"No. The RSS feeds are public, unauthenticated endpoints. Only opening a linked document on PACER is subject to PACER's fees."}},{"@type":"Question","name":"How far back does it go?","acceptedAnswer":{"@type":"Answer","text":"The live feeds cover 24 hours. Turn on includeHistorical to also read dockets from the last 1 to 365 days in the RECAP archive. That needs a free CourtListener API token in courtListenerApiKey, since the CourtListener API no longer answers anonymous requests."}},{"@type":"Question","name":"Why does the same entry appear twice?","acceptedAnswer":{"@type":"Answer","text":"Some courts attach two event labels to one entry. Both are published with the same entryId; entryKey tells them apart."}},{"@type":"Question","name":"Can I get the judge or all parties?","acceptedAnswer":{"@type":"Answer","text":"Not from the feed. Open docketUrl on PACER. Historical RECAP records do include parties, nature of suit and the assigned judge when the archive has them."}},{"@type":"Question","name":"What if a court's feed is down?","acceptedAnswer":{"@type":"Answer","text":"That court produces one error item and the run continues with the others."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -34,7 +34,7 @@
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> PACER RSS docket monitor</nav>
 <article>
 <h1>PACER RSS Feeds: Monitor New Federal Court Filings</h1>
-<p class="lede">Every federal district and bankruptcy court running CM/ECF publishes a free RSS feed of its last 24 hours of docket activity. This Actor reads those feeds for the courts you choose, normalizes each entry, filters it, and on scheduled runs keeps only entries that are new since the last run. No PACER account is needed.</p>
+<p class="lede">Federal district and bankruptcy courts running CM/ECF can publish a free RSS feed of their last 24 hours of docket activity, and so can the Court of Federal Claims, the Court of International Trade and some courts of appeals. This Actor reads those feeds for the courts you choose, normalizes each entry, filters it, and on scheduled runs keeps only entries that are new since the last run. No PACER account is needed.</p>
 <div class="cta">
 <a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open the Actor on Apify Store</a>
 <p class="note">PACER RSS Docket Monitor — New Federal Court Filings. Pay per result; see the Store page for current pricing.</p>
@@ -45,8 +45,14 @@
 
 <section id="source">
 <h2>The source and its limits</h2>
-<p>The feeds are the courts' own public endpoints, <code>https://ecf.&lt;court&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code>. Each entry has the case number, the case title (the lead parties), the docket text, the document number with a link, and the filing time. Documents are linked, never downloaded; opening a document on PACER is subject to PACER's own fees.</p>
-<p>Coverage differs per court. In the Actor's sweep of 2026-10-17, 94 courts published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests. The Actor still tries every court you name and reports what happened. The full list is on <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a>.</p>
+<p>The feeds are the courts' own public endpoints, <code>https://ecf.&lt;court&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code> (and <code>…/n/beam/servlet/TransportRoom?servlet=RSSGenerator</code> for the courts of appeals). Each entry has the case number, the case title (the lead parties), the docket text, the document number with a link, and the filing time. Documents are linked, never downloaded; opening a document on PACER is subject to PACER's own fees.</p>
+<p>Coverage differs per court. The registry lists 203 courts, and 143 had a live feed at their last probe:</p>
+<ul>
+<li><strong>District and bankruptcy courts</strong> (sweep of 2026-10-17): of 188, 94 published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests.</li>
+<li><strong>Court of Federal Claims and Court of International Trade</strong> (probe of 2026-11-07): both live. Court of International Trade feed titles carry only the case number, so party filters cannot match there.</li>
+<li><strong>Courts of appeals</strong> (probe of 2026-11-07): 6 of 13 had entries. Appellate feeds carry orders, opinions and judgments only, never new appeals, so they are for following an appeal you already know about; <code>newCasesOnly</code> drops every appellate entry.</li>
+</ul>
+<p>The Actor still tries every court you name and reports what happened. The full list is on <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a>.</p>
 <p>For past dockets, the optional historical pass reads the RECAP archive through the Free Law Project's CourtListener API, in the same record shape with <code>source: "courtlistener-recap"</code>.</p>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -62,7 +68,7 @@
 <div class="table-wrap"><table>
 <thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
 <tbody>
-<tr><td><code>court, courtName, courtType, state</code></td><td>CM/ECF court code and name; district or bankruptcy</td></tr>
+<tr><td><code>court, courtName, courtType, state</code></td><td>CM/ECF court code and name; district, bankruptcy, appellate or national (<code>state</code> is null for the last two)</td></tr>
 <tr><td><code>caseNumber, caseNumberShort, caseTitle, caseType</code></td><td>Case as published, a normalized number, the lead parties, and civil, criminal, bankruptcy and so on</td></tr>
 <tr><td><code>entryText, entryCategory</code></td><td>Docket text and a heuristic category (complaint, petition, motion, order …)</td></tr>
 <tr><td><code>documentNumber, documentUrl, docketUrl</code></td><td>Document number and links to the document and docket on PACER</td></tr>
@@ -174,7 +180,7 @@ curl -sS -X POST \
 
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
-<p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type.</p>
+<p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type.</p>
 <p><a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
@@ -182,7 +188,7 @@ curl -sS -X POST \
 <section class="related">
 <h2>Related guides</h2>
 <ul>
-<li><a href="../pacer-rss-feeds-by-court/">PACER RSS Feeds by Court: All 188 Federal Courts Listed</a></li>
+<li><a href="../pacer-rss-feeds-by-court/">PACER RSS Feeds by Court: All 203 Federal Courts Listed</a></li>
 <li><a href="../patent-litigation-docket-monitor/">Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets</a></li>
 <li><a href="../bankruptcy-filings-monitor/">New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds</a></li>
 <li><a href="../sdny-securities-class-action-monitor/">S.D.N.Y. Securities and Class Action Complaint Alerts</a></li>
