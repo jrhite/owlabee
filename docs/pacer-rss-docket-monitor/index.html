@@ -13,7 +13,20 @@
 <meta property="og:description" content="Read the free public PACER RSS feeds of federal district, bankruptcy, appellate and national courts as JSON and filter filings by party, case number, entry type or chapter.">
 <meta property="og:url" content="https://owlabee.com/pacer-rss-docket-monitor/">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PACER RSS Feeds: Monitor New Federal Court Filings","description":"Read the free public PACER RSS feeds of federal district, bankruptcy, appellate and national courts as JSON and filter filings by party, case number, entry type or chapter.","url":"https://owlabee.com/pacer-rss-docket-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/federal-court-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/federal-court-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/federal-court-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a PACER account?","acceptedAnswer":{"@type":"Answer","text":"No. The RSS feeds are public, unauthenticated endpoints. Only opening a linked document on PACER is subject to PACER's fees."}},{"@type":"Question","name":"How far back does it go?","acceptedAnswer":{"@type":"Answer","text":"The live feeds cover 24 hours. Turn on includeHistorical to also read dockets from the last 1 to 365 days in the RECAP archive. That needs a free CourtListener API token in courtListenerApiKey, since the CourtListener API no longer answers anonymous requests."}},{"@type":"Question","name":"Why does the same entry appear twice?","acceptedAnswer":{"@type":"Answer","text":"Some courts attach two event labels to one entry. Both are published with the same entryId; entryKey tells them apart."}},{"@type":"Question","name":"Can I get the judge or all parties?","acceptedAnswer":{"@type":"Answer","text":"Not from the feed. Open docketUrl on PACER. Historical RECAP records do include parties, nature of suit and the assigned judge when the archive has them."}},{"@type":"Question","name":"What if a court's feed is down?","acceptedAnswer":{"@type":"Answer","text":"That court produces one error item and the run continues with the others."}}]}]}</script>
 </head>
@@ -21,7 +34,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
 <div class="wrap wrap-wide header-row">
-<a class="brand" href="../"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 1.5 29 9v14L16 30.5 3 23V9z" fill="var(--honey)"/><circle cx="11.2" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="20.8" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="12.2" cy="13.8" r="1.5" fill="var(--honey)"/><circle cx="21.8" cy="13.8" r="1.5" fill="var(--honey)"/><path d="M16 18.2 14 21h4z" fill="var(--ink-on-honey)"/></svg><span>owlabee</span></a>
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>

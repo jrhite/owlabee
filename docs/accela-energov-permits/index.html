@@ -13,7 +13,20 @@
 <meta property="og:description" content="Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.">
 <meta property="og:url" content="https://owlabee.com/accela-energov-permits/">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Accela Citizen Access and EnerGov Permit Data as JSON","description":"Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.","url":"https://owlabee.com/accela-energov-permits/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/accela-energov-permit-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/accela-energov-permit-scraper","name":"Accela Citizen Access & EnerGov Permit Scraper (Any City)","description":"Permits from Accela Citizen Access and Tyler EnerGov portals in 31 cities and counties, in the same schema as the open-data scraper","url":"https://apify.com/owlabee/accela-energov-permit-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which portals are supported?","acceptedAnswer":{"@type":"Answer","text":"The 31 jurisdictions in the registry, or all, all-energov and all-accela. Portals that load search through partial postbacks or show reCAPTCHA are not supported."}},{"@type":"Question","name":"Why is issuedDate null on Accela portals?","acceptedAnswer":{"@type":"Answer","text":"ACA's General Search lists records by application date and shows no issue date. status tells you whether the permit was issued."}},{"@type":"Question","name":"Does it need proxies or a login?","acceptedAnswer":{"@type":"Answer","text":"No. Both portal families answer plain HTTPS requests for every jurisdiction in the registry."}},{"@type":"Question","name":"Can you add my city?","acceptedAnswer":{"@type":"Answer","text":"If it runs EnerGov Citizen Self Service or Accela Citizen Access with a public General Search page, usually yes. Ask on the Store page."}},{"@type":"Question","name":"How do I keep runs small?","acceptedAnswer":{"@type":"Answer","text":"Use a short issuedWithinDays, cap maxResultsPerJurisdiction, leave includeDetails off unless you need valuation or contractor fields, and set a maximum total charge."}}]}]}</script>
 </head>
@@ -21,7 +34,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
 <div class="wrap wrap-wide header-row">
-<a class="brand" href="../"><svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 1.5 29 9v14L16 30.5 3 23V9z" fill="var(--honey)"/><circle cx="11.2" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="20.8" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="12.2" cy="13.8" r="1.5" fill="var(--honey)"/><circle cx="21.8" cy="13.8" r="1.5" fill="var(--honey)"/><path d="M16 18.2 14 21h4z" fill="var(--ink-on-honey)"/></svg><span>owlabee</span></a>
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>

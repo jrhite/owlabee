@@ -13,7 +13,20 @@
 <meta property="og:description" content="Guides to public data (permits, grants, SAM.gov, OSHA, EPA, recalls, PACER, licenses, DNS, sitemaps, Shopify, podcasts, Bluesky, job boards) and documents as JSON.">
 <meta property="og:url" content="https://owlabee.com/">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"owlabee","url":"https://owlabee.com/","inLanguage":"en-US","description":"Guides to public data (permits, grants, SAM.gov, OSHA, EPA, recalls, PACER, licenses, DNS, sitemaps, Shopify, podcasts, Bluesky, job boards) and documents as JSON."},{"@type":"ItemList","name":"Guides","itemListElement":[{"@type":"ListItem","position":1,"url":"https://owlabee.com/building-permits-api/","name":"Building Permits API: 61 US Open-Data Portals as JSON"},{"@type":"ListItem","position":2,"url":"https://owlabee.com/accela-energov-permits/","name":"Accela Citizen Access and EnerGov Permit Data as JSON"},{"@type":"ListItem","position":3,"url":"https://owlabee.com/grants-gov-api/","name":"Grants.gov API: Federal Grant Opportunities as JSON"},{"@type":"ListItem","position":4,"url":"https://owlabee.com/sam-gov-contract-opportunities/","name":"SAM.gov Contract Opportunities API Feed by Keyword"},{"@type":"ListItem","position":5,"url":"https://owlabee.com/osha-inspections-by-company/","name":"OSHA Inspections by Company: DOL Data API Lookup"},{"@type":"ListItem","position":6,"url":"https://owlabee.com/epa-echo-enforcement/","name":"EPA ECHO Enforcement Cases by Company or Facility"},{"@type":"ListItem","position":7,"url":"https://owlabee.com/product-recalls-api/","name":"Product Recalls API: FDA, NHTSA and CPSC in One Feed"},{"@type":"ListItem","position":8,"url":"https://owlabee.com/pacer-rss-docket-monitor/","name":"PACER RSS Feeds: Monitor New Federal Court Filings"},{"@type":"ListItem","position":9,"url":"https://owlabee.com/pacer-rss-feeds-by-court/","name":"PACER RSS Feeds by Court: All 203 Federal Courts Listed"},{"@type":"ListItem","position":10,"url":"https://owlabee.com/patent-litigation-docket-monitor/","name":"Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets"},{"@type":"ListItem","position":11,"url":"https://owlabee.com/bankruptcy-filings-monitor/","name":"New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds"},{"@type":"ListItem","position":12,"url":"https://owlabee.com/sdny-securities-class-action-monitor/","name":"S.D.N.Y. Securities and Class Action Complaint Alerts"},{"@type":"ListItem","position":13,"url":"https://owlabee.com/professional-license-verification/","name":"Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI"},{"@type":"ListItem","position":14,"url":"https://owlabee.com/spf-dmarc-dkim-checker/","name":"Bulk SPF, DMARC and DKIM Checker for Domain Lists"},{"@type":"ListItem","position":15,"url":"https://owlabee.com/sitemap-change-monitor/","name":"Sitemap Monitor: Track New, Removed and Changed Pages"},{"@type":"ListItem","position":16,"url":"https://owlabee.com/shopify-price-tracker/","name":"Shopify Price Tracker: Catalog and Changes as JSON"},{"@type":"ListItem","position":17,"url":"https://owlabee.com/pdf-to-markdown-rag/","name":"PDF to Markdown for RAG: Headings, Tables, Chunks and OCR"},{"@type":"ListItem","position":18,"url":"https://owlabee.com/document-to-json/","name":"PDF to JSON with Your Own Schema: Invoices, Forms, Quotes"},{"@type":"ListItem","position":19,"url":"https://owlabee.com/podcast-summarizer/","name":"Podcast Summarizer: Chapters and Quotes from Transcripts"},{"@type":"ListItem","position":20,"url":"https://owlabee.com/podcast-rss-feed-scraper/","name":"Podcast RSS Feed Scraper: Episodes and Transcripts as JSON"},{"@type":"ListItem","position":21,"url":"https://owlabee.com/bluesky-monitor/","name":"Bluesky Monitor: Posts, Hashtags and Followers as JSON"},{"@type":"ListItem","position":22,"url":"https://owlabee.com/job-board-api-hiring-signals/","name":"Greenhouse, Lever and Ashby Jobs API and Hiring Signals"}]}]}</script>
 </head>
@@ -21,7 +34,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
 <div class="wrap wrap-wide header-row">
-<a class="brand" href=""><svg class="logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 1.5 29 9v14L16 30.5 3 23V9z" fill="var(--honey)"/><circle cx="11.2" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="20.8" cy="14.5" r="4.3" fill="var(--ink-on-honey)"/><circle cx="12.2" cy="13.8" r="1.5" fill="var(--honey)"/><circle cx="21.8" cy="13.8" r="1.5" fill="var(--honey)"/><path d="M16 18.2 14 21h4z" fill="var(--ink-on-honey)"/></svg><span>owlabee</span></a>
+<a class="brand" href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
 <nav aria-label="Site">
 <a href="#guides">Guides</a>
 <a href="#actors">All Actors</a>
@@ -34,10 +47,20 @@
 
 <section class="hero">
 <div class="wrap wrap-wide">
+<div class="hero-grid">
+<div class="lockup">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="132" height="132" class="lockup-mark" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7" fill="currentColor"/><circle cx="69.05" cy="45" r="7" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3"/><path d="M78.6,54.6 C83,62 88,71 84,83" fill="none" stroke="#C29A45" stroke-width="1.6" stroke-linecap="round"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg>
+<p class="lockup-word"><span class="lockup-name">owlabee</span><span class="dotcom">.com</span></p>
+<p class="motto">Wise data. Honest work.</p>
+<p class="tagline">The owl sees clearly; the bee does the work.</p>
+</div>
+<div class="hero-copy">
 <p class="kicker">Apify Actors · pay per result · ready for AI agents</p>
 <h1>Public data sources, <span class="hl">as clean JSON</span></h1>
 <p class="lede">owlabee publishes 18 Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl or from an AI agent.</p>
 <p class="hero-cta"><a class="button" href="#guides">Browse the guides</a> <a class="button button-ghost" href="https://apify.com/owlabee">See them on Apify Store</a></p>
+</div>
+</div>
 <ul class="stats">
 <li><strong>18</strong><span>Actors on Apify Store</span></li>
 <li><strong>22</strong><span>guides to the sources</span></li>
