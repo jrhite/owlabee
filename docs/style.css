@@ -133,6 +133,10 @@ q { font-style: italic; }
 
 .site-footer { border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; padding: 20px 0 32px; }
 .site-footer a { color: var(--muted); }
+.site-footer .maker { color: var(--text); font-size: 1rem; margin-top: 14px; }
+.site-footer .maker a { color: var(--link); }
+.site-footer a.maker-link { color: var(--link); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.site-footer a.maker-link:hover { text-decoration-thickness: 3px; }
 
 /* PACER court reference table */
 .courts { font-size: 0.9rem; }
