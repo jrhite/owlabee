@@ -9,11 +9,11 @@
     "subfolder": "mcp/web-monitoring"
   },
   "websiteUrl": "https://owlabee.com/",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=owlabee/domain-intelligence,owlabee/website-change-monitor,owlabee/shopify-catalog-monitor,owlabee/ats-hiring-signals,owlabee/bluesky-monitor,owlabee/podcast-rss-scraper",
+      "url": "https://mcp.apify.com/?tools=owlabee/spf-dmarc-dkim-checker,owlabee/website-change-monitor,owlabee/shopify-catalog-monitor,owlabee/job-postings-api,owlabee/bluesky-monitor,owlabee/podcast-rss-scraper",
       "headers": [
         {
           "name": "Authorization",

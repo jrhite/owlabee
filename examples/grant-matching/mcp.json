@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-grant-matching": {
+      "url": "https://mcp.apify.com/?tools=owlabee/grant-matching",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

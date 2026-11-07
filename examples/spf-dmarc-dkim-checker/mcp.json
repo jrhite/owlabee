@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-spf-dmarc-dkim-checker": {
+      "url": "https://mcp.apify.com/?tools=owlabee/spf-dmarc-dkim-checker",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

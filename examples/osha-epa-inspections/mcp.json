@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-osha-epa-inspections": {
+      "url": "https://mcp.apify.com/?tools=owlabee/osha-epa-inspections",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

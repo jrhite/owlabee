@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-pdf-to-json": {
+      "url": "https://mcp.apify.com/?tools=owlabee/pdf-to-json",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

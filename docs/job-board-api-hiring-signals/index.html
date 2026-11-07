@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Greenhouse, Lever and Ashby Jobs API and Hiring Signals","description":"Get open jobs from Greenhouse, Lever, Ashby, SmartRecruiters and Workable boards as normalized JSON, or new, removed and changed roles per company between runs.","url":"https://owlabee.com/job-board-api-hiring-signals/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/ats-hiring-signals"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/ats-hiring-signals","name":"Hiring Signals & ATS Jobs Scraper — Greenhouse, Lever, Ashby","description":"Open roles from Greenhouse, Lever, Ashby, SmartRecruiters and Workable job boards, or new, removed and changed roles per company","url":"https://apify.com/owlabee/ats-hiring-signals","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it need an API key or proxies?","acceptedAnswer":{"@type":"Answer","text":"No. Greenhouse, Lever, Ashby and SmartRecruiters publish job-board APIs that need no credentials. Workable sometimes blocks datacenter traffic."}},{"@type":"Question","name":"How do I find a company's board id?","acceptedAnswer":{"@type":"Answer","text":"Open a job on the company's careers page and paste its URL (for example boards.greenhouse.io/\u003ctoken> or jobs.lever.co/\u003ccompany>), or paste the careers page itself."}},{"@type":"Question","name":"What happens on the first signals run?","acceptedAnswer":{"@type":"Answer","text":"There is no snapshot yet, so every current job is written as a job record with a baseline summary. Change events start with the second run."}},{"@type":"Question","name":"Why are some fields null?","acceptedAnswer":{"@type":"Answer","text":"Providers expose different fields: some Greenhouse boards have no posted date, Lever has no update date, SmartRecruiters departments are optional. The Actor does not guess them."}},{"@type":"Question","name":"Does it read LinkedIn or job aggregators?","acceptedAnswer":{"@type":"Answer","text":"No. Only the five providers' public job-board APIs and, when you give one, the company's own careers page."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Greenhouse, Lever and Ashby Jobs API and Hiring Signals","description":"Get open jobs from Greenhouse, Lever, Ashby, SmartRecruiters and Workable boards as normalized JSON, or new, removed and changed roles per company between runs.","url":"https://owlabee.com/job-board-api-hiring-signals/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/job-postings-api"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/job-postings-api","name":"Hiring Signals & ATS Jobs Scraper — Greenhouse, Lever, Ashby","description":"Open roles from Greenhouse, Lever, Ashby, SmartRecruiters and Workable job boards, or new, removed and changed roles per company","url":"https://apify.com/owlabee/job-postings-api","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it need an API key or proxies?","acceptedAnswer":{"@type":"Answer","text":"No. Greenhouse, Lever, Ashby and SmartRecruiters publish job-board APIs that need no credentials. Workable sometimes blocks datacenter traffic."}},{"@type":"Question","name":"How do I find a company's board id?","acceptedAnswer":{"@type":"Answer","text":"Open a job on the company's careers page and paste its URL (for example boards.greenhouse.io/\u003ctoken> or jobs.lever.co/\u003ccompany>), or paste the careers page itself."}},{"@type":"Question","name":"What happens on the first signals run?","acceptedAnswer":{"@type":"Answer","text":"There is no snapshot yet, so every current job is written as a job record with a baseline summary. Change events start with the second run."}},{"@type":"Question","name":"Why are some fields null?","acceptedAnswer":{"@type":"Answer","text":"Providers expose different fields: some Greenhouse boards have no posted date, Lever has no update date, SmartRecruiters departments are optional. The Actor does not guess them."}},{"@type":"Question","name":"Does it read LinkedIn or job aggregators?","acceptedAnswer":{"@type":"Answer","text":"No. Only the five providers' public job-board APIs and, when you give one, the company's own careers page."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@
 <h1>Greenhouse, Lever and Ashby Jobs API and Hiring Signals</h1>
 <p class="lede">Most company career pages are built on one of a few applicant tracking systems, and each has a public job-board API. This Actor reads Greenhouse, Lever, Ashby, SmartRecruiters and Workable boards, normalizes every open role, and in signals mode reports what changed at each company since the last run.</p>
 <div class="cta">
-<a class="button" href="https://apify.com/owlabee/ats-hiring-signals">Open the Actor on Apify Store</a>
+<a class="button" href="https://apify.com/owlabee/job-postings-api">Open the Actor on Apify Store</a>
 <p class="note">Hiring Signals &amp; ATS Jobs Scraper — Greenhouse, Lever, Ashby. Pay per result; see the Store page for current pricing.</p>
 </div>
 </div>
@@ -152,7 +152,7 @@
 <pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
 
 curl -sS -X POST \
-  &quot;https://api.apify.com/v2/acts/owlabee~ats-hiring-signals/run-sync-get-dataset-items&quot; \
+  &quot;https://api.apify.com/v2/acts/owlabee~job-postings-api/run-sync-get-dataset-items&quot; \
   -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
   -H &quot;Content-Type: application/json&quot; \
   -d '{
@@ -169,8 +169,8 @@ curl -sS -X POST \
 <p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
 <pre tabindex="0" aria-label="MCP client configuration"><code>{
   &quot;mcpServers&quot;: {
-    &quot;owlabee-ats-hiring-signals&quot;: {
-      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/ats-hiring-signals&quot;,
+    &quot;owlabee-job-postings-api&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/job-postings-api&quot;,
       &quot;headers&quot;: {
         &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
       }
@@ -179,7 +179,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Which roles did Stripe add or remove on its Greenhouse job board since last week?</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/ats-hiring-signals">examples/ats-hiring-signals</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/job-postings-api">examples/job-postings-api</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -199,7 +199,7 @@ curl -sS -X POST \
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
 <p>Hiring Signals &amp; ATS Jobs Scraper — Greenhouse, Lever, Ashby. Open roles from Greenhouse, Lever, Ashby, SmartRecruiters and Workable job boards, or new, removed and changed roles per company.</p>
-<p><a class="button" href="https://apify.com/owlabee/ats-hiring-signals">Open on Apify Store</a></p>
+<p><a class="button" href="https://apify.com/owlabee/job-postings-api">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
 
