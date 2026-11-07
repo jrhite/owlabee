@@ -1,0 +1,2292 @@
+{
+ "source": "Court registry of owlabee/federal-court-docket-monitor (src/lib/courts.ts, REGISTRY_PROBED_AT 2026-10-17), copied as published. Do not edit by hand; refresh from the registry.",
+ "sweptAt": "2026-10-17",
+ "courts": [
+  {
+   "code": "almd",
+   "type": "district",
+   "name": "Middle District of Alabama",
+   "state": "AL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 166
+  },
+  {
+   "code": "almb",
+   "type": "bankruptcy",
+   "name": "Middle District of Alabama",
+   "state": "AL",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order",
+    "caseupld",
+    "misc"
+   ],
+   "probedEntries24h": 572
+  },
+  {
+   "code": "alnd",
+   "type": "district",
+   "name": "Northern District of Alabama",
+   "state": "AL",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "alnb",
+   "type": "bankruptcy",
+   "name": "Northern District of Alabama",
+   "state": "AL",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "HTTP 500"
+  },
+  {
+   "code": "alsd",
+   "type": "district",
+   "name": "Southern District of Alabama",
+   "state": "AL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 141
+  },
+  {
+   "code": "alsb",
+   "type": "bankruptcy",
+   "name": "Southern District of Alabama",
+   "state": "AL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 867
+  },
+  {
+   "code": "akd",
+   "type": "district",
+   "name": "District of Alaska",
+   "state": "AK",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Empty reply from server"
+  },
+  {
+   "code": "akb",
+   "type": "bankruptcy",
+   "name": "District of Alaska",
+   "state": "AK",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 35
+  },
+  {
+   "code": "azd",
+   "type": "district",
+   "name": "District of Arizona",
+   "state": "AZ",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 2601
+  },
+  {
+   "code": "azb",
+   "type": "bankruptcy",
+   "name": "District of Arizona",
+   "state": "AZ",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1187
+  },
+  {
+   "code": "ared",
+   "type": "district",
+   "name": "Eastern District of Arkansas",
+   "state": "AR",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion"
+   ],
+   "probedEntries24h": 83
+  },
+  {
+   "code": "areb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Arkansas",
+   "state": "AR",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 608
+  },
+  {
+   "code": "arwd",
+   "type": "district",
+   "name": "Western District of Arkansas",
+   "state": "AR",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 122
+  },
+  {
+   "code": "arwb",
+   "type": "bankruptcy",
+   "name": "Western District of Arkansas",
+   "state": "AR",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 285
+  },
+  {
+   "code": "cacd",
+   "type": "district",
+   "name": "Central District of California",
+   "state": "CA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Empty reply from server"
+  },
+  {
+   "code": "cacb",
+   "type": "bankruptcy",
+   "name": "Central District of California",
+   "state": "CA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Empty reply from server"
+  },
+  {
+   "code": "caed",
+   "type": "district",
+   "name": "Eastern District of California",
+   "state": "CA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "caeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of California",
+   "state": "CA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1310
+  },
+  {
+   "code": "cand",
+   "type": "district",
+   "name": "Northern District of California",
+   "state": "CA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "canb",
+   "type": "bankruptcy",
+   "name": "Northern District of California",
+   "state": "CA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 651
+  },
+  {
+   "code": "casd",
+   "type": "district",
+   "name": "Southern District of California",
+   "state": "CA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40005 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "casb",
+   "type": "bankruptcy",
+   "name": "Southern District of California",
+   "state": "CA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 395
+  },
+  {
+   "code": "cod",
+   "type": "district",
+   "name": "District of Colorado",
+   "state": "CO",
+   "status": "partial",
+   "entryTypes": [
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 920
+  },
+  {
+   "code": "cob",
+   "type": "bankruptcy",
+   "name": "District of Colorado",
+   "state": "CO",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 934
+  },
+  {
+   "code": "ctd",
+   "type": "district",
+   "name": "District of Connecticut",
+   "state": "CT",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 851
+  },
+  {
+   "code": "ctb",
+   "type": "bankruptcy",
+   "name": "District of Connecticut",
+   "state": "CT",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "ded",
+   "type": "district",
+   "name": "District of Delaware",
+   "state": "DE",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 534
+  },
+  {
+   "code": "deb",
+   "type": "bankruptcy",
+   "name": "District of Delaware",
+   "state": "DE",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 611
+  },
+  {
+   "code": "dcd",
+   "type": "district",
+   "name": "District of Columbia",
+   "state": "DC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 986
+  },
+  {
+   "code": "dcb",
+   "type": "bankruptcy",
+   "name": "District of Columbia",
+   "state": "DC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 137
+  },
+  {
+   "code": "flmd",
+   "type": "district",
+   "name": "Middle District of Florida",
+   "state": "FL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1842
+  },
+  {
+   "code": "flmb",
+   "type": "bankruptcy",
+   "name": "Middle District of Florida",
+   "state": "FL",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order",
+    "misc",
+    "caseupld",
+    "trustee"
+   ],
+   "probedEntries24h": 2258
+  },
+  {
+   "code": "flnd",
+   "type": "district",
+   "name": "Northern District of Florida",
+   "state": "FL",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "flnb",
+   "type": "bankruptcy",
+   "name": "Northern District of Florida",
+   "state": "FL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 2049
+  },
+  {
+   "code": "flsd",
+   "type": "district",
+   "name": "Southern District of Florida",
+   "state": "FL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 2231
+  },
+  {
+   "code": "flsb",
+   "type": "bankruptcy",
+   "name": "Southern District of Florida",
+   "state": "FL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 2233
+  },
+  {
+   "code": "gamd",
+   "type": "district",
+   "name": "Middle District of Georgia",
+   "state": "GA",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr"
+   ],
+   "probedEntries24h": 65
+  },
+  {
+   "code": "gamb",
+   "type": "bankruptcy",
+   "name": "Middle District of Georgia",
+   "state": "GA",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 210
+  },
+  {
+   "code": "gand",
+   "type": "district",
+   "name": "Northern District of Georgia",
+   "state": "GA",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "ganb",
+   "type": "bankruptcy",
+   "name": "Northern District of Georgia",
+   "state": "GA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Empty reply from server"
+  },
+  {
+   "code": "gasd",
+   "type": "district",
+   "name": "Southern District of Georgia",
+   "state": "GA",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "gasb",
+   "type": "bankruptcy",
+   "name": "Southern District of Georgia",
+   "state": "GA",
+   "status": "partial",
+   "entryTypes": [
+    "order"
+   ],
+   "probedEntries24h": 59
+  },
+  {
+   "code": "gud",
+   "type": "district",
+   "name": "District of Guam",
+   "state": "GU",
+   "status": "empty",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "gub",
+   "type": "bankruptcy",
+   "name": "District of Guam",
+   "state": "GU",
+   "status": "empty",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "hid",
+   "type": "district",
+   "name": "District of Hawaii",
+   "state": "HI",
+   "status": "partial",
+   "entryTypes": [
+    "cmp",
+    "order",
+    "order-cr"
+   ],
+   "probedEntries24h": 45
+  },
+  {
+   "code": "hib",
+   "type": "bankruptcy",
+   "name": "District of Hawaii",
+   "state": "HI",
+   "status": "partial",
+   "entryTypes": [
+    "appeal",
+    "motion",
+    "order",
+    "misc"
+   ],
+   "probedEntries24h": 55
+  },
+  {
+   "code": "idd",
+   "type": "district",
+   "name": "District of Idaho",
+   "state": "ID",
+   "status": "partial",
+   "entryTypes": [
+    "allx",
+    "motion"
+   ],
+   "probedEntries24h": 20
+  },
+  {
+   "code": "idb",
+   "type": "bankruptcy",
+   "name": "District of Idaho",
+   "state": "ID",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 94
+  },
+  {
+   "code": "ilcd",
+   "type": "district",
+   "name": "Central District of Illinois",
+   "state": "IL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 742
+  },
+  {
+   "code": "ilcb",
+   "type": "bankruptcy",
+   "name": "Central District of Illinois",
+   "state": "IL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 295
+  },
+  {
+   "code": "ilnd",
+   "type": "district",
+   "name": "Northern District of Illinois",
+   "state": "IL",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion",
+    "cmp"
+   ],
+   "probedEntries24h": 992
+  },
+  {
+   "code": "ilnb",
+   "type": "bankruptcy",
+   "name": "Northern District of Illinois",
+   "state": "IL",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "ilsd",
+   "type": "district",
+   "name": "Southern District of Illinois",
+   "state": "IL",
+   "status": "partial",
+   "entryTypes": [
+    "motion",
+    "order",
+    "order-cr",
+    "cmp",
+    "charge-cr"
+   ],
+   "probedEntries24h": 200
+  },
+  {
+   "code": "ilsb",
+   "type": "bankruptcy",
+   "name": "Southern District of Illinois",
+   "state": "IL",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 392
+  },
+  {
+   "code": "innd",
+   "type": "district",
+   "name": "Northern District of Indiana",
+   "state": "IN",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 485
+  },
+  {
+   "code": "innb",
+   "type": "bankruptcy",
+   "name": "Northern District of Indiana",
+   "state": "IN",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "motion",
+    "notice",
+    "order",
+    "plan"
+   ],
+   "probedEntries24h": 383
+  },
+  {
+   "code": "insd",
+   "type": "district",
+   "name": "Southern District of Indiana",
+   "state": "IN",
+   "status": "partial",
+   "entryTypes": [
+    "adr",
+    "answer",
+    "appeal",
+    "appeal-cr",
+    "charge-cr",
+    "cmp",
+    "cvbevent-cr",
+    "detention-cr",
+    "discov",
+    "discovery-cr",
+    "minutes",
+    "minutes-cr",
+    "misc",
+    "misc-cr",
+    "misccs",
+    "mot2255",
+    "motion",
+    "notice",
+    "notice-cr",
+    "order",
+    "order-cr",
+    "plea-cr",
+    "respm",
+    "respm-cr",
+    "respoth",
+    "service",
+    "transfer",
+    "trial",
+    "trial-cr",
+    "waiver-cr"
+   ],
+   "probedEntries24h": 683
+  },
+  {
+   "code": "insb",
+   "type": "bankruptcy",
+   "name": "Southern District of Indiana",
+   "state": "IN",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1209
+  },
+  {
+   "code": "iand",
+   "type": "district",
+   "name": "Northern District of Iowa",
+   "state": "IA",
+   "status": "partial",
+   "entryTypes": [
+    "motion"
+   ],
+   "probedEntries24h": 19
+  },
+  {
+   "code": "ianb",
+   "type": "bankruptcy",
+   "name": "Northern District of Iowa",
+   "state": "IA",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 57
+  },
+  {
+   "code": "iasd",
+   "type": "district",
+   "name": "Southern District of Iowa",
+   "state": "IA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 228
+  },
+  {
+   "code": "iasb",
+   "type": "bankruptcy",
+   "name": "Southern District of Iowa",
+   "state": "IA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 194
+  },
+  {
+   "code": "ksd",
+   "type": "district",
+   "name": "District of Kansas",
+   "state": "KS",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 477
+  },
+  {
+   "code": "ksb",
+   "type": "bankruptcy",
+   "name": "District of Kansas",
+   "state": "KS",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 935
+  },
+  {
+   "code": "kyed",
+   "type": "district",
+   "name": "Eastern District of Kentucky",
+   "state": "KY",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "kyeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Kentucky",
+   "state": "KY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 782
+  },
+  {
+   "code": "kywd",
+   "type": "district",
+   "name": "Western District of Kentucky",
+   "state": "KY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 429
+  },
+  {
+   "code": "kywb",
+   "type": "bankruptcy",
+   "name": "Western District of Kentucky",
+   "state": "KY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 829
+  },
+  {
+   "code": "laed",
+   "type": "district",
+   "name": "Eastern District of Louisiana",
+   "state": "LA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "laeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Louisiana",
+   "state": "LA",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "misc",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 336
+  },
+  {
+   "code": "lamd",
+   "type": "district",
+   "name": "Middle District of Louisiana",
+   "state": "LA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "lamb",
+   "type": "bankruptcy",
+   "name": "Middle District of Louisiana",
+   "state": "LA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 238
+  },
+  {
+   "code": "lawd",
+   "type": "district",
+   "name": "Western District of Louisiana",
+   "state": "LA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 695
+  },
+  {
+   "code": "lawb",
+   "type": "bankruptcy",
+   "name": "Western District of Louisiana",
+   "state": "LA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "med",
+   "type": "district",
+   "name": "District of Maine",
+   "state": "ME",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr"
+   ],
+   "probedEntries24h": 53
+  },
+  {
+   "code": "meb",
+   "type": "bankruptcy",
+   "name": "District of Maine",
+   "state": "ME",
+   "status": "empty",
+   "entryTypes": [
+    "answer"
+   ],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "mdd",
+   "type": "district",
+   "name": "District of Maryland",
+   "state": "MD",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "mdb",
+   "type": "bankruptcy",
+   "name": "District of Maryland",
+   "state": "MD",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1837
+  },
+  {
+   "code": "mad",
+   "type": "district",
+   "name": "District of Massachusetts",
+   "state": "MA",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "appeal-cr",
+    "charge-cr",
+    "cmp",
+    "detention-cr",
+    "discov",
+    "discov-cr",
+    "minutes",
+    "minute-cr",
+    "misc",
+    "misc-cr",
+    "mot2255",
+    "motion",
+    "notice",
+    "notice-cr",
+    "order",
+    "order-cr",
+    "plea-cr",
+    "respm",
+    "respm-cr",
+    "respoth",
+    "service",
+    "transfer",
+    "transer-cr",
+    "trial",
+    "trial-cr",
+    "waiver"
+   ],
+   "probedEntries24h": 738
+  },
+  {
+   "code": "mab",
+   "type": "bankruptcy",
+   "name": "District of Massachusetts",
+   "state": "MA",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "caseupld",
+    "claims",
+    "cmp",
+    "crbatch",
+    "misc",
+    "motion",
+    "notice",
+    "order",
+    "plan"
+   ],
+   "probedEntries24h": 558
+  },
+  {
+   "code": "mied",
+   "type": "district",
+   "name": "Eastern District of Michigan",
+   "state": "MI",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "appeal-cr",
+    "charge-cr",
+    "cmp",
+    "motion",
+    "notice",
+    "notice-cr",
+    "order",
+    "order-cr",
+    "petition",
+    "petition-cr",
+    "respm",
+    "respm-cr",
+    "respoth",
+    "respp",
+    "respp-cr"
+   ],
+   "probedEntries24h": 538
+  },
+  {
+   "code": "mieb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Michigan",
+   "state": "MI",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "miwd",
+   "type": "district",
+   "name": "Western District of Michigan",
+   "state": "MI",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion"
+   ],
+   "probedEntries24h": 162
+  },
+  {
+   "code": "miwb",
+   "type": "bankruptcy",
+   "name": "Western District of Michigan",
+   "state": "MI",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "mnd",
+   "type": "district",
+   "name": "District of Minnesota",
+   "state": "MN",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "mnb",
+   "type": "bankruptcy",
+   "name": "District of Minnesota",
+   "state": "MN",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "msnd",
+   "type": "district",
+   "name": "Northern District of Mississippi",
+   "state": "MS",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "msnb",
+   "type": "bankruptcy",
+   "name": "Northern District of Mississippi",
+   "state": "MS",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "mssd",
+   "type": "district",
+   "name": "Southern District of Mississippi",
+   "state": "MS",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 395
+  },
+  {
+   "code": "mssb",
+   "type": "bankruptcy",
+   "name": "Southern District of Mississippi",
+   "state": "MS",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "moed",
+   "type": "district",
+   "name": "Eastern District of Missouri",
+   "state": "MO",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "moeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Missouri",
+   "state": "MO",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 677
+  },
+  {
+   "code": "mowd",
+   "type": "district",
+   "name": "Western District of Missouri",
+   "state": "MO",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion"
+   ],
+   "probedEntries24h": 250
+  },
+  {
+   "code": "mowb",
+   "type": "bankruptcy",
+   "name": "Western District of Missouri",
+   "state": "MO",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "mtd",
+   "type": "district",
+   "name": "District of Montana",
+   "state": "MT",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 209
+  },
+  {
+   "code": "mtb",
+   "type": "bankruptcy",
+   "name": "District of Montana",
+   "state": "MT",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 43
+  },
+  {
+   "code": "ned",
+   "type": "district",
+   "name": "District of Nebraska",
+   "state": "NE",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "neb",
+   "type": "bankruptcy",
+   "name": "District of Nebraska",
+   "state": "NE",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 375
+  },
+  {
+   "code": "nvd",
+   "type": "district",
+   "name": "District of Nevada",
+   "state": "NV",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40000 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "nvb",
+   "type": "bankruptcy",
+   "name": "District of Nevada",
+   "state": "NV",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "nhd",
+   "type": "district",
+   "name": "District of New Hampshire",
+   "state": "NH",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 199
+  },
+  {
+   "code": "nhb",
+   "type": "bankruptcy",
+   "name": "District of New Hampshire",
+   "state": "NH",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order",
+    "auditor",
+    "caseupld",
+    "claims",
+    "cmp",
+    "crbatch",
+    "crmisc",
+    "misc",
+    "notice",
+    "plan",
+    "trustee"
+   ],
+   "probedEntries24h": 116
+  },
+  {
+   "code": "njd",
+   "type": "district",
+   "name": "District of New Jersey",
+   "state": "NJ",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1563
+  },
+  {
+   "code": "njb",
+   "type": "bankruptcy",
+   "name": "District of New Jersey",
+   "state": "NJ",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order",
+    "misc",
+    "plan"
+   ],
+   "probedEntries24h": 1239
+  },
+  {
+   "code": "nmd",
+   "type": "district",
+   "name": "District of New Mexico",
+   "state": "NM",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "nmb",
+   "type": "bankruptcy",
+   "name": "District of New Mexico",
+   "state": "NM",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "nyed",
+   "type": "district",
+   "name": "Eastern District of New York",
+   "state": "NY",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "nyeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of New York",
+   "state": "NY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 830
+  },
+  {
+   "code": "nynd",
+   "type": "district",
+   "name": "Northern District of New York",
+   "state": "NY",
+   "status": "partial",
+   "entryTypes": [
+    "cmp",
+    "order",
+    "order-cr",
+    "motion"
+   ],
+   "probedEntries24h": 232
+  },
+  {
+   "code": "nynb",
+   "type": "bankruptcy",
+   "name": "Northern District of New York",
+   "state": "NY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 886
+  },
+  {
+   "code": "nysd",
+   "type": "district",
+   "name": "Southern District of New York",
+   "state": "NY",
+   "status": "partial",
+   "entryTypes": [
+    "adr",
+    "answer",
+    "appeal",
+    "appeal-cr",
+    "charge-cr",
+    "cmp",
+    "discov",
+    "discovery-cr",
+    "misc",
+    "misc-cr",
+    "misccs",
+    "mot2255",
+    "motion",
+    "notice",
+    "notice-cr",
+    "order",
+    "order-cr",
+    "respm",
+    "respm-cr",
+    "respoth",
+    "service",
+    "service-cr",
+    "transfer",
+    "transfer-cr",
+    "trial",
+    "trial-cr",
+    "waiver-cr",
+    "detention-cr",
+    "minutes",
+    "minutes-cr",
+    "plea"
+   ],
+   "probedEntries24h": 2674
+  },
+  {
+   "code": "nysb",
+   "type": "bankruptcy",
+   "name": "Southern District of New York",
+   "state": "NY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 620
+  },
+  {
+   "code": "nywd",
+   "type": "district",
+   "name": "Western District of New York",
+   "state": "NY",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "nywb",
+   "type": "bankruptcy",
+   "name": "Western District of New York",
+   "state": "NY",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order",
+    "misc",
+    "cmp"
+   ],
+   "probedEntries24h": 366
+  },
+  {
+   "code": "nced",
+   "type": "district",
+   "name": "Eastern District of North Carolina",
+   "state": "NC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 716
+  },
+  {
+   "code": "nceb",
+   "type": "bankruptcy",
+   "name": "Eastern District of North Carolina",
+   "state": "NC",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "ncmd",
+   "type": "district",
+   "name": "Middle District of North Carolina",
+   "state": "NC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 273
+  },
+  {
+   "code": "ncmb",
+   "type": "bankruptcy",
+   "name": "Middle District of North Carolina",
+   "state": "NC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 596
+  },
+  {
+   "code": "ncwd",
+   "type": "district",
+   "name": "Western District of North Carolina",
+   "state": "NC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 376
+  },
+  {
+   "code": "ncwb",
+   "type": "bankruptcy",
+   "name": "Western District of North Carolina",
+   "state": "NC",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 118
+  },
+  {
+   "code": "ndd",
+   "type": "district",
+   "name": "District of North Dakota",
+   "state": "ND",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "ndb",
+   "type": "bankruptcy",
+   "name": "District of North Dakota",
+   "state": "ND",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 75
+  },
+  {
+   "code": "nmid",
+   "type": "district",
+   "name": "District of Northern Mariana Islands",
+   "state": "MP",
+   "status": "empty",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion"
+   ],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "nmib",
+   "type": "bankruptcy",
+   "name": "District of Northern Mariana Islands",
+   "state": "MP",
+   "status": "empty",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "ohnd",
+   "type": "district",
+   "name": "Northern District of Ohio",
+   "state": "OH",
+   "status": "partial",
+   "entryTypes": [
+    "cmp",
+    "order",
+    "order_cr",
+    "motion",
+    "charge_cr"
+   ],
+   "probedEntries24h": 303
+  },
+  {
+   "code": "ohnb",
+   "type": "bankruptcy",
+   "name": "Northern District of Ohio",
+   "state": "OH",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1187
+  },
+  {
+   "code": "ohsd",
+   "type": "district",
+   "name": "Southern District of Ohio",
+   "state": "OH",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 729
+  },
+  {
+   "code": "ohsb",
+   "type": "bankruptcy",
+   "name": "Southern District of Ohio",
+   "state": "OH",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1131
+  },
+  {
+   "code": "oked",
+   "type": "district",
+   "name": "Eastern District of Oklahoma",
+   "state": "OK",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "okeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Oklahoma",
+   "state": "OK",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "oknd",
+   "type": "district",
+   "name": "Northern District of Oklahoma",
+   "state": "OK",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "oknb",
+   "type": "bankruptcy",
+   "name": "Northern District of Oklahoma",
+   "state": "OK",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "okwd",
+   "type": "district",
+   "name": "Western District of Oklahoma",
+   "state": "OK",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "okwb",
+   "type": "bankruptcy",
+   "name": "Western District of Oklahoma",
+   "state": "OK",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "ord",
+   "type": "district",
+   "name": "District of Oregon",
+   "state": "OR",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 370
+  },
+  {
+   "code": "orb",
+   "type": "bankruptcy",
+   "name": "District of Oregon",
+   "state": "OR",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order",
+    "trustee",
+    "notice"
+   ],
+   "probedEntries24h": 371
+  },
+  {
+   "code": "paed",
+   "type": "district",
+   "name": "Eastern District of Pennsylvania",
+   "state": "PA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1303
+  },
+  {
+   "code": "paeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Pennsylvania",
+   "state": "PA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 851
+  },
+  {
+   "code": "pamd",
+   "type": "district",
+   "name": "Middle District of Pennsylvania",
+   "state": "PA",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "pamb",
+   "type": "bankruptcy",
+   "name": "Middle District of Pennsylvania",
+   "state": "PA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 519
+  },
+  {
+   "code": "pawd",
+   "type": "district",
+   "name": "Western District of Pennsylvania",
+   "state": "PA",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion",
+    "cmp"
+   ],
+   "probedEntries24h": 367
+  },
+  {
+   "code": "pawb",
+   "type": "bankruptcy",
+   "name": "Western District of Pennsylvania",
+   "state": "PA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 736
+  },
+  {
+   "code": "prd",
+   "type": "district",
+   "name": "District of Puerto Rico",
+   "state": "PR",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 715
+  },
+  {
+   "code": "prb",
+   "type": "bankruptcy",
+   "name": "District of Puerto Rico",
+   "state": "PR",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 650
+  },
+  {
+   "code": "rid",
+   "type": "district",
+   "name": "District of Rhode Island",
+   "state": "RI",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 162
+  },
+  {
+   "code": "rib",
+   "type": "bankruptcy",
+   "name": "District of Rhode Island",
+   "state": "RI",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 198
+  },
+  {
+   "code": "scd",
+   "type": "district",
+   "name": "District of South Carolina",
+   "state": "SC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 750
+  },
+  {
+   "code": "scb",
+   "type": "bankruptcy",
+   "name": "District of South Carolina",
+   "state": "SC",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 769
+  },
+  {
+   "code": "sdd",
+   "type": "district",
+   "name": "District of South Dakota",
+   "state": "SD",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 191
+  },
+  {
+   "code": "sdb",
+   "type": "bankruptcy",
+   "name": "District of South Dakota",
+   "state": "SD",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 93
+  },
+  {
+   "code": "tned",
+   "type": "district",
+   "name": "Eastern District of Tennessee",
+   "state": "TN",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 336
+  },
+  {
+   "code": "tneb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Tennessee",
+   "state": "TN",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 923
+  },
+  {
+   "code": "tnmd",
+   "type": "district",
+   "name": "Middle District of Tennessee",
+   "state": "TN",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion"
+   ],
+   "probedEntries24h": 207
+  },
+  {
+   "code": "tnmb",
+   "type": "bankruptcy",
+   "name": "Middle District of Tennessee",
+   "state": "TN",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 627
+  },
+  {
+   "code": "tnwd",
+   "type": "district",
+   "name": "Western District of Tennessee",
+   "state": "TN",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 369
+  },
+  {
+   "code": "tnwb",
+   "type": "bankruptcy",
+   "name": "Western District of Tennessee",
+   "state": "TN",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1014
+  },
+  {
+   "code": "txed",
+   "type": "district",
+   "name": "Eastern District of Texas",
+   "state": "TX",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 974
+  },
+  {
+   "code": "txeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Texas",
+   "state": "TX",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "auditor",
+    "caseupld",
+    "claims",
+    "cmp",
+    "court",
+    "misc",
+    "motion",
+    "notice",
+    "order",
+    "plan",
+    "trustee"
+   ],
+   "probedEntries24h": 430
+  },
+  {
+   "code": "txnd",
+   "type": "district",
+   "name": "Northern District of Texas",
+   "state": "TX",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "charge-cr",
+    "cmp",
+    "answer"
+   ],
+   "probedEntries24h": 409
+  },
+  {
+   "code": "txnb",
+   "type": "bankruptcy",
+   "name": "Northern District of Texas",
+   "state": "TX",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1425
+  },
+  {
+   "code": "txsd",
+   "type": "district",
+   "name": "Southern District of Texas",
+   "state": "TX",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 2846
+  },
+  {
+   "code": "txsb",
+   "type": "bankruptcy",
+   "name": "Southern District of Texas",
+   "state": "TX",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1989
+  },
+  {
+   "code": "txwd",
+   "type": "district",
+   "name": "Western District of Texas",
+   "state": "TX",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 3969
+  },
+  {
+   "code": "txwb",
+   "type": "bankruptcy",
+   "name": "Western District of Texas",
+   "state": "TX",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 1102
+  },
+  {
+   "code": "utd",
+   "type": "district",
+   "name": "District of Utah",
+   "state": "UT",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr",
+    "motion"
+   ],
+   "probedEntries24h": 174
+  },
+  {
+   "code": "utb",
+   "type": "bankruptcy",
+   "name": "District of Utah",
+   "state": "UT",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 824
+  },
+  {
+   "code": "vtd",
+   "type": "district",
+   "name": "District of Vermont",
+   "state": "VT",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 93
+  },
+  {
+   "code": "vtb",
+   "type": "bankruptcy",
+   "name": "District of Vermont",
+   "state": "VT",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 32
+  },
+  {
+   "code": "vid",
+   "type": "district",
+   "name": "District of Virgin Islands",
+   "state": "VI",
+   "status": "partial",
+   "entryTypes": [
+    "order",
+    "order-cr"
+   ],
+   "probedEntries24h": 13
+  },
+  {
+   "code": "vib",
+   "type": "bankruptcy",
+   "name": "District of Virgin Islands",
+   "state": "VI",
+   "status": "empty",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "vaed",
+   "type": "district",
+   "name": "Eastern District of Virginia",
+   "state": "VA",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "vaeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Virginia",
+   "state": "VA",
+   "status": "unreachable",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
+  },
+  {
+   "code": "vawd",
+   "type": "district",
+   "name": "Western District of Virginia",
+   "state": "VA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 468
+  },
+  {
+   "code": "vawb",
+   "type": "bankruptcy",
+   "name": "Western District of Virginia",
+   "state": "VA",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "motion",
+    "order"
+   ],
+   "probedEntries24h": 143
+  },
+  {
+   "code": "waed",
+   "type": "district",
+   "name": "Eastern District of Washington",
+   "state": "WA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 288
+  },
+  {
+   "code": "waeb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Washington",
+   "state": "WA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 171
+  },
+  {
+   "code": "wawd",
+   "type": "district",
+   "name": "Western District of Washington",
+   "state": "WA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 893
+  },
+  {
+   "code": "wawb",
+   "type": "bankruptcy",
+   "name": "Western District of Washington",
+   "state": "WA",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 895
+  },
+  {
+   "code": "wvnd",
+   "type": "district",
+   "name": "Northern District of West Virginia",
+   "state": "WV",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 235
+  },
+  {
+   "code": "wvnb",
+   "type": "bankruptcy",
+   "name": "Northern District of West Virginia",
+   "state": "WV",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 186
+  },
+  {
+   "code": "wvsd",
+   "type": "district",
+   "name": "Southern District of West Virginia",
+   "state": "WV",
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probeNote": "feed answered HTTP 200 with no entries"
+  },
+  {
+   "code": "wvsb",
+   "type": "bankruptcy",
+   "name": "Southern District of West Virginia",
+   "state": "WV",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 127
+  },
+  {
+   "code": "wied",
+   "type": "district",
+   "name": "Eastern District of Wisconsin",
+   "state": "WI",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 440
+  },
+  {
+   "code": "wieb",
+   "type": "bankruptcy",
+   "name": "Eastern District of Wisconsin",
+   "state": "WI",
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "court",
+    "misc",
+    "motion",
+    "order",
+    "trustee"
+   ],
+   "probedEntries24h": 664
+  },
+  {
+   "code": "wiwd",
+   "type": "district",
+   "name": "Western District of Wisconsin",
+   "state": "WI",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 207
+  },
+  {
+   "code": "wiwb",
+   "type": "bankruptcy",
+   "name": "Western District of Wisconsin",
+   "state": "WI",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 377
+  },
+  {
+   "code": "wyd",
+   "type": "district",
+   "name": "District of Wyoming",
+   "state": "WY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 188
+  },
+  {
+   "code": "wyb",
+   "type": "bankruptcy",
+   "name": "District of Wyoming",
+   "state": "WY",
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 52
+  }
+ ]
+}
