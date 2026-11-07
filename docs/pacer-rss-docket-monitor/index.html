@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PACER RSS Feeds: Monitor New Federal Court Filings | owlabee</title>
+<meta name="description" content="Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/pacer-rss-docket-monitor/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="PACER RSS Feeds: Monitor New Federal Court Filings | owlabee">
+<meta property="og:description" content="Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/pacer-rss-docket-monitor/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PACER RSS Feeds: Monitor New Federal Court Filings","description":"Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.","url":"https://jrhite.github.io/owlabee/pacer-rss-docket-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/federal-court-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/federal-court-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/federal-court-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need a PACER account?","acceptedAnswer":{"@type":"Answer","text":"No. The RSS feeds are public, unauthenticated endpoints. Only opening a linked document on PACER is subject to PACER's fees."}},{"@type":"Question","name":"How far back does it go?","acceptedAnswer":{"@type":"Answer","text":"The live feeds cover 24 hours. Turn on includeHistorical to also read dockets from the last 1 to 365 days in the RECAP archive."}},{"@type":"Question","name":"Why does the same entry appear twice?","acceptedAnswer":{"@type":"Answer","text":"Some courts attach two event labels to one entry. Both are published with the same entryId; entryKey tells them apart."}},{"@type":"Question","name":"Can I get the judge or all parties?","acceptedAnswer":{"@type":"Answer","text":"Not from the feed. Open docketUrl on PACER. Historical RECAP records do include parties, nature of suit and the assigned judge when the archive has them."}},{"@type":"Question","name":"What if a court's feed is down?","acceptedAnswer":{"@type":"Answer","text":"That court produces one error item and the run continues with the others."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> PACER RSS docket monitor</nav>
+<article>
+<h1>PACER RSS Feeds: Monitor New Federal Court Filings</h1>
+<p class="lede">Every federal district and bankruptcy court running CM/ECF publishes a free RSS feed of its last 24 hours of docket activity. This Actor reads those feeds for the courts you choose, normalizes each entry, filters it, and on scheduled runs keeps only entries that are new since the last run. No PACER account is needed.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open the Actor on Apify Store</a>
+<p class="note">PACER RSS Docket Monitor — New Federal Court Filings. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>The feeds are the courts' own public endpoints, <code>https://ecf.&lt;court&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code>. Each entry has the case number, the case title (the lead parties), the docket text, the document number with a link, and the filing time. Documents are linked, never downloaded; opening a document on PACER is subject to PACER's own fees.</p>
+<p>Coverage differs per court. In the Actor's sweep of 2026-10-17, 94 courts published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests. The Actor still tries every court you name and reports what happened.</p>
+<p>For past dockets, the optional historical pass reads the RECAP archive through the Free Law Project's CourtListener API, in the same record shape with <code>source: "courtlistener-recap"</code>.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Each feed covers the <strong>trailing 24 hours</strong> only. Schedule at least daily; hourly is a good default, since courts regenerate feeds every 30 to 60 minutes.</li>
+<li>Nature of suit, party lists, judges and the full docket text are not in the feeds. The case title carries only the lead parties, so a party that is not first-named may be missing.</li>
+<li><code>entryTypes</code> is a heuristic over the entry text; use <code>entryKeywords</code> for precision.</li>
+<li>The CourtListener API allows 5 requests per minute, 50 per hour and 125 per day by default, shared by anonymous callers; a free CourtListener token gives a run its own allowance.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>court, courtName, courtType, state</code></td><td>CM/ECF court code and name; district or bankruptcy</td></tr>
+<tr><td><code>caseNumber, caseNumberShort, caseTitle, caseType</code></td><td>Case as published, a normalized number, the lead parties, and civil, criminal, bankruptcy and so on</td></tr>
+<tr><td><code>entryText, entryCategory</code></td><td>Docket text and a heuristic category (complaint, petition, motion, order …)</td></tr>
+<tr><td><code>documentNumber, documentUrl, docketUrl</code></td><td>Document number and links to the document and docket on PACER</td></tr>
+<tr><td><code>bankruptcyChapter, trustee, office</code></td><td>Bankruptcy entries only</td></tr>
+<tr><td><code>filedAt, pubDateRaw</code></td><td>Filing time, and the original timestamp string</td></tr>
+<tr><td><code>likelyNewCase, matchedFilters, isNew</code></td><td>Document number 1, which filters matched, and the monitor-mode flag</td></tr>
+<tr><td><code>source, recapUrl</code></td><td><code>pacer-rss</code> or <code>courtlistener-recap</code></td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>One docket entry from the Southern District of New York (from the Actor's README):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;recordType&quot;: &quot;docket-entry&quot;,
+  &quot;entryId&quot;: &quot;nysd:663583:517&quot;,
+  &quot;court&quot;: &quot;nysd&quot;,
+  &quot;courtName&quot;: &quot;U.S. District Court, Southern District of New York&quot;,
+  &quot;courtType&quot;: &quot;district&quot;,
+  &quot;state&quot;: &quot;NY&quot;,
+  &quot;caseNumber&quot;: &quot;1:26-cv-03810&quot;,
+  &quot;caseNumberShort&quot;: &quot;26-cv-3810&quot;,
+  &quot;caseTitle&quot;: &quot;First-Citizens Bank &amp; Trust Company v. Patriot Bank, N.A.&quot;,
+  &quot;caseType&quot;: &quot;civil&quot;,
+  &quot;bankruptcyChapter&quot;: null,
+  &quot;entryText&quot;: &quot;Certificate of Service Other&quot;,
+  &quot;entryCategory&quot;: &quot;notice&quot;,
+  &quot;documentNumber&quot;: 153,
+  &quot;documentUrl&quot;: &quot;https://ecf.nysd.uscourts.gov/doc1/127140563915?caseid=663583&amp;de_seq_num=517&quot;,
+  &quot;docketUrl&quot;: &quot;https://ecf.nysd.uscourts.gov/cgi-bin/DktRpt.pl?663583&quot;,
+  &quot;filedAt&quot;: &quot;2026-10-17T07:34:33.000Z&quot;,
+  &quot;likelyNewCase&quot;: false,
+  &quot;matchedFilters&quot;: [
+    &quot;party:Patriot Bank&quot;
+  ],
+  &quot;isNew&quot;: true,
+  &quot;source&quot;: &quot;pacer-rss&quot;,
+  &quot;recapUrl&quot;: null,
+  &quot;fetchedAt&quot;: &quot;2026-10-17T10:22:00.283Z&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>New cases naming a company</h3>
+<p>Combine <code>partyKeywords</code>, <code>entryTypes: ["complaint"]</code> and <code>newCasesOnly</code> to catch a new case opened against or by a company in the courts you watch.</p>
+<h3>Chapter 11 filings</h3>
+<p>Watch <code>deb</code> and <code>nysb</code> with <code>bankruptcyChapters: ["11"]</code> and <code>onlyNewSinceLastRun</code> on an hourly schedule.</p>
+<h3>Follow one case</h3>
+<p>Pass <code>caseNumbers</code> to get every new motion and order in a case without checking the docket by hand.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. New Chapter 11 entries in the Delaware and Southern District of New York bankruptcy courts, new since the last run:</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~federal-court-docket-monitor/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;courts&quot;: [
+    &quot;deb&quot;,
+    &quot;nysb&quot;
+  ],
+  &quot;bankruptcyChapters&quot;: [
+    &quot;11&quot;
+  ],
+  &quot;maxEntriesPerCourt&quot;: 25,
+  &quot;maxResults&quot;: 25,
+  &quot;onlyNewSinceLastRun&quot;: true,
+  &quot;stateStoreName&quot;: &quot;pacer-chapter-11-de-sdny-monitor&quot;,
+  &quot;notifyOnlyOnResults&quot;: true
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-federal-court-docket-monitor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/federal-court-docket-monitor&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Every hour, check the Delaware and SDNY bankruptcy courts for new Chapter 11 filings and give me the case title, entry text and docket link.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/federal-court-docket-monitor">examples/federal-court-docket-monitor</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Do I need a PACER account?</h3>
+<p>No. The RSS feeds are public, unauthenticated endpoints. Only opening a linked document on PACER is subject to PACER's fees.</p>
+<h3>How far back does it go?</h3>
+<p>The live feeds cover 24 hours. Turn on <code>includeHistorical</code> to also read dockets from the last 1 to 365 days in the RECAP archive.</p>
+<h3>Why does the same entry appear twice?</h3>
+<p>Some courts attach two event labels to one entry. Both are published with the same <code>entryId</code>; <code>entryKey</code> tells them apart.</p>
+<h3>Can I get the judge or all parties?</h3>
+<p>Not from the feed. Open <code>docketUrl</code> on PACER. Historical RECAP records do include parties, nature of suit and the assigned judge when the archive has them.</p>
+<h3>What if a court's feed is down?</h3>
+<p>That court produces one error item and the run continues with the others.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type.</p>
+<p><a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../grants-gov-api/">Grants.gov API: Federal Grant Opportunities as JSON</a></li>
+<li><a href="../product-recalls-api/">Product Recalls API: FDA, NHTSA and CPSC in One Feed</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

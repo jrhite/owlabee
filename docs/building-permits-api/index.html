@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building Permits API: 61 US Open-Data Portals as JSON | owlabee</title>
+<meta name="description" content="Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/building-permits-api/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Building Permits API: 61 US Open-Data Portals as JSON | owlabee">
+<meta property="og:description" content="Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/building-permits-api/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Building Permits API: 61 US Open-Data Portals as JSON","description":"Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.","url":"https://jrhite.github.io/owlabee/building-permits-api/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/building-permits-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/building-permits-scraper","name":"Building Permits Scraper — Roofing & Construction Leads","description":"Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor","url":"https://apify.com/owlabee/building-permits-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need an API key for the city portals?","acceptedAnswer":{"@type":"Answer","text":"No. The portals are public open-data APIs. A Socrata app token is optional and only raises Socrata's rate limits."}},{"@type":"Question","name":"Why is estimatedCost or the contractor empty?","acceptedAnswer":{"@type":"Answer","text":"The jurisdiction does not publish that column. Turn on includeRaw to see every field the portal does publish."}},{"@type":"Question","name":"My city runs Accela or EnerGov instead of an open-data portal.","acceptedAnswer":{"@type":"Answer","text":"Use the Accela Citizen Access and EnerGov permit scraper, which returns the same schema."}},{"@type":"Question","name":"What happens when a portal is down?","acceptedAnswer":{"@type":"Answer","text":"That jurisdiction produces one error item and the rest of the run continues."}},{"@type":"Question","name":"How do I control what a run costs?","acceptedAnswer":{"@type":"Answer","text":"Set maxResultsPerJurisdiction, keep the date window short, and set a maximum total charge for the run. In monitor mode you pay only for new permits."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Building permits API</nav>
+<article>
+<h1>Building Permits API: 61 US Open-Data Portals as JSON</h1>
+<p class="lede">Many US cities and counties publish their building permits on open-data portals, but each portal has its own API, column names and permit-type labels. The Building Permits Scraper reads 61 of them and returns every permit in one schema, with a link back to the source row.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open the Actor on Apify Store</a>
+<p class="note">Building Permits Scraper — Roofing &amp; Construction Leads. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>The data comes from the jurisdictions' own open-data portals, which run on four kinds of software: <strong>Socrata</strong> (the SODA API), <strong>CKAN DataStore</strong>, <strong>ArcGIS REST</strong> and <strong>CARTO SQL</strong>. Examples are New York City (DOB NOW approved permits), Chicago, Los Angeles (LADBS), Seattle (SDCI), Austin, Philadelphia (L&amp;I, via CARTO), Boston (CKAN), Washington, DC and Miami-Dade County (ArcGIS), plus one state, New Jersey. Each entry was checked live, and the Actor calls the portal APIs directly over HTTPS: no browser, no login, no proxies.</p>
+<p>For a place that is not in the list, Socrata auto-discovery sends one request to the public Socrata Discovery API, finds datasets whose name says "permit" for that place, maps their columns by name and crawls them. Records from a discovered dataset carry a <code>mappingConfidence</code> of <code>high</code>, <code>medium</code> or <code>low</code>. Discovery only searches Socrata portals.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Coverage is each jurisdiction's own dataset. Some publish no valuation (Washington, DC, Philadelphia, Maricopa County) or no contractor columns (Los Angeles, Detroit). Louisville publishes active permits only and Tucson residential permits only.</li>
+<li>Update frequency differs: most portals refresh daily, a few weekly or every few weeks, and some issued dates lag by one to three weeks.</li>
+<li>Requests are limited to two per second per portal. Socrata allows anonymous use; an optional free Socrata app token raises its rate limits.</li>
+<li>Each portal uses its own permit-type vocabulary, so use generic words such as <code>roof</code> or <code>solar</code> and check <code>permitType</code> values after a first run.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>permitNumber, permitType, permitSubtype</code></td><td>The permit as the jurisdiction labels it</td></tr>
+<tr><td><code>workDescription, status</code></td><td>Free-text scope of work and the current status</td></tr>
+<tr><td><code>appliedDate, issuedDate, finalizedDate, expirationDate</code></td><td>ISO-8601 dates as published</td></tr>
+<tr><td><code>estimatedCost</code></td><td>Declared job value in USD, or null where the jurisdiction publishes none</td></tr>
+<tr><td><code>address, city, state, zip, parcelId, latitude, longitude</code></td><td>Location of the work</td></tr>
+<tr><td><code>contractorName, contractorLicense, contractorPhone</code></td><td>Only where the jurisdiction publishes them; nothing is inferred</td></tr>
+<tr><td><code>ownerName, applicantName</code></td><td>Where published</td></tr>
+<tr><td><code>sourceApi, sourceUrl, sourceRecordId</code></td><td>Which API answered and a link to the source dataset or row</td></tr>
+<tr><td><code>isNew</code></td><td>Present in monitor mode for permits not seen on earlier runs</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>One permit record from New York City (from the Actor's README):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;jurisdiction&quot;: &quot;nyc&quot;,
+  &quot;jurisdictionName&quot;: &quot;New York City, NY&quot;,
+  &quot;permitNumber&quot;: &quot;B01186301-S6-MS&quot;,
+  &quot;permitType&quot;: &quot;Mechanical Systems&quot;,
+  &quot;permitSubtype&quot;: &quot;Initial Permit&quot;,
+  &quot;workDescription&quot;: &quot;Mechanical Systems filed in conjunction to NB application #B01186301-I1.&quot;,
+  &quot;status&quot;: &quot;Permit Issued&quot;,
+  &quot;appliedDate&quot;: &quot;2026-02-20&quot;,
+  &quot;issuedDate&quot;: &quot;2026-10-14&quot;,
+  &quot;finalizedDate&quot;: null,
+  &quot;expirationDate&quot;: &quot;2027-10-14&quot;,
+  &quot;estimatedCost&quot;: null,
+  &quot;address&quot;: &quot;280 BERGEN STREET&quot;,
+  &quot;city&quot;: &quot;Brooklyn&quot;,
+  &quot;state&quot;: &quot;NY&quot;,
+  &quot;zip&quot;: &quot;11217&quot;,
+  &quot;parcelId&quot;: &quot;3003880020&quot;,
+  &quot;latitude&quot;: 40.683782,
+  &quot;longitude&quot;: -73.982946,
+  &quot;contractorName&quot;: &quot;DEVELOPING NY STATE LLC&quot;,
+  &quot;contractorLicense&quot;: &quot;612632&quot;,
+  &quot;contractorPhone&quot;: null,
+  &quot;ownerName&quot;: &quot;DEVELOPING NY STATE&quot;,
+  &quot;applicantName&quot;: &quot;YITCHOK KATZ&quot;,
+  &quot;sourceApi&quot;: &quot;socrata&quot;,
+  &quot;sourceUrl&quot;: &quot;https://data.cityofnewyork.us/d/rbx6-tga4&quot;,
+  &quot;sourceRecordId&quot;: &quot;B01186301-S6-MS-1&quot;,
+  &quot;fetchedAt&quot;: &quot;2026-10-16T13:25:32.995Z&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Weekly re-roof lead list</h3>
+<p>Set <code>permitTypes</code> to <code>["roof", "re-roof"]</code> and <code>issuedWithinDays</code> to 7 for one city. Each record has the address and, where published, the contractor who pulled the permit.</p>
+<h3>Daily new-permit feed</h3>
+<p>Schedule the Actor with <code>onlyNewSinceLastRun</code> and a <code>webhookUrl</code>. The first run is a baseline; later runs send only permits not seen before, flagged <code>isNew: true</code>.</p>
+<h3>Larger jobs only</h3>
+<p>Use <code>minEstimatedCost</code> to drop permits below a declared value (permits with no declared cost are kept), for example to find commercial projects for suppliers.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. Permits issued in Chicago and Seattle in the last 7 days with a declared cost of at least 50,000 USD:</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~building-permits-scraper/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;jurisdictions&quot;: [
+    &quot;chicago&quot;,
+    &quot;seattle&quot;
+  ],
+  &quot;issuedWithinDays&quot;: 7,
+  &quot;minEstimatedCost&quot;: 50000,
+  &quot;maxResultsPerJurisdiction&quot;: 12,
+  &quot;onlyNewSinceLastRun&quot;: false,
+  &quot;includeRaw&quot;: false
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-building-permits-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/building-permits-scraper&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>List the building permits issued in Chicago and Seattle in the last 7 days with an estimated cost above fifty thousand dollars, including the contractor and address.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/building-permits-scraper">examples/building-permits-scraper</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Do I need an API key for the city portals?</h3>
+<p>No. The portals are public open-data APIs. A Socrata app token is optional and only raises Socrata's rate limits.</p>
+<h3>Why is <code>estimatedCost</code> or the contractor empty?</h3>
+<p>The jurisdiction does not publish that column. Turn on <code>includeRaw</code> to see every field the portal does publish.</p>
+<h3>My city runs Accela or EnerGov instead of an open-data portal.</h3>
+<p>Use the <a href="../accela-energov-permits/">Accela Citizen Access and EnerGov permit scraper</a>, which returns the same schema.</p>
+<h3>What happens when a portal is down?</h3>
+<p>That jurisdiction produces one error item and the rest of the run continues.</p>
+<h3>How do I control what a run costs?</h3>
+<p>Set <code>maxResultsPerJurisdiction</code>, keep the date window short, and set a maximum total charge for the run. In monitor mode you pay only for new permits.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Building Permits Scraper — Roofing &amp; Construction Leads. Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor.</p>
+<p><a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../accela-energov-permits/">Accela Citizen Access and EnerGov Permit Data as JSON</a></li>
+<li><a href="../professional-license-verification/">Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

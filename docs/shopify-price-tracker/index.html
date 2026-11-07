@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopify Price Tracker: Catalog and Changes as JSON | owlabee</title>
+<meta name="description" content="Export any public Shopify store's catalog from products.json, every variant with price, compare-at price, availability and SKU, or track price and stock changes.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/shopify-price-tracker/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Shopify Price Tracker: Catalog and Changes as JSON | owlabee">
+<meta property="og:description" content="Export any public Shopify store's catalog from products.json, every variant with price, compare-at price, availability and SKU, or track price and stock changes.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/shopify-price-tracker/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Shopify Price Tracker: Catalog and Changes as JSON","description":"Export any public Shopify store's catalog from products.json, every variant with price, compare-at price, availability and SKU, or track price and stock changes.","url":"https://jrhite.github.io/owlabee/shopify-price-tracker/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/shopify-catalog-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/shopify-catalog-monitor","name":"Shopify Catalog Monitor & Price Tracker — Products Scraper","description":"Every product or variant of a public Shopify store from products.json, or price, stock and new or removed product changes","url":"https://apify.com/owlabee/shopify-catalog-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it need a Shopify API key?","acceptedAnswer":{"@type":"Answer","text":"No. It reads the public products.json endpoint that Shopify serves for storefronts."}},{"@type":"Question","name":"Why does the first changes run return so many records?","acceptedAnswer":{"@type":"Answer","text":"There is nothing to compare against yet, so the full catalog is stored as baseline records. Later runs return only changes."}},{"@type":"Question","name":"What counts as a change?","acceptedAnswer":{"@type":"Answer","text":"Price, compare-at price, availability, product title and variant title, plus products and variants that appear or disappear. A new product is one event, not one per variant."}},{"@type":"Question","name":"Can I track stores that are not on Shopify?","acceptedAnswer":{"@type":"Answer","text":"No. For other sites, the sitemap change monitor reports page and content changes."}},{"@type":"Question","name":"How do I start a fresh baseline?","acceptedAnswer":{"@type":"Answer","text":"Use a new stateStoreName, or delete the store's key in the existing one."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Shopify price tracker</nav>
+<article>
+<h1>Shopify Price Tracker: Catalog and Changes as JSON</h1>
+<p class="lede">Every Shopify storefront serves its public catalog as JSON at <code>/products.json</code>. This Actor reads it for one store or many, writes one clean record per variant or product, and in changes mode reports only what moved since the last run: prices, stock and new or removed products.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/shopify-catalog-monitor">Open the Actor on Apify Store</a>
+<p class="note">Shopify Catalog Monitor &amp; Price Tracker — Products Scraper. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>Shopify storefronts expose <code>/products.json</code> (and <code>/collections.json</code>) publicly. The Actor paginates each store 250 products at a time, normalizes prices to numbers, builds canonical product URLs and stamps each record with <code>fetchedAt</code>. No browser, proxies or API keys.</p>
+<p>In <strong>changes</strong> mode it keeps the previous snapshot of each store in a key-value store you name and writes only what changed, with <code>before</code> and <code>after</code> values and the percentage price move. Change types are <code>new-product</code>, <code>removed-product</code>, <code>new-variant</code>, <code>removed-variant</code>, <code>price-changed</code>, <code>availability-changed</code> and <code>title-changed</code>.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Requests to each store are spaced about 500 ms apart, so a 5,000-product store takes roughly 15 to 20 seconds.</li>
+<li>Most stores do not expose inventory quantities; <code>inventoryQuantity</code> is null unless the store publishes it.</li>
+<li>Password-protected stores, stores not on Shopify, and stores that block datacenter traffic return an error item. The Actor does not use residential proxies or browsers to get around that.</li>
+<li>When <code>maxProductsPerStore</code> truncates a listing, removals are not reported for that store, to avoid false "removed" events.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>storeDomain, productId, productHandle, productTitle</code></td><td>The store and product</td></tr>
+<tr><td><code>vendor, productType, tags</code></td><td>As set by the store</td></tr>
+<tr><td><code>variantId, variantTitle, sku, barcode, option1-3</code></td><td>The variant</td></tr>
+<tr><td><code>price, compareAtPrice</code></td><td>Numbers in the store's currency</td></tr>
+<tr><td><code>available, inventoryQuantity</code></td><td>Availability; quantity only where the store publishes it</td></tr>
+<tr><td><code>productUrl, imageUrl, grams</code></td><td>Canonical URL, image and weight</td></tr>
+<tr><td><code>createdAt, updatedAt, publishedAt</code></td><td>Timestamps from Shopify</td></tr>
+<tr><td><code>recordType, changeType, before, after, percentChange</code></td><td>In changes mode</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>A price-changed record in changes mode (from the Actor's README; illustrative ids):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;recordType&quot;: &quot;change&quot;,
+  &quot;changeType&quot;: &quot;price-changed&quot;,
+  &quot;changedFields&quot;: [
+    &quot;price&quot;
+  ],
+  &quot;before&quot;: {
+    &quot;price&quot;: 98,
+    &quot;compareAtPrice&quot;: 120
+  },
+  &quot;after&quot;: {
+    &quot;price&quot;: 88.2,
+    &quot;compareAtPrice&quot;: 120
+  },
+  &quot;percentChange&quot;: -10,
+  &quot;detectedAt&quot;: &quot;2026-10-17T12:00:00.000Z&quot;,
+  &quot;storeDomain&quot;: &quot;www.allbirds.com&quot;,
+  &quot;productTitle&quot;: &quot;Wool Runner&quot;,
+  &quot;variantTitle&quot;: &quot;Natural Grey / 9&quot;,
+  &quot;price&quot;: 88.2,
+  &quot;available&quot;: true,
+  &quot;productUrl&quot;: &quot;https://www.allbirds.com/products/wool-runner&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Competitor price tracking</h3>
+<p>Run changes mode daily on a set of competitor stores and send <code>price-changed</code> events, with the percentage move, to a webhook.</p>
+<h3>Supplier stock watch</h3>
+<p>Watch <code>availability-changed</code> events on a supplier's store to know when variants go out of stock or come back.</p>
+<h3>Catalog export</h3>
+<p>Snapshot mode exports every variant with price, SKU, options and image, for analysis or a product feed.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. Price and stock changes on one store (the first run stores a baseline):</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~shopify-catalog-monitor/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;storeUrls&quot;: [
+    &quot;www.deathwishcoffee.com&quot;
+  ],
+  &quot;mode&quot;: &quot;changes&quot;,
+  &quot;granularity&quot;: &quot;variant&quot;,
+  &quot;maxProductsPerStore&quot;: 30,
+  &quot;includeCollections&quot;: false,
+  &quot;stateStoreName&quot;: &quot;shopify-price-monitor-deathwishcoffee&quot;
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-shopify-catalog-monitor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/shopify-catalog-monitor&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Track the prices on www.deathwishcoffee.com and tell me which variants changed price or went out of stock since yesterday.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/shopify-catalog-monitor">examples/shopify-catalog-monitor</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does it need a Shopify API key?</h3>
+<p>No. It reads the public <code>products.json</code> endpoint that Shopify serves for storefronts.</p>
+<h3>Why does the first changes run return so many records?</h3>
+<p>There is nothing to compare against yet, so the full catalog is stored as <code>baseline</code> records. Later runs return only changes.</p>
+<h3>What counts as a change?</h3>
+<p>Price, compare-at price, availability, product title and variant title, plus products and variants that appear or disappear. A new product is one event, not one per variant.</p>
+<h3>Can I track stores that are not on Shopify?</h3>
+<p>No. For other sites, the <a href="../sitemap-change-monitor/">sitemap change monitor</a> reports page and content changes.</p>
+<h3>How do I start a fresh baseline?</h3>
+<p>Use a new <code>stateStoreName</code>, or delete the store's key in the existing one.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Shopify Catalog Monitor &amp; Price Tracker — Products Scraper. Every product or variant of a public Shopify store from products.json, or price, stock and new or removed product changes.</p>
+<p><a class="button" href="https://apify.com/owlabee/shopify-catalog-monitor">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../sitemap-change-monitor/">Sitemap Monitor: Track New, Removed and Changed Pages</a></li>
+<li><a href="../spf-dmarc-dkim-checker/">Bulk SPF, DMARC and DKIM Checker for Domain Lists</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

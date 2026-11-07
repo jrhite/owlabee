@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sitemap Monitor: Track New, Removed and Changed Pages | owlabee</title>
+<meta name="description" content="Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/sitemap-change-monitor/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Sitemap Monitor: Track New, Removed and Changed Pages | owlabee">
+<meta property="og:description" content="Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/sitemap-change-monitor/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Sitemap Monitor: Track New, Removed and Changed Pages","description":"Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.","url":"https://jrhite.github.io/owlabee/sitemap-change-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/website-change-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/website-change-monitor","name":"Website Change Monitor — Sitemap Monitor & Page Diff","description":"Pages discovered through a site's sitemaps, and new, removed, updated and content-changed pages between runs with diff previews","url":"https://apify.com/owlabee/website-change-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work with sitemap indexes and gzipped sitemaps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Indexes are followed recursively, .xml.gz files are decompressed and plain-text sitemaps are accepted."}},{"@type":"Question","name":"How do I avoid false positives from dates and counters?","acceptedAnswer":{"@type":"Answer","text":"Point contentSelector at the element with the real content and turn on ignoreNumbers."}},{"@type":"Question","name":"How is severity decided?","acceptedAnswer":{"@type":"Answer","text":"A removed page or a page that starts failing is high, a new page is medium, a lastmod change with unchanged content is low, and a content change is scored by the share of words that changed."}},{"@type":"Question","name":"Can I get alerts?","acceptedAnswer":{"@type":"Answer","text":"Set webhookUrl. By default it is called only when changes were found, with a run summary and up to 1,000 change records."}},{"@type":"Question","name":"Does it render JavaScript?","acceptedAnswer":{"@type":"Answer","text":"No. Pages are fetched as plain HTML; use a selector that targets server-rendered markup."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Sitemap change monitor</nav>
+<article>
+<h1>Sitemap Monitor: Track New, Removed and Changed Pages</h1>
+<p class="lede">A site's sitemaps list every page it wants indexed, with last-modified dates. This Actor reads them, keeps a snapshot per site, and on each run reports which pages appeared, disappeared, changed their lastmod date or changed their content.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/website-change-monitor">Open the Actor on Apify Store</a>
+<p class="note">Website Change Monitor — Sitemap Monitor &amp; Page Diff. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>The Actor follows <code>robots.txt</code> <code>Sitemap:</code> lines, sitemap indexes, and plain, gzipped and text sitemaps, falling back to <code>/sitemap.xml</code> and <code>/sitemap_index.xml</code>. That is the <a href="https://www.sitemaps.org/protocol.html">sitemaps protocol</a> sites already publish for search engines.</p>
+<ul>
+<li><strong>Discover mode</strong> lists every page URL with <code>lastmod</code>, <code>changefreq</code> and <code>priority</code>.</li>
+<li><strong>Monitor mode</strong> keeps a snapshot per site and emits one record per change: <code>new-url</code>, <code>removed-url</code>, <code>lastmod-changed</code>, <code>content-changed</code> and <code>status-changed</code>.</li>
+</ul>
+<p>Content changes are detected without a browser. Each HTML page is scoped to a CSS selector (<code>main, article, body</code> by default), stripped of scripts, styles and whitespace noise, optionally stripped of numbers and dates, and hashed. A changed page gets a word-level preview of what was added and removed, and a <code>severity</code> of low, medium or high with a reason.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Only pages listed in the sitemaps are tracked.</li>
+<li><code>maxPages</code> cuts the list in sitemap order. In monitor mode set it above the site's page count, or the tail of the sitemap will look removed.</li>
+<li>Pages are fetched as plain HTML (up to 1 MB, 20-second timeout), at about two requests per second per host, and <code>robots.txt</code> Disallow rules are honored. JavaScript-rendered content is not executed.</li>
+<li>The first monitor run is a baseline: every page becomes a <code>baseline</code> record and changes appear from the second run on.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>changeType</code></td><td>discovered, baseline, new-url, removed-url, lastmod-changed, content-changed, status-changed or error</td></tr>
+<tr><td><code>url, site, sitemapUrl</code></td><td>The page, the input site and the sitemap it came from</td></tr>
+<tr><td><code>lastmod, changefreq, priority</code></td><td>As listed in the sitemap</td></tr>
+<tr><td><code>status, title, contentHash</code></td><td>HTTP status, page title and the content hash</td></tr>
+<tr><td><code>changedFields</code></td><td>Every field that changed when several changed at once</td></tr>
+<tr><td><code>changedPreview</code></td><td>Added and removed word counts, previews and a similarity ratio</td></tr>
+<tr><td><code>severity, severityReason</code></td><td>low, medium or high, with a one-phrase reason</td></tr>
+<tr><td><code>before, after</code></td><td>Previous and current page snapshots</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>A content-changed record from a monitor run (shape from the Actor's README; values illustrative, snapshots omitted):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;changeType&quot;: &quot;content-changed&quot;,
+  &quot;site&quot;: &quot;https://example.com&quot;,
+  &quot;url&quot;: &quot;https://example.com/pricing&quot;,
+  &quot;changedFields&quot;: [
+    &quot;contentHash&quot;,
+    &quot;lastmod&quot;
+  ],
+  &quot;title&quot;: &quot;Pricing — Example&quot;,
+  &quot;lastmod&quot;: &quot;2026-10-16&quot;,
+  &quot;status&quot;: 200,
+  &quot;contentHash&quot;: &quot;3f9a1c…&quot;,
+  &quot;changedPreview&quot;: {
+    &quot;addedWords&quot;: 3,
+    &quot;removedWords&quot;: 1,
+    &quot;addedPreview&quot;: &quot;SSO now included&quot;,
+    &quot;removedPreview&quot;: &quot;Add-on&quot;,
+    &quot;similarity&quot;: 0.94,
+    &quot;changedRatio&quot;: 0.06,
+    &quot;numbersChanged&quot;: false
+  },
+  &quot;severity&quot;: &quot;low&quot;,
+  &quot;severityReason&quot;: &quot;6% of the text changed&quot;,
+  &quot;detectedAt&quot;: &quot;2026-10-16T12:00:09.000Z&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>New pages on a competitor's site</h3>
+<p>Monitor with <code>checkContent: false</code> for a lighter, sitemap-only diff that reports new and removed URLs.</p>
+<h3>Documentation or policy page changes</h3>
+<p>Narrow with <code>includePatterns</code> and a <code>contentSelector</code> such as <code>main</code>, and get content-changed records with a diff preview.</p>
+<h3>Full URL inventory</h3>
+<p>Discover mode lists every URL in a site's sitemaps with its last-modified date, for SEO audits or crawl planning.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. Sitemap-level monitoring (new and removed pages, lastmod changes) for one site:</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~website-change-monitor/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;sites&quot;: [
+    &quot;https://www.sitemaps.org/sitemap.xml&quot;
+  ],
+  &quot;mode&quot;: &quot;monitor&quot;,
+  &quot;checkContent&quot;: false,
+  &quot;maxPages&quot;: 200,
+  &quot;stateStoreName&quot;: &quot;website-change-monitor-sitemaps-org&quot;,
+  &quot;resetBaseline&quot;: false,
+  &quot;notifyOnlyOnChanges&quot;: true
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-website-change-monitor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/website-change-monitor&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Tell me which pages were added to or removed from sitemaps.org since the last check.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/website-change-monitor">examples/website-change-monitor</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does it work with sitemap indexes and gzipped sitemaps?</h3>
+<p>Yes. Indexes are followed recursively, <code>.xml.gz</code> files are decompressed and plain-text sitemaps are accepted.</p>
+<h3>How do I avoid false positives from dates and counters?</h3>
+<p>Point <code>contentSelector</code> at the element with the real content and turn on <code>ignoreNumbers</code>.</p>
+<h3>How is severity decided?</h3>
+<p>A removed page or a page that starts failing is high, a new page is medium, a lastmod change with unchanged content is low, and a content change is scored by the share of words that changed.</p>
+<h3>Can I get alerts?</h3>
+<p>Set <code>webhookUrl</code>. By default it is called only when changes were found, with a run summary and up to 1,000 change records.</p>
+<h3>Does it render JavaScript?</h3>
+<p>No. Pages are fetched as plain HTML; use a selector that targets server-rendered markup.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Website Change Monitor — Sitemap Monitor &amp; Page Diff. Pages discovered through a site's sitemaps, and new, removed, updated and content-changed pages between runs with diff previews.</p>
+<p><a class="button" href="https://apify.com/owlabee/website-change-monitor">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../shopify-price-tracker/">Shopify Price Tracker: Catalog and Changes as JSON</a></li>
+<li><a href="../spf-dmarc-dkim-checker/">Bulk SPF, DMARC and DKIM Checker for Domain Lists</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

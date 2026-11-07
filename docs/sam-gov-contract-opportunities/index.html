@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAM.gov Contract Opportunities API Feed by Keyword | owlabee</title>
+<meta name="description" content="Pull federal contract notices from the SAM.gov Get Opportunities API by keyword, NAICS code, set-aside and state, with points of contact and new-notice flags.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/sam-gov-contract-opportunities/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="SAM.gov Contract Opportunities API Feed by Keyword | owlabee">
+<meta property="og:description" content="Pull federal contract notices from the SAM.gov Get Opportunities API by keyword, NAICS code, set-aside and state, with points of contact and new-notice flags.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/sam-gov-contract-opportunities/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"SAM.gov Contract Opportunities API Feed by Keyword","description":"Pull federal contract notices from the SAM.gov Get Opportunities API by keyword, NAICS code, set-aside and state, with points of contact and new-notice flags.","url":"https://jrhite.github.io/owlabee/sam-gov-contract-opportunities/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/grants-gov-api"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/grants-gov-api","name":"Grants.gov API & SAM.gov Scraper — Federal Grants Feed","description":"Grants.gov grant opportunities and SAM.gov contract notices by keyword, plus optional USAspending awards and six state and local bid datasets","url":"https://apify.com/owlabee/grants-gov-api","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is a SAM.gov key really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Any individual with a SAM.gov account can request a personal public API key from Account Details. Federal and entity-associated accounts get larger daily allowances."}},{"@type":"Question","name":"What do the ptype and setAside codes mean?","acceptedAnswer":{"@type":"Answer","text":"They are passed straight to SAM.gov. Notice types: o Solicitation, k Combined Synopsis/Solicitation, p Presolicitation, r Sources Sought, s Special Notice, a Award Notice (comma-separate several). Set-aside codes include SBA, 8A, HZC, SDVOSBC and WOSB; the input field lists them all."}},{"@type":"Question","name":"Does it read the sam.gov website?","acceptedAnswer":{"@type":"Answer","text":"No. Only the official API, with your key. No HTML scraping, proxies or login."}},{"@type":"Question","name":"What if my daily quota runs out?","acceptedAnswer":{"@type":"Answer","text":"SAM.gov answers with a rate-limit error and the Actor writes one SAM_RATE_LIMITED error item for that keyword; the other sources continue."}},{"@type":"Question","name":"Can it include recent awards?","acceptedAnswer":{"@type":"Answer","text":"Yes. includeRecentAwards adds USAspending.gov award records for the same keywords."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> SAM.gov opportunities</nav>
+<article>
+<h1>SAM.gov Contract Opportunities API Feed by Keyword</h1>
+<p class="lede">SAM.gov publishes federal contract opportunities (solicitations, presolicitations, sources sought and award notices) through its Get Opportunities API. With your own free SAM.gov key, this Actor searches it by keyword and filters, and flags notices that are new or changed since the last run.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/grants-gov-api">Open the Actor on Apify Store</a>
+<p class="note">Grants.gov API &amp; SAM.gov Scraper — Federal Grants Feed. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>The <strong>SAM.gov Get Opportunities API</strong> is the official public API for federal contract notices. It requires a free personal API key, which any individual can request; no entity registration is needed:</p>
+<ol>
+<li>Create or sign in to an account at <a href="https://sam.gov">sam.gov</a>.</li>
+<li>Open your profile, then <strong>Account Details</strong>.</li>
+<li>Under <strong>Public API Key</strong>, click <strong>Request</strong>, enter your password and copy the key.</li>
+<li>Pass it as <code>samApiKey</code>. It is stored as an encrypted secret input and never written to logs.</li>
+</ol>
+<p><code>samFilters</code> passes <code>naics</code>, <code>setAside</code>, <code>state</code> and <code>ptype</code> (notice type) to the API. The Actor asks for up to 1,000 notices per request, so one keyword normally costs one request.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>A personal, non-federal key has a small daily request allowance. Keep the keyword list short on SAM.gov schedules.</li>
+<li>SAM.gov matches keywords against the notice title, and the posted-date window is at most one year.</li>
+<li>Without a key the SAM.gov source is skipped with a log line; a rejected key produces a <code>SAM_AUTH_FAILED</code> error item.</li>
+<li>Points of contact are returned exactly as the agency published them.</li>
+</ul>
+<p>The same Actor also reads six state and local bid datasets from city, county and state open-data portals (Los Angeles, New York City School Construction Authority, Montgomery County, MD, Mesa, AZ, Cook County, IL and Illinois) with <code>sources: ["sled"]</code>. That is a small set, not a nationwide state and local feed.</p>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>noticeId, solicitationNumber, title</code></td><td>SAM.gov notice id, solicitation number and title</td></tr>
+<tr><td><code>department, subTier, office</code></td><td>The contracting organization; <code>agency</code> holds the department</td></tr>
+<tr><td><code>type, baseType, status</code></td><td>Notice type (for example Combined Synopsis/Solicitation) and active or inactive</td></tr>
+<tr><td><code>postedDate, responseDeadLine, archiveDate</code></td><td><code>closeDate</code> repeats the response deadline</td></tr>
+<tr><td><code>naicsCode, classificationCode, setAside, setAsideCode</code></td><td>Classification and set-aside</td></tr>
+<tr><td><code>placeOfPerformance</code></td><td>City, state, ZIP and country</td></tr>
+<tr><td><code>pointOfContact[]</code></td><td>Type, name, title, email and phone, as published</td></tr>
+<tr><td><code>award</code></td><td>Award number, amount, date and awardee on award notices</td></tr>
+<tr><td><code>url, descriptionUrl, isNew, isUpdated</code></td><td>Notice link, the description endpoint, and monitor-mode flags</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>One SAM.gov notice (shape from the Actor's normalizer; illustrative values from its test fixture):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;source&quot;: &quot;samGov&quot;,
+  &quot;recordType&quot;: &quot;opportunity&quot;,
+  &quot;keyword&quot;: &quot;it support&quot;,
+  &quot;opportunityId&quot;: &quot;ab12cd34ef56ab12cd34ef56ab12cd34&quot;,
+  &quot;noticeId&quot;: &quot;ab12cd34ef56ab12cd34ef56ab12cd34&quot;,
+  &quot;title&quot;: &quot;Small Business IT Support Services&quot;,
+  &quot;solicitationNumber&quot;: &quot;W912DY26R0012&quot;,
+  &quot;agency&quot;: &quot;DEPT OF DEFENSE&quot;,
+  &quot;department&quot;: &quot;DEPT OF DEFENSE&quot;,
+  &quot;subTier&quot;: &quot;DEPT OF THE ARMY&quot;,
+  &quot;office&quot;: &quot;ACC-APG&quot;,
+  &quot;status&quot;: &quot;active&quot;,
+  &quot;type&quot;: &quot;Combined Synopsis/Solicitation&quot;,
+  &quot;postedDate&quot;: &quot;2026-10-12&quot;,
+  &quot;responseDeadLine&quot;: &quot;2026-11-15T14:00:00-05:00&quot;,
+  &quot;closeDate&quot;: &quot;2026-11-15T14:00:00-05:00&quot;,
+  &quot;naicsCode&quot;: &quot;541512&quot;,
+  &quot;classificationCode&quot;: &quot;D399&quot;,
+  &quot;setAside&quot;: &quot;Total Small Business Set-Aside (FAR 19.5)&quot;,
+  &quot;setAsideCode&quot;: &quot;SBA&quot;,
+  &quot;placeOfPerformance&quot;: {
+    &quot;city&quot;: &quot;Aberdeen Proving Ground&quot;,
+    &quot;state&quot;: &quot;MD&quot;,
+    &quot;zip&quot;: &quot;21005&quot;,
+    &quot;country&quot;: &quot;UNITED STATES&quot;
+  },
+  &quot;pointOfContact&quot;: [
+    {
+      &quot;type&quot;: &quot;primary&quot;,
+      &quot;fullName&quot;: &quot;John Q. Public&quot;,
+      &quot;title&quot;: &quot;Contract Specialist&quot;,
+      &quot;email&quot;: &quot;contracting.officer@army.mil&quot;,
+      &quot;phone&quot;: &quot;410-555-0199&quot;,
+      &quot;fax&quot;: null
+    }
+  ],
+  &quot;award&quot;: null,
+  &quot;url&quot;: &quot;https://sam.gov/opp/ab12cd34ef56ab12cd34ef56ab12cd34/view&quot;,
+  &quot;descriptionUrl&quot;: &quot;https://api.sam.gov/prod/opportunities/v1/noticedesc?noticeid=ab12cd34ef56ab12cd34ef56ab12cd34&quot;,
+  &quot;jurisdiction&quot;: &quot;United States&quot;,
+  &quot;level&quot;: &quot;federal&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Set-aside alerts for one NAICS code</h3>
+<p>Filter <code>samFilters</code> by NAICS, set-aside and state, schedule daily with <code>onlyNewSinceLastRun</code>, and send new notices to a webhook.</p>
+<h3>Grants and contracts in one feed</h3>
+<p>Enable <code>grantsGov</code> and <code>samGov</code> together. Both share <code>title</code>, <code>agency</code>, <code>postedDate</code>, <code>closeDate</code> and <code>url</code>.</p>
+<h3>Bid/no-bid triage</h3>
+<p>Send the notices to the <a href="https://apify.com/owlabee/gov-opportunity-fit-scorer">Grant Matching and RFP Bid/No-Bid Scorer</a> to rank them against your company profile.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. Small business set-aside notices for one NAICS code in Virginia, posted in the last 7 days (replace the key placeholder with your own key):</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~grants-gov-api/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;keywords&quot;: [
+    &quot;cybersecurity&quot;
+  ],
+  &quot;sources&quot;: [
+    &quot;samGov&quot;
+  ],
+  &quot;samApiKey&quot;: &quot;&lt;YOUR_SAM_GOV_API_KEY&gt;&quot;,
+  &quot;samFilters&quot;: {
+    &quot;naics&quot;: &quot;541512&quot;,
+    &quot;setAside&quot;: &quot;SBA&quot;,
+    &quot;state&quot;: &quot;VA&quot;,
+    &quot;ptype&quot;: &quot;o,k&quot;
+  },
+  &quot;postedWithinDays&quot;: 7,
+  &quot;maxResults&quot;: 100,
+  &quot;onlyNewSinceLastRun&quot;: true
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-grants-gov-api&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/grants-gov-api&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Find SAM.gov solicitations posted this week for NAICS 541512 that are small business set-asides in Virginia, with response deadlines and points of contact.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/grants-gov-api">examples/grants-gov-api</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Is a SAM.gov key really free?</h3>
+<p>Yes. Any individual with a SAM.gov account can request a personal public API key from Account Details. Federal and entity-associated accounts get larger daily allowances.</p>
+<h3>What do the <code>ptype</code> and <code>setAside</code> codes mean?</h3>
+<p>They are passed straight to SAM.gov. Notice types: <code>o</code> Solicitation, <code>k</code> Combined Synopsis/Solicitation, <code>p</code> Presolicitation, <code>r</code> Sources Sought, <code>s</code> Special Notice, <code>a</code> Award Notice (comma-separate several). Set-aside codes include <code>SBA</code>, <code>8A</code>, <code>HZC</code>, <code>SDVOSBC</code> and <code>WOSB</code>; the input field lists them all.</p>
+<h3>Does it read the sam.gov website?</h3>
+<p>No. Only the official API, with your key. No HTML scraping, proxies or login.</p>
+<h3>What if my daily quota runs out?</h3>
+<p>SAM.gov answers with a rate-limit error and the Actor writes one <code>SAM_RATE_LIMITED</code> error item for that keyword; the other sources continue.</p>
+<h3>Can it include recent awards?</h3>
+<p>Yes. <code>includeRecentAwards</code> adds USAspending.gov award records for the same keywords.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Grants.gov API &amp; SAM.gov Scraper — Federal Grants Feed. Grants.gov grant opportunities and SAM.gov contract notices by keyword, plus optional USAspending awards and six state and local bid datasets.</p>
+<p><a class="button" href="https://apify.com/owlabee/grants-gov-api">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../grants-gov-api/">Grants.gov API: Federal Grant Opportunities as JSON</a></li>
+<li><a href="../osha-inspections-by-company/">OSHA Inspections by Company: DOL Data API Lookup</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>
