@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/accela-energov-permit-scraper](https://apify.com/owlabee/accela-energov-permit-scraper) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://jrhite.github.io/owlabee/accela-energov-permits/](https://jrhite.github.io/owlabee/accela-energov-permits/)
+Guide on the site: [https://owlabee.github.io/owlabee/accela-energov-permits/](https://owlabee.github.io/owlabee/accela-energov-permits/)
 
 Reads building permits from city and county portals that run Accela Citizen Access or Tyler EnerGov Citizen Self Service, using the same public search the portal web page uses. Each permit comes back in the same normalized schema as the Building Permits Scraper. Turn on permit details for valuation, contractor, license, owner and applicant.
 

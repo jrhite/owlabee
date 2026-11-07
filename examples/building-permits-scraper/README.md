@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/building-permits-scraper](https://apify.com/owlabee/building-permits-scraper) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://jrhite.github.io/owlabee/building-permits-api/](https://jrhite.github.io/owlabee/building-permits-api/)
+Guide on the site: [https://owlabee.github.io/owlabee/building-permits-api/](https://owlabee.github.io/owlabee/building-permits-api/)
 
 Pulls building permits from official US open-data portals (Socrata, CKAN, ArcGIS and CARTO APIs) and writes them in one normalized schema: permit number, type, work description, status, dates, estimated cost, address with coordinates and parcel id, and the contractor's name, license and phone where the jurisdiction publishes them. Monitor mode emits only permits not seen on earlier runs.
 

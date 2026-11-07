@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Building Permits API: 61 US Open-Data Portals as JSON | owlabee</title>
 <meta name="description" content="Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
-<link rel="canonical" href="https://jrhite.github.io/owlabee/building-permits-api/">
+<link rel="canonical" href="https://owlabee.github.io/owlabee/building-permits-api/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="Building Permits API: 61 US Open-Data Portals as JSON | owlabee">
 <meta property="og:description" content="Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
-<meta property="og:url" content="https://jrhite.github.io/owlabee/building-permits-api/">
+<meta property="og:url" content="https://owlabee.github.io/owlabee/building-permits-api/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Building Permits API: 61 US Open-Data Portals as JSON","description":"Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.","url":"https://jrhite.github.io/owlabee/building-permits-api/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/building-permits-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/building-permits-scraper","name":"Building Permits Scraper — Roofing & Construction Leads","description":"Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor","url":"https://apify.com/owlabee/building-permits-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need an API key for the city portals?","acceptedAnswer":{"@type":"Answer","text":"No. The portals are public open-data APIs. A Socrata app token is optional and only raises Socrata's rate limits."}},{"@type":"Question","name":"Why is estimatedCost or the contractor empty?","acceptedAnswer":{"@type":"Answer","text":"The jurisdiction does not publish that column. Turn on includeRaw to see every field the portal does publish."}},{"@type":"Question","name":"My city runs Accela or EnerGov instead of an open-data portal.","acceptedAnswer":{"@type":"Answer","text":"Use the Accela Citizen Access and EnerGov permit scraper, which returns the same schema."}},{"@type":"Question","name":"What happens when a portal is down?","acceptedAnswer":{"@type":"Answer","text":"That jurisdiction produces one error item and the rest of the run continues."}},{"@type":"Question","name":"How do I control what a run costs?","acceptedAnswer":{"@type":"Answer","text":"Set maxResultsPerJurisdiction, keep the date window short, and set a maximum total charge for the run. In monitor mode you pay only for new permits."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Building Permits API: 61 US Open-Data Portals as JSON","description":"Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.","url":"https://owlabee.github.io/owlabee/building-permits-api/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/building-permits-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/building-permits-scraper","name":"Building Permits Scraper — Roofing & Construction Leads","description":"Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor","url":"https://apify.com/owlabee/building-permits-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need an API key for the city portals?","acceptedAnswer":{"@type":"Answer","text":"No. The portals are public open-data APIs. A Socrata app token is optional and only raises Socrata's rate limits."}},{"@type":"Question","name":"Why is estimatedCost or the contractor empty?","acceptedAnswer":{"@type":"Answer","text":"The jurisdiction does not publish that column. Turn on includeRaw to see every field the portal does publish."}},{"@type":"Question","name":"My city runs Accela or EnerGov instead of an open-data portal.","acceptedAnswer":{"@type":"Answer","text":"Use the Accela Citizen Access and EnerGov permit scraper, which returns the same schema."}},{"@type":"Question","name":"What happens when a portal is down?","acceptedAnswer":{"@type":"Answer","text":"That jurisdiction produces one error item and the rest of the run continues."}},{"@type":"Question","name":"How do I control what a run costs?","acceptedAnswer":{"@type":"Answer","text":"Set maxResultsPerJurisdiction, keep the date window short, and set a maximum total charge for the run. In monitor mode you pay only for new permits."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -25,7 +25,7 @@
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>
-<a href="https://github.com/jrhite/owlabee">GitHub</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
 </nav>
 </div>
 </header>
@@ -155,7 +155,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>List the building permits issued in Chicago and Seattle in the last 7 days with an estimated cost above fifty thousand dollars, including the contractor and address.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/building-permits-scraper">examples/building-permits-scraper</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/building-permits-scraper">examples/building-permits-scraper</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -191,7 +191,7 @@ curl -sS -X POST \
 <footer class="site-footer">
 <div class="wrap">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
 </div>
 </footer>
 </body>

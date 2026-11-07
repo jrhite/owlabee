@@ -1,6 +1,6 @@
 # MCP Registry entries
 
-Each folder holds one `server.json` listed in the [official MCP Registry](https://registry.modelcontextprotocol.io) under `io.github.jrhite`. Each entry points to Apify's hosted MCP server (`https://mcp.apify.com`) with a fixed set of owlabee Actors as tools. The server itself is run by Apify, not by us. Clients authenticate with their own Apify API token, and runs are billed per result to that Apify account.
+Each folder holds one `server.json` listed in the [official MCP Registry](https://registry.modelcontextprotocol.io) under `io.github.owlabee`. Each entry points to Apify's hosted MCP server (`https://mcp.apify.com`) with a fixed set of owlabee Actors as tools. The server itself is run by Apify, not by us. Clients authenticate with their own Apify API token, and runs are billed per result to that Apify account.
 
 | Entry | Actors |
 | --- | --- |

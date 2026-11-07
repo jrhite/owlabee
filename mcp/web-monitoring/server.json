@@ -1,10 +1,10 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.jrhite/web-monitoring",
+  "name": "io.github.owlabee/web-monitoring",
   "title": "Web & Business Monitoring (DMARC, sitemaps, Shopify, jobs)",
   "description": "Monitor domain SPF/DMARC/WHOIS, website changes, Shopify prices, ATS jobs, Bluesky and podcasts.",
   "repository": {
-    "url": "https://github.com/jrhite/owlabee",
+    "url": "https://github.com/owlabee/owlabee",
     "source": "github",
     "subfolder": "mcp/web-monitoring"
   },

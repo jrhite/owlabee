@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OSHA Inspections by Company: DOL Data API Lookup | owlabee</title>
 <meta name="description" content="Look up OSHA inspections, violations and penalties by company name, inspection number, state or ZIP through the DOL Data API, with a name-match confidence per record.">
-<link rel="canonical" href="https://jrhite.github.io/owlabee/osha-inspections-by-company/">
+<link rel="canonical" href="https://owlabee.github.io/owlabee/osha-inspections-by-company/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="OSHA Inspections by Company: DOL Data API Lookup | owlabee">
 <meta property="og:description" content="Look up OSHA inspections, violations and penalties by company name, inspection number, state or ZIP through the DOL Data API, with a name-match confidence per record.">
-<meta property="og:url" content="https://jrhite.github.io/owlabee/osha-inspections-by-company/">
+<meta property="og:url" content="https://owlabee.github.io/owlabee/osha-inspections-by-company/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"OSHA Inspections by Company: DOL Data API Lookup","description":"Look up OSHA inspections, violations and penalties by company name, inspection number, state or ZIP through the DOL Data API, with a name-match confidence per record.","url":"https://jrhite.github.io/owlabee/osha-inspections-by-company/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/osha-epa-enforcement-report"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/osha-epa-enforcement-report","name":"OSHA Inspections by Company + EPA Enforcement Report","description":"OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP","url":"https://apify.com/owlabee/osha-epa-enforcement-report","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does OSHA need a key when EPA does not?","acceptedAnswer":{"@type":"Answer","text":"The DOL Data API does not answer without one. The key is free from dataportal.dol.gov and only used for apiprod.dol.gov."}},{"@type":"Question","name":"Why did I get records for a different company?","acceptedAnswer":{"@type":"Answer","text":"Agencies record establishment names. Check matchConfidence and matchBasis, raise minMatchConfidence to high, add a state or ZIP, or look up exact identifiers."}},{"@type":"Question","name":"Are State Plan inspections included?","acceptedAnswer":{"@type":"Answer","text":"Yes, as DOL publishes them in the same datasets."}},{"@type":"Question","name":"Is this a rating of the company?","acceptedAnswer":{"@type":"Answer","text":"No. Records describe what the agency published, nothing more."}},{"@type":"Question","name":"Can I get EPA cases in the same run?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add epa to sources. The per-company summary then counts records and penalties by agency."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"OSHA Inspections by Company: DOL Data API Lookup","description":"Look up OSHA inspections, violations and penalties by company name, inspection number, state or ZIP through the DOL Data API, with a name-match confidence per record.","url":"https://owlabee.github.io/owlabee/osha-inspections-by-company/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/osha-epa-enforcement-report"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/osha-epa-enforcement-report","name":"OSHA Inspections by Company + EPA Enforcement Report","description":"OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP","url":"https://apify.com/owlabee/osha-epa-enforcement-report","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does OSHA need a key when EPA does not?","acceptedAnswer":{"@type":"Answer","text":"The DOL Data API does not answer without one. The key is free from dataportal.dol.gov and only used for apiprod.dol.gov."}},{"@type":"Question","name":"Why did I get records for a different company?","acceptedAnswer":{"@type":"Answer","text":"Agencies record establishment names. Check matchConfidence and matchBasis, raise minMatchConfidence to high, add a state or ZIP, or look up exact identifiers."}},{"@type":"Question","name":"Are State Plan inspections included?","acceptedAnswer":{"@type":"Answer","text":"Yes, as DOL publishes them in the same datasets."}},{"@type":"Question","name":"Is this a rating of the company?","acceptedAnswer":{"@type":"Answer","text":"No. Records describe what the agency published, nothing more."}},{"@type":"Question","name":"Can I get EPA cases in the same run?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add epa to sources. The per-company summary then counts records and penalties by agency."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -25,7 +25,7 @@
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>
-<a href="https://github.com/jrhite/owlabee">GitHub</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
 </nav>
 </div>
 </header>
@@ -160,7 +160,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Look up OSHA inspections since 2021 for Acme Roofing in Texas, with violation counts, penalties and how confident each name match is.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/osha-epa-enforcement-report">examples/osha-epa-enforcement-report</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/osha-epa-enforcement-report">examples/osha-epa-enforcement-report</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -196,7 +196,7 @@ curl -sS -X POST \
 <footer class="site-footer">
 <div class="wrap">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
 </div>
 </footer>
 </body>

@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EPA ECHO Enforcement Cases by Company or Facility | owlabee</title>
 <meta name="description" content="Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.">
-<link rel="canonical" href="https://jrhite.github.io/owlabee/epa-echo-enforcement/">
+<link rel="canonical" href="https://owlabee.github.io/owlabee/epa-echo-enforcement/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="EPA ECHO Enforcement Cases by Company or Facility | owlabee">
 <meta property="og:description" content="Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.">
-<meta property="og:url" content="https://jrhite.github.io/owlabee/epa-echo-enforcement/">
+<meta property="og:url" content="https://owlabee.github.io/owlabee/epa-echo-enforcement/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"EPA ECHO Enforcement Cases by Company or Facility","description":"Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.","url":"https://jrhite.github.io/owlabee/epa-echo-enforcement/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/osha-epa-enforcement-report"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/osha-epa-enforcement-report","name":"OSHA Inspections by Company + EPA Enforcement Report","description":"OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP","url":"https://apify.com/owlabee/osha-epa-enforcement-report","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does EPA ECHO need an API key?","acceptedAnswer":{"@type":"Answer","text":"No. ECHO web services are public. Only the OSHA source needs a key."}},{"@type":"Question","name":"Why does it search facilities first?","acceptedAnswer":{"@type":"Answer","text":"ECHO's company-name filter for cases is not usable, so cases are found through the facilities that match the name."}},{"@type":"Question","name":"Are state cases included?","acceptedAnswer":{"@type":"Answer","text":"Cases that states report to EPA are in ECHO and are returned (the lead agency is in the raw case data). State agencies' own databases are not queried."}},{"@type":"Question","name":"How do I avoid records for similarly named companies?","acceptedAnswer":{"@type":"Answer","text":"Add a state or ZIP, raise minMatchConfidence, or look up facilities by FRS id."}},{"@type":"Question","name":"What does the summary record contain?","acceptedAnswer":{"@type":"Answer","text":"Per company: record counts and penalty totals by agency, open records, counts by match confidence, the most recent action and every matched name."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"EPA ECHO Enforcement Cases by Company or Facility","description":"Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.","url":"https://owlabee.github.io/owlabee/epa-echo-enforcement/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/osha-epa-enforcement-report"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/osha-epa-enforcement-report","name":"OSHA Inspections by Company + EPA Enforcement Report","description":"OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP","url":"https://apify.com/owlabee/osha-epa-enforcement-report","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does EPA ECHO need an API key?","acceptedAnswer":{"@type":"Answer","text":"No. ECHO web services are public. Only the OSHA source needs a key."}},{"@type":"Question","name":"Why does it search facilities first?","acceptedAnswer":{"@type":"Answer","text":"ECHO's company-name filter for cases is not usable, so cases are found through the facilities that match the name."}},{"@type":"Question","name":"Are state cases included?","acceptedAnswer":{"@type":"Answer","text":"Cases that states report to EPA are in ECHO and are returned (the lead agency is in the raw case data). State agencies' own databases are not queried."}},{"@type":"Question","name":"How do I avoid records for similarly named companies?","acceptedAnswer":{"@type":"Answer","text":"Add a state or ZIP, raise minMatchConfidence, or look up facilities by FRS id."}},{"@type":"Question","name":"What does the summary record contain?","acceptedAnswer":{"@type":"Answer","text":"Per company: record counts and penalty totals by agency, open records, counts by match confidence, the most recent action and every matched name."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -25,7 +25,7 @@
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>
-<a href="https://github.com/jrhite/owlabee">GitHub</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
 </nav>
 </div>
 </header>
@@ -148,7 +148,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Which EPA enforcement cases are on record for Tesla facilities in California, and under which law was each filed?</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/osha-epa-enforcement-report">examples/osha-epa-enforcement-report</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/osha-epa-enforcement-report">examples/osha-epa-enforcement-report</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -184,7 +184,7 @@ curl -sS -X POST \
 <footer class="site-footer">
 <div class="wrap">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
 </div>
 </footer>
 </body>

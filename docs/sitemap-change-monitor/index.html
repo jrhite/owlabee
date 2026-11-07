@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sitemap Monitor: Track New, Removed and Changed Pages | owlabee</title>
 <meta name="description" content="Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.">
-<link rel="canonical" href="https://jrhite.github.io/owlabee/sitemap-change-monitor/">
+<link rel="canonical" href="https://owlabee.github.io/owlabee/sitemap-change-monitor/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="Sitemap Monitor: Track New, Removed and Changed Pages | owlabee">
 <meta property="og:description" content="Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.">
-<meta property="og:url" content="https://jrhite.github.io/owlabee/sitemap-change-monitor/">
+<meta property="og:url" content="https://owlabee.github.io/owlabee/sitemap-change-monitor/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Sitemap Monitor: Track New, Removed and Changed Pages","description":"Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.","url":"https://jrhite.github.io/owlabee/sitemap-change-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/website-change-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/website-change-monitor","name":"Website Change Monitor — Sitemap Monitor & Page Diff","description":"Pages discovered through a site's sitemaps, and new, removed, updated and content-changed pages between runs with diff previews","url":"https://apify.com/owlabee/website-change-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work with sitemap indexes and gzipped sitemaps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Indexes are followed recursively, .xml.gz files are decompressed and plain-text sitemaps are accepted."}},{"@type":"Question","name":"How do I avoid false positives from dates and counters?","acceptedAnswer":{"@type":"Answer","text":"Point contentSelector at the element with the real content and turn on ignoreNumbers."}},{"@type":"Question","name":"How is severity decided?","acceptedAnswer":{"@type":"Answer","text":"A removed page or a page that starts failing is high, a new page is medium, a lastmod change with unchanged content is low, and a content change is scored by the share of words that changed."}},{"@type":"Question","name":"Can I get alerts?","acceptedAnswer":{"@type":"Answer","text":"Set webhookUrl. By default it is called only when changes were found, with a run summary and up to 1,000 change records."}},{"@type":"Question","name":"Does it render JavaScript?","acceptedAnswer":{"@type":"Answer","text":"No. Pages are fetched as plain HTML; use a selector that targets server-rendered markup."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Sitemap Monitor: Track New, Removed and Changed Pages","description":"Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.","url":"https://owlabee.github.io/owlabee/sitemap-change-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/website-change-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/website-change-monitor","name":"Website Change Monitor — Sitemap Monitor & Page Diff","description":"Pages discovered through a site's sitemaps, and new, removed, updated and content-changed pages between runs with diff previews","url":"https://apify.com/owlabee/website-change-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it work with sitemap indexes and gzipped sitemaps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Indexes are followed recursively, .xml.gz files are decompressed and plain-text sitemaps are accepted."}},{"@type":"Question","name":"How do I avoid false positives from dates and counters?","acceptedAnswer":{"@type":"Answer","text":"Point contentSelector at the element with the real content and turn on ignoreNumbers."}},{"@type":"Question","name":"How is severity decided?","acceptedAnswer":{"@type":"Answer","text":"A removed page or a page that starts failing is high, a new page is medium, a lastmod change with unchanged content is low, and a content change is scored by the share of words that changed."}},{"@type":"Question","name":"Can I get alerts?","acceptedAnswer":{"@type":"Answer","text":"Set webhookUrl. By default it is called only when changes were found, with a run summary and up to 1,000 change records."}},{"@type":"Question","name":"Does it render JavaScript?","acceptedAnswer":{"@type":"Answer","text":"No. Pages are fetched as plain HTML; use a selector that targets server-rendered markup."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -25,7 +25,7 @@
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>
-<a href="https://github.com/jrhite/owlabee">GitHub</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
 </nav>
 </div>
 </header>
@@ -153,7 +153,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Tell me which pages were added to or removed from sitemaps.org since the last check.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/website-change-monitor">examples/website-change-monitor</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/website-change-monitor">examples/website-change-monitor</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -189,7 +189,7 @@ curl -sS -X POST \
 <footer class="site-footer">
 <div class="wrap">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
 </div>
 </footer>
 </body>

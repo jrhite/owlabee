@@ -1,10 +1,10 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.jrhite/us-public-records",
+  "name": "io.github.owlabee/us-public-records",
   "title": "US Public Records (permits, grants, OSHA/EPA, recalls)",
   "description": "US public records as JSON: building permits, Grants.gov/SAM.gov, OSHA/EPA, recalls, licenses, PACER.",
   "repository": {
-    "url": "https://github.com/jrhite/owlabee",
+    "url": "https://github.com/owlabee/owlabee",
     "source": "github",
     "subfolder": "mcp/us-public-records"
   },

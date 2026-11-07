@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jrhite.github.io/owlabee/sitemap.xml
+Sitemap: https://owlabee.github.io/owlabee/sitemap.xml
