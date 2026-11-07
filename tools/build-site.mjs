@@ -4,7 +4,7 @@
 import { mkdirSync, writeFileSync, readFileSync, copyFileSync } from 'node:fs';
 import { pages } from './site-content.mjs';
 import { actors, storeUrl, apiUrl, mcpUrl } from './actors.mjs';
-import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL } from './site-config.mjs';
+import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY } from './site-config.mjs';
 
 const UPDATED = '2026-11-07';
 const root = new URL('../', import.meta.url);
@@ -290,6 +290,7 @@ for (const p of pages) {
 }
 copyFileSync(new URL('site.css', import.meta.url), new URL('style.css', docs));
 writeFileSync(new URL('.nojekyll', docs), '');
+writeFileSync(new URL(`${INDEXNOW_KEY}.txt`, docs), `${INDEXNOW_KEY}\n`);
 // GitHub Pages custom domain: written when BASE_URL is not a github.io address.
 const host = new URL(BASE_URL).hostname;
 if (!host.endsWith('.github.io')) writeFileSync(new URL('CNAME', docs), `${host}\n`);
