@@ -1051,4 +1051,506 @@ export const pages = [
     ],
     related: ['sitemap-change-monitor', 'spf-dmarc-dkim-checker'],
   },
+
+  {
+    slug: 'pdf-to-markdown-rag',
+    actor: 'pdf-to-markdown',
+    title: 'PDF to Markdown for RAG: Headings, Tables, Chunks and OCR',
+    nav: 'PDF to Markdown for RAG',
+    description:
+      'Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.',
+    lede:
+      'Retrieval pipelines work best on text that keeps a document\'s structure: headings at the right level, tables as tables, and page numbers you can cite. This Actor turns document URLs into that kind of Markdown and can split it into heading-aware chunks ready to embed.',
+    source: `
+<p>The input is any public document URL: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> or <strong>plain text</strong>, plus <code>kvs://&lt;storeId&gt;/&lt;key&gt;</code> references to files in your own Apify key-value stores and <code>data:</code> URLs. Conversion runs inside the Actor with open-source libraries (pdf.js, mammoth, turndown and tesseract.js). There is no browser and no external conversion service; the Actor contacts only the URLs you give it and your optional webhook.</p>
+<p>For PDFs it rebuilds the layout from the file's own text layer: headings from font-size and bold clusters, tables from column alignment, two-column pages read column by column, and running headers, footers and page numbers stripped. Each document becomes one record with the Markdown and its metadata (title, author, producer, creation date, page count, headings, tables and links).</p>
+<h3>Chunks and OCR</h3>
+<ul>
+<li><code>chunk: true</code> adds one <code>chunk</code> record per heading-aware chunk, with <code>startPage</code>, <code>endPage</code>, the <code>headingPath</code> it sits under and a token estimate. Chunk size and overlap are configurable.</li>
+<li><code>ocr: true</code> runs the bundled English OCR model on PDF pages that have no text layer. Without it, those pages are listed in <code>needsOcrPages</code> and marked in the Markdown, and nothing is recognized.</li>
+</ul>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Files up to 25 MB by default (<code>maxFileSizeMb</code>, at most 50), a 20-second download timeout by default, and 10 minutes of conversion per file. After that, the pages converted so far are returned with a <code>PROCESSING_TIMEOUT</code> warning.</li>
+<li>Layout reconstruction is heuristic. Complex forms, rotated text, equations and multi-line table cells are best effort, and images are not extracted.</li>
+<li>OCR is English only and runs at about two to five seconds per page.</li>
+<li>Password-protected, corrupt or unsupported files return an error item with a clear code instead of failing the run.</li>
+</ul>`,
+    fields: [
+      ['recordType', '<code>document</code>, or <code>chunk</code> when chunking is on'],
+      ['url, filename, mimeType, bytes', 'The source file'],
+      ['pages, pagesProcessed', 'Page count and pages converted'],
+      ['title, author, producer, creationDate', 'Document metadata, where the file has it'],
+      ['markdown', 'The converted text, with <code>&lt;!-- page N --&gt;</code> markers unless <code>pageBreaks</code> is off'],
+      ['characters, words, headings, tables, links', 'Size and structure of the result'],
+      ['needsOcrPages, ocrPages, warnings', 'Pages without a text layer, pages recognized by OCR, and conversion notes'],
+      ['chunkIndex, chunkCount, startPage, endPage, headingPath, tokensEstimate', 'On chunk records'],
+      ['kvsKey', 'The <code>.md</code> file key when <code>saveToKeyValueStore</code> is on'],
+    ],
+    example: {
+      caption: 'One chunk record from the "Attention Is All You Need" paper on arXiv (from the Actor\'s README; Markdown shortened):',
+      json: {
+        recordType: 'chunk',
+        url: 'https://arxiv.org/pdf/1706.03762v7',
+        filename: '1706.03762v7.pdf',
+        chunkIndex: 4,
+        chunkCount: 17,
+        startPage: 3,
+        endPage: 4,
+        headingPath: ['Attention Is All You Need', '3 Model Architecture', '3.2 Attention'],
+        markdown: '### 3.2 Attention\n\nAn attention function can be described as mapping a query and a set of key-value pairs to an output ...',
+        tokensEstimate: 572,
+        characters: 2287,
+        fetchedAt: '2026-10-16T13:20:00.000Z',
+      },
+    },
+    useCases: [
+      ['RAG ingestion', 'Turn on <code>chunk</code> and send the chunk records to your embedding step. <code>startPage</code>, <code>endPage</code> and <code>headingPath</code> let answers cite where a passage came from.'],
+      ['Mixed document folders', 'Send PDFs, DOCX files and HTML pages in one run and get the same record shape back for each. <code>saveToKeyValueStore</code> also writes each one as a <code>.md</code> file.'],
+      ['Scanned PDFs', 'Turn on <code>ocr</code> for scans. The Markdown marks which pages were recognized, so you can review them separately.'],
+    ],
+    input: {
+      urls: ['https://arxiv.org/pdf/1706.03762v7'],
+      chunk: true,
+      chunkTokens: 800,
+      chunkOverlapTokens: 80,
+      ocr: false,
+      saveToKeyValueStore: false,
+      pageBreaks: true,
+      maxFileSizeMb: 25,
+      downloadTimeoutSecs: 20,
+    },
+    inputCaption: 'One arXiv paper as Markdown plus 800-token chunks with an 80-token overlap:',
+    prompt: 'Convert this PDF to Markdown and split it into chunks of about 800 tokens, keeping the page numbers and section headings for each chunk.',
+    faq: [
+      ['Does it send my documents to another service?', 'No. Files are downloaded over HTTPS and converted inside the Actor. Only the URLs you give and your optional webhook are contacted.'],
+      ['How do chunks reference pages?', 'Each chunk carries <code>startPage</code> and <code>endPage</code> from the page markers, and <code>headingPath</code>, the headings it sits under.'],
+      ['What happens with a scanned PDF?', 'Pages with no text layer are listed in <code>needsOcrPages</code> and marked in the Markdown. Turn on <code>ocr</code> to have them recognized; they then appear in <code>ocrPages</code>.'],
+      ['How are DOCX and HTML pages counted?', 'DOCX files use their saved page count. When that is missing, and for HTML, Markdown and text, pages are estimated at one per roughly 3,000 characters (<code>pagesEstimated: true</code>).'],
+      ['I need specific fields, not Markdown.', 'Use the <a href="../document-to-json/">document to JSON extractor</a>, which runs the same layout engine against a schema you define.'],
+    ],
+    related: ['document-to-json', 'podcast-rss-feed-scraper'],
+  },
+
+  {
+    slug: 'document-to-json',
+    actor: 'document-to-json-extractor',
+    title: 'PDF to JSON with Your Own Schema: Invoices, Forms, Quotes',
+    nav: 'Document to JSON',
+    description:
+      'Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.',
+    lede:
+      'Pass document URLs and a JSON Schema describing the object you want (invoice number, line items, totals, form fields, dates) and get back one JSON object per document in exactly that shape, with a confidence score per field and a list of fields that were not found.',
+    source: `
+<p>Documents are read from public URLs, your own key-value stores (<code>kvs://</code>) or <code>data:</code> URLs: <strong>PDF</strong> with a text layer, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> and <strong>plain text</strong>. They go through a layout engine first (headings, tables, lists and page markers), so table rows stay rows and labels stay next to their values.</p>
+<p>The <code>schema</code> input is a JSON Schema (draft-07 subset): <code>type: object</code> at the top, field types string, number, integer, boolean, array and object, with <code>description</code>, <code>format</code> (date, date-time, email, uri) and <code>enum</code>. Nested objects and arrays of objects work; <code>$ref</code>, <code>oneOf</code> and <code>anyOf</code> do not.</p>
+<h3>Three extractors</h3>
+<ul>
+<li><strong><code>rules</code></strong>: no language model. It collects label/value pairs, tables, numbered form fields, dates, amounts, emails, phone numbers and URLs and matches them to your field names and descriptions, coercing types. Every value is verbatim from the document.</li>
+<li><strong><code>byok</code></strong>: Claude fills the schema with the Anthropic API key you supply, on a <code>fast</code>, <code>balanced</code> or <code>best</code> tier. Items record tokens used.</li>
+<li><strong><code>hosted</code></strong>: Claude on the Actor's own key. This is what an empty <code>extractor</code> means when the Actor's model key is configured. If the model cannot be reached, the document gets the rules extraction instead, marked <code>rules-fallback</code>.</li>
+</ul>
+<p>In model modes, document text is sent to the Anthropic API only to produce the extraction. Each mode is priced differently; see the Store page.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Scanned PDFs without a text layer return a <code>NO_TEXT</code> error item. Convert them first with the <a href="../pdf-to-markdown-rag/">PDF to Markdown Actor</a> with OCR on, save the Markdown to a key-value store, and pass the <code>kvs://</code> reference.</li>
+<li>Schemas can be up to 6 levels deep and 200 fields. Model modes cut documents at <code>maxInputTokens</code> (at most 40,000, about 60 pages) and cap output at 4,000 tokens per document, so very long line-item tables may be cut.</li>
+<li>The rules extractor's date and amount parsing is tuned to English-language business documents.</li>
+<li>URLs that resolve to private or local network addresses are rejected.</li>
+</ul>`,
+    fields: [
+      ['data', 'The filled object, in the shape of your schema; fields not found are null'],
+      ['confidence, overallConfidence', 'A score per field and for the whole document'],
+      ['filledFields, totalFields, missingFields', 'What was and was not found'],
+      ['extractionMethod, extractionNotes', '<code>rules</code>, <code>byok</code>, <code>hosted</code> or <code>rules-fallback</code>, and where each value came from'],
+      ['lowConfidenceFields', 'Model modes: fields the model was unsure about'],
+      ['url, filename, mimeType, pages, title, author', 'The source document'],
+      ['textPreview, markdown', 'A 1,000-character preview; the full text with <code>includeMarkdown</code>'],
+      ['needsOcrPages, warnings', 'Pages without text and conversion notes'],
+    ],
+    example: {
+      caption: 'IRS Form W-9 extracted with the rules extractor and the quick-start schema (from the Actor\'s README; shortened):',
+      json: {
+        recordType: 'document',
+        url: 'https://www.irs.gov/pub/irs-pdf/fw9.pdf',
+        filename: 'fw9.pdf',
+        pages: 6,
+        extractionMethod: 'rules',
+        data: {
+          title: 'Form W-9 (Rev. March 2024)',
+          formNumber: 'W-9',
+          revisionDate: '2024-03',
+          issuer: 'Department of the Treasury',
+          fields: [
+            { label: 'Name of entity/individual', description: 'An entry is required. …' },
+            { label: 'Business name/disregarded entity name, if different from above', description: null },
+            { label: 'City, state, and ZIP code', description: null },
+          ],
+        },
+        confidence: { title: 0.8, formNumber: 0.6, revisionDate: 0.6, issuer: 0.4, fields: 0.5 },
+        overallConfidence: 0.58,
+        filledFields: 5,
+        totalFields: 5,
+        missingFields: [],
+        fetchedAt: '2026-10-17T10:22:02.464Z',
+      },
+    },
+    useCases: [
+      ['Invoices to line items', 'Describe vendor, invoice number, dates, totals and a <code>lineItems</code> array once, then send every invoice through the same schema. Field descriptions guide both the rules matcher and the model.'],
+      ['Batch form fields', 'Run several government forms through one schema to get each form\'s number, revision date, issuer and numbered fields as JSON.'],
+      ['Supplier quotes and specifications', 'The Actor\'s task examples turn a supplier quote into line items and a roofing specification PDF into a takeoff of the roof system and materials.'],
+    ],
+    input: {
+      urls: ['https://www.irs.gov/pub/irs-pdf/fw9.pdf', 'https://www.irs.gov/pub/irs-pdf/fw4.pdf'],
+      schema: {
+        type: 'object',
+        properties: {
+          title: { type: 'string', description: 'Title of the form' },
+          formNumber: { type: 'string', description: 'The form number, e.g. W-9 or 1040' },
+          revisionDate: { type: 'string', format: 'date', description: 'Revision date of the form' },
+          issuer: { type: 'string', description: 'Agency or organization that issues the form' },
+        },
+      },
+      extractor: 'rules',
+      includeMarkdown: false,
+    },
+    inputCaption: 'Two IRS form PDFs through one small schema with the rules extractor (no model):',
+    prompt: 'Extract the invoice number, invoice date, vendor, total and line items from these three PDF invoices as JSON.',
+    faq: [
+      ['Which extractor should I use?', 'Use <code>rules</code> for well-labeled documents with a known layout, bulk first passes, and data that must not go to a model. Use a model mode for fields that need reading comprehension or long, messy documents.'],
+      ['How do I write the schema?', 'As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use <code>format: "date"</code> for ISO dates and <code>enum</code> for fixed choices.'],
+      ['Is my Anthropic key safe in <code>byok</code> mode?', 'It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset.'],
+      ['What happens if the model fails?', 'The document gets the rules extraction, marked <code>rules-fallback</code> with the reason, so a run does not fail because of the model.'],
+      ['Does it work on scanned documents?', 'Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by <code>kvs://</code> reference.'],
+    ],
+    related: ['pdf-to-markdown-rag', 'grants-gov-api'],
+  },
+
+  {
+    slug: 'podcast-summarizer',
+    actor: 'podcast-episode-summarizer',
+    title: 'Podcast Summarizer: Chapters and Quotes from Transcripts',
+    nav: 'Podcast summarizer',
+    description:
+      'Summarize podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items from published transcripts.',
+    lede:
+      'Many podcasts now publish a transcript file with each episode. This Actor reads it, falls back to the show notes when there is none, and writes a structured summary per episode: an abstract, key topics, chapters with timestamps, notable quotes, named guests and action items.',
+    source: `
+<p>Input is a list of <strong>RSS or Atom feed URLs</strong>, <strong>Apple Podcasts show links</strong> or IDs, or <code>search:&lt;show name&gt;</code> terms. Apple links and searches are resolved through Apple's public iTunes Lookup and Search API, which needs no key.</p>
+<p>For each episode the Actor downloads the <strong>Podcasting 2.0</strong> <code>&lt;podcast:transcript&gt;</code> file the feed links (text, WebVTT, SRT, JSON or HTML, up to 2 MB). It does not download or transcribe audio. When an episode has no transcript, the show notes are summarized instead and <code>transcriptSource</code> says <code>description</code>; chapters and quote timestamps are then empty.</p>
+<h3>Three summarizers</h3>
+<ul>
+<li><strong><code>extractive</code></strong>: no language model. A deterministic summary that picks sentences and keywords from the text itself, so topics, chapters and quotes are verbatim.</li>
+<li><strong><code>byok</code></strong>: Claude writes the summary with the Anthropic API key you supply, on a <code>fast</code>, <code>balanced</code> or <code>best</code> tier.</li>
+<li><strong><code>hosted</code></strong>: Claude on the Actor's own key. This is what an empty <code>summarizer</code> means when the Actor's model key is configured. If the model fails, the episode gets the extractive summary, marked <code>extractive-fallback</code>.</li>
+</ul>
+<p>Each mode is priced differently; see the Store page.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Named guests come from <code>&lt;podcast:person role="guest"&gt;</code> tags and speaker labels; the show's author and the first voice of an episode are treated as hosts.</li>
+<li>The extractive summarizer makes chapters only for texts of 300 words or more, about one per 800 words, up to 8.</li>
+<li>Model modes cut transcripts at <code>maxInputTokens</code> (at most 40,000 tokens, about three hours of speech) and say so on the item.</li>
+<li>Apple lookups are limited to about 20 requests per minute.</li>
+</ul>`,
+    fields: [
+      ['showTitle, title, pubDate, durationSeconds', 'The episode'],
+      ['audioUrl, link, episodeGuid', 'Where the episode lives'],
+      ['transcriptSource, transcriptUrl, transcriptFormat, transcriptWords', '<code>transcript</code> or <code>description</code>, and the transcript used'],
+      ['summary.abstract', 'A short abstract of the episode'],
+      ['summary.keyTopics', 'Key topics'],
+      ['summary.chapters', 'Chapters with titles, summaries and start times where the transcript has them'],
+      ['summary.notableQuotes', 'Quotes with speaker and timestamp'],
+      ['summary.namedGuests, summary.actionItems', 'Guests and action items mentioned'],
+      ['summaryMethod, modelTier', '<code>extractive</code>, <code>byok</code>, <code>hosted</code> or <code>extractive-fallback</code>'],
+    ],
+    example: {
+      caption: 'One Podnews Daily episode summarized in extractive mode (from the Actor\'s README; shortened):',
+      json: {
+        recordType: 'episode',
+        feedUrl: 'https://podnews.net/rss',
+        showTitle: 'Podnews Daily - podcast industry and podcasting news',
+        title: 'PAVE Studios shows head to Disney+ and Hulu',
+        pubDate: '2026-10-16T10:09:41.000Z',
+        durationSeconds: 291,
+        transcriptSource: 'transcript',
+        transcriptFormat: 'vtt',
+        transcriptWords: 724,
+        summaryMethod: 'extractive',
+        summary: {
+          abstract: 'Meanwhile, in Australia, podcast publisher Mammamia is to make it to Samsung TV Plus as a streaming TV channel. …',
+          keyTopics: ['adam curry', 'youtube short', 'samsung tv', 'tv plus', 'pave studios'],
+          chapters: [{ title: 'Adam Curry & Youtube Short', summary: 'YouTube leads in almost every territory, with 32% market share globally …', startTime: 0, startTimestamp: '0:00' }],
+          notableQuotes: [{ quote: 'Adam Curry is to step back from No Agenda, with the show on October the 29th being his last.', speaker: 'James Cridland', timestamp: '1:29' }],
+          namedGuests: ['Adam Curry'],
+          actionItems: ['You can find out more with a link in our show notes.'],
+        },
+        fetchedAt: '2026-10-16T15:33:45.237Z',
+      },
+    },
+    useCases: [
+      ['Show notes and newsletters', 'Get chapters, quotes and an abstract for each new episode of the shows you cover, ready to edit into notes or a newsletter.'],
+      ['Media monitoring', 'Search summaries and quotes for a brand or topic to see what was said, by whom and at what minute.'],
+      ['Indexing a back catalog', 'Run the extractive summarizer over many episodes for search indexes. It needs no key and returns topics and quotes verbatim from the transcript.'],
+    ],
+    input: {
+      feeds: ['https://rss.buzzsprout.com/1538779.rss'],
+      maxEpisodesPerFeed: 3,
+      summarizer: 'extractive',
+      maxConcurrency: 3,
+    },
+    inputCaption: 'Extractive summaries (no model) for the three newest episodes of one feed:',
+    prompt: 'Summarize the two latest episodes of The Daily with chapters, notable quotes and the guests mentioned.',
+    faq: [
+      ['Does it transcribe audio?', 'No. It uses the transcript file the podcast publishes, or the show notes when there is none.'],
+      ['Can I pass an Apple Podcasts link or just a show name?', 'Yes. Apple links and IDs are resolved with the iTunes Lookup API, and <code>search:show name</code> takes the top iTunes Search match with a public feed.'],
+      ['Which summarizer should I use?', 'Extractive for bulk back catalogs, indexing and monitoring; a model mode when you want written abstracts and chapter titles in prose.'],
+      ['Can I summarize specific episodes only?', 'Yes. List episode GUIDs, episode page URLs or audio URLs in <code>episodes</code>. GUIDs from the <a href="../podcast-rss-feed-scraper/">podcast RSS scraper</a> work directly.'],
+      ['What if a transcript cannot be downloaded?', 'The show notes are summarized instead, and an episode with neither produces a <code>NO_TEXT</code> error item.'],
+    ],
+    related: ['podcast-rss-feed-scraper', 'pdf-to-markdown-rag'],
+  },
+
+  {
+    slug: 'podcast-rss-feed-scraper',
+    actor: 'podcast-rss-scraper',
+    title: 'Podcast RSS Feed Scraper: Episodes and Transcripts as JSON',
+    nav: 'Podcast RSS scraper',
+    description:
+      'Turn podcast RSS feeds, Apple Podcasts links or show names into show and episode JSON: dates, durations, audio URLs, chapters and Podcasting 2.0 transcripts.',
+    lede:
+      'Every podcast is published as an RSS feed, but feeds vary in namespaces, duration formats and show-note markup. This Actor parses them into clean show and episode records, finds the feed for an Apple Podcasts link or show name, and can download each episode\'s transcript as text.',
+    source: `
+<p>The Actor parses the <strong>RSS 2.0</strong>, <strong>iTunes</strong> and <strong>Podcasting 2.0</strong> namespaces with an XML parser; no browser and no proxies. It handles odd feeds: non-standard namespace prefixes, missing GUIDs, durations given as <code>MM:SS</code>, <code>HH:MM:SS</code> or seconds, and HTML show notes.</p>
+<p>Apple Podcasts URLs, bare Apple IDs and <code>search:&lt;term&gt;</code> entries are resolved through Apple's public iTunes Lookup and Search API, which needs no key. A show web page with an RSS autodiscovery link also works.</p>
+<p>With <code>fetchTranscripts</code>, each episode's <code>&lt;podcast:transcript&gt;</code> file is downloaded (plain text first, then WebVTT, SRT, JSON or HTML, up to 2 MB) and returned as <code>transcriptText</code> with timestamps and cue numbers removed and speaker names kept as labels.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Feeds are fetched up to 30 MB each with a 20-second timeout, at about two requests per second per host.</li>
+<li>Only transcripts published in the feed are downloaded; audio is never transcribed.</li>
+<li>Apple lists some shows without a public feed (Apple-exclusive or subscription shows); those return an <code>APPLE_NO_FEED_URL</code> error item.</li>
+<li>Apple lookups are limited to about 20 requests per minute, so many Apple inputs resolve more slowly than feed URLs.</li>
+<li><code>ownerEmail</code> is included only when the feed publishes it.</li>
+</ul>`,
+    fields: [
+      ['recordType', '<code>show</code> or <code>episode</code>'],
+      ['title, description, author, language, categories, explicit', 'Show metadata'],
+      ['episodeCount, lastBuildDate, latestEpisodeAt, podcastGuid, funding', 'Show-level Podcasting 2.0 and feed details'],
+      ['episodeGuid, title, pubDate, durationSeconds, season, episode, episodeType', 'Episode metadata'],
+      ['audioUrl, audioType, audioBytes, imageUrl, link', 'Media and links'],
+      ['transcripts, transcriptUrl, transcriptFormat', 'Transcript links in the feed'],
+      ['transcriptText, transcriptWords', 'With <code>fetchTranscripts</code>'],
+      ['resolvedVia, searchAlternatives', 'How an Apple link or search term was resolved, and other matches'],
+    ],
+    example: {
+      caption: 'One Podnews Daily episode with its transcript fetched (from the Actor\'s README; shortened):',
+      json: {
+        recordType: 'episode',
+        feedUrl: 'https://podnews.net/rss',
+        showTitle: 'Podnews Daily - podcast industry and podcasting news',
+        episodeGuid: 'https://podnews.net/update/pave-disney-hulu-clues',
+        title: 'PAVE Studios shows head to Disney+ and Hulu',
+        pubDate: '2026-10-16T10:09:41.000Z',
+        durationSeconds: 291,
+        episode: 2450,
+        episodeType: 'full',
+        explicit: false,
+        audioUrl: 'https://op3.dev/e,pg=9b024349-ccf0-5f69-a609-6b82873eab3c/podnews.net/audio/podnews261016.mp3',
+        audioType: 'audio/mpeg',
+        link: 'https://podnews.net/update/pave-disney-hulu-clues',
+        transcriptUrl: 'https://podnews.net/audio/podnews261016.mp3.vtt',
+        transcriptFormat: 'vtt',
+        transcriptText: 'James Cridland: From our free daily newsletter, the latest from podnews.net with Soundstack. …',
+        transcriptWords: 730,
+        fetchedAt: '2026-10-16T13:13:06.512Z',
+      },
+    },
+    useCases: [
+      ['New-episode alerts', 'Turn on <code>onlyNewSinceLastRun</code> and schedule the Actor. The first run is a baseline; later runs return only episodes with GUIDs not seen before and POST them to your webhook.'],
+      ['Transcript text for search or LLM analysis', 'Turn on <code>fetchTranscripts</code> to get plain transcript text with speaker labels for shows that publish transcripts.'],
+      ['Find a feed from a show name', 'Pass <code>search:Hard Fork</code> or an Apple Podcasts link; the show record records how it was resolved and lists other matches.'],
+    ],
+    input: {
+      feeds: ['https://podnews.net/rss'],
+      maxEpisodesPerFeed: 5,
+      includeShowRecord: true,
+      fetchTranscripts: true,
+      onlyNewSinceLastRun: false,
+      maxConcurrency: 5,
+    },
+    inputCaption: 'The five newest episodes of one feed, with transcript text:',
+    prompt: 'Get the last 20 episodes of Planet Money from Apple Podcasts with their publish dates, durations and audio URLs.',
+    faq: [
+      ['Does it need an API key?', 'No. Feeds, transcript files and the iTunes API are public endpoints.'],
+      ['Which transcript formats are supported?', 'Plain text, WebVTT, SRT, Podcasting 2.0 JSON and HTML. Timestamps, cue numbers and styling are removed; speaker names are kept.'],
+      ['How does monitoring work?', 'The Actor stores each feed\'s seen episode GUIDs (up to 5,000) in the key-value store named by <code>stateStoreName</code> and returns only unseen ones on later runs.'],
+      ['Can it resolve Podcast Index GUIDs?', 'No. That needs a Podcast Index API key, so those inputs return <code>GUID_RESOLUTION_UNAVAILABLE</code>.'],
+      ['I want summaries, not raw transcripts.', 'The <a href="../podcast-summarizer/">podcast summarizer</a> takes the same inputs and writes an abstract, chapters and quotes per episode.'],
+    ],
+    related: ['podcast-summarizer', 'bluesky-monitor'],
+  },
+
+  {
+    slug: 'bluesky-monitor',
+    actor: 'bluesky-monitor',
+    title: 'Bluesky Monitor: Posts, Hashtags and Followers as JSON',
+    nav: 'Bluesky monitor',
+    description:
+      'Search Bluesky posts by keyword or hashtag and read profiles, author feeds and follower lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.',
+    lede:
+      'Bluesky runs on the open AT Protocol, and its public API answers without a login. This Actor reads it in six modes (post search, profiles, author feeds, followers, following and account search) and writes every result as a flat record, so you can follow keywords, hashtags or accounts on a schedule.',
+    source: `
+<p>The data comes from Bluesky's <strong>public, unauthenticated AT Protocol API</strong>: the <code>public.api.bsky.app</code> AppView, with its origin <code>api.bsky.app</code> as a fallback for post search. These are the same public endpoints the Bluesky app uses. No login, API key, proxies or browser.</p>
+<table>
+<thead><tr><th>Mode</th><th>Queries are</th><th>Returns</th></tr></thead>
+<tbody>
+<tr><td><code>searchPosts</code></td><td>Keywords, hashtags, phrases and search operators</td><td>Matching posts</td></tr>
+<tr><td><code>authorFeed</code></td><td>Handles, DIDs or profile URLs</td><td>The accounts' posts</td></tr>
+<tr><td><code>profiles</code></td><td>Handles, DIDs or profile URLs</td><td>Profiles with follower, following and post counts</td></tr>
+<tr><td><code>followers</code>, <code>following</code></td><td>Handles, DIDs or profile URLs</td><td>Follower or following lists</td></tr>
+<tr><td><code>searchActors</code></td><td>Search terms</td><td>Matching accounts</td></tr>
+</tbody>
+</table>
+<h3>Limits worth knowing</h3>
+<ul>
+<li><strong>Post search returns at most 100 posts per query per run.</strong> From datacenter networks the public host refuses post search, and the origin host serves only the first page of results without a login. Use <code>since</code>, narrower queries, several queries, or the new-since-last-run mode on a schedule to keep up.</li>
+<li>Requests are limited to about two per second. One request returns up to 100 posts or followers, so 10,000 followers take about a minute.</li>
+<li>Follower records do not include per-follower counts; run <code>profiles</code> on the handles you care about.</li>
+<li>Posts and profiles whose authors opted out of logged-out visibility may be missing, as they are on the public web.</li>
+</ul>`,
+    fields: [
+      ['type, query', '<code>post</code>, <code>profile</code>, <code>follower</code> or <code>following</code>, and the query that found it'],
+      ['text, createdAt, langs', 'Post content and time'],
+      ['likeCount, repostCount, replyCount, quoteCount', 'Engagement counts'],
+      ['authorHandle, authorDisplayName, authorDid', 'Post author'],
+      ['hasImages, hasVideo, embedUrls, externalUrl', 'Media and links'],
+      ['isReply, isRepost, quotedPostUrl', 'Thread context'],
+      ['postUrl, uri', 'Link to the post on bsky.app and its AT URI'],
+      ['handle, displayName, description, followersCount, followsCount, postsCount', 'On profile records'],
+      ['subjectHandle', 'On follower records: the account you asked about'],
+    ],
+    example: {
+      caption: 'One post record from <code>searchPosts</code> (from the Actor\'s README; shortened):',
+      json: {
+        type: 'post',
+        query: 'apify',
+        uri: 'at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.post/3l6oveex3ii2l',
+        authorHandle: 'bsky.app',
+        authorDisplayName: 'Bluesky',
+        text: 'We shipped a new Apify integration today! Try the open API: https://docs.bsky.app',
+        createdAt: '2026-10-15T18:02:11.482Z',
+        likeCount: 310,
+        repostCount: 40,
+        replyCount: 12,
+        quoteCount: 5,
+        langs: ['en'],
+        hasImages: true,
+        hasVideo: false,
+        isReply: false,
+        isRepost: false,
+        postUrl: 'https://bsky.app/profile/bsky.app/post/3l6oveex3ii2l',
+        fetchedAt: '2026-10-16T12:40:32.064Z',
+      },
+    },
+    useCases: [
+      ['Brand and keyword mentions', 'Run <code>searchPosts</code> with <code>sort: "latest"</code> and <code>onlyNewSinceLastRun</code> on a schedule, and send each run\'s new posts to a webhook.'],
+      ['Follower growth', 'Run <code>followers</code> with the new-since-last-run mode to get only new followers of an account on each run.'],
+      ['Account research', 'Run <code>profiles</code> on a list of handles for follower, following and post counts in one table.'],
+    ],
+    input: {
+      mode: 'searchPosts',
+      queries: ['apify'],
+      maxResults: 50,
+      sort: 'latest',
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'bluesky-keyword-brand-mention-monitor',
+    },
+    inputCaption: 'New Bluesky posts mentioning a keyword since the last run, newest first:',
+    prompt: 'Find the latest Bluesky posts with the hashtag #opensource and list the authors, text and like counts.',
+    faq: [
+      ['Does it need a Bluesky login or API key?', 'No. It uses Bluesky\'s public, unauthenticated API endpoints.'],
+      ['Can I search hashtags or exact phrases?', 'Yes. <code>#opensource</code>, <code>"exact phrase"</code> and operators such as <code>from:handle</code>, <code>lang:en</code> or <code>domain:example.com</code> are passed to Bluesky\'s search.'],
+      ['How does new-since-last-run work?', 'Per mode and query, the Actor stores the keys of records it already emitted (the most recent 10,000) and stops paging when it reaches known records. Profiles are re-emitted only when something changed, listed in <code>changedFields</code>.'],
+      ['Why do I get at most 100 posts for a search?', 'Post search from datacenter networks returns only the first page of results without a login. Split broad topics into several queries or narrow them with <code>since</code>.'],
+      ['What happens with a bad handle?', 'It produces an error item such as <code>PROFILE_NOT_FOUND</code> and the rest of the run continues.'],
+    ],
+    related: ['podcast-rss-feed-scraper', 'sitemap-change-monitor'],
+  },
+
+  {
+    slug: 'job-board-api-hiring-signals',
+    actor: 'ats-hiring-signals',
+    title: 'Greenhouse, Lever and Ashby Jobs API and Hiring Signals',
+    nav: 'Job board API & hiring signals',
+    description:
+      'Get open jobs from Greenhouse, Lever, Ashby, SmartRecruiters and Workable boards as normalized JSON, or new, removed and changed roles per company between runs.',
+    lede:
+      'Most company career pages are built on one of a few applicant tracking systems, and each has a public job-board API. This Actor reads Greenhouse, Lever, Ashby, SmartRecruiters and Workable boards, normalizes every open role, and in signals mode reports what changed at each company since the last run.',
+    source: `
+<p>Only the providers' <strong>public, unauthenticated job-board APIs</strong> are used: <code>boards-api.greenhouse.io</code>, <code>api.lever.co</code> (and <code>api.eu.lever.co</code>), <code>api.ashbyhq.com/posting-api</code>, <code>api.smartrecruiters.com/v1/companies</code> and <code>apply.workable.com/api</code>. Private or password-protected boards are not supported.</p>
+<p>Boards are given as <code>provider:boardId</code> (<code>greenhouse:stripe</code>), as a public board URL, or as a company's own careers page URL. For a careers page, the Actor fetches it once and looks for a supported board in the final URL or the HTML. Three curated presets (<code>ai-labs</code>, <code>developer-tools</code>, <code>fintech</code>) add 50 to 59 boards each.</p>
+<p>In <strong>signals</strong> mode each board is compared with the snapshot from the previous run, producing <code>new-role</code>, <code>removed-role</code>, <code>title-changed</code> and <code>location-changed</code> events plus one <code>board-summary</code> per company with open roles, net change, top departments and locations, remote share and a 0 to 100 hiring velocity score.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Requests to each provider are limited to about two per second. Descriptions on SmartRecruiters and Workable need one extra request per job.</li>
+<li>Workable's API sits behind a firewall. When both of its endpoints refuse, the board returns a <code>WORKABLE_BLOCKED</code> error item; no residential proxies are used.</li>
+<li><code>city</code> and <code>country</code> are best-effort parses of free-text locations. Salary data appears only where the provider exposes it (Ashby and Lever) and the company publishes it.</li>
+<li>Careers pages that render their job list only in the browser, with no link to the job board in the HTML, return <code>ATS_NOT_DETECTED</code>.</li>
+<li>Only currently listed jobs are returned. Boards over <code>maxJobsPerBoard</code> are marked truncated and removals are not reported for them.</li>
+</ul>`,
+    fields: [
+      ['type', '<code>job</code>, a signal type, <code>board-summary</code> or <code>error</code>'],
+      ['provider, boardId, companyName, jobId', 'Which board and job'],
+      ['title, department, team', 'The role'],
+      ['location, city, country, remote', 'Raw location, best-effort city and country, and a remote flag'],
+      ['employmentType, postedAt, updatedAt', 'Where the provider exposes them'],
+      ['applyUrl, jobUrl', 'Links to the posting'],
+      ['descriptionText, compensation', 'With <code>includeDescription</code>; compensation on Ashby and Lever where published'],
+      ['openRoles, netChange, topDepartments, remoteShare, hiringVelocityScore', 'On <code>board-summary</code> records in signals mode'],
+    ],
+    example: {
+      caption: 'A <code>board-summary</code> record from a signals run (from the Actor\'s README):',
+      json: {
+        type: 'board-summary',
+        provider: 'lever',
+        boardId: 'spotify',
+        baseline: false,
+        openRoles: 312,
+        previousOpenRoles: 298,
+        newSinceLastRun: 21,
+        removedSinceLastRun: 7,
+        changedSinceLastRun: 3,
+        netChange: 14,
+        topDepartments: [{ name: 'Engineering', count: 140 }, { name: 'Sales', count: 45 }],
+        topLocations: [{ name: 'Stockholm, Sweden', count: 120 }, { name: 'New York, NY', count: 80 }],
+        remoteShare: 0.18,
+        hiringVelocityScore: 58,
+        truncated: false,
+        previousSnapshotAt: '2026-10-09T12:00:00.000Z',
+        detectedAt: '2026-10-16T12:00:00.000Z',
+      },
+    },
+    useCases: [
+      ['Weekly hiring signals for target accounts', 'Run signals mode weekly on a list of company boards to see which companies are adding roles, removing them or shifting focus, with a velocity score per company.'],
+      ['Job export across providers', 'Pull open roles from Greenhouse, Lever and Ashby boards in one run, all in the same record shape.'],
+      ['Start from a careers page', 'Paste a company\'s careers URL instead of hunting for its board id; the Actor detects the board behind it.'],
+    ],
+    input: {
+      boards: ['greenhouse:stripe'],
+      mode: 'signals',
+      includeDescription: false,
+      maxJobsPerBoard: 80,
+      stateStoreName: 'hiring-signals-stripe-weekly',
+      maxConcurrency: 5,
+    },
+    inputCaption: 'Signals mode on one Greenhouse board (the first run stores a baseline):',
+    prompt: 'Which roles did Stripe add or remove on its Greenhouse job board since last week?',
+    faq: [
+      ['Does it need an API key or proxies?', 'No. Greenhouse, Lever, Ashby and SmartRecruiters publish job-board APIs that need no credentials. Workable sometimes blocks datacenter traffic.'],
+      ['How do I find a company\'s board id?', 'Open a job on the company\'s careers page and paste its URL (for example <code>boards.greenhouse.io/&lt;token&gt;</code> or <code>jobs.lever.co/&lt;company&gt;</code>), or paste the careers page itself.'],
+      ['What happens on the first signals run?', 'There is no snapshot yet, so every current job is written as a <code>job</code> record with a baseline summary. Change events start with the second run.'],
+      ['Why are some fields null?', 'Providers expose different fields: some Greenhouse boards have no posted date, Lever has no update date, SmartRecruiters departments are optional. The Actor does not guess them.'],
+      ['Does it read LinkedIn or job aggregators?', 'No. Only the five providers\' public job-board APIs and, when you give one, the company\'s own careers page.'],
+    ],
+    related: ['spf-dmarc-dkim-checker', 'bluesky-monitor'],
+  },
 ];

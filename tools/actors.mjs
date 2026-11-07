@@ -169,6 +169,7 @@ const meta = {
       ['maxResults', 'Cap on dataset items across all queries.'],
       ['sort', '`latest` or `top` (searchPosts only).'],
     ],
+    page: 'bluesky-monitor',
   },
   'ats-hiring-signals': {
     group: 'Web and domains',
@@ -181,6 +182,7 @@ const meta = {
       ['mode', '`jobs` or `signals`.'],
       ['maxJobsPerBoard', 'Cap on job records per board.'],
     ],
+    page: 'job-board-api-hiring-signals',
   },
   'podcast-rss-scraper': {
     group: 'Documents and media',
@@ -193,6 +195,7 @@ const meta = {
       ['fetchTranscripts', 'Download each episode\'s transcript and attach the text.'],
       ['onlyNewSinceLastRun', 'Return only episodes not seen before.'],
     ],
+    page: 'podcast-rss-feed-scraper',
   },
   'podcast-episode-summarizer': {
     group: 'Documents and media',
@@ -205,6 +208,7 @@ const meta = {
       ['summarizer', '`extractive` (no model), `byok` (your Anthropic key) or `hosted`.'],
       ['episodes', 'Specific episode GUIDs or URLs.'],
     ],
+    page: 'podcast-summarizer',
   },
   'pdf-to-markdown': {
     group: 'Documents and media',
@@ -217,6 +221,7 @@ const meta = {
       ['ocr', 'Run OCR on pages without extractable text.'],
       ['saveToKeyValueStore', 'Also save each document as a `.md` file.'],
     ],
+    page: 'pdf-to-markdown-rag',
   },
   'document-to-json-extractor': {
     group: 'Documents and media',
@@ -229,6 +234,7 @@ const meta = {
       ['extractor', '`rules` (no model), `byok` (your Anthropic key) or `hosted`.'],
       ['includeMarkdown', 'Also return the converted document text.'],
     ],
+    page: 'document-to-json',
   },
   'drone-roof-inspection-report': {
     group: 'Documents and media',
