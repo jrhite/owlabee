@@ -6,6 +6,8 @@ This repo has runnable examples for each Actor: curl, Python, Node.js and an MCP
 
 Guides to the data sources: **<!-- site -->[owlabee.com](https://owlabee.com/)<!-- /site -->**
 
+Made by [Jacob Hite](https://jacobhite.com/).
+
 ## Actors
 
 <!-- actors -->
