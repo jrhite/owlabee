@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S.D.N.Y. Securities and Class Action Complaint Alerts | owlabee</title>
+<meta name="description" content="Follow new civil complaints in the Southern District of New York from its PACER RSS feed and find securities and class-action dockets with keywords and the RECAP archive.">
+<link rel="canonical" href="https://owlabee.com/sdny-securities-class-action-monitor/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="S.D.N.Y. Securities and Class Action Complaint Alerts | owlabee">
+<meta property="og:description" content="Follow new civil complaints in the Southern District of New York from its PACER RSS feed and find securities and class-action dockets with keywords and the RECAP archive.">
+<meta property="og:url" content="https://owlabee.com/sdny-securities-class-action-monitor/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"S.D.N.Y. Securities and Class Action Complaint Alerts","description":"Follow new civil complaints in the Southern District of New York from its PACER RSS feed and find securities and class-action dockets with keywords and the RECAP archive.","url":"https://owlabee.com/sdny-securities-class-action-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/federal-court-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/federal-court-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/federal-court-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the S.D.N.Y. feed include complaints?","acceptedAnswer":{"@type":"Answer","text":"Yes. At the 2026-10-17 sweep its feed advertised cmp among its entry types."}},{"@type":"Question","name":"Why might a securities complaint not match my keyword?","acceptedAnswer":{"@type":"Answer","text":"The live feed's docket text is short. If the text for a complaint does not contain your phrase, it will not match. The new-civil-cases input catches it regardless."}},{"@type":"Question","name":"Can I search all parties, not just the lead ones?","acceptedAnswer":{"@type":"Answer","text":"In archive records, yes: partyKeywords matches the full party list. Live entries only have the case title."}},{"@type":"Question","name":"Can I follow one case after it is filed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Put its number in caseNumbers; 1:26-cv-03810, 26-cv-3810 and similar forms all work."}},{"@type":"Question","name":"Is this legal advice?","acceptedAnswer":{"@type":"Answer","text":"No. It describes public docket data and how to filter it."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> S.D.N.Y. securities &amp; class actions</nav>
+<article>
+<h1>S.D.N.Y. Securities and Class Action Complaint Alerts</h1>
+<p class="lede">The Southern District of New York publishes a large, partial PACER RSS feed that includes complaints. This guide shows how to get every new civil case opened there, and how to narrow to securities and class-action matters with keywords, party names and the RECAP archive.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open the Actor on Apify Store</a>
+<p class="note">PACER RSS Docket Monitor — New Federal Court Filings. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>At the Actor's sweep of 2026-10-17, the S.D.N.Y. feed was live and published only the entry types below. <code>cmp</code> (complaints) is among them:</p>
+<div class="table-wrap"><table class="court-list">
+<thead><tr><th scope="col">Code</th><th scope="col">Court</th><th scope="col">Feed at the 2026-10-17 sweep</th><th scope="col">What it carries</th><th scope="col">Entries in its 24-hour feed</th></tr></thead>
+<tbody>
+<tr><td><a href="../pacer-rss-feeds-by-court/#nysd"><code>nysd</code></a></td><td>U.S. District Court, Southern District of New York</td><td>Live: some entry types</td><td>Only: <code>adr</code>, <code>answer</code>, <code>appeal</code>, <code>appeal-cr</code>, <code>charge-cr</code>, <code>cmp</code>, <code>discov</code>, <code>discovery-cr</code>, <code>misc</code>, <code>misc-cr</code>, <code>misccs</code>, <code>mot2255</code>, <code>motion</code>, <code>notice</code>, <code>notice-cr</code>, <code>order</code>, <code>order-cr</code>, <code>respm</code>, <code>respm-cr</code>, <code>respoth</code>, <code>service</code>, <code>service-cr</code>, <code>transfer</code>, <code>transfer-cr</code>, <code>trial</code>, <code>trial-cr</code>, <code>waiver-cr</code>, <code>detention-cr</code>, <code>minutes</code>, <code>minutes-cr</code>, <code>plea</code></td><td>2,674</td></tr>
+</tbody>
+</table></div>
+<h3>What the feed gives you, and what it does not</h3>
+<p>Each entry has the case number, the case title (lead parties), a short docket text in brackets such as <code>[Memorandum of Law in Support of Motion]</code>, the document number with a link, and the filing time. The feed has no nature of suit, party list or full docket text, so "securities" or "class action" appears in a live entry only if the court's docket text for it contains the phrase.</p>
+<ul>
+<li><code>caseTypes: ["civil"]</code> with <code>newCasesOnly</code> returns document number 1 of every new civil case: the complaint or notice of removal.</li>
+<li><code>entryKeywords</code> such as <code>class action</code> or <code>securities</code> narrow live entries whose docket text contains them. With <code>includeHistorical</code>, plain keywords are also sent to the RECAP archive's search of entry descriptions, and archive records carry <code>natureOfSuit</code>, <code>cause</code> and the full <code>parties</code> list.</li>
+<li><code>partyKeywords</code> matches the case title in live entries and the party list in archive records, so it also finds companies that are not first-named.</li>
+</ul>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>The feed covers the trailing 24 hours, and busy courts publish thousands of entries a day. Use filters and <code>maxEntriesPerCourt</code>.</li>
+<li>A party that is not first-named may be missing from a live case title; the archive pass and <code>docketUrl</code> have the rest.</li>
+<li>This page describes public docket data and how to filter it. It is not legal advice.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>caseNumber, caseTitle, caseType</code></td><td>The case; the title names the lead parties</td></tr>
+<tr><td><code>entryText, entryCategory</code></td><td>Docket text in the feed and a heuristic category</td></tr>
+<tr><td><code>documentNumber, likelyNewCase</code></td><td>Document 1 opens the case</td></tr>
+<tr><td><code>documentUrl, docketUrl</code></td><td>Links to the document and docket on PACER</td></tr>
+<tr><td><code>matchedFilters, isNew</code></td><td>Which filters matched, and the new-since-last-run flag</td></tr>
+<tr><td><code>natureOfSuit, cause, parties, assignedTo</code></td><td>Archive records only</td></tr>
+<tr><td><code>moreEntriesInArchive, recapUrl</code></td><td>Archive records: more entries exist on CourtListener, and the link</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>Shape of a new civil case record from the live S.D.N.Y. feed (field names from the Actor; the case and parties are placeholders):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;recordType&quot;: &quot;docket-entry&quot;,
+  &quot;court&quot;: &quot;nysd&quot;,
+  &quot;courtName&quot;: &quot;U.S. District Court, Southern District of New York&quot;,
+  &quot;courtType&quot;: &quot;district&quot;,
+  &quot;state&quot;: &quot;NY&quot;,
+  &quot;caseNumber&quot;: &quot;1:26-cv-09999&quot;,
+  &quot;caseNumberShort&quot;: &quot;26-cv-9999&quot;,
+  &quot;caseTitle&quot;: &quot;Doe v. Example Corp. et al&quot;,
+  &quot;caseType&quot;: &quot;civil&quot;,
+  &quot;entryText&quot;: &quot;Complaint&quot;,
+  &quot;entryCategory&quot;: &quot;complaint&quot;,
+  &quot;documentNumber&quot;: 1,
+  &quot;docketUrl&quot;: &quot;https://ecf.nysd.uscourts.gov/cgi-bin/DktRpt.pl?000000&quot;,
+  &quot;likelyNewCase&quot;: true,
+  &quot;matchedFilters&quot;: [
+    &quot;caseType:civil&quot;,
+    &quot;newCase&quot;
+  ],
+  &quot;isNew&quot;: true,
+  &quot;source&quot;: &quot;pacer-rss&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Every new civil complaint, hourly</h3>
+<p>Run the first input on an hourly schedule. Each run lists cases opened since the previous one, to screen by title for securities and class-action matters.</p>
+<h3>Keyword search with the archive</h3>
+<p>Run the second input to combine live keyword matching with a 30-day RECAP archive search for "class action" and "securities", with nature of suit where the archive has it.</p>
+<h3>Issuers you follow</h3>
+<p>Put the companies you follow in <code>partyKeywords</code> with <code>newCasesOnly</code> to be told when a new S.D.N.Y. case names one of them.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. Every new civil case in S.D.N.Y. since the last run:</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~federal-court-docket-monitor/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;courts&quot;: [
+    &quot;nysd&quot;
+  ],
+  &quot;caseTypes&quot;: [
+    &quot;civil&quot;
+  ],
+  &quot;newCasesOnly&quot;: true,
+  &quot;onlyNewSinceLastRun&quot;: true,
+  &quot;stateStoreName&quot;: &quot;new-civil-nysd&quot;,
+  &quot;maxEntriesPerCourt&quot;: 300,
+  &quot;notifyOnlyOnResults&quot;: true
+}'</code></pre>
+<p>The second input adds the keywords and a 30-day RECAP archive pass. The keywords apply to live entries too, so live complaints whose docket text lacks them are left out:</p>
+<pre tabindex="0" aria-label="Actor input"><code>{
+  &quot;courts&quot;: [
+    &quot;nysd&quot;
+  ],
+  &quot;caseTypes&quot;: [
+    &quot;civil&quot;
+  ],
+  &quot;entryKeywords&quot;: [
+    &quot;class action&quot;,
+    &quot;securities&quot;
+  ],
+  &quot;newCasesOnly&quot;: true,
+  &quot;includeHistorical&quot;: true,
+  &quot;historicalSinceDays&quot;: 30,
+  &quot;maxHistoricalPerCourt&quot;: 100,
+  &quot;maxEntriesPerCourt&quot;: 300
+}</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-federal-court-docket-monitor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/federal-court-docket-monitor&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Which new lawsuits were filed in the Southern District of New York today naming a bank? Give me case number, title and the docket link.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/federal-court-docket-monitor">examples/federal-court-docket-monitor</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does the S.D.N.Y. feed include complaints?</h3>
+<p>Yes. At the 2026-10-17 sweep its feed advertised <code>cmp</code> among its entry types.</p>
+<h3>Why might a securities complaint not match my keyword?</h3>
+<p>The live feed's docket text is short. If the text for a complaint does not contain your phrase, it will not match. The new-civil-cases input catches it regardless.</p>
+<h3>Can I search all parties, not just the lead ones?</h3>
+<p>In archive records, yes: <code>partyKeywords</code> matches the full party list. Live entries only have the case title.</p>
+<h3>Can I follow one case after it is filed?</h3>
+<p>Yes. Put its number in <code>caseNumbers</code>; <code>1:26-cv-03810</code>, <code>26-cv-3810</code> and similar forms all work.</p>
+<h3>Is this legal advice?</h3>
+<p>No. It describes public docket data and how to filter it.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type.</p>
+<p><a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../pacer-rss-feeds-by-court/">PACER RSS Feeds by Court: All 188 Federal Courts Listed</a></li>
+<li><a href="../patent-litigation-docket-monitor/">Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets</a></li>
+<li><a href="../bankruptcy-filings-monitor/">New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds</a></li>
+<li><a href="../pacer-rss-docket-monitor/">PACER RSS Feeds: Monitor New Federal Court Filings</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>
