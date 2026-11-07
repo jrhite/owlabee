@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/us-license-verifier](https://apify.com/owlabee/us-license-verifier) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://owlabee.github.io/owlabee/professional-license-verification/](https://owlabee.github.io/owlabee/professional-license-verification/)
+Guide on the site: [https://owlabee.com/professional-license-verification/](https://owlabee.com/professional-license-verification/)
 
 Looks up professional licenses by name or license number in five official public registries (Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the federal NPI Registry) and returns one normalized record per license with a normalized status, expiration date, a disciplinary-action flag and a link to the source. Verify mode adds `verified` and plain-English notes.
 

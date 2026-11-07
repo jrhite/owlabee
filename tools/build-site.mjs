@@ -290,6 +290,9 @@ for (const p of pages) {
 }
 copyFileSync(new URL('site.css', import.meta.url), new URL('style.css', docs));
 writeFileSync(new URL('.nojekyll', docs), '');
+// GitHub Pages custom domain: written when BASE_URL is not a github.io address.
+const host = new URL(BASE_URL).hostname;
+if (!host.endsWith('.github.io')) writeFileSync(new URL('CNAME', docs), `${host}\n`);
 writeFileSync(new URL('robots.txt', docs), `User-agent: *\nAllow: /\n\nSitemap: ${BASE_URL}sitemap.xml\n`);
 writeFileSync(
   new URL('sitemap.xml', docs),

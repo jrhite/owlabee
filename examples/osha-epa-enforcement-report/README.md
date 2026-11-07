@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/osha-epa-enforcement-report](https://apify.com/owlabee/osha-epa-enforcement-report) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://owlabee.github.io/owlabee/osha-inspections-by-company/](https://owlabee.github.io/owlabee/osha-inspections-by-company/) and [https://owlabee.github.io/owlabee/epa-echo-enforcement/](https://owlabee.github.io/owlabee/epa-echo-enforcement/)
+Guide on the site: [https://owlabee.com/osha-inspections-by-company/](https://owlabee.com/osha-inspections-by-company/) and [https://owlabee.com/epa-echo-enforcement/](https://owlabee.com/epa-echo-enforcement/)
 
 Looks up OSHA inspections with their violations and penalties through the U.S. Department of Labor Data API, and EPA and state enforcement cases recorded in EPA ECHO, by company name, identifier, state or ZIP. Each inspection or case is one normalized record with a name-match confidence, plus an optional per-company summary record. OSHA needs your own free DOL API key; EPA needs none.
 
