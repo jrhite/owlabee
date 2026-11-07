@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/bluesky-monitor](https://apify.com/owlabee/bluesky-monitor) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/bluesky-monitor/](https://owlabee.com/bluesky-monitor/)
+
 Searches Bluesky posts by keyword or hashtag and reads profiles, author feeds, followers and following lists from the public AT Protocol API, as flat JSON records. With "Only new since last run" a schedule emits only posts or followers that appeared since the previous run.
 
 ## Inputs that matter

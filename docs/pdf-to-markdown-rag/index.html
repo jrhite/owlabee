@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF to Markdown for RAG: Headings, Tables, Chunks and OCR | owlabee</title>
+<meta name="description" content="Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.">
+<link rel="canonical" href="https://owlabee.com/pdf-to-markdown-rag/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="PDF to Markdown for RAG: Headings, Tables, Chunks and OCR | owlabee">
+<meta property="og:description" content="Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.">
+<meta property="og:url" content="https://owlabee.com/pdf-to-markdown-rag/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to Markdown for RAG: Headings, Tables, Chunks and OCR","description":"Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.","url":"https://owlabee.com/pdf-to-markdown-rag/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pdf-to-markdown"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pdf-to-markdown","name":"PDF to Markdown for RAG — DOCX, OCR & Chunks","description":"Clean Markdown from PDF, DOCX, HTML and text URLs, with optional heading-aware RAG chunks and OCR for scanned pages","url":"https://apify.com/owlabee/pdf-to-markdown","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it send my documents to another service?","acceptedAnswer":{"@type":"Answer","text":"No. Files are downloaded over HTTPS and converted inside the Actor. Only the URLs you give and your optional webhook are contacted."}},{"@type":"Question","name":"How do chunks reference pages?","acceptedAnswer":{"@type":"Answer","text":"Each chunk carries startPage and endPage from the page markers, and headingPath, the headings it sits under."}},{"@type":"Question","name":"What happens with a scanned PDF?","acceptedAnswer":{"@type":"Answer","text":"Pages with no text layer are listed in needsOcrPages and marked in the Markdown. Turn on ocr to have them recognized; they then appear in ocrPages."}},{"@type":"Question","name":"How are DOCX and HTML pages counted?","acceptedAnswer":{"@type":"Answer","text":"DOCX files use their saved page count. When that is missing, and for HTML, Markdown and text, pages are estimated at one per roughly 3,000 characters (pagesEstimated: true)."}},{"@type":"Question","name":"I need specific fields, not Markdown.","acceptedAnswer":{"@type":"Answer","text":"Use the document to JSON extractor, which runs the same layout engine against a schema you define."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> PDF to Markdown for RAG</nav>
+<article>
+<h1>PDF to Markdown for RAG: Headings, Tables, Chunks and OCR</h1>
+<p class="lede">Retrieval pipelines work best on text that keeps a document's structure: headings at the right level, tables as tables, and page numbers you can cite. This Actor turns document URLs into that kind of Markdown and can split it into heading-aware chunks ready to embed.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/pdf-to-markdown">Open the Actor on Apify Store</a>
+<p class="note">PDF to Markdown for RAG — DOCX, OCR &amp; Chunks. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>The input is any public document URL: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> or <strong>plain text</strong>, plus <code>kvs://&lt;storeId&gt;/&lt;key&gt;</code> references to files in your own Apify key-value stores and <code>data:</code> URLs. Conversion runs inside the Actor with open-source libraries (pdf.js, mammoth, turndown and tesseract.js). There is no browser and no external conversion service; the Actor contacts only the URLs you give it and your optional webhook.</p>
+<p>For PDFs it rebuilds the layout from the file's own text layer: headings from font-size and bold clusters, tables from column alignment, two-column pages read column by column, and running headers, footers and page numbers stripped. Each document becomes one record with the Markdown and its metadata (title, author, producer, creation date, page count, headings, tables and links).</p>
+<h3>Chunks and OCR</h3>
+<ul>
+<li><code>chunk: true</code> adds one <code>chunk</code> record per heading-aware chunk, with <code>startPage</code>, <code>endPage</code>, the <code>headingPath</code> it sits under and a token estimate. Chunk size and overlap are configurable.</li>
+<li><code>ocr: true</code> runs the bundled English OCR model on PDF pages that have no text layer. Without it, those pages are listed in <code>needsOcrPages</code> and marked in the Markdown, and nothing is recognized.</li>
+</ul>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Files up to 25 MB by default (<code>maxFileSizeMb</code>, at most 50), a 20-second download timeout by default, and 10 minutes of conversion per file. After that, the pages converted so far are returned with a <code>PROCESSING_TIMEOUT</code> warning.</li>
+<li>Layout reconstruction is heuristic. Complex forms, rotated text, equations and multi-line table cells are best effort, and images are not extracted.</li>
+<li>OCR is English only and runs at about two to five seconds per page.</li>
+<li>Password-protected, corrupt or unsupported files return an error item with a clear code instead of failing the run.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>recordType</code></td><td><code>document</code>, or <code>chunk</code> when chunking is on</td></tr>
+<tr><td><code>url, filename, mimeType, bytes</code></td><td>The source file</td></tr>
+<tr><td><code>pages, pagesProcessed</code></td><td>Page count and pages converted</td></tr>
+<tr><td><code>title, author, producer, creationDate</code></td><td>Document metadata, where the file has it</td></tr>
+<tr><td><code>markdown</code></td><td>The converted text, with <code>&lt;!-- page N --&gt;</code> markers unless <code>pageBreaks</code> is off</td></tr>
+<tr><td><code>characters, words, headings, tables, links</code></td><td>Size and structure of the result</td></tr>
+<tr><td><code>needsOcrPages, ocrPages, warnings</code></td><td>Pages without a text layer, pages recognized by OCR, and conversion notes</td></tr>
+<tr><td><code>chunkIndex, chunkCount, startPage, endPage, headingPath, tokensEstimate</code></td><td>On chunk records</td></tr>
+<tr><td><code>kvsKey</code></td><td>The <code>.md</code> file key when <code>saveToKeyValueStore</code> is on</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>One chunk record from the "Attention Is All You Need" paper on arXiv (from the Actor's README; Markdown shortened):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;recordType&quot;: &quot;chunk&quot;,
+  &quot;url&quot;: &quot;https://arxiv.org/pdf/1706.03762v7&quot;,
+  &quot;filename&quot;: &quot;1706.03762v7.pdf&quot;,
+  &quot;chunkIndex&quot;: 4,
+  &quot;chunkCount&quot;: 17,
+  &quot;startPage&quot;: 3,
+  &quot;endPage&quot;: 4,
+  &quot;headingPath&quot;: [
+    &quot;Attention Is All You Need&quot;,
+    &quot;3 Model Architecture&quot;,
+    &quot;3.2 Attention&quot;
+  ],
+  &quot;markdown&quot;: &quot;### 3.2 Attention\n\nAn attention function can be described as mapping a query and a set of key-value pairs to an output ...&quot;,
+  &quot;tokensEstimate&quot;: 572,
+  &quot;characters&quot;: 2287,
+  &quot;fetchedAt&quot;: &quot;2026-10-16T13:20:00.000Z&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>RAG ingestion</h3>
+<p>Turn on <code>chunk</code> and send the chunk records to your embedding step. <code>startPage</code>, <code>endPage</code> and <code>headingPath</code> let answers cite where a passage came from.</p>
+<h3>Mixed document folders</h3>
+<p>Send PDFs, DOCX files and HTML pages in one run and get the same record shape back for each. <code>saveToKeyValueStore</code> also writes each one as a <code>.md</code> file.</p>
+<h3>Scanned PDFs</h3>
+<p>Turn on <code>ocr</code> for scans. The Markdown marks which pages were recognized, so you can review them separately.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. One arXiv paper as Markdown plus 800-token chunks with an 80-token overlap:</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~pdf-to-markdown/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;urls&quot;: [
+    &quot;https://arxiv.org/pdf/1706.03762v7&quot;
+  ],
+  &quot;chunk&quot;: true,
+  &quot;chunkTokens&quot;: 800,
+  &quot;chunkOverlapTokens&quot;: 80,
+  &quot;ocr&quot;: false,
+  &quot;saveToKeyValueStore&quot;: false,
+  &quot;pageBreaks&quot;: true,
+  &quot;maxFileSizeMb&quot;: 25,
+  &quot;downloadTimeoutSecs&quot;: 20
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-pdf-to-markdown&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/pdf-to-markdown&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Convert this PDF to Markdown and split it into chunks of about 800 tokens, keeping the page numbers and section headings for each chunk.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/pdf-to-markdown">examples/pdf-to-markdown</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does it send my documents to another service?</h3>
+<p>No. Files are downloaded over HTTPS and converted inside the Actor. Only the URLs you give and your optional webhook are contacted.</p>
+<h3>How do chunks reference pages?</h3>
+<p>Each chunk carries <code>startPage</code> and <code>endPage</code> from the page markers, and <code>headingPath</code>, the headings it sits under.</p>
+<h3>What happens with a scanned PDF?</h3>
+<p>Pages with no text layer are listed in <code>needsOcrPages</code> and marked in the Markdown. Turn on <code>ocr</code> to have them recognized; they then appear in <code>ocrPages</code>.</p>
+<h3>How are DOCX and HTML pages counted?</h3>
+<p>DOCX files use their saved page count. When that is missing, and for HTML, Markdown and text, pages are estimated at one per roughly 3,000 characters (<code>pagesEstimated: true</code>).</p>
+<h3>I need specific fields, not Markdown.</h3>
+<p>Use the <a href="../document-to-json/">document to JSON extractor</a>, which runs the same layout engine against a schema you define.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>PDF to Markdown for RAG — DOCX, OCR &amp; Chunks. Clean Markdown from PDF, DOCX, HTML and text URLs, with optional heading-aware RAG chunks and OCR for scanned pages.</p>
+<p><a class="button" href="https://apify.com/owlabee/pdf-to-markdown">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../document-to-json/">PDF to JSON with Your Own Schema: Invoices, Forms, Quotes</a></li>
+<li><a href="../podcast-rss-feed-scraper/">Podcast RSS Feed Scraper: Episodes and Transcripts as JSON</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF to JSON with Your Own Schema: Invoices, Forms, Quotes | owlabee</title>
+<meta name="description" content="Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.">
+<link rel="canonical" href="https://owlabee.com/document-to-json/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="PDF to JSON with Your Own Schema: Invoices, Forms, Quotes | owlabee">
+<meta property="og:description" content="Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.">
+<meta property="og:url" content="https://owlabee.com/document-to-json/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to JSON with Your Own Schema: Invoices, Forms, Quotes","description":"Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.","url":"https://owlabee.com/document-to-json/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/document-to-json-extractor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/document-to-json-extractor","name":"PDF & Document to JSON Extractor (AI) — Invoices, Forms","description":"One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence","url":"https://apify.com/owlabee/document-to-json-extractor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which extractor should I use?","acceptedAnswer":{"@type":"Answer","text":"Use rules for well-labeled documents with a known layout, bulk first passes, and data that must not go to a model. Use a model mode for fields that need reading comprehension or long, messy documents."}},{"@type":"Question","name":"How do I write the schema?","acceptedAnswer":{"@type":"Answer","text":"As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use format: \"date\" for ISO dates and enum for fixed choices."}},{"@type":"Question","name":"Is my Anthropic key safe in byok mode?","acceptedAnswer":{"@type":"Answer","text":"It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset."}},{"@type":"Question","name":"What happens if the model fails?","acceptedAnswer":{"@type":"Answer","text":"The document gets the rules extraction, marked rules-fallback with the reason, so a run does not fail because of the model."}},{"@type":"Question","name":"Does it work on scanned documents?","acceptedAnswer":{"@type":"Answer","text":"Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by kvs:// reference."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Document to JSON</nav>
+<article>
+<h1>PDF to JSON with Your Own Schema: Invoices, Forms, Quotes</h1>
+<p class="lede">Pass document URLs and a JSON Schema describing the object you want (invoice number, line items, totals, form fields, dates) and get back one JSON object per document in exactly that shape, with a confidence score per field and a list of fields that were not found.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/document-to-json-extractor">Open the Actor on Apify Store</a>
+<p class="note">PDF &amp; Document to JSON Extractor (AI) — Invoices, Forms. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>Documents are read from public URLs, your own key-value stores (<code>kvs://</code>) or <code>data:</code> URLs: <strong>PDF</strong> with a text layer, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> and <strong>plain text</strong>. They go through a layout engine first (headings, tables, lists and page markers), so table rows stay rows and labels stay next to their values.</p>
+<p>The <code>schema</code> input is a JSON Schema (draft-07 subset): <code>type: object</code> at the top, field types string, number, integer, boolean, array and object, with <code>description</code>, <code>format</code> (date, date-time, email, uri) and <code>enum</code>. Nested objects and arrays of objects work; <code>$ref</code>, <code>oneOf</code> and <code>anyOf</code> do not.</p>
+<h3>Three extractors</h3>
+<ul>
+<li><strong><code>rules</code></strong>: no language model. It collects label/value pairs, tables, numbered form fields, dates, amounts, emails, phone numbers and URLs and matches them to your field names and descriptions, coercing types. Every value is verbatim from the document.</li>
+<li><strong><code>byok</code></strong>: Claude fills the schema with the Anthropic API key you supply, on a <code>fast</code>, <code>balanced</code> or <code>best</code> tier. Items record tokens used.</li>
+<li><strong><code>hosted</code></strong>: Claude on the Actor's own key. This is what an empty <code>extractor</code> means when the Actor's model key is configured. If the model cannot be reached, the document gets the rules extraction instead, marked <code>rules-fallback</code>.</li>
+</ul>
+<p>In model modes, document text is sent to the Anthropic API only to produce the extraction. Each mode is priced differently; see the Store page.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Scanned PDFs without a text layer return a <code>NO_TEXT</code> error item. Convert them first with the <a href="../pdf-to-markdown-rag/">PDF to Markdown Actor</a> with OCR on, save the Markdown to a key-value store, and pass the <code>kvs://</code> reference.</li>
+<li>Schemas can be up to 6 levels deep and 200 fields. Model modes cut documents at <code>maxInputTokens</code> (at most 40,000, about 60 pages) and cap output at 4,000 tokens per document, so very long line-item tables may be cut.</li>
+<li>The rules extractor's date and amount parsing is tuned to English-language business documents.</li>
+<li>URLs that resolve to private or local network addresses are rejected.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>data</code></td><td>The filled object, in the shape of your schema; fields not found are null</td></tr>
+<tr><td><code>confidence, overallConfidence</code></td><td>A score per field and for the whole document</td></tr>
+<tr><td><code>filledFields, totalFields, missingFields</code></td><td>What was and was not found</td></tr>
+<tr><td><code>extractionMethod, extractionNotes</code></td><td><code>rules</code>, <code>byok</code>, <code>hosted</code> or <code>rules-fallback</code>, and where each value came from</td></tr>
+<tr><td><code>lowConfidenceFields</code></td><td>Model modes: fields the model was unsure about</td></tr>
+<tr><td><code>url, filename, mimeType, pages, title, author</code></td><td>The source document</td></tr>
+<tr><td><code>textPreview, markdown</code></td><td>A 1,000-character preview; the full text with <code>includeMarkdown</code></td></tr>
+<tr><td><code>needsOcrPages, warnings</code></td><td>Pages without text and conversion notes</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>IRS Form W-9 extracted with the rules extractor and the quick-start schema (from the Actor's README; shortened):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;recordType&quot;: &quot;document&quot;,
+  &quot;url&quot;: &quot;https://www.irs.gov/pub/irs-pdf/fw9.pdf&quot;,
+  &quot;filename&quot;: &quot;fw9.pdf&quot;,
+  &quot;pages&quot;: 6,
+  &quot;extractionMethod&quot;: &quot;rules&quot;,
+  &quot;data&quot;: {
+    &quot;title&quot;: &quot;Form W-9 (Rev. March 2024)&quot;,
+    &quot;formNumber&quot;: &quot;W-9&quot;,
+    &quot;revisionDate&quot;: &quot;2024-03&quot;,
+    &quot;issuer&quot;: &quot;Department of the Treasury&quot;,
+    &quot;fields&quot;: [
+      {
+        &quot;label&quot;: &quot;Name of entity/individual&quot;,
+        &quot;description&quot;: &quot;An entry is required. …&quot;
+      },
+      {
+        &quot;label&quot;: &quot;Business name/disregarded entity name, if different from above&quot;,
+        &quot;description&quot;: null
+      },
+      {
+        &quot;label&quot;: &quot;City, state, and ZIP code&quot;,
+        &quot;description&quot;: null
+      }
+    ]
+  },
+  &quot;confidence&quot;: {
+    &quot;title&quot;: 0.8,
+    &quot;formNumber&quot;: 0.6,
+    &quot;revisionDate&quot;: 0.6,
+    &quot;issuer&quot;: 0.4,
+    &quot;fields&quot;: 0.5
+  },
+  &quot;overallConfidence&quot;: 0.58,
+  &quot;filledFields&quot;: 5,
+  &quot;totalFields&quot;: 5,
+  &quot;missingFields&quot;: [],
+  &quot;fetchedAt&quot;: &quot;2026-10-17T10:22:02.464Z&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Invoices to line items</h3>
+<p>Describe vendor, invoice number, dates, totals and a <code>lineItems</code> array once, then send every invoice through the same schema. Field descriptions guide both the rules matcher and the model.</p>
+<h3>Batch form fields</h3>
+<p>Run several government forms through one schema to get each form's number, revision date, issuer and numbered fields as JSON.</p>
+<h3>Supplier quotes and specifications</h3>
+<p>The Actor's task examples turn a supplier quote into line items and a roofing specification PDF into a takeoff of the roof system and materials.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. Two IRS form PDFs through one small schema with the rules extractor (no model):</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~document-to-json-extractor/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;urls&quot;: [
+    &quot;https://www.irs.gov/pub/irs-pdf/fw9.pdf&quot;,
+    &quot;https://www.irs.gov/pub/irs-pdf/fw4.pdf&quot;
+  ],
+  &quot;schema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+      &quot;title&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;Title of the form&quot;
+      },
+      &quot;formNumber&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;The form number, e.g. W-9 or 1040&quot;
+      },
+      &quot;revisionDate&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;format&quot;: &quot;date&quot;,
+        &quot;description&quot;: &quot;Revision date of the form&quot;
+      },
+      &quot;issuer&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;Agency or organization that issues the form&quot;
+      }
+    }
+  },
+  &quot;extractor&quot;: &quot;rules&quot;,
+  &quot;includeMarkdown&quot;: false
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-document-to-json-extractor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/document-to-json-extractor&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Extract the invoice number, invoice date, vendor, total and line items from these three PDF invoices as JSON.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/document-to-json-extractor">examples/document-to-json-extractor</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Which extractor should I use?</h3>
+<p>Use <code>rules</code> for well-labeled documents with a known layout, bulk first passes, and data that must not go to a model. Use a model mode for fields that need reading comprehension or long, messy documents.</p>
+<h3>How do I write the schema?</h3>
+<p>As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use <code>format: "date"</code> for ISO dates and <code>enum</code> for fixed choices.</p>
+<h3>Is my Anthropic key safe in <code>byok</code> mode?</h3>
+<p>It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset.</p>
+<h3>What happens if the model fails?</h3>
+<p>The document gets the rules extraction, marked <code>rules-fallback</code> with the reason, so a run does not fail because of the model.</p>
+<h3>Does it work on scanned documents?</h3>
+<p>Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by <code>kvs://</code> reference.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>PDF &amp; Document to JSON Extractor (AI) — Invoices, Forms. One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence.</p>
+<p><a class="button" href="https://apify.com/owlabee/document-to-json-extractor">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../pdf-to-markdown-rag/">PDF to Markdown for RAG: Headings, Tables, Chunks and OCR</a></li>
+<li><a href="../grants-gov-api/">Grants.gov API: Federal Grant Opportunities as JSON</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

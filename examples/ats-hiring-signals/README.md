@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/ats-hiring-signals](https://apify.com/owlabee/ats-hiring-signals) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/job-board-api-hiring-signals/](https://owlabee.com/job-board-api-hiring-signals/)
+
 Reads company job boards on Greenhouse, Lever, Ashby, SmartRecruiters and Workable through their public job-board APIs. Jobs mode writes one normalized record per open role (title, department, location, remote, apply URL). Signals mode compares with the previous snapshot and reports new, removed and changed roles per company.
 
 ## Inputs that matter

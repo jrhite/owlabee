@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/document-to-json-extractor](https://apify.com/owlabee/document-to-json-extractor) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/document-to-json/](https://owlabee.com/document-to-json/)
+
 Takes PDF, DOCX or HTML documents by URL plus your own JSON Schema and returns one JSON object per document that matches it, for invoices, contracts, forms and statements. The rules extractor needs no model; Claude extraction is available with your own Anthropic key or the hosted tiers.
 
 ## Inputs that matter

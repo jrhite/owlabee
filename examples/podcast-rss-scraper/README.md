@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/podcast-rss-scraper](https://apify.com/owlabee/podcast-rss-scraper) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/podcast-rss-feed-scraper/](https://owlabee.com/podcast-rss-feed-scraper/)
+
 Turns podcast RSS feeds, Apple Podcasts show links or search terms into show and episode records: title, publish date, duration, audio URL, chapters and Podcasting 2.0 transcript links, with optional transcript text. No browser and no login.
 
 ## Inputs that matter
