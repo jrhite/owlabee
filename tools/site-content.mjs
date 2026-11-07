@@ -623,12 +623,18 @@ export const pages = [
     title: 'PACER RSS Feeds: Monitor New Federal Court Filings',
     nav: 'PACER RSS docket monitor',
     description:
-      'Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.',
+      'Read the free public PACER RSS feeds of federal district, bankruptcy, appellate and national courts as JSON and filter filings by party, case number, entry type or chapter.',
     lede:
-      'Every federal district and bankruptcy court running CM/ECF publishes a free RSS feed of its last 24 hours of docket activity. This Actor reads those feeds for the courts you choose, normalizes each entry, filters it, and on scheduled runs keeps only entries that are new since the last run. No PACER account is needed.',
+      'Federal district and bankruptcy courts running CM/ECF can publish a free RSS feed of their last 24 hours of docket activity, and so can the Court of Federal Claims, the Court of International Trade and some courts of appeals. This Actor reads those feeds for the courts you choose, normalizes each entry, filters it, and on scheduled runs keeps only entries that are new since the last run. No PACER account is needed.',
     source: `
-<p>The feeds are the courts' own public endpoints, <code>https://ecf.&lt;court&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code>. Each entry has the case number, the case title (the lead parties), the docket text, the document number with a link, and the filing time. Documents are linked, never downloaded; opening a document on PACER is subject to PACER's own fees.</p>
-<p>Coverage differs per court. In the Actor's sweep of 2026-10-17, 94 courts published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests. The Actor still tries every court you name and reports what happened. The full list is on <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a>.</p>
+<p>The feeds are the courts' own public endpoints, <code>https://ecf.&lt;court&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code> (and <code>…/n/beam/servlet/TransportRoom?servlet=RSSGenerator</code> for the courts of appeals). Each entry has the case number, the case title (the lead parties), the docket text, the document number with a link, and the filing time. Documents are linked, never downloaded; opening a document on PACER is subject to PACER's own fees.</p>
+<p>Coverage differs per court. The registry lists 203 courts, and 143 had a live feed at their last probe:</p>
+<ul>
+<li><strong>District and bankruptcy courts</strong> (sweep of 2026-10-17): of 188, 94 published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests.</li>
+<li><strong>Court of Federal Claims and Court of International Trade</strong> (probe of 2026-11-07): both live. Court of International Trade feed titles carry only the case number, so party filters cannot match there.</li>
+<li><strong>Courts of appeals</strong> (probe of 2026-11-07): 6 of 13 had entries. Appellate feeds carry orders, opinions and judgments only, never new appeals, so they are for following an appeal you already know about; <code>newCasesOnly</code> drops every appellate entry.</li>
+</ul>
+<p>The Actor still tries every court you name and reports what happened. The full list is on <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a>.</p>
 <p>For past dockets, the optional historical pass reads the RECAP archive through the Free Law Project's CourtListener API, in the same record shape with <code>source: "courtlistener-recap"</code>.</p>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -638,7 +644,7 @@ export const pages = [
 <li>The CourtListener API allows 5 requests per minute, 50 per hour and 125 per day by default, shared by anonymous callers; a free CourtListener token gives a run its own allowance.</li>
 </ul>`,
     fields: [
-      ['court, courtName, courtType, state', 'CM/ECF court code and name; district or bankruptcy'],
+      ['court, courtName, courtType, state', 'CM/ECF court code and name; district, bankruptcy, appellate or national (<code>state</code> is null for the last two)'],
       ['caseNumber, caseNumberShort, caseTitle, caseType', 'Case as published, a normalized number, the lead parties, and civil, criminal, bankruptcy and so on'],
       ['entryText, entryCategory', 'Docket text and a heuristic category (complaint, petition, motion, order …)'],
       ['documentNumber, documentUrl, docketUrl', 'Document number and links to the document and docket on PACER'],
@@ -705,22 +711,24 @@ export const pages = [
     slug: 'pacer-rss-feeds-by-court',
     kind: 'reference',
     actor: 'federal-court-docket-monitor',
-    title: 'PACER RSS Feeds by Court: All 188 Federal Courts Listed',
+    title: 'PACER RSS Feeds by Court: All 203 Federal Courts Listed',
     nav: 'PACER RSS feeds by court',
     description:
-      'Which federal district and bankruptcy courts publish a PACER RSS feed, and what each carries: CM/ECF code, court name, feed status and entry types for all 188 courts.',
+      'Which federal courts publish a PACER RSS feed and what each carries: code, name, status and entry types for 203 district, bankruptcy, appellate and national courts.',
     lede:
-      'Every federal district and bankruptcy court on CM/ECF can publish a free RSS feed of its docket activity, but not all do, and many publish only some kinds of entries. This page lists all 188 courts with their CM/ECF code, whether the feed was live, and what it carries.',
+      'Federal courts on CM/ECF can publish a free RSS feed of their docket activity, but not all do, and many publish only some kinds of entries. This page lists all 203 courts in the registry (94 district, 94 bankruptcy, 13 courts of appeals, the Court of Federal Claims and the Court of International Trade) with their CM/ECF code, whether the feed was live, and what it carries.',
     input: { courts: ['nysd'], maxEntriesPerCourt: 100, onlyNewSinceLastRun: false },
     guideLinks: ['patent-litigation-docket-monitor', 'bankruptcy-filings-monitor', 'sdny-securities-class-action-monitor', 'pacer-rss-docket-monitor'],
     prompt: 'Which bankruptcy courts in Texas publish a PACER RSS feed with every entry type?',
     faq: [
-      ['How do I read a court\'s PACER RSS feed directly?', 'Open <code>https://ecf.&lt;code&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code> with the code from the table, for example <code>https://ecf.nysd.uscourts.gov/cgi-bin/rss_outside.pl</code>. It is an RSS file of the last 24 hours of entries.'],
+      ['How do I read a court\'s PACER RSS feed directly?', 'For district, bankruptcy and national courts, open <code>https://ecf.&lt;code&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code> with the code from the table, for example <code>https://ecf.nysd.uscourts.gov/cgi-bin/rss_outside.pl</code>. Courts of appeals use <code>https://ecf.&lt;code&gt;.uscourts.gov/n/beam/servlet/TransportRoom?servlet=RSSGenerator</code>.'],
+      ['Can I see new appeals in a court of appeals feed?', 'No. Appellate feeds carry orders, opinions and judgments only, never new appeals or briefs. Use them to follow an appeal you already know about, by its case number.'],
+      ['Why can\'t I filter the Court of International Trade by party?', 'Its feed titles carry only the case number, with no party names, so party filters have nothing to match. Filter by case number or entry text.'],
       ['Do I need a PACER account?', 'Not to read the feeds. They are public, unauthenticated endpoints. Opening a linked document on PACER is subject to PACER\'s own fees.'],
       ['Why do some courts publish only some entry types?', 'Each court chooses which CM/ECF entry types its feed includes. The table lists the types a partial feed advertises, as the feed states them.'],
-      ['What does "did not answer" mean?', 'During the sweep the court\'s server timed out, sent an empty reply or returned an HTTP error to a request from a datacenter IP. The feed may still work from another network.'],
-      ['How far back does a feed go?', 'Only the trailing 24 hours. To keep a running record, read the feeds at least daily; the Actor\'s README suggests hourly, since courts regenerate feeds every 30 to 60 minutes.'],
-      ['How current is this list?', `It reflects the Actor's registry, generated from a sweep on 2026-10-17. Feed settings change, so a court you name is always tried and each run reports what every court returned.`],
+      ['What does "did not answer" mean?', 'During the probe the court\'s server timed out, sent an empty reply or returned an HTTP error to a request from a datacenter IP. The feed may still work from another network.'],
+      ['How far back does a feed go?', 'District, bankruptcy and national feeds cover the trailing 24 hours. To keep a running record, read the feeds at least daily; the Actor\'s README suggests hourly, since courts regenerate feeds every 30 to 60 minutes.'],
+      ['How current is this list?', `It reflects the Actor's registry: district and bankruptcy courts from a sweep on 2026-10-17, courts of appeals and national courts from a probe on 2026-11-07. Feed settings change, so a court you name is always tried and each run reports what every court returned.`],
     ],
     related: ['pacer-rss-docket-monitor', 'patent-litigation-docket-monitor', 'bankruptcy-filings-monitor', 'sdny-securities-class-action-monitor'],
   },

@@ -1,6 +1,7 @@
 {
- "source": "Court registry of owlabee/federal-court-docket-monitor (src/lib/courts.ts, REGISTRY_PROBED_AT 2026-10-17), copied as published. Do not edit by hand; refresh from the registry.",
+ "source": "Court registry of owlabee/federal-court-docket-monitor (src/lib/courts.ts), copied as published. District and bankruptcy rows: sweep of 2026-10-17 (REGISTRY_PROBED_AT). Appellate and national rows: probe of 2026-11-07 (APPELLATE_NATIONAL_PROBED_AT). Do not edit by hand; refresh from the registry.",
  "sweptAt": "2026-10-17",
+ "appellateNationalProbedAt": "2026-11-07",
  "courts": [
   {
    "code": "almd",
@@ -11,7 +12,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 166
+   "probedEntries24h": 166,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "almb",
@@ -28,7 +30,8 @@
     "caseupld",
     "misc"
    ],
-   "probedEntries24h": 572
+   "probedEntries24h": 572,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "alnd",
@@ -38,6 +41,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -48,6 +52,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "HTTP 500"
   },
   {
@@ -59,7 +64,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 141
+   "probedEntries24h": 141,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "alsb",
@@ -70,7 +76,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 867
+   "probedEntries24h": 867,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "akd",
@@ -80,6 +87,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Empty reply from server"
   },
   {
@@ -91,7 +99,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 35
+   "probedEntries24h": 35,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "azd",
@@ -102,7 +111,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 2601
+   "probedEntries24h": 2601,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "azb",
@@ -113,7 +123,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1187
+   "probedEntries24h": 1187,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ared",
@@ -126,7 +137,8 @@
     "order-cr",
     "motion"
    ],
-   "probedEntries24h": 83
+   "probedEntries24h": 83,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "areb",
@@ -137,7 +149,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 608
+   "probedEntries24h": 608,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "arwd",
@@ -148,7 +161,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 122
+   "probedEntries24h": 122,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "arwb",
@@ -159,7 +173,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 285
+   "probedEntries24h": 285,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "cacd",
@@ -169,6 +184,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Empty reply from server"
   },
   {
@@ -179,6 +195,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Empty reply from server"
   },
   {
@@ -189,6 +206,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
   },
   {
@@ -200,7 +218,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1310
+   "probedEntries24h": 1310,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "cand",
@@ -210,6 +229,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -221,7 +241,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 651
+   "probedEntries24h": 651,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "casd",
@@ -231,6 +252,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40005 milliseconds with 0 bytes received"
   },
   {
@@ -242,7 +264,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 395
+   "probedEntries24h": 395,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "cod",
@@ -254,7 +277,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 920
+   "probedEntries24h": 920,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "cob",
@@ -265,7 +289,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 934
+   "probedEntries24h": 934,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ctd",
@@ -276,7 +301,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 851
+   "probedEntries24h": 851,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ctb",
@@ -286,6 +312,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -297,7 +324,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 534
+   "probedEntries24h": 534,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "deb",
@@ -308,7 +336,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 611
+   "probedEntries24h": 611,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "dcd",
@@ -319,7 +348,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 986
+   "probedEntries24h": 986,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "dcb",
@@ -330,7 +360,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 137
+   "probedEntries24h": 137,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "flmd",
@@ -341,7 +372,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1842
+   "probedEntries24h": 1842,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "flmb",
@@ -359,7 +391,8 @@
     "caseupld",
     "trustee"
    ],
-   "probedEntries24h": 2258
+   "probedEntries24h": 2258,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "flnd",
@@ -369,6 +402,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -380,7 +414,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 2049
+   "probedEntries24h": 2049,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "flsd",
@@ -391,7 +426,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 2231
+   "probedEntries24h": 2231,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "flsb",
@@ -402,7 +438,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 2233
+   "probedEntries24h": 2233,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "gamd",
@@ -414,7 +451,8 @@
     "order",
     "order-cr"
    ],
-   "probedEntries24h": 65
+   "probedEntries24h": 65,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "gamb",
@@ -429,7 +467,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 210
+   "probedEntries24h": 210,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "gand",
@@ -439,6 +478,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -449,6 +489,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Empty reply from server"
   },
   {
@@ -459,6 +500,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -470,7 +512,8 @@
    "entryTypes": [
     "order"
    ],
-   "probedEntries24h": 59
+   "probedEntries24h": 59,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "gud",
@@ -482,6 +525,7 @@
     "all"
    ],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -494,6 +538,7 @@
     "all"
    ],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -507,7 +552,8 @@
     "order",
     "order-cr"
    ],
-   "probedEntries24h": 45
+   "probedEntries24h": 45,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "hib",
@@ -521,7 +567,8 @@
     "order",
     "misc"
    ],
-   "probedEntries24h": 55
+   "probedEntries24h": 55,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "idd",
@@ -533,7 +580,8 @@
     "allx",
     "motion"
    ],
-   "probedEntries24h": 20
+   "probedEntries24h": 20,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "idb",
@@ -548,7 +596,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 94
+   "probedEntries24h": 94,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ilcd",
@@ -559,7 +608,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 742
+   "probedEntries24h": 742,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ilcb",
@@ -570,7 +620,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 295
+   "probedEntries24h": 295,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ilnd",
@@ -584,7 +635,8 @@
     "motion",
     "cmp"
    ],
-   "probedEntries24h": 992
+   "probedEntries24h": 992,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ilnb",
@@ -594,6 +646,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -609,7 +662,8 @@
     "cmp",
     "charge-cr"
    ],
-   "probedEntries24h": 200
+   "probedEntries24h": 200,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ilsb",
@@ -620,7 +674,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 392
+   "probedEntries24h": 392,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "innd",
@@ -631,7 +686,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 485
+   "probedEntries24h": 485,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "innb",
@@ -647,7 +703,8 @@
     "order",
     "plan"
    ],
-   "probedEntries24h": 383
+   "probedEntries24h": 383,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "insd",
@@ -687,7 +744,8 @@
     "trial-cr",
     "waiver-cr"
    ],
-   "probedEntries24h": 683
+   "probedEntries24h": 683,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "insb",
@@ -698,7 +756,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1209
+   "probedEntries24h": 1209,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "iand",
@@ -709,7 +768,8 @@
    "entryTypes": [
     "motion"
    ],
-   "probedEntries24h": 19
+   "probedEntries24h": 19,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ianb",
@@ -724,7 +784,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 57
+   "probedEntries24h": 57,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "iasd",
@@ -735,7 +796,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 228
+   "probedEntries24h": 228,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "iasb",
@@ -746,7 +808,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 194
+   "probedEntries24h": 194,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ksd",
@@ -757,7 +820,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 477
+   "probedEntries24h": 477,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ksb",
@@ -768,7 +832,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 935
+   "probedEntries24h": 935,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "kyed",
@@ -778,6 +843,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -789,7 +855,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 782
+   "probedEntries24h": 782,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "kywd",
@@ -800,7 +867,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 429
+   "probedEntries24h": 429,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "kywb",
@@ -811,7 +879,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 829
+   "probedEntries24h": 829,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "laed",
@@ -821,6 +890,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -837,7 +907,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 336
+   "probedEntries24h": 336,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "lamd",
@@ -847,6 +918,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -858,7 +930,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 238
+   "probedEntries24h": 238,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "lawd",
@@ -869,7 +942,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 695
+   "probedEntries24h": 695,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "lawb",
@@ -879,6 +953,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -891,7 +966,8 @@
     "order",
     "order-cr"
    ],
-   "probedEntries24h": 53
+   "probedEntries24h": 53,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "meb",
@@ -903,6 +979,7 @@
     "answer"
    ],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -913,6 +990,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -924,7 +1002,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1837
+   "probedEntries24h": 1837,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mad",
@@ -962,7 +1041,8 @@
     "trial-cr",
     "waiver"
    ],
-   "probedEntries24h": 738
+   "probedEntries24h": 738,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mab",
@@ -983,7 +1063,8 @@
     "order",
     "plan"
    ],
-   "probedEntries24h": 558
+   "probedEntries24h": 558,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mied",
@@ -1010,7 +1091,8 @@
     "respp",
     "respp-cr"
    ],
-   "probedEntries24h": 538
+   "probedEntries24h": 538,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mieb",
@@ -1020,6 +1102,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1033,7 +1116,8 @@
     "order-cr",
     "motion"
    ],
-   "probedEntries24h": 162
+   "probedEntries24h": 162,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "miwb",
@@ -1043,6 +1127,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1053,6 +1138,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1063,6 +1149,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
   },
   {
@@ -1073,6 +1160,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1083,6 +1171,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1094,7 +1183,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 395
+   "probedEntries24h": 395,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mssb",
@@ -1104,6 +1194,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1114,6 +1205,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
   },
   {
@@ -1125,7 +1217,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 677
+   "probedEntries24h": 677,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mowd",
@@ -1138,7 +1231,8 @@
     "order-cr",
     "motion"
    ],
-   "probedEntries24h": 250
+   "probedEntries24h": 250,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mowb",
@@ -1148,6 +1242,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1159,7 +1254,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 209
+   "probedEntries24h": 209,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "mtb",
@@ -1174,7 +1270,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 43
+   "probedEntries24h": 43,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ned",
@@ -1184,6 +1281,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1195,7 +1293,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 375
+   "probedEntries24h": 375,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nvd",
@@ -1205,6 +1304,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40000 milliseconds with 0 bytes received"
   },
   {
@@ -1215,6 +1315,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1226,7 +1327,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 199
+   "probedEntries24h": 199,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nhb",
@@ -1251,7 +1353,8 @@
     "plan",
     "trustee"
    ],
-   "probedEntries24h": 116
+   "probedEntries24h": 116,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "njd",
@@ -1262,7 +1365,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1563
+   "probedEntries24h": 1563,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "njb",
@@ -1279,7 +1383,8 @@
     "misc",
     "plan"
    ],
-   "probedEntries24h": 1239
+   "probedEntries24h": 1239,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nmd",
@@ -1289,6 +1394,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1299,6 +1405,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1309,6 +1416,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1320,7 +1428,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 830
+   "probedEntries24h": 830,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nynd",
@@ -1334,7 +1443,8 @@
     "order-cr",
     "motion"
    ],
-   "probedEntries24h": 232
+   "probedEntries24h": 232,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nynb",
@@ -1345,7 +1455,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 886
+   "probedEntries24h": 886,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nysd",
@@ -1386,7 +1497,8 @@
     "minutes-cr",
     "plea"
    ],
-   "probedEntries24h": 2674
+   "probedEntries24h": 2674,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nysb",
@@ -1397,7 +1509,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 620
+   "probedEntries24h": 620,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nywd",
@@ -1407,6 +1520,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1424,7 +1538,8 @@
     "misc",
     "cmp"
    ],
-   "probedEntries24h": 366
+   "probedEntries24h": 366,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nced",
@@ -1435,7 +1550,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 716
+   "probedEntries24h": 716,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nceb",
@@ -1445,6 +1561,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1456,7 +1573,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 273
+   "probedEntries24h": 273,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ncmb",
@@ -1467,7 +1585,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 596
+   "probedEntries24h": 596,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ncwd",
@@ -1478,7 +1597,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 376
+   "probedEntries24h": 376,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ncwb",
@@ -1493,7 +1613,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 118
+   "probedEntries24h": 118,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ndd",
@@ -1503,6 +1624,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1514,7 +1636,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 75
+   "probedEntries24h": 75,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "nmid",
@@ -1528,6 +1651,7 @@
     "motion"
    ],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1544,6 +1668,7 @@
     "order"
    ],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1559,7 +1684,8 @@
     "motion",
     "charge_cr"
    ],
-   "probedEntries24h": 303
+   "probedEntries24h": 303,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ohnb",
@@ -1570,7 +1696,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1187
+   "probedEntries24h": 1187,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ohsd",
@@ -1581,7 +1708,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 729
+   "probedEntries24h": 729,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "ohsb",
@@ -1592,7 +1720,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1131
+   "probedEntries24h": 1131,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "oked",
@@ -1602,6 +1731,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
   },
   {
@@ -1612,6 +1742,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1622,6 +1753,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1632,6 +1764,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40001 milliseconds with 0 bytes received"
   },
   {
@@ -1642,6 +1775,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1652,6 +1786,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -1663,7 +1798,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 370
+   "probedEntries24h": 370,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "orb",
@@ -1680,7 +1816,8 @@
     "trustee",
     "notice"
    ],
-   "probedEntries24h": 371
+   "probedEntries24h": 371,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "paed",
@@ -1691,7 +1828,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1303
+   "probedEntries24h": 1303,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "paeb",
@@ -1702,7 +1840,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 851
+   "probedEntries24h": 851,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "pamd",
@@ -1712,6 +1851,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -1723,7 +1863,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 519
+   "probedEntries24h": 519,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "pawd",
@@ -1737,7 +1878,8 @@
     "motion",
     "cmp"
    ],
-   "probedEntries24h": 367
+   "probedEntries24h": 367,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "pawb",
@@ -1748,7 +1890,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 736
+   "probedEntries24h": 736,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "prd",
@@ -1759,7 +1902,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 715
+   "probedEntries24h": 715,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "prb",
@@ -1770,7 +1914,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 650
+   "probedEntries24h": 650,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "rid",
@@ -1781,7 +1926,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 162
+   "probedEntries24h": 162,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "rib",
@@ -1792,7 +1938,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 198
+   "probedEntries24h": 198,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "scd",
@@ -1803,7 +1950,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 750
+   "probedEntries24h": 750,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "scb",
@@ -1814,7 +1962,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 769
+   "probedEntries24h": 769,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "sdd",
@@ -1825,7 +1974,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 191
+   "probedEntries24h": 191,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "sdb",
@@ -1836,7 +1986,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 93
+   "probedEntries24h": 93,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "tned",
@@ -1847,7 +1998,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 336
+   "probedEntries24h": 336,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "tneb",
@@ -1858,7 +2010,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 923
+   "probedEntries24h": 923,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "tnmd",
@@ -1871,7 +2024,8 @@
     "order-cr",
     "motion"
    ],
-   "probedEntries24h": 207
+   "probedEntries24h": 207,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "tnmb",
@@ -1882,7 +2036,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 627
+   "probedEntries24h": 627,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "tnwd",
@@ -1893,7 +2048,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 369
+   "probedEntries24h": 369,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "tnwb",
@@ -1904,7 +2060,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1014
+   "probedEntries24h": 1014,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txed",
@@ -1915,7 +2072,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 974
+   "probedEntries24h": 974,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txeb",
@@ -1938,7 +2096,8 @@
     "plan",
     "trustee"
    ],
-   "probedEntries24h": 430
+   "probedEntries24h": 430,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txnd",
@@ -1953,7 +2112,8 @@
     "cmp",
     "answer"
    ],
-   "probedEntries24h": 409
+   "probedEntries24h": 409,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txnb",
@@ -1964,7 +2124,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1425
+   "probedEntries24h": 1425,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txsd",
@@ -1975,7 +2136,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 2846
+   "probedEntries24h": 2846,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txsb",
@@ -1986,7 +2148,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1989
+   "probedEntries24h": 1989,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txwd",
@@ -1997,7 +2160,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 3969
+   "probedEntries24h": 3969,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "txwb",
@@ -2008,7 +2172,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 1102
+   "probedEntries24h": 1102,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "utd",
@@ -2021,7 +2186,8 @@
     "order-cr",
     "motion"
    ],
-   "probedEntries24h": 174
+   "probedEntries24h": 174,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "utb",
@@ -2032,7 +2198,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 824
+   "probedEntries24h": 824,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "vtd",
@@ -2043,7 +2210,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 93
+   "probedEntries24h": 93,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "vtb",
@@ -2054,7 +2222,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 32
+   "probedEntries24h": 32,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "vid",
@@ -2066,7 +2235,8 @@
     "order",
     "order-cr"
    ],
-   "probedEntries24h": 13
+   "probedEntries24h": 13,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "vib",
@@ -2081,6 +2251,7 @@
     "order"
    ],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -2091,6 +2262,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -2101,6 +2273,7 @@
    "status": "unreachable",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "Operation timed out after 40002 milliseconds with 0 bytes received"
   },
   {
@@ -2112,7 +2285,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 468
+   "probedEntries24h": 468,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "vawb",
@@ -2127,7 +2301,8 @@
     "motion",
     "order"
    ],
-   "probedEntries24h": 143
+   "probedEntries24h": 143,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "waed",
@@ -2138,7 +2313,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 288
+   "probedEntries24h": 288,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "waeb",
@@ -2149,7 +2325,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 171
+   "probedEntries24h": 171,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wawd",
@@ -2160,7 +2337,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 893
+   "probedEntries24h": 893,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wawb",
@@ -2171,7 +2349,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 895
+   "probedEntries24h": 895,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wvnd",
@@ -2182,7 +2361,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 235
+   "probedEntries24h": 235,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wvnb",
@@ -2193,7 +2373,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 186
+   "probedEntries24h": 186,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wvsd",
@@ -2203,6 +2384,7 @@
    "status": "empty",
    "entryTypes": [],
    "probedEntries24h": 0,
+   "probedAt": "2026-10-17",
    "probeNote": "feed answered HTTP 200 with no entries"
   },
   {
@@ -2214,7 +2396,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 127
+   "probedEntries24h": 127,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wied",
@@ -2225,7 +2408,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 440
+   "probedEntries24h": 440,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wieb",
@@ -2242,7 +2426,8 @@
     "order",
     "trustee"
    ],
-   "probedEntries24h": 664
+   "probedEntries24h": 664,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wiwd",
@@ -2253,7 +2438,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 207
+   "probedEntries24h": 207,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wiwb",
@@ -2264,7 +2450,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 377
+   "probedEntries24h": 377,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wyd",
@@ -2275,7 +2462,8 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 188
+   "probedEntries24h": 188,
+   "probedAt": "2026-10-17"
   },
   {
    "code": "wyb",
@@ -2286,7 +2474,199 @@
    "entryTypes": [
     "all"
    ],
-   "probedEntries24h": 52
+   "probedEntries24h": 52,
+   "probedAt": "2026-10-17"
+  },
+  {
+   "code": "cofc",
+   "type": "national",
+   "name": "Court of Federal Claims",
+   "state": null,
+   "status": "full",
+   "entryTypes": [
+    "all"
+   ],
+   "probedEntries24h": 494,
+   "probedAt": "2026-11-07"
+  },
+  {
+   "code": "cit",
+   "type": "national",
+   "name": "Court of International Trade",
+   "state": null,
+   "status": "partial",
+   "entryTypes": [
+    "answer",
+    "appeal",
+    "cmp",
+    "misc",
+    "motion",
+    "notice",
+    "order"
+   ],
+   "probedEntries24h": 257,
+   "probedAt": "2026-11-07",
+   "probeNote": "case titles carry the case number only, no party names"
+  },
+  {
+   "code": "ca1",
+   "type": "appellate",
+   "name": "First Circuit",
+   "state": null,
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probedAt": "2026-11-07",
+   "probeNote": "feed answered HTTP 200: \"not configured for feed\""
+  },
+  {
+   "code": "ca2",
+   "type": "appellate",
+   "name": "Second Circuit",
+   "state": null,
+   "status": "empty",
+   "entryTypes": [
+    "orders",
+    "opinions"
+   ],
+   "probedEntries24h": 0,
+   "probedAt": "2026-11-07",
+   "probeNote": "feed answered HTTP 200, configured for orders and opinions, with no entries on a Saturday"
+  },
+  {
+   "code": "ca3",
+   "type": "appellate",
+   "name": "Third Circuit",
+   "state": null,
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probedAt": "2026-11-07",
+   "probeNote": "feed answered HTTP 200: \"not configured for feed\""
+  },
+  {
+   "code": "ca4",
+   "type": "appellate",
+   "name": "Fourth Circuit",
+   "state": null,
+   "status": "partial",
+   "entryTypes": [
+    "orders",
+    "opinions",
+    "judgments"
+   ],
+   "probedEntries24h": 63,
+   "probedAt": "2026-11-07"
+  },
+  {
+   "code": "ca5",
+   "type": "appellate",
+   "name": "Fifth Circuit",
+   "state": null,
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probedAt": "2026-11-07",
+   "probeNote": "feed answered HTTP 200: \"not configured for feed\""
+  },
+  {
+   "code": "ca6",
+   "type": "appellate",
+   "name": "Sixth Circuit",
+   "state": null,
+   "status": "partial",
+   "entryTypes": [
+    "orders",
+    "opinions",
+    "judgments"
+   ],
+   "probedEntries24h": 65,
+   "probedAt": "2026-11-07"
+  },
+  {
+   "code": "ca7",
+   "type": "appellate",
+   "name": "Seventh Circuit",
+   "state": null,
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probedAt": "2026-11-07",
+   "probeNote": "feed answered HTTP 200: \"not configured for feed\""
+  },
+  {
+   "code": "ca8",
+   "type": "appellate",
+   "name": "Eighth Circuit",
+   "state": null,
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probedAt": "2026-11-07",
+   "probeNote": "feed answered HTTP 200: \"not configured for feed\""
+  },
+  {
+   "code": "ca9",
+   "type": "appellate",
+   "name": "Ninth Circuit",
+   "state": null,
+   "status": "empty",
+   "entryTypes": [],
+   "probedEntries24h": 0,
+   "probedAt": "2026-11-07",
+   "probeNote": "feed answered HTTP 200: \"not configured for feed\""
+  },
+  {
+   "code": "ca10",
+   "type": "appellate",
+   "name": "Tenth Circuit",
+   "state": null,
+   "status": "partial",
+   "entryTypes": [
+    "opinions"
+   ],
+   "probedEntries24h": 7,
+   "probedAt": "2026-11-07"
+  },
+  {
+   "code": "ca11",
+   "type": "appellate",
+   "name": "Eleventh Circuit",
+   "state": null,
+   "status": "partial",
+   "entryTypes": [
+    "opinions"
+   ],
+   "probedEntries24h": 5,
+   "probedAt": "2026-11-07"
+  },
+  {
+   "code": "cadc",
+   "type": "appellate",
+   "name": "District of Columbia Circuit",
+   "state": null,
+   "status": "partial",
+   "entryTypes": [
+    "orders",
+    "opinions",
+    "judgments"
+   ],
+   "probedEntries24h": 23,
+   "probedAt": "2026-11-07"
+  },
+  {
+   "code": "cafc",
+   "type": "appellate",
+   "name": "Federal Circuit",
+   "state": null,
+   "status": "partial",
+   "entryTypes": [
+    "orders",
+    "opinions",
+    "judgments"
+   ],
+   "probedEntries24h": 4,
+   "probedAt": "2026-11-07"
   }
  ]
 }
