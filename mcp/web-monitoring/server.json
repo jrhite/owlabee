@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.jrhite/web-monitoring",
+  "title": "Web & Business Monitoring (DMARC, sitemaps, Shopify, jobs)",
+  "description": "Monitor domain SPF/DMARC/WHOIS, website changes, Shopify prices, ATS jobs, Bluesky and podcasts.",
+  "repository": {
+    "url": "https://github.com/jrhite/owlabee",
+    "source": "github",
+    "subfolder": "mcp/web-monitoring"
+  },
+  "websiteUrl": "https://apify.com/owlabee",
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.apify.com/?tools=owlabee/domain-intelligence,owlabee/website-change-monitor,owlabee/shopify-catalog-monitor,owlabee/ats-hiring-signals,owlabee/bluesky-monitor,owlabee/podcast-rss-scraper",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Apify API token, sent as 'Bearer <token>'. Runs are billed per result to your Apify account.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
