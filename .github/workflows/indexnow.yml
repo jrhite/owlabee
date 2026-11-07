@@ -1,0 +1,38 @@
+name: IndexNow ping
+
+# Tells Bing (and the other IndexNow engines it shares with) that the site's
+# pages changed, so they are recrawled within hours instead of weeks.
+# The key is public by design and served at https://owlabee.com/<key>.txt.
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Wait for GitHub Pages to publish
+        run: sleep 150
+
+      - name: Submit every sitemap URL
+        run: |
+          set -euo pipefail
+          base=$(node -e "import('./tools/site-config.mjs').then(m => console.log(m.BASE_URL))")
+          key=$(node -e "import('./tools/site-config.mjs').then(m => console.log(m.INDEXNOW_KEY))")
+          host=$(node -e "console.log(new URL(process.argv[1]).hostname)" "$base")
+          curl -fsS "${base}${key}.txt" | grep -qx "$key"
+          urls=$(grep -o '<loc>[^<]*</loc>' docs/sitemap.xml | sed 's#</*loc>##g' | jq -R . | jq -s .)
+          jq -n --arg host "$host" --arg key "$key" --arg loc "${base}${key}.txt" --argjson urls "$urls" \
+            '{host: $host, key: $key, keyLocation: $loc, urlList: $urls}' > body.json
+          echo "Submitting $(jq '.urlList | length' body.json) URLs for $host"
+          code=$(curl -s -o resp.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data @body.json)
+          echo "IndexNow HTTP $code"; cat resp.txt || true
+          case "$code" in 200|202) ;; *) exit 1 ;; esac
