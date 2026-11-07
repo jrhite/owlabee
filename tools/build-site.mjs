@@ -4,7 +4,7 @@
 import { mkdirSync, writeFileSync, readFileSync, copyFileSync } from 'node:fs';
 import { pages } from './site-content.mjs';
 import { actors, storeUrl, apiUrl, mcpUrl } from './actors.mjs';
-import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY } from './site-config.mjs';
+import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY, MAKER_NAME, MAKER_URL } from './site-config.mjs';
 import { referenceSections } from './pacer-courts.mjs';
 
 const UPDATED = '2026-11-07';
@@ -62,7 +62,7 @@ ${body}
 <footer class="site-footer">
 <div class="wrap">
 <p>${esc(disclaimer)}</p>
-<p><a href="${STORE_PROFILE_URL}">owlabee on Apify Store</a> · <a href="${REPO_URL}">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+<p><a href="${STORE_PROFILE_URL}">owlabee on Apify Store</a> · <a href="${REPO_URL}">Examples on GitHub</a> (MIT) · Made by <a href="${MAKER_URL}">${esc(MAKER_NAME)}</a> · No cookies, scripts or trackers on this site.</p>
 </div>
 </footer>
 </body>
