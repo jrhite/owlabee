@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>owlabee: public records and web data as JSON</title>
+<meta name="description" content="Guides to public data sources (permits, Grants.gov, SAM.gov, OSHA, EPA ECHO, recalls, PACER RSS, licenses, DNS, sitemaps, Shopify) and how to get them as JSON.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="owlabee: public records and web data as JSON">
+<meta property="og:description" content="Guides to public data sources (permits, Grants.gov, SAM.gov, OSHA, EPA ECHO, recalls, PACER RSS, licenses, DNS, sitemaps, Shopify) and how to get them as JSON.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"owlabee","url":"https://jrhite.github.io/owlabee/","inLanguage":"en-US","description":"Guides to public data sources (permits, Grants.gov, SAM.gov, OSHA, EPA ECHO, recalls, PACER RSS, licenses, DNS, sitemaps, Shopify) and how to get them as JSON."},{"@type":"ItemList","name":"Guides","itemListElement":[{"@type":"ListItem","position":1,"url":"https://jrhite.github.io/owlabee/building-permits-api/","name":"Building Permits API: 61 US Open-Data Portals as JSON"},{"@type":"ListItem","position":2,"url":"https://jrhite.github.io/owlabee/accela-energov-permits/","name":"Accela Citizen Access and EnerGov Permit Data as JSON"},{"@type":"ListItem","position":3,"url":"https://jrhite.github.io/owlabee/grants-gov-api/","name":"Grants.gov API: Federal Grant Opportunities as JSON"},{"@type":"ListItem","position":4,"url":"https://jrhite.github.io/owlabee/sam-gov-contract-opportunities/","name":"SAM.gov Contract Opportunities API Feed by Keyword"},{"@type":"ListItem","position":5,"url":"https://jrhite.github.io/owlabee/osha-inspections-by-company/","name":"OSHA Inspections by Company: DOL Data API Lookup"},{"@type":"ListItem","position":6,"url":"https://jrhite.github.io/owlabee/epa-echo-enforcement/","name":"EPA ECHO Enforcement Cases by Company or Facility"},{"@type":"ListItem","position":7,"url":"https://jrhite.github.io/owlabee/product-recalls-api/","name":"Product Recalls API: FDA, NHTSA and CPSC in One Feed"},{"@type":"ListItem","position":8,"url":"https://jrhite.github.io/owlabee/pacer-rss-docket-monitor/","name":"PACER RSS Feeds: Monitor New Federal Court Filings"},{"@type":"ListItem","position":9,"url":"https://jrhite.github.io/owlabee/professional-license-verification/","name":"Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI"},{"@type":"ListItem","position":10,"url":"https://jrhite.github.io/owlabee/spf-dmarc-dkim-checker/","name":"Bulk SPF, DMARC and DKIM Checker for Domain Lists"},{"@type":"ListItem","position":11,"url":"https://jrhite.github.io/owlabee/sitemap-change-monitor/","name":"Sitemap Monitor: Track New, Removed and Changed Pages"},{"@type":"ListItem","position":12,"url":"https://jrhite.github.io/owlabee/shopify-price-tracker/","name":"Shopify Price Tracker: Catalog and Changes as JSON"}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="">owlabee</a>
+<nav aria-label="Site">
+<a href="#guides">Guides</a>
+<a href="#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<h1>Public data sources as JSON</h1>
+<p class="lede">owlabee publishes 18 Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps and storefronts) and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl or from an AI agent.</p>
+<p class="note">Every Actor is pay per result, billed to your own Apify account; see each Store page for current pricing.</p>
+
+<section id="guides">
+<h2>Guides</h2>
+<ul class="cards">
+<li><a href="building-permits-api/"><strong>Building Permits API: 61 US Open-Data Portals as JSON</strong><span>Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.</span></a></li>
+<li><a href="accela-energov-permits/"><strong>Accela Citizen Access and EnerGov Permit Data as JSON</strong><span>Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.</span></a></li>
+<li><a href="grants-gov-api/"><strong>Grants.gov API: Federal Grant Opportunities as JSON</strong><span>Search federal grant opportunities on the official Grants.gov API by keyword and get normalized JSON with new and updated flags, details and recent USAspending awards.</span></a></li>
+<li><a href="sam-gov-contract-opportunities/"><strong>SAM.gov Contract Opportunities API Feed by Keyword</strong><span>Pull federal contract notices from the SAM.gov Get Opportunities API by keyword, NAICS code, set-aside and state, with points of contact and new-notice flags.</span></a></li>
+<li><a href="osha-inspections-by-company/"><strong>OSHA Inspections by Company: DOL Data API Lookup</strong><span>Look up OSHA inspections, violations and penalties by company name, inspection number, state or ZIP through the DOL Data API, with a name-match confidence per record.</span></a></li>
+<li><a href="epa-echo-enforcement/"><strong>EPA ECHO Enforcement Cases by Company or Facility</strong><span>Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.</span></a></li>
+<li><a href="product-recalls-api/"><strong>Product Recalls API: FDA, NHTSA and CPSC in One Feed</strong><span>US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, with a new-recalls-only mode.</span></a></li>
+<li><a href="pacer-rss-docket-monitor/"><strong>PACER RSS Feeds: Monitor New Federal Court Filings</strong><span>Read the free public PACER RSS feeds of federal district and bankruptcy courts as JSON and filter new filings by party, case number, entry type or bankruptcy chapter.</span></a></li>
+<li><a href="professional-license-verification/"><strong>Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI</strong><span>Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.</span></a></li>
+<li><a href="spf-dmarc-dkim-checker/"><strong>Bulk SPF, DMARC and DKIM Checker for Domain Lists</strong><span>Check SPF, DMARC, DKIM, MTA-STS and BIMI for a list of domains and get a 0-100 email security score per domain, plus RDAP WHOIS, DNS, TLS expiry and HTTP headers.</span></a></li>
+<li><a href="sitemap-change-monitor/"><strong>Sitemap Monitor: Track New, Removed and Changed Pages</strong><span>Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.</span></a></li>
+<li><a href="shopify-price-tracker/"><strong>Shopify Price Tracker: Catalog and Changes as JSON</strong><span>Export any public Shopify store's catalog from products.json, every variant with price, compare-at price, availability and SKU, or track price and stock changes.</span></a></li>
+</ul>
+</section>
+
+<section id="actors">
+<h2>All Actors</h2>
+<h3>Permits and property</h3>
+<ul class="actor-list">
+<li><a href="https://apify.com/owlabee/building-permits-scraper"><strong>Building Permits Scraper — Roofing &amp; Construction Leads</strong></a><span>Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/building-permits-scraper">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/accela-energov-permit-scraper"><strong>Accela Citizen Access &amp; EnerGov Permit Scraper (Any City)</strong></a><span>Permits from Accela Citizen Access and Tyler EnerGov portals in 31 cities and counties, in the same schema as the open-data scraper.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/accela-energov-permit-scraper">Examples on GitHub</a></li>
+</ul>
+<h3>Government and public records</h3>
+<ul class="actor-list">
+<li><a href="https://apify.com/owlabee/grants-gov-api"><strong>Grants.gov API &amp; SAM.gov Scraper — Federal Grants Feed</strong></a><span>Grants.gov grant opportunities and SAM.gov contract notices by keyword, plus optional USAspending awards and six state and local bid datasets.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/grants-gov-api">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/gov-opportunity-fit-scorer"><strong>Grant Matching &amp; RFP Bid/No-Bid Scorer (AI) — Grants.gov</strong></a><span>Grants.gov, SAM.gov and USAspending opportunities ranked by fit to your organization, with reasons and disqualifiers.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/gov-opportunity-fit-scorer">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/federal-court-docket-monitor"><strong>PACER RSS Docket Monitor — New Federal Court Filings</strong></a><span>New docket entries from the public PACER RSS feeds of federal district and bankruptcy courts, filtered by party, case or entry type.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/federal-court-docket-monitor">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/osha-epa-enforcement-report"><strong>OSHA Inspections by Company + EPA Enforcement Report</strong></a><span>OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/osha-epa-enforcement-report">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/product-recall-feed"><strong>Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API</strong></a><span>FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/product-recall-feed">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/us-license-verifier"><strong>License Verification API — TDLR, DBPR, DORA, WA DOH, NPI</strong></a><span>Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/us-license-verifier">Examples on GitHub</a></li>
+</ul>
+<h3>Web and domains</h3>
+<ul class="actor-list">
+<li><a href="https://apify.com/owlabee/domain-intelligence"><strong>SPF, DMARC &amp; DKIM Checker — Bulk Domain WHOIS, DNS &amp; SSL</strong></a><span>One record per domain: SPF, DMARC, DKIM, MTA-STS and BIMI with a 0-100 email security score, RDAP WHOIS, DNS, TLS and HTTP headers.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/domain-intelligence">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/website-change-monitor"><strong>Website Change Monitor — Sitemap Monitor &amp; Page Diff</strong></a><span>Pages discovered through a site's sitemaps, and new, removed, updated and content-changed pages between runs with diff previews.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/website-change-monitor">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/shopify-catalog-monitor"><strong>Shopify Catalog Monitor &amp; Price Tracker — Products Scraper</strong></a><span>Every product or variant of a public Shopify store from products.json, or price, stock and new or removed product changes.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/shopify-catalog-monitor">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/bluesky-monitor"><strong>Bluesky Monitor &amp; Scraper — Posts, Keywords, Followers</strong></a><span>Bluesky posts by keyword or hashtag, profiles, author feeds and follower lists from the public AT Protocol API.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/bluesky-monitor">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/ats-hiring-signals"><strong>Hiring Signals &amp; ATS Jobs Scraper — Greenhouse, Lever, Ashby</strong></a><span>Open roles from Greenhouse, Lever, Ashby, SmartRecruiters and Workable job boards, or new, removed and changed roles per company.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/ats-hiring-signals">Examples on GitHub</a></li>
+</ul>
+<h3>Documents and media</h3>
+<ul class="actor-list">
+<li><a href="https://apify.com/owlabee/podcast-rss-scraper"><strong>Podcast RSS Scraper — Episodes, Transcripts &amp; Apple Podcasts</strong></a><span>Show and episode records from podcast RSS feeds, Apple Podcasts links or search terms, with Podcasting 2.0 transcripts.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/podcast-rss-scraper">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/podcast-episode-summarizer"><strong>Podcast Episode Summarizer (AI) — Transcript to Summary</strong></a><span>Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/podcast-episode-summarizer">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/pdf-to-markdown"><strong>PDF to Markdown for RAG — DOCX, OCR &amp; Chunks</strong></a><span>Clean Markdown from PDF, DOCX, HTML and text URLs, with optional heading-aware RAG chunks and OCR for scanned pages.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/pdf-to-markdown">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/document-to-json-extractor"><strong>PDF &amp; Document to JSON Extractor (AI) — Invoices, Forms</strong></a><span>One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/document-to-json-extractor">Examples on GitHub</a></li>
+<li><a href="https://apify.com/owlabee/drone-roof-inspection-report"><strong>AI Drone Roof Inspection Report — Findings &amp; Repair Scope</strong></a><span>Per-photo roof defect findings, per-building condition grade and repair scope, a Markdown report and a contact sheet.</span><a class="small" href="https://github.com/jrhite/owlabee/tree/main/examples/drone-roof-inspection-report">Examples on GitHub</a></li>
+</ul>
+</section>
+
+<section id="how">
+<h2>How running an Actor works</h2>
+<ol>
+<li>Create an Apify account and copy your API token from Console → Settings → API &amp; Integrations.</li>
+<li>Send the Actor's input as JSON to <code>https://api.apify.com/v2/acts/owlabee~&lt;actor&gt;/run-sync-get-dataset-items</code> with <code>Authorization: Bearer &lt;token&gt;</code>, or use the Python and Node.js clients.</li>
+<li>Or connect an AI agent to <code>https://mcp.apify.com/?tools=owlabee/&lt;actor&gt;</code>, Apify's hosted MCP server.</li>
+</ol>
+<p>Each guide has a ready-to-run input. More examples, one folder per Actor, are on <a href="https://github.com/jrhite/owlabee">GitHub</a>.</p>
+</section>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

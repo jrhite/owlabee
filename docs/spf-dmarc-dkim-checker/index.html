@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk SPF, DMARC and DKIM Checker for Domain Lists | owlabee</title>
+<meta name="description" content="Check SPF, DMARC, DKIM, MTA-STS and BIMI for a list of domains and get a 0-100 email security score per domain, plus RDAP WHOIS, DNS, TLS expiry and HTTP headers.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/spf-dmarc-dkim-checker/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Bulk SPF, DMARC and DKIM Checker for Domain Lists | owlabee">
+<meta property="og:description" content="Check SPF, DMARC, DKIM, MTA-STS and BIMI for a list of domains and get a 0-100 email security score per domain, plus RDAP WHOIS, DNS, TLS expiry and HTTP headers.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/spf-dmarc-dkim-checker/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Bulk SPF, DMARC and DKIM Checker for Domain Lists","description":"Check SPF, DMARC, DKIM, MTA-STS and BIMI for a list of domains and get a 0-100 email security score per domain, plus RDAP WHOIS, DNS, TLS expiry and HTTP headers.","url":"https://jrhite.github.io/owlabee/spf-dmarc-dkim-checker/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/domain-intelligence"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/domain-intelligence","name":"SPF, DMARC & DKIM Checker — Bulk Domain WHOIS, DNS & SSL","description":"One record per domain: SPF, DMARC, DKIM, MTA-STS and BIMI with a 0-100 email security score, RDAP WHOIS, DNS, TLS and HTTP headers","url":"https://apify.com/owlabee/domain-intelligence","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does a domain show no DKIM when I know it has it?","acceptedAnswer":{"@type":"Answer","text":"DKIM selectors are not discoverable. The Actor probes 18 common ones; add yours in dkimSelectors (for example fm1 for Fastmail or krs for Klaviyo)."}},{"@type":"Question","name":"Does it send email or change anything?","acceptedAnswer":{"@type":"Answer","text":"No. It only reads public DNS, RDAP, TLS and HTTP responses."}},{"@type":"Question","name":"How many domains can I check?","acceptedAnswer":{"@type":"Answer","text":"The list has no fixed cap. Up to 20 domains run in parallel (maxConcurrency), and the run stops cleanly at its maximum total charge."}},{"@type":"Question","name":"Why is a WHOIS field empty?","acceptedAnswer":{"@type":"Answer","text":"Most registries redact personal data, and some country domains offer no RDAP. The Actor reports exactly what the registry returns."}},{"@type":"Question","name":"What if a site has no web server?","acceptedAnswer":{"@type":"Answer","text":"tls.status and http.status become unavailable; the DNS and WHOIS sections are still filled."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> SPF, DMARC &amp; DKIM checker</nav>
+<article>
+<h1>Bulk SPF, DMARC and DKIM Checker for Domain Lists</h1>
+<p class="lede">Checking email authentication one domain at a time is slow. This Actor takes a list of domains and returns one record per domain with its SPF, DMARC, DKIM, MTA-STS and BIMI setup, an email security score, and optionally WHOIS, TLS and HTTP data.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/domain-intelligence">Open the Actor on Apify Store</a>
+<p class="note">SPF, DMARC &amp; DKIM Checker — Bulk Domain WHOIS, DNS &amp; SSL. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>Everything comes from public sources: DNS records over DNS-over-HTTPS (Cloudflare, with Google as fallback), registration data from <strong>RDAP</strong> (the successor to WHOIS), and each domain's own TLS and HTTP endpoints. No API keys, proxies or browser.</p>
+<p>The <code>dns</code> section reads A, AAAA, MX, NS, TXT, CAA and SOA records and checks:</p>
+<ul>
+<li><strong>SPF</strong>: record present, syntax, lookup count and the <code>all</code> qualifier.</li>
+<li><strong>DMARC</strong>: policy, subdomain policy, <code>pct</code>, and aggregate and forensic reporting addresses.</li>
+<li><strong>DKIM</strong>: 18 common selectors probed, plus any you add.</li>
+<li><strong>MTA-STS</strong> record and policy mode, and <strong>BIMI</strong>.</li>
+</ul>
+<h3>How the email security score is computed</h3>
+<table>
+<thead><tr><th>Check</th><th>Points</th></tr></thead>
+<tbody>
+<tr><td>SPF record present and valid (10 lookups or fewer, no unknown terms, single record)</td><td>25</td></tr>
+<tr><td>DMARC policy <code>reject</code> / <code>quarantine</code> / <code>none</code></td><td>35 / 20 / 5</td></tr>
+<tr><td>At least one DKIM selector found</td><td>25</td></tr>
+<tr><td>MTA-STS record present</td><td>10</td></tr>
+<tr><td>BIMI record present</td><td>5</td></tr>
+</tbody>
+</table>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>DKIM selectors cannot be listed from outside, only probed. A domain whose selector is not in the list shows no DKIM even if it is configured; add your provider's selector in <code>dkimSelectors</code>.</li>
+<li>The SPF lookup count covers the top-level record only (includes are not followed), so it is a lower bound.</li>
+<li>Subdomains are reduced to their registrable domain, and many registries redact WHOIS contact data.</li>
+<li>All sections of a domain share a 20-second budget; a slow source marks its own section as an error without blocking the others.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>dns.spfRecord, spfValid, spfAllQualifier, spfLookupCount, spfIssues</code></td><td>SPF</td></tr>
+<tr><td><code>dns.dmarcRecord, dmarcPolicy, dmarcSubdomainPolicy, dmarcPct, hasRua, hasRuf</code></td><td>DMARC</td></tr>
+<tr><td><code>dns.dkimSelectorsProbed, dkimSelectorsFound</code></td><td>DKIM</td></tr>
+<tr><td><code>dns.mtaStsPresent, mtaStsPolicyMode, bimiRecord</code></td><td>MTA-STS and BIMI</td></tr>
+<tr><td><code>dns.mx, mxProviderGuess</code></td><td>Mail servers and a provider guess (Google, Microsoft, Zoho and others)</td></tr>
+<tr><td><code>emailSecurityScore, summary</code></td><td>Score from 0 to 100 and a one-line summary</td></tr>
+<tr><td><code>whois.*</code></td><td>Registrar, registration and expiration dates, nameservers, DNSSEC (with <code>whois</code>)</td></tr>
+<tr><td><code>tls.*, http.*</code></td><td>Certificate issuer and expiry, status code, redirects, security headers, tech hints</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>The email-security part of one record for github.com (from the Actor's README; values illustrative, other sections omitted):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;domain&quot;: &quot;github.com&quot;,
+  &quot;dns&quot;: {
+    &quot;status&quot;: &quot;ok&quot;,
+    &quot;hasMx&quot;: true,
+    &quot;mxProviderGuess&quot;: &quot;google&quot;,
+    &quot;spfRecord&quot;: &quot;v=spf1 ip4:192.30.252.0/22 include:_netblocks.google.com ... ~all&quot;,
+    &quot;spfValid&quot;: true,
+    &quot;spfAllQualifier&quot;: &quot;~all&quot;,
+    &quot;spfLookupCount&quot;: 7,
+    &quot;spfIssues&quot;: [],
+    &quot;dmarcRecord&quot;: &quot;v=DMARC1; p=reject; pct=100; rua=mailto:dmarc@github.com&quot;,
+    &quot;dmarcPolicy&quot;: &quot;reject&quot;,
+    &quot;dmarcSubdomainPolicy&quot;: null,
+    &quot;dmarcPct&quot;: 100,
+    &quot;hasRua&quot;: true,
+    &quot;hasRuf&quot;: false,
+    &quot;dmarcIssues&quot;: [],
+    &quot;dkimSelectorsProbed&quot;: 18,
+    &quot;dkimSelectorsFound&quot;: [
+      &quot;google&quot;,
+      &quot;pm&quot;
+    ],
+    &quot;mtaStsPresent&quot;: true,
+    &quot;mtaStsPolicyMode&quot;: &quot;enforce&quot;,
+    &quot;bimiRecord&quot;: null
+  },
+  &quot;dmarcPolicy&quot;: &quot;reject&quot;,
+  &quot;emailSecurityScore&quot;: 95,
+  &quot;errors&quot;: {}
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Deliverability audit of a client list</h3>
+<p>Run the <code>dns</code> section over every client domain and sort by <code>emailSecurityScore</code> to find missing DMARC or a soft SPF policy.</p>
+<h3>Expiry watch</h3>
+<p>Run <code>whois</code> and <code>tls</code> on a schedule and alert on low <code>daysUntilExpiry</code> for domains and certificates.</p>
+<h3>Lead segmentation</h3>
+<p>Combine <code>dns</code> and <code>http</code> to group domains by mail provider and tech stack hints.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. SPF, DMARC and DKIM for ten domains, DNS section only:</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~domain-intelligence/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;domains&quot;: [
+    &quot;example.com&quot;,
+    &quot;github.com&quot;,
+    &quot;apify.com&quot;,
+    &quot;cloudflare.com&quot;,
+    &quot;mozilla.org&quot;,
+    &quot;wikipedia.org&quot;,
+    &quot;stripe.com&quot;,
+    &quot;shopify.com&quot;,
+    &quot;nytimes.com&quot;,
+    &quot;python.org&quot;
+  ],
+  &quot;sections&quot;: [
+    &quot;dns&quot;
+  ],
+  &quot;dkimSelectors&quot;: [],
+  &quot;maxConcurrency&quot;: 5
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-domain-intelligence&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/domain-intelligence&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Check SPF, DMARC and DKIM for these ten domains and list the ones whose DMARC policy is not reject, with their email security score.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/domain-intelligence">examples/domain-intelligence</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Why does a domain show no DKIM when I know it has it?</h3>
+<p>DKIM selectors are not discoverable. The Actor probes 18 common ones; add yours in <code>dkimSelectors</code> (for example <code>fm1</code> for Fastmail or <code>krs</code> for Klaviyo).</p>
+<h3>Does it send email or change anything?</h3>
+<p>No. It only reads public DNS, RDAP, TLS and HTTP responses.</p>
+<h3>How many domains can I check?</h3>
+<p>The list has no fixed cap. Up to 20 domains run in parallel (<code>maxConcurrency</code>), and the run stops cleanly at its maximum total charge.</p>
+<h3>Why is a WHOIS field empty?</h3>
+<p>Most registries redact personal data, and some country domains offer no RDAP. The Actor reports exactly what the registry returns.</p>
+<h3>What if a site has no web server?</h3>
+<p><code>tls.status</code> and <code>http.status</code> become <code>unavailable</code>; the DNS and WHOIS sections are still filled.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>SPF, DMARC &amp; DKIM Checker — Bulk Domain WHOIS, DNS &amp; SSL. One record per domain: SPF, DMARC, DKIM, MTA-STS and BIMI with a 0-100 email security score, RDAP WHOIS, DNS, TLS and HTTP headers.</p>
+<p><a class="button" href="https://apify.com/owlabee/domain-intelligence">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../sitemap-change-monitor/">Sitemap Monitor: Track New, Removed and Changed Pages</a></li>
+<li><a href="../shopify-price-tracker/">Shopify Price Tracker: Catalog and Changes as JSON</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

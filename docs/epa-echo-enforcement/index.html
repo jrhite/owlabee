@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPA ECHO Enforcement Cases by Company or Facility | owlabee</title>
+<meta name="description" content="Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/epa-echo-enforcement/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="EPA ECHO Enforcement Cases by Company or Facility | owlabee">
+<meta property="og:description" content="Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/epa-echo-enforcement/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"EPA ECHO Enforcement Cases by Company or Facility","description":"Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.","url":"https://jrhite.github.io/owlabee/epa-echo-enforcement/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/osha-epa-enforcement-report"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/osha-epa-enforcement-report","name":"OSHA Inspections by Company + EPA Enforcement Report","description":"OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP","url":"https://apify.com/owlabee/osha-epa-enforcement-report","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does EPA ECHO need an API key?","acceptedAnswer":{"@type":"Answer","text":"No. ECHO web services are public. Only the OSHA source needs a key."}},{"@type":"Question","name":"Why does it search facilities first?","acceptedAnswer":{"@type":"Answer","text":"ECHO's company-name filter for cases is not usable, so cases are found through the facilities that match the name."}},{"@type":"Question","name":"Are state cases included?","acceptedAnswer":{"@type":"Answer","text":"Cases that states report to EPA are in ECHO and are returned (the lead agency is in the raw case data). State agencies' own databases are not queried."}},{"@type":"Question","name":"How do I avoid records for similarly named companies?","acceptedAnswer":{"@type":"Answer","text":"Add a state or ZIP, raise minMatchConfidence, or look up facilities by FRS id."}},{"@type":"Question","name":"What does the summary record contain?","acceptedAnswer":{"@type":"Answer","text":"Per company: record counts and penalty totals by agency, open records, counts by match confidence, the most recent action and every matched name."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> EPA ECHO enforcement</nav>
+<article>
+<h1>EPA ECHO Enforcement Cases by Company or Facility</h1>
+<p class="lede">EPA's Enforcement and Compliance History Online (ECHO) records federal and state environmental enforcement cases. Its case search cannot filter by company name, so this Actor finds a company's facilities first and then reads their cases, returning one normalized record per case.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/osha-epa-enforcement-report">Open the Actor on Apify Store</a>
+<p class="note">OSHA Inspections by Company + EPA Enforcement Report. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p><strong>EPA ECHO</strong> web services (<code>echodata.epa.gov</code>) publish enforcement cases with the case number and name, category, status, primary law (CAA, CWA, RCRA and others), filing and settlement dates, federal and state or local penalties, and the outcome. No key is needed.</p>
+<p>Because ECHO's company-name filter for cases is not usable, the Actor runs a facility search for each company and then reads the case lists of the matched facilities. By default it checks only facilities that ECHO flags with formal enforcement actions or penalties; <code>epaAllFacilities</code> checks every matched facility, up to <code>maxFacilitiesPerCompany</code>. You can also look up a facility directly by its 12-digit FRS registry id with <code>frs:&lt;id&gt;</code>.</p>
+<p>ECHO includes state-led and locally led cases that states report to EPA. State agencies' own systems are not queried.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>A very broad name can exceed ECHO's query limit and returns a <code>QUERY_TOO_BROAD</code> item; add a state or ZIP.</li>
+<li>A case found through a matched facility can be filed under another party's name. Its <code>matchConfidence</code> is then <code>low</code> and <code>matchNote</code> says so.</li>
+<li>Agency data lag EPA's internal systems, and statuses and penalties can change after a case is first published.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>recordId, entityName</code></td><td><code>epa:&lt;case number&gt;</code> and the case or defendant name</td></tr>
+<tr><td><code>facilityName, facilityRegistryId</code></td><td>The matched facility and its FRS registry id</td></tr>
+<tr><td><code>address, city, state, zip, naicsCode</code></td><td>Facility location and industry</td></tr>
+<tr><td><code>actionDate, closedDate</code></td><td>Case filed (or settled, when no filing date)</td></tr>
+<tr><td><code>actionType, status, outcome</code></td><td>For example Administrative - Formal, Final Order Issued, Final Order With Penalty</td></tr>
+<tr><td><code>lawOrProgram</code></td><td>Primary law: CAA, CWA, RCRA and others</td></tr>
+<tr><td><code>penaltyUsd</code></td><td>Penalty as published</td></tr>
+<tr><td><code>matchBasis, matchConfidence, matchedName, sourceUrl</code></td><td>How the record matched, and the ECHO case report link</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>One EPA case from a quick-start run on 2026-11-01 (from the Actor's README, raw fields omitted):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;recordType&quot;: &quot;enforcement-case&quot;,
+  &quot;agency&quot;: &quot;EPA&quot;,
+  &quot;recordId&quot;: &quot;epa:09-2019-0029&quot;,
+  &quot;query&quot;: &quot;Tesla&quot;,
+  &quot;entityName&quot;: &quot;Tesla Motors, Inc.&quot;,
+  &quot;facilityName&quot;: &quot;TESLA MOTORS INC&quot;,
+  &quot;facilityRegistryId&quot;: &quot;110000482898&quot;,
+  &quot;address&quot;: &quot;45500 FREMONT BLVD&quot;,
+  &quot;city&quot;: &quot;FREMONT&quot;,
+  &quot;state&quot;: &quot;CA&quot;,
+  &quot;zip&quot;: &quot;94538&quot;,
+  &quot;naicsCode&quot;: &quot;336111&quot;,
+  &quot;actionDate&quot;: &quot;2019-03-28&quot;,
+  &quot;closedDate&quot;: null,
+  &quot;actionType&quot;: &quot;Administrative - Formal&quot;,
+  &quot;status&quot;: &quot;Final Order Issued&quot;,
+  &quot;penaltyUsd&quot;: 31000,
+  &quot;lawOrProgram&quot;: &quot;RCRA&quot;,
+  &quot;outcome&quot;: &quot;Final Order With Penalty&quot;,
+  &quot;sourceUrl&quot;: &quot;https://echo.epa.gov/enforcement-case-report?id=09-2019-0029&quot;,
+  &quot;matchBasis&quot;: &quot;facility-name&quot;,
+  &quot;matchConfidence&quot;: &quot;medium&quot;,
+  &quot;matchedName&quot;: &quot;TESLA MOTORS INC&quot;,
+  &quot;fetchedAt&quot;: &quot;2026-11-01T13:01:08.211Z&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Due diligence on a facility</h3>
+<p>Look up a plant by FRS id and read every case filed against it, with the law involved and the outcome.</p>
+<h3>Supplier screening without a key</h3>
+<p>Run <code>sources: ["epa"]</code> for a list of supplier names and states. EPA needs no key, so this works before you request a DOL key.</p>
+<h3>Scheduled watch</h3>
+<p>Turn on <code>monitor</code> to write only new or changed cases, fingerprinted by status, penalty and closing date, and post them to a webhook.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. EPA ECHO cases for facilities matching "Tesla" in California (the Actor's own quick-start input):</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~osha-epa-enforcement-report/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;companies&quot;: [
+    &quot;Tesla&quot;
+  ],
+  &quot;state&quot;: &quot;CA&quot;,
+  &quot;sources&quot;: [
+    &quot;epa&quot;
+  ]
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-osha-epa-enforcement-report&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/osha-epa-enforcement-report&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Which EPA enforcement cases are on record for Tesla facilities in California, and under which law was each filed?</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/osha-epa-enforcement-report">examples/osha-epa-enforcement-report</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does EPA ECHO need an API key?</h3>
+<p>No. ECHO web services are public. Only the OSHA source needs a key.</p>
+<h3>Why does it search facilities first?</h3>
+<p>ECHO's company-name filter for cases is not usable, so cases are found through the facilities that match the name.</p>
+<h3>Are state cases included?</h3>
+<p>Cases that states report to EPA are in ECHO and are returned (the lead agency is in the raw case data). State agencies' own databases are not queried.</p>
+<h3>How do I avoid records for similarly named companies?</h3>
+<p>Add a state or ZIP, raise <code>minMatchConfidence</code>, or look up facilities by FRS id.</p>
+<h3>What does the summary record contain?</h3>
+<p>Per company: record counts and penalty totals by agency, open records, counts by match confidence, the most recent action and every matched name.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>OSHA Inspections by Company + EPA Enforcement Report. OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP.</p>
+<p><a class="button" href="https://apify.com/owlabee/osha-epa-enforcement-report">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../osha-inspections-by-company/">OSHA Inspections by Company: DOL Data API Lookup</a></li>
+<li><a href="../product-recalls-api/">Product Recalls API: FDA, NHTSA and CPSC in One Feed</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>

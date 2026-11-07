@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI | owlabee</title>
+<meta name="description" content="Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.">
+<link rel="canonical" href="https://jrhite.github.io/owlabee/professional-license-verification/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI | owlabee">
+<meta property="og:description" content="Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.">
+<meta property="og:url" content="https://jrhite.github.io/owlabee/professional-license-verification/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI","description":"Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.","url":"https://jrhite.github.io/owlabee/professional-license-verification/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/us-license-verifier"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/us-license-verifier","name":"License Verification API — TDLR, DBPR, DORA, WA DOH, NPI","description":"Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry","url":"https://apify.com/owlabee/us-license-verifier","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which states are covered?","acceptedAnswer":{"@type":"Answer","text":"Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry."}},{"@type":"Question","name":"What does verified mean?","acceptedAnswer":{"@type":"Answer","text":"The license was found, its status is ACTIVE and the expiration date is today or later. Statuses such as \"Active - With Conditions\" normalize to PROBATION and do not verify."}},{"@type":"Question","name":"Is this the board's official verification?","acceptedAnswer":{"@type":"Answer","text":"No. It reads the boards' public records and links each one. Confirm with the issuing board before relying on a result."}},{"@type":"Question","name":"Why do I get several records for one number?","acceptedAnswer":{"@type":"Answer","text":"License numbers repeat across license types in Texas and Colorado. Add the type, for example TX:3365:Master Electrician."}},{"@type":"Question","name":"Does it need proxies or a key?","acceptedAnswer":{"@type":"Answer","text":"No. A free Socrata app token is optional and only raises rate limits on the Texas, Colorado and Washington datasets."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/jrhite/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> License verification</nav>
+<article>
+<h1>Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI</h1>
+<p class="lede">State licensing boards publish their license records in different places and formats. This Actor queries five official public registries by name or license number and returns one normalized record per license, with a status, an expiration date and a disciplinary-action flag.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/us-license-verifier">Open the Actor on Apify Store</a>
+<p class="note">License Verification API — TDLR, DBPR, DORA, WA DOH, NPI. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<table>
+<thead><tr><th>Source id</th><th>Board</th><th>Coverage</th><th>How it is queried</th></tr></thead>
+<tbody>
+<tr><td><code>TX_TDLR</code></td><td>Texas Department of Licensing and Regulation</td><td>About 1.0 M licenses: electricians, A/C and HVAC, cosmetologists, barbers, tow operators and more</td><td>Socrata open-data API on data.texas.gov</td></tr>
+<tr><td><code>FL_DBPR</code></td><td>Florida Department of Business &amp; Professional Regulation</td><td>Real estate, construction contractors, home inspectors, CPAs, architects, engineers and more</td><td>The public "Verify a Licensee" portal, one request per query</td></tr>
+<tr><td><code>CO_DORA</code></td><td>Colorado Department of Regulatory Agencies</td><td>About 1.6 M licenses across every DORA profession, with disciplinary case numbers</td><td>Socrata open-data API on data.colorado.gov, updated daily</td></tr>
+<tr><td><code>WA_DOH</code></td><td>Washington State Department of Health</td><td>About 2.5 M health-care credentials, with an "action taken" flag</td><td>Socrata open-data API on data.wa.gov, updated daily</td></tr>
+<tr><td><code>NPI</code></td><td>CMS NPPES NPI Registry (federal)</td><td>Every US health-care provider and organization with an NPI</td><td>Official JSON API at npiregistry.cms.hhs.gov</td></tr>
+</tbody>
+</table>
+<p>Queries are one line each: <code>TX:3365:Master Electrician</code>, <code>name:Jane Smith:FL</code>, <code>npi:1003000126</code>, or pinned to a board with <code>tdlr:</code>, <code>dbpr:</code>, <code>dora:</code>, <code>doh:</code>. A query with a state goes only to that state's board; a query without one goes to every enabled source.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Texas publishes no status column, so its status is derived from the expiration date (<code>statusDerived: true</code>).</li>
+<li>Open-data extracts can lag the board's live database: Colorado and Washington refresh daily, Texas less often.</li>
+<li>Florida returns the first 50 matches of the portal's result page. Common names can match hundreds of licenses; narrow with a state, license type or city.</li>
+<li>Other states return an <code>INVALID_QUERY</code> item that names the supported ones. California's DCA and CSLB lookups are not included.</li>
+<li>Each record notes that you should confirm with the issuing board before relying on it.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>state, board, source</code></td><td>Which registry answered</td></tr>
+<tr><td><code>licenseNumber, licenseType, licenseSubtype, profession</code></td><td>The license</td></tr>
+<tr><td><code>holderName, businessName</code></td><td>As the board publishes them</td></tr>
+<tr><td><code>status, rawStatus, statusDerived</code></td><td>Normalized status (ACTIVE, EXPIRED, SUSPENDED, REVOKED, PROBATION, PENDING, INACTIVE, UNKNOWN) and the board's own value</td></tr>
+<tr><td><code>issueDate, expirationDate</code></td><td>Where published</td></tr>
+<tr><td><code>city, county, zip</code></td><td>Where published</td></tr>
+<tr><td><code>disciplinaryActionFlag</code></td><td>True when the board records an action (Colorado adds case details)</td></tr>
+<tr><td><code>verified, verificationNotes</code></td><td>Verify mode: found, active and not expired, with plain-English notes</td></tr>
+<tr><td><code>sourceUrl, sourceRecordId</code></td><td>Where to confirm the record</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>A Texas master electrician in verify mode, query <code>TX:3365:Master Electrician</code> (from the Actor's README):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;state&quot;: &quot;TX&quot;,
+  &quot;board&quot;: &quot;TDLR&quot;,
+  &quot;source&quot;: &quot;TX_TDLR&quot;,
+  &quot;licenseNumber&quot;: &quot;3365&quot;,
+  &quot;licenseType&quot;: &quot;Master Electrician&quot;,
+  &quot;licenseSubtype&quot;: &quot;ME&quot;,
+  &quot;profession&quot;: &quot;Electrical&quot;,
+  &quot;status&quot;: &quot;ACTIVE&quot;,
+  &quot;rawStatus&quot;: null,
+  &quot;statusDerived&quot;: true,
+  &quot;holderName&quot;: &quot;Womack, Thomas F&quot;,
+  &quot;businessName&quot;: null,
+  &quot;issueDate&quot;: null,
+  &quot;expirationDate&quot;: &quot;2027-03-19&quot;,
+  &quot;county&quot;: &quot;Walker&quot;,
+  &quot;disciplinaryActionFlag&quot;: null,
+  &quot;sourceUrl&quot;: &quot;https://www.tdlr.texas.gov/LicenseSearch/&quot;,
+  &quot;sourceRecordId&quot;: &quot;MASTER ELECTRICIAN#3365&quot;,
+  &quot;query&quot;: &quot;TX:3365:Master Electrician&quot;,
+  &quot;found&quot;: true,
+  &quot;verified&quot;: true,
+  &quot;verificationNotes&quot;: [
+    &quot;Active; expires 2027-03-19.&quot;,
+    &quot;Status derived from the expiration date because the source publishes no status field.&quot;,
+    &quot;Confirm with the issuing board before relying on this result.&quot;
+  ]
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Check a contractor's trade license</h3>
+<p>Look up an electrician or HVAC contractor by number in TDLR, or a Florida contractor in DBPR, and read the status and expiration date.</p>
+<h3>Bulk provider lookups</h3>
+<p>Send a list of NPIs or names to the NPI Registry and get taxonomy codes and the self-reported state license number for each.</p>
+<h3>Status-change watch</h3>
+<p>Turn on <code>monitor</code> to write only licenses that are new, changed (status or expiration) or removed since the last run.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. One NPI and one Texas name search in verify mode (the Actor's own quick-start input):</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~us-license-verifier/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;queries&quot;: [
+    &quot;npi:1003000126&quot;,
+    &quot;name:John Smith:TX&quot;
+  ],
+  &quot;lookups&quot;: [],
+  &quot;mode&quot;: &quot;verify&quot;,
+  &quot;sources&quot;: [
+    &quot;TX_TDLR&quot;,
+    &quot;FL_DBPR&quot;,
+    &quot;CO_DORA&quot;,
+    &quot;WA_DOH&quot;,
+    &quot;NPI&quot;
+  ],
+  &quot;maxResultsPerQuery&quot;: 5,
+  &quot;maxResults&quot;: 20,
+  &quot;monitor&quot;: false
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-us-license-verifier&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/us-license-verifier&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Is Texas master electrician license 3365 active, and when does it expire?</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/us-license-verifier">examples/us-license-verifier</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Which states are covered?</h3>
+<p>Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry.</p>
+<h3>What does <code>verified</code> mean?</h3>
+<p>The license was found, its status is ACTIVE and the expiration date is today or later. Statuses such as "Active - With Conditions" normalize to PROBATION and do not verify.</p>
+<h3>Is this the board's official verification?</h3>
+<p>No. It reads the boards' public records and links each one. Confirm with the issuing board before relying on a result.</p>
+<h3>Why do I get several records for one number?</h3>
+<p>License numbers repeat across license types in Texas and Colorado. Add the type, for example <code>TX:3365:Master Electrician</code>.</p>
+<h3>Does it need proxies or a key?</h3>
+<p>No. A free Socrata app token is optional and only raises rate limits on the Texas, Colorado and Washington datasets.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>License Verification API — TDLR, DBPR, DORA, WA DOH, NPI. Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry.</p>
+<p><a class="button" href="https://apify.com/owlabee/us-license-verifier">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../building-permits-api/">Building Permits API: 61 US Open-Data Portals as JSON</a></li>
+<li><a href="../osha-inspections-by-company/">OSHA Inspections by Company: DOL Data API Lookup</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>
