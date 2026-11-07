@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-drone-roof-inspection-report": {
+      "url": "https://mcp.apify.com/?tools=owlabee/drone-roof-inspection-report",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

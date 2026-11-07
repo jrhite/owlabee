@@ -1,0 +1,44 @@
+{
+  "urls": [
+    "https://www.irs.gov/pub/irs-pdf/fw9.pdf"
+  ],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Title of the form"
+      },
+      "formNumber": {
+        "type": "string",
+        "description": "The form number, e.g. W-9 or 1040"
+      },
+      "revisionDate": {
+        "type": "string",
+        "format": "date",
+        "description": "Revision date of the form"
+      },
+      "issuer": {
+        "type": "string",
+        "description": "Agency or organization that issues the form"
+      },
+      "fields": {
+        "type": "array",
+        "description": "The numbered fields a filer completes",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "extractor": "rules",
+  "includeMarkdown": false
+}

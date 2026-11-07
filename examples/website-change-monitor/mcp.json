@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-website-change-monitor": {
+      "url": "https://mcp.apify.com/?tools=owlabee/website-change-monitor",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

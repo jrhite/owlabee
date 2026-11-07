@@ -1,0 +1,8 @@
+{
+  "storeUrls": [
+    "allbirds.com",
+    "www.deathwishcoffee.com"
+  ],
+  "mode": "snapshot",
+  "maxProductsPerStore": 100
+}

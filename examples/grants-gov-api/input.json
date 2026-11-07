@@ -1,0 +1,16 @@
+{
+  "keywords": [
+    "small business"
+  ],
+  "sources": [
+    "grantsGov"
+  ],
+  "oppStatuses": [
+    "posted"
+  ],
+  "postedWithinDays": 14,
+  "maxResults": 25,
+  "fetchDetails": false,
+  "includeRecentAwards": false,
+  "onlyNewSinceLastRun": false
+}

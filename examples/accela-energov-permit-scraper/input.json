@@ -1,0 +1,12 @@
+{
+  "jurisdictions": [
+    "overland-park-ks",
+    "southlake-tx"
+  ],
+  "issuedWithinDays": 7,
+  "maxResultsPerJurisdiction": 25,
+  "maxSecondsPerJurisdiction": 900,
+  "includeDetails": false,
+  "onlyNewSinceLastRun": false,
+  "includeRaw": false
+}

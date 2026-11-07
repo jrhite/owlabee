@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-grants-gov-api": {
+      "url": "https://mcp.apify.com/?tools=owlabee/grants-gov-api",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

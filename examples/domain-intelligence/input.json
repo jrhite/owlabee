@@ -1,0 +1,13 @@
+{
+  "domains": [
+    "example.com",
+    "apify.com",
+    "github.com"
+  ],
+  "sections": [
+    "whois",
+    "dns",
+    "tls",
+    "http"
+  ]
+}

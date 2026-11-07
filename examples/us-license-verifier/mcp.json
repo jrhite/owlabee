@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-us-license-verifier": {
+      "url": "https://mcp.apify.com/?tools=owlabee/us-license-verifier",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

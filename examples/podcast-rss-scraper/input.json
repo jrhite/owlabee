@@ -1,0 +1,7 @@
+{
+  "feeds": [
+    "https://feeds.npr.org/510318/podcast.xml",
+    "https://podnews.net/rss"
+  ],
+  "maxEpisodesPerFeed": 10
+}

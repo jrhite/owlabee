@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-product-recall-feed": {
+      "url": "https://mcp.apify.com/?tools=owlabee/product-recall-feed",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

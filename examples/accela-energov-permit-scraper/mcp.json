@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-accela-energov-permit-scraper": {
+      "url": "https://mcp.apify.com/?tools=owlabee/accela-energov-permit-scraper",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

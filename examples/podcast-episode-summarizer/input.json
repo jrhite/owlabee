@@ -1,0 +1,7 @@
+{
+  "feeds": [
+    "https://podnews.net/rss"
+  ],
+  "maxEpisodesPerFeed": 2,
+  "summarizer": "extractive"
+}

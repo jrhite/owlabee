@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-building-permits-scraper": {
+      "url": "https://mcp.apify.com/?tools=owlabee/building-permits-scraper",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

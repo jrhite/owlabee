@@ -1,0 +1,9 @@
+{
+  "boards": [
+    "greenhouse:stripe",
+    "lever:spotify"
+  ],
+  "mode": "jobs",
+  "includeDescription": false,
+  "maxJobsPerBoard": 50
+}

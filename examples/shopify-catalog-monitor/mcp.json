@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-shopify-catalog-monitor": {
+      "url": "https://mcp.apify.com/?tools=owlabee/shopify-catalog-monitor",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

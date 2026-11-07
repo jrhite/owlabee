@@ -1,0 +1,8 @@
+{
+  "mode": "authorFeed",
+  "queries": [
+    "bsky.app"
+  ],
+  "maxResults": 20,
+  "sort": "latest"
+}

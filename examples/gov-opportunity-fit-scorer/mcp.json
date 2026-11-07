@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-gov-opportunity-fit-scorer": {
+      "url": "https://mcp.apify.com/?tools=owlabee/gov-opportunity-fit-scorer",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}
