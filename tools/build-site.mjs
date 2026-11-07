@@ -200,11 +200,11 @@ ${p.related.map((s) => `<li><a href="../${s}/">${esc(pageBySlug[s].title)}</a></
 
 function indexPage() {
   const description =
-    'Guides to public data sources (permits, Grants.gov, SAM.gov, OSHA, EPA ECHO, recalls, PACER RSS, licenses, DNS, sitemaps, Shopify) and how to get them as JSON.';
+    'Guides to public data (permits, grants, SAM.gov, OSHA, EPA, recalls, PACER, licenses, DNS, sitemaps, Shopify, podcasts, Bluesky, job boards) and documents as JSON.';
   const groups = [...new Set(actors.map((a) => a.group))];
   const body = `
 <h1>Public data sources as JSON</h1>
-<p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps and storefronts) and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl or from an AI agent.</p>
+<p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl or from an AI agent.</p>
 <p class="note">Every Actor is pay per result, billed to your own Apify account; see each Store page for current pricing.</p>
 
 <section id="guides">
