@@ -4,7 +4,7 @@ owlabee publishes <!-- count -->18<!-- /count --> pay-per-result [Apify](https:/
 
 This repo has runnable examples for each Actor: curl, Python, Node.js and an MCP config for AI agents. Each Actor is billed per result to your own Apify account; see its Store page for current pricing.
 
-Guides to the data sources: **<!-- site -->[owlabee.github.io/owlabee](https://owlabee.github.io/owlabee/)<!-- /site -->**
+Guides to the data sources: **<!-- site -->[owlabee.com](https://owlabee.com/)<!-- /site -->**
 
 ## Actors
 

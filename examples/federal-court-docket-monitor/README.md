@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/federal-court-docket-monitor](https://apify.com/owlabee/federal-court-docket-monitor) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://owlabee.github.io/owlabee/pacer-rss-docket-monitor/](https://owlabee.github.io/owlabee/pacer-rss-docket-monitor/)
+Guide on the site: [https://owlabee.com/pacer-rss-docket-monitor/](https://owlabee.com/pacer-rss-docket-monitor/)
 
 Reads the free public RSS feeds that federal district and bankruptcy courts publish from CM/ECF, normalizes every docket entry, and filters by party name, case number, case type, entry type, keyword or bankruptcy chapter. Monitor mode flags only entries that are new since the last run. An optional pass reads older dockets from the RECAP archive through the CourtListener API.
 

@@ -8,8 +8,8 @@
     "source": "github",
     "subfolder": "mcp/documents-to-data"
   },
-  "websiteUrl": "https://apify.com/owlabee",
-  "version": "1.0.0",
+  "websiteUrl": "https://owlabee.com/",
+  "version": "1.0.1",
   "remotes": [
     {
       "type": "streamable-http",

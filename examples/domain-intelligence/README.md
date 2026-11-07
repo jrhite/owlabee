@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/domain-intelligence](https://apify.com/owlabee/domain-intelligence) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://owlabee.github.io/owlabee/spf-dmarc-dkim-checker/](https://owlabee.github.io/owlabee/spf-dmarc-dkim-checker/)
+Guide on the site: [https://owlabee.com/spf-dmarc-dkim-checker/](https://owlabee.com/spf-dmarc-dkim-checker/)
 
 Checks a list of domains and returns one record per domain: RDAP WHOIS registration data, DNS records, SPF, DMARC, DKIM (18 common selectors plus yours), MTA-STS and BIMI with an email security score from 0 to 100, TLS certificate expiry, HTTP security headers and tech stack hints. It uses public RDAP, DNS-over-HTTPS and each domain's own public endpoints.
 
