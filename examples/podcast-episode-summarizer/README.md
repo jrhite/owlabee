@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/podcast-episode-summarizer](https://apify.com/owlabee/podcast-episode-summarizer) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/podcast-summarizer/](https://owlabee.com/podcast-summarizer/)
+
 Summarizes podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items, built from the episode's Podcasting 2.0 transcript (show notes when there is none). The extractive mode needs no model; Claude summaries are available with your own Anthropic key or the hosted tiers.
 
 ## Inputs that matter

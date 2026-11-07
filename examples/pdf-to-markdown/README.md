@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/pdf-to-markdown](https://apify.com/owlabee/pdf-to-markdown) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/pdf-to-markdown-rag/](https://owlabee.com/pdf-to-markdown-rag/)
+
 Converts PDF, DOCX, HTML, Markdown and text documents from URLs into Markdown with headings, lists, tables and links, plus metadata. Optional heading-aware chunks are ready for embedding, and optional OCR handles scanned pages. No browser and no external API.
 
 ## Inputs that matter

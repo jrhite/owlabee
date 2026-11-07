@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podcast Summarizer: Chapters and Quotes from Transcripts | owlabee</title>
+<meta name="description" content="Summarize podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items from published transcripts.">
+<link rel="canonical" href="https://owlabee.com/podcast-summarizer/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Podcast Summarizer: Chapters and Quotes from Transcripts | owlabee">
+<meta property="og:description" content="Summarize podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items from published transcripts.">
+<meta property="og:url" content="https://owlabee.com/podcast-summarizer/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Podcast Summarizer: Chapters and Quotes from Transcripts","description":"Summarize podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items from published transcripts.","url":"https://owlabee.com/podcast-summarizer/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/podcast-episode-summarizer"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/podcast-episode-summarizer","name":"Podcast Episode Summarizer (AI) — Transcript to Summary","description":"Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes","url":"https://apify.com/owlabee/podcast-episode-summarizer","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it transcribe audio?","acceptedAnswer":{"@type":"Answer","text":"No. It uses the transcript file the podcast publishes, or the show notes when there is none."}},{"@type":"Question","name":"Can I pass an Apple Podcasts link or just a show name?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apple links and IDs are resolved with the iTunes Lookup API, and search:show name takes the top iTunes Search match with a public feed."}},{"@type":"Question","name":"Which summarizer should I use?","acceptedAnswer":{"@type":"Answer","text":"Extractive for bulk back catalogs, indexing and monitoring; a model mode when you want written abstracts and chapter titles in prose."}},{"@type":"Question","name":"Can I summarize specific episodes only?","acceptedAnswer":{"@type":"Answer","text":"Yes. List episode GUIDs, episode page URLs or audio URLs in episodes. GUIDs from the podcast RSS scraper work directly."}},{"@type":"Question","name":"What if a transcript cannot be downloaded?","acceptedAnswer":{"@type":"Answer","text":"The show notes are summarized instead, and an episode with neither produces a NO_TEXT error item."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap header-row">
+<a class="brand" href="../">owlabee</a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Podcast summarizer</nav>
+<article>
+<h1>Podcast Summarizer: Chapters and Quotes from Transcripts</h1>
+<p class="lede">Many podcasts now publish a transcript file with each episode. This Actor reads it, falls back to the show notes when there is none, and writes a structured summary per episode: an abstract, key topics, chapters with timestamps, notable quotes, named guests and action items.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/podcast-episode-summarizer">Open the Actor on Apify Store</a>
+<p class="note">Podcast Episode Summarizer (AI) — Transcript to Summary. Pay per result; see the Store page for current pricing.</p>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<p>Input is a list of <strong>RSS or Atom feed URLs</strong>, <strong>Apple Podcasts show links</strong> or IDs, or <code>search:&lt;show name&gt;</code> terms. Apple links and searches are resolved through Apple's public iTunes Lookup and Search API, which needs no key.</p>
+<p>For each episode the Actor downloads the <strong>Podcasting 2.0</strong> <code>&lt;podcast:transcript&gt;</code> file the feed links (text, WebVTT, SRT, JSON or HTML, up to 2 MB). It does not download or transcribe audio. When an episode has no transcript, the show notes are summarized instead and <code>transcriptSource</code> says <code>description</code>; chapters and quote timestamps are then empty.</p>
+<h3>Three summarizers</h3>
+<ul>
+<li><strong><code>extractive</code></strong>: no language model. A deterministic summary that picks sentences and keywords from the text itself, so topics, chapters and quotes are verbatim.</li>
+<li><strong><code>byok</code></strong>: Claude writes the summary with the Anthropic API key you supply, on a <code>fast</code>, <code>balanced</code> or <code>best</code> tier.</li>
+<li><strong><code>hosted</code></strong>: Claude on the Actor's own key. This is what an empty <code>summarizer</code> means when the Actor's model key is configured. If the model fails, the episode gets the extractive summary, marked <code>extractive-fallback</code>.</li>
+</ul>
+<p>Each mode is priced differently; see the Store page.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>Named guests come from <code>&lt;podcast:person role="guest"&gt;</code> tags and speaker labels; the show's author and the first voice of an episode are treated as hosts.</li>
+<li>The extractive summarizer makes chapters only for texts of 300 words or more, about one per 800 words, up to 8.</li>
+<li>Model modes cut transcripts at <code>maxInputTokens</code> (at most 40,000 tokens, about three hours of speech) and say so on the item.</li>
+<li>Apple lookups are limited to about 20 requests per minute.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>showTitle, title, pubDate, durationSeconds</code></td><td>The episode</td></tr>
+<tr><td><code>audioUrl, link, episodeGuid</code></td><td>Where the episode lives</td></tr>
+<tr><td><code>transcriptSource, transcriptUrl, transcriptFormat, transcriptWords</code></td><td><code>transcript</code> or <code>description</code>, and the transcript used</td></tr>
+<tr><td><code>summary.abstract</code></td><td>A short abstract of the episode</td></tr>
+<tr><td><code>summary.keyTopics</code></td><td>Key topics</td></tr>
+<tr><td><code>summary.chapters</code></td><td>Chapters with titles, summaries and start times where the transcript has them</td></tr>
+<tr><td><code>summary.notableQuotes</code></td><td>Quotes with speaker and timestamp</td></tr>
+<tr><td><code>summary.namedGuests, summary.actionItems</code></td><td>Guests and action items mentioned</td></tr>
+<tr><td><code>summaryMethod, modelTier</code></td><td><code>extractive</code>, <code>byok</code>, <code>hosted</code> or <code>extractive-fallback</code></td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>One Podnews Daily episode summarized in extractive mode (from the Actor's README; shortened):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;recordType&quot;: &quot;episode&quot;,
+  &quot;feedUrl&quot;: &quot;https://podnews.net/rss&quot;,
+  &quot;showTitle&quot;: &quot;Podnews Daily - podcast industry and podcasting news&quot;,
+  &quot;title&quot;: &quot;PAVE Studios shows head to Disney+ and Hulu&quot;,
+  &quot;pubDate&quot;: &quot;2026-10-16T10:09:41.000Z&quot;,
+  &quot;durationSeconds&quot;: 291,
+  &quot;transcriptSource&quot;: &quot;transcript&quot;,
+  &quot;transcriptFormat&quot;: &quot;vtt&quot;,
+  &quot;transcriptWords&quot;: 724,
+  &quot;summaryMethod&quot;: &quot;extractive&quot;,
+  &quot;summary&quot;: {
+    &quot;abstract&quot;: &quot;Meanwhile, in Australia, podcast publisher Mammamia is to make it to Samsung TV Plus as a streaming TV channel. …&quot;,
+    &quot;keyTopics&quot;: [
+      &quot;adam curry&quot;,
+      &quot;youtube short&quot;,
+      &quot;samsung tv&quot;,
+      &quot;tv plus&quot;,
+      &quot;pave studios&quot;
+    ],
+    &quot;chapters&quot;: [
+      {
+        &quot;title&quot;: &quot;Adam Curry &amp; Youtube Short&quot;,
+        &quot;summary&quot;: &quot;YouTube leads in almost every territory, with 32% market share globally …&quot;,
+        &quot;startTime&quot;: 0,
+        &quot;startTimestamp&quot;: &quot;0:00&quot;
+      }
+    ],
+    &quot;notableQuotes&quot;: [
+      {
+        &quot;quote&quot;: &quot;Adam Curry is to step back from No Agenda, with the show on October the 29th being his last.&quot;,
+        &quot;speaker&quot;: &quot;James Cridland&quot;,
+        &quot;timestamp&quot;: &quot;1:29&quot;
+      }
+    ],
+    &quot;namedGuests&quot;: [
+      &quot;Adam Curry&quot;
+    ],
+    &quot;actionItems&quot;: [
+      &quot;You can find out more with a link in our show notes.&quot;
+    ]
+  },
+  &quot;fetchedAt&quot;: &quot;2026-10-16T15:33:45.237Z&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Show notes and newsletters</h3>
+<p>Get chapters, quotes and an abstract for each new episode of the shows you cover, ready to edit into notes or a newsletter.</p>
+<h3>Media monitoring</h3>
+<p>Search summaries and quotes for a brand or topic to see what was said, by whom and at what minute.</p>
+<h3>Indexing a back catalog</h3>
+<p>Run the extractive summarizer over many episodes for search indexes. It needs no key and returns topics and quotes verbatim from the transcript.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. Extractive summaries (no model) for the three newest episodes of one feed:</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~podcast-episode-summarizer/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;feeds&quot;: [
+    &quot;https://rss.buzzsprout.com/1538779.rss&quot;
+  ],
+  &quot;maxEpisodesPerFeed&quot;: 3,
+  &quot;summarizer&quot;: &quot;extractive&quot;,
+  &quot;maxConcurrency&quot;: 3
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-podcast-episode-summarizer&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/podcast-episode-summarizer&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Summarize the two latest episodes of The Daily with chapters, notable quotes and the guests mentioned.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/podcast-episode-summarizer">examples/podcast-episode-summarizer</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does it transcribe audio?</h3>
+<p>No. It uses the transcript file the podcast publishes, or the show notes when there is none.</p>
+<h3>Can I pass an Apple Podcasts link or just a show name?</h3>
+<p>Yes. Apple links and IDs are resolved with the iTunes Lookup API, and <code>search:show name</code> takes the top iTunes Search match with a public feed.</p>
+<h3>Which summarizer should I use?</h3>
+<p>Extractive for bulk back catalogs, indexing and monitoring; a model mode when you want written abstracts and chapter titles in prose.</p>
+<h3>Can I summarize specific episodes only?</h3>
+<p>Yes. List episode GUIDs, episode page URLs or audio URLs in <code>episodes</code>. GUIDs from the <a href="../podcast-rss-feed-scraper/">podcast RSS scraper</a> work directly.</p>
+<h3>What if a transcript cannot be downloaded?</h3>
+<p>The show notes are summarized instead, and an episode with neither produces a <code>NO_TEXT</code> error item.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Podcast Episode Summarizer (AI) — Transcript to Summary. Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes.</p>
+<p><a class="button" href="https://apify.com/owlabee/podcast-episode-summarizer">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../podcast-rss-feed-scraper/">Podcast RSS Feed Scraper: Episodes and Transcripts as JSON</a></li>
+<li><a href="../pdf-to-markdown-rag/">PDF to Markdown for RAG: Headings, Tables, Chunks and OCR</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+</div>
+</footer>
+</body>
+</html>
