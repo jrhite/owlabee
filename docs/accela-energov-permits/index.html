@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Accela Citizen Access and EnerGov Permit Data as JSON | owlabee</title>
 <meta name="description" content="Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.">
-<link rel="canonical" href="https://jrhite.github.io/owlabee/accela-energov-permits/">
+<link rel="canonical" href="https://owlabee.github.io/owlabee/accela-energov-permits/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="Accela Citizen Access and EnerGov Permit Data as JSON | owlabee">
 <meta property="og:description" content="Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.">
-<meta property="og:url" content="https://jrhite.github.io/owlabee/accela-energov-permits/">
+<meta property="og:url" content="https://owlabee.github.io/owlabee/accela-energov-permits/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Accela Citizen Access and EnerGov Permit Data as JSON","description":"Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.","url":"https://jrhite.github.io/owlabee/accela-energov-permits/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://jrhite.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/accela-energov-permit-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/accela-energov-permit-scraper","name":"Accela Citizen Access & EnerGov Permit Scraper (Any City)","description":"Permits from Accela Citizen Access and Tyler EnerGov portals in 31 cities and counties, in the same schema as the open-data scraper","url":"https://apify.com/owlabee/accela-energov-permit-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which portals are supported?","acceptedAnswer":{"@type":"Answer","text":"The 31 jurisdictions in the registry, or all, all-energov and all-accela. Portals that load search through partial postbacks or show reCAPTCHA are not supported."}},{"@type":"Question","name":"Why is issuedDate null on Accela portals?","acceptedAnswer":{"@type":"Answer","text":"ACA's General Search lists records by application date and shows no issue date. status tells you whether the permit was issued."}},{"@type":"Question","name":"Does it need proxies or a login?","acceptedAnswer":{"@type":"Answer","text":"No. Both portal families answer plain HTTPS requests for every jurisdiction in the registry."}},{"@type":"Question","name":"Can you add my city?","acceptedAnswer":{"@type":"Answer","text":"If it runs EnerGov Citizen Self Service or Accela Citizen Access with a public General Search page, usually yes. Ask on the Store page."}},{"@type":"Question","name":"How do I keep runs small?","acceptedAnswer":{"@type":"Answer","text":"Use a short issuedWithinDays, cap maxResultsPerJurisdiction, leave includeDetails off unless you need valuation or contractor fields, and set a maximum total charge."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Accela Citizen Access and EnerGov Permit Data as JSON","description":"Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.","url":"https://owlabee.github.io/owlabee/accela-energov-permits/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.github.io/owlabee/"},"about":{"@id":"https://apify.com/owlabee/accela-energov-permit-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/accela-energov-permit-scraper","name":"Accela Citizen Access & EnerGov Permit Scraper (Any City)","description":"Permits from Accela Citizen Access and Tyler EnerGov portals in 31 cities and counties, in the same schema as the open-data scraper","url":"https://apify.com/owlabee/accela-energov-permit-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which portals are supported?","acceptedAnswer":{"@type":"Answer","text":"The 31 jurisdictions in the registry, or all, all-energov and all-accela. Portals that load search through partial postbacks or show reCAPTCHA are not supported."}},{"@type":"Question","name":"Why is issuedDate null on Accela portals?","acceptedAnswer":{"@type":"Answer","text":"ACA's General Search lists records by application date and shows no issue date. status tells you whether the permit was issued."}},{"@type":"Question","name":"Does it need proxies or a login?","acceptedAnswer":{"@type":"Answer","text":"No. Both portal families answer plain HTTPS requests for every jurisdiction in the registry."}},{"@type":"Question","name":"Can you add my city?","acceptedAnswer":{"@type":"Answer","text":"If it runs EnerGov Citizen Self Service or Accela Citizen Access with a public General Search page, usually yes. Ask on the Store page."}},{"@type":"Question","name":"How do I keep runs small?","acceptedAnswer":{"@type":"Answer","text":"Use a short issuedWithinDays, cap maxResultsPerJurisdiction, leave includeDetails off unless you need valuation or contractor fields, and set a maximum total charge."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -25,7 +25,7 @@
 <nav aria-label="Site">
 <a href="../#guides">Guides</a>
 <a href="../#actors">All Actors</a>
-<a href="https://github.com/jrhite/owlabee">GitHub</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
 </nav>
 </div>
 </header>
@@ -153,7 +153,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Find the roofing permits issued in Hernando County, Florida this week and list each address with the contractor who pulled it.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/jrhite/owlabee/tree/main/examples/accela-energov-permit-scraper">examples/accela-energov-permit-scraper</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/accela-energov-permit-scraper">examples/accela-energov-permit-scraper</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -189,7 +189,7 @@ curl -sS -X POST \
 <footer class="site-footer">
 <div class="wrap">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/jrhite/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies, scripts or trackers on this site.</p>
 </div>
 </footer>
 </body>

@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/website-change-monitor](https://apify.com/owlabee/website-change-monitor) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://jrhite.github.io/owlabee/sitemap-change-monitor/](https://jrhite.github.io/owlabee/sitemap-change-monitor/)
+Guide on the site: [https://owlabee.github.io/owlabee/sitemap-change-monitor/](https://owlabee.github.io/owlabee/sitemap-change-monitor/)
 
 Discovers every page of a site through its sitemaps (robots.txt, sitemap indexes, gzipped and text sitemaps). Discover mode lists the URLs with lastmod. Monitor mode keeps a snapshot per site and reports new, removed, lastmod-changed, content-changed and status-changed pages, with a word-level preview and a severity for each change. No browser is used.
 

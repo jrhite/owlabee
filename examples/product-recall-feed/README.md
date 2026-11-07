@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/product-recall-feed](https://apify.com/owlabee/product-recall-feed) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://jrhite.github.io/owlabee/product-recalls-api/](https://jrhite.github.io/owlabee/product-recalls-api/)
+Guide on the site: [https://owlabee.github.io/owlabee/product-recalls-api/](https://owlabee.github.io/owlabee/product-recalls-api/)
 
 Pulls US product recalls from openFDA enforcement reports, NHTSA and CPSC through their official public APIs and writes each recall in one normalized record: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Filter by date, keyword, firm, product type or vehicle; changes mode emits only recalls not seen before.
 

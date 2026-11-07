@@ -2,7 +2,7 @@
 
 Apify Store: [apify.com/owlabee/grants-gov-api](https://apify.com/owlabee/grants-gov-api) · Pay per result; see the Store page for current pricing.
 
-Guide on the site: [https://jrhite.github.io/owlabee/grants-gov-api/](https://jrhite.github.io/owlabee/grants-gov-api/)
+Guide on the site: [https://owlabee.github.io/owlabee/grants-gov-api/](https://owlabee.github.io/owlabee/grants-gov-api/)
 
 Searches the official Grants.gov API (no key) and the SAM.gov Get Opportunities API (free personal key) by keyword, optionally adds recent USAspending.gov awards and six state and local open-data bid datasets, and normalizes every record to the same field names. Monitor mode flags records as new or updated since the last run.
 

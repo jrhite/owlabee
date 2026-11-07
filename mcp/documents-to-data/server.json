@@ -1,10 +1,10 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.jrhite/documents-to-data",
+  "name": "io.github.owlabee/documents-to-data",
   "title": "Documents to Data (PDF to Markdown, document to JSON)",
   "description": "Turn PDFs, documents, podcasts and drone photos into Markdown, structured JSON, summaries, reports.",
   "repository": {
-    "url": "https://github.com/jrhite/owlabee",
+    "url": "https://github.com/owlabee/owlabee",
     "source": "github",
     "subfolder": "mcp/documents-to-data"
   },

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       servers:
-        description: "Space-separated server names, e.g. io.github.jrhite/web-monitoring"
+        description: "Space-separated server names, e.g. io.github.owlabee/web-monitoring"
         required: true
       status:
         description: "active, deprecated or deleted"
