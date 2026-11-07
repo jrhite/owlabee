@@ -1,0 +1,622 @@
+[
+  {
+    "name": "accela-energov-permit-scraper",
+    "title": "Accela Citizen Access & EnerGov Permit Scraper (Any City)",
+    "input": {
+      "jurisdictions": [
+        "overland-park-ks",
+        "southlake-tx"
+      ],
+      "issuedWithinDays": 7,
+      "maxResultsPerJurisdiction": 25,
+      "maxSecondsPerJurisdiction": 900,
+      "includeDetails": false,
+      "onlyNewSinceLastRun": false,
+      "includeRaw": false
+    },
+    "sample": {
+      "jurisdiction": "hernando-county-fl",
+      "jurisdictionName": "Hernando County, FL",
+      "permitNumber": "ELER-000154-2026",
+      "permitType": "General Electric - Residential",
+      "status": "Issued",
+      "appliedDate": "2026-10-14T10:40:15",
+      "issuedDate": "2026-10-16T15:12:23",
+      "estimatedCost": 3630,
+      "address": "1234 Example Ave, SPRING HILL, FL, 34606",
+      "contractorName": "RIVERA'S ELECTRIC INC.",
+      "sourceUrl": "https://hernandocountyfl-energovweb.tylerhost.net/apps/selfservice#/permit/8c0f…",
+      "fetchedAt": "2026-10-17T10:50:12.345Z",
+      "isNew": true
+    }
+  },
+  {
+    "name": "ats-hiring-signals",
+    "title": "Hiring Signals & ATS Jobs Scraper — Greenhouse, Lever, Ashby",
+    "input": {
+      "boards": [
+        "greenhouse:stripe",
+        "lever:spotify"
+      ],
+      "mode": "jobs",
+      "includeDescription": false,
+      "maxJobsPerBoard": 50
+    },
+    "sample": {
+      "type": "job",
+      "provider": "greenhouse",
+      "boardId": "stripe",
+      "title": "Senior Backend Engineer, Payments",
+      "department": "Engineering",
+      "location": "San Francisco, CA",
+      "remote": false,
+      "postedAt": "2026-09-01T16:00:00.000Z",
+      "applyUrl": "https://boards.greenhouse.io/stripe/jobs/4012345007",
+      "fetchedAt": "2026-10-16T12:00:00.000Z"
+    }
+  },
+  {
+    "name": "bluesky-monitor",
+    "title": "Bluesky Monitor & Scraper — Posts, Keywords, Followers",
+    "input": {
+      "mode": "authorFeed",
+      "queries": [
+        "bsky.app"
+      ],
+      "maxResults": 20,
+      "sort": "latest"
+    },
+    "sample": {
+      "type": "post",
+      "query": "apify",
+      "authorHandle": "bsky.app",
+      "text": "We shipped a new Apify integration today! Try the open API: https://docs.bsky.app",
+      "createdAt": "2026-10-15T18:02:11.482Z",
+      "likeCount": 310,
+      "repostCount": 40,
+      "replyCount": 12,
+      "quoteCount": 5,
+      "hasImages": true,
+      "postUrl": "https://bsky.app/profile/bsky.app/post/3l6oveex3ii2l",
+      "fetchedAt": "2026-10-16T12:40:32.064Z"
+    }
+  },
+  {
+    "name": "building-permits-scraper",
+    "title": "Building Permits Scraper — Roofing & Construction Leads",
+    "input": {
+      "jurisdictions": [
+        "chicago",
+        "seattle"
+      ],
+      "issuedWithinDays": 7,
+      "maxResultsPerJurisdiction": 25,
+      "onlyNewSinceLastRun": false,
+      "includeRaw": false
+    },
+    "sample": {
+      "jurisdiction": "nyc",
+      "jurisdictionName": "New York City, NY",
+      "permitNumber": "B01186301-S6-MS",
+      "permitType": "Mechanical Systems",
+      "status": "Permit Issued",
+      "issuedDate": "2026-10-14",
+      "estimatedCost": null,
+      "address": "280 BERGEN STREET",
+      "contractorName": "DEVELOPING NY STATE LLC",
+      "contractorPhone": null,
+      "sourceUrl": "https://data.cityofnewyork.us/d/rbx6-tga4",
+      "fetchedAt": "2026-10-16T13:25:32.995Z"
+    }
+  },
+  {
+    "name": "document-to-json-extractor",
+    "title": "PDF & Document to JSON Extractor (AI) — Invoices, Forms",
+    "input": {
+      "urls": [
+        "https://www.irs.gov/pub/irs-pdf/fw9.pdf"
+      ],
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the form"
+          },
+          "formNumber": {
+            "type": "string",
+            "description": "The form number, e.g. W-9 or 1040"
+          },
+          "revisionDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Revision date of the form"
+          },
+          "issuer": {
+            "type": "string",
+            "description": "Agency or organization that issues the form"
+          },
+          "fields": {
+            "type": "array",
+            "description": "The numbered fields a filer completes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "extractor": "rules",
+      "includeMarkdown": false
+    },
+    "sample": {
+      "recordType": "document",
+      "url": "https://www.irs.gov/pub/irs-pdf/fw9.pdf",
+      "filename": "fw9.pdf",
+      "pages": 6,
+      "title": "Form W-9 (Rev. March 2024)",
+      "extractionMethod": "rules",
+      "data": {
+        "title": "Form W-9 (Rev. March 2024)",
+        "formNumber": "W-9",
+        "revisionDate": "2024-03",
+        "issuer": "Department of the Treasury",
+        "fields": [
+          {
+            "label": "Name of entity/individual",
+            "description": "An entry is required. (For a sole proprietor or disregarded entity, enter the owner’s name on line 1, and enter the business/disregarded …"
+          },
+          {
+            "label": "Business name/disregarded entity name, if different from above",
+            "description": null
+          },
+          {
+            "label": "Address (number, street, and apt. or suite no.)",
+            "description": "See instructions. Requester’s name and address (optional)"
+          }
+        ]
+      },
+      "overallConfidence": 0.58,
+      "filledFields": 5,
+      "totalFields": 5,
+      "fetchedAt": "2026-10-17T10:22:02.464Z"
+    }
+  },
+  {
+    "name": "domain-intelligence",
+    "title": "SPF, DMARC & DKIM Checker — Bulk Domain WHOIS, DNS & SSL",
+    "input": {
+      "domains": [
+        "example.com",
+        "apify.com",
+        "github.com"
+      ],
+      "sections": [
+        "whois",
+        "dns",
+        "tls",
+        "http"
+      ]
+    },
+    "sample": {
+      "domain": "github.com",
+      "fetchedAt": "2026-10-16T12:00:00.000Z",
+      "registrar": "MarkMonitor Inc.",
+      "expirationDate": "2026-10-09T18:20:50.000Z",
+      "mxProviderGuess": "google",
+      "dmarcPolicy": "reject",
+      "tlsDaysUntilExpiry": 112,
+      "httpStatusCode": 200,
+      "techHints": [
+        "Stripe"
+      ],
+      "emailSecurityScore": 95,
+      "summary": "github.com: registered via MarkMonitor Inc., expires in 358 days; MX google, SPF ok (~all), DMARC reject, DKIM google/pm, MTA-STS; email …"
+    }
+  },
+  {
+    "name": "drone-roof-inspection-report",
+    "title": "AI Drone Roof Inspection Report — Findings & Repair Scope",
+    "input": {
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/US_Navy_070706-N-3832S-057_Cyptologic_Technician_Technical_1st_Class_Jason_Guidry_nails_shingles_onto_the_roof_of_a_house_during_a_community_relations_project_with_Habitat_for_Humanity.jpg/960px-US_Navy_070706-N-3832S-057_Cyptologic_Technician_Technical_1st_Class_Jason_Guidry_nails_shingles_onto_the_roof_of_a_house_during_a_community_relations_project_with_Habitat_for_Humanity.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/US_Navy_090611-N-9712C-001_Aviation_Electronics_Technician_2nd_Class_Sonny_Abernathy_nails_shingles_to_the_roof_of_a_Habitat_for_Humanity_house.jpg/960px-US_Navy_090611-N-9712C-001_Aviation_Electronics_Technician_2nd_Class_Sonny_Abernathy_nails_shingles_to_the_roof_of_a_Habitat_for_Humanity_house.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Staggered_planks_on_the_roof_referred_to_as_%22skip_sheathing%22_forms_the_surface_for_new_cedar_shingles_to_be_attached_to_the_roof._%283d6d81ed-74ae-4577-b77a-8f05e2b5c48b%29.jpg/960px-Staggered_planks_on_the_roof_referred_to_as_%22skip_sheathing%22_forms_the_surface_for_new_cedar_shingles_to_be_attached_to_the_roof._%283d6d81ed-74ae-4577-b77a-8f05e2b5c48b%29.jpg"
+      ],
+      "analyzer": "rules"
+    },
+    "sample": {
+      "recordType": "photo",
+      "photoNumber": 3,
+      "url": "https://example.com/inspections/oak-ridge/DJI_0003.JPG",
+      "buildingLabel": "Building 1",
+      "analysisMethod": "hosted",
+      "view": "close-up",
+      "summary": "South slope near the eave; several missing tabs and a lifted row next to the plumbing vent.",
+      "findingCount": 2,
+      "confidence": 0.78,
+      "fetchedAt": "2026-10-19T09:12:44.118Z"
+    }
+  },
+  {
+    "name": "federal-court-docket-monitor",
+    "title": "PACER RSS Docket Monitor — New Federal Court Filings",
+    "input": {
+      "courts": [
+        "nysd"
+      ],
+      "newCasesOnly": false,
+      "maxEntriesPerCourt": 40,
+      "onlyNewSinceLastRun": false
+    },
+    "sample": {
+      "recordType": "docket-entry",
+      "court": "nysd",
+      "caseNumber": "1:26-cv-03810",
+      "caseTitle": "First-Citizens Bank & Trust Company v. Patriot Bank, N.A.",
+      "bankruptcyChapter": null,
+      "entryText": "Certificate of Service Other",
+      "entryCategory": "notice",
+      "documentNumber": 153,
+      "docketUrl": "https://ecf.nysd.uscourts.gov/cgi-bin/DktRpt.pl?663583",
+      "filedAt": "2026-10-17T07:34:33.000Z",
+      "isNew": true,
+      "source": "pacer-rss",
+      "fetchedAt": "2026-10-17T10:22:00.283Z"
+    }
+  },
+  {
+    "name": "gov-opportunity-fit-scorer",
+    "title": "Grant Matching & RFP Bid/No-Bid Scorer (AI) — Grants.gov",
+    "input": {
+      "companyProfile": {
+        "name": "Cascadia Civil Engineering",
+        "description": "Civil engineering firm with 40 staff, NAICS 541330, SBA small business, serving the Pacific Northwest; past EPA and USDA rural water and wastewater grants.",
+        "capabilities": [
+          "water infrastructure design",
+          "wastewater treatment",
+          "stormwater management",
+          "rural water systems",
+          "environmental engineering"
+        ],
+        "naicsCodes": [
+          "541330",
+          "237110"
+        ],
+        "setAsides": [
+          "SBA"
+        ],
+        "organizationType": "small business",
+        "businessSize": "small",
+        "locations": [
+          "WA",
+          "OR",
+          "ID"
+        ],
+        "keywords": [
+          "water",
+          "wastewater",
+          "infrastructure",
+          "drinking water",
+          "rural"
+        ],
+        "pastAwards": [
+          "EPA Water Infrastructure Improvements for the Nation",
+          "USDA Rural Development Water and Waste Disposal"
+        ],
+        "budgetRange": {
+          "min": 50000,
+          "max": 5000000
+        }
+      },
+      "searchTerms": [
+        "water infrastructure"
+      ],
+      "sources": [
+        "grantsGov"
+      ],
+      "oppStatuses": [
+        "posted"
+      ],
+      "postedWithinDays": 30,
+      "maxOpportunities": 25,
+      "scorer": "rules"
+    },
+    "sample": {
+      "source": "provided",
+      "recordType": "opportunity",
+      "title": "Wastewater Treatment Plant Engineering Services",
+      "agency": "City of Yakima",
+      "closeDate": "2026-12-15",
+      "url": "https://example.org/rfp/22",
+      "fitScore": 100,
+      "fitVerdict": "strong",
+      "disqualifiers": [],
+      "fitSummary": "Wastewater Treatment Plant Engineering Services (City of Yakima) scores 100/100 for Cascadia Civil Engineering, a strong fit. Matches you…",
+      "daysToClose": 59,
+      "scoreMethod": "rules",
+      "fetchedAt": "2026-10-17T10:26:20.692Z"
+    }
+  },
+  {
+    "name": "grants-gov-api",
+    "title": "Grants.gov API & SAM.gov Scraper — Federal Grants Feed",
+    "input": {
+      "keywords": [
+        "small business"
+      ],
+      "sources": [
+        "grantsGov"
+      ],
+      "oppStatuses": [
+        "posted"
+      ],
+      "postedWithinDays": 14,
+      "maxResults": 25,
+      "fetchDetails": false,
+      "includeRecentAwards": false,
+      "onlyNewSinceLastRun": false
+    },
+    "sample": {
+      "source": "grantsGov",
+      "recordType": "opportunity",
+      "title": "Small Business Development Centers Program",
+      "agency": "Small Business Administration",
+      "status": "posted",
+      "postedDate": "2026-10-10",
+      "closeDate": "2026-12-15",
+      "url": "https://www.grants.gov/search-results-detail/351083",
+      "isNew": true,
+      "jurisdiction": "United States",
+      "fetchedAt": "2026-10-16T12:00:00.000Z"
+    }
+  },
+  {
+    "name": "osha-epa-enforcement-report",
+    "title": "OSHA Inspections by Company + EPA Enforcement Report",
+    "input": {
+      "companies": [
+        "Tesla"
+      ],
+      "state": "CA",
+      "sources": [
+        "epa"
+      ]
+    },
+    "sample": {
+      "recordType": "enforcement-case",
+      "agency": "EPA",
+      "query": "Tesla",
+      "entityName": "Tesla Motors, Inc.",
+      "city": "FREMONT",
+      "state": "CA",
+      "actionDate": "2019-03-28",
+      "actionType": "Administrative - Formal",
+      "status": "Final Order Issued",
+      "penaltyUsd": 31000,
+      "sourceUrl": "https://echo.epa.gov/enforcement-case-report?id=09-2019-0029",
+      "matchConfidence": "medium",
+      "fetchedAt": "2026-11-01T13:01:08.211Z"
+    }
+  },
+  {
+    "name": "pdf-to-markdown",
+    "title": "PDF to Markdown for RAG — DOCX, OCR & Chunks",
+    "input": {
+      "urls": [
+        "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "https://arxiv.org/pdf/1706.03762v7"
+      ],
+      "chunk": false,
+      "ocr": false,
+      "saveToKeyValueStore": false
+    },
+    "sample": {
+      "recordType": "document",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "filename": "1706.03762v7.pdf",
+      "pages": 15,
+      "title": null,
+      "markdown": "<!-- page 1 -->\n\n# Attention Is All You Need\n\n| Ashish Vaswani∗ | Noam Shazeer∗ | ... |\n\n## Abstract\n\nThe dominant sequence transduction …",
+      "words": 6004,
+      "tables": 12,
+      "fetchedAt": "2026-10-16T13:20:00.000Z"
+    }
+  },
+  {
+    "name": "podcast-episode-summarizer",
+    "title": "Podcast Episode Summarizer (AI) — Transcript to Summary",
+    "input": {
+      "feeds": [
+        "https://podnews.net/rss"
+      ],
+      "maxEpisodesPerFeed": 2,
+      "summarizer": "extractive"
+    },
+    "sample": {
+      "recordType": "episode",
+      "showTitle": "Podnews Daily - podcast industry and podcasting news",
+      "title": "PAVE Studios shows head to Disney+ and Hulu",
+      "pubDate": "2026-10-16T10:09:41.000Z",
+      "durationSeconds": 291,
+      "transcriptSource": "transcript",
+      "summaryMethod": "extractive",
+      "summary": {
+        "abstract": "Meanwhile, in Australia, podcast publisher Mammamia is to make it to Samsung TV Plus as a streaming TV channel. YouTube leads in almost e…",
+        "keyTopics": [
+          "adam curry",
+          "youtube short",
+          "samsung tv"
+        ],
+        "chapters": [
+          {
+            "title": "Adam Curry & Youtube Short",
+            "summary": "YouTube leads in almost every territory, with 32% market share globally, and added 27 million users in 2025, suggests the research.",
+            "startTime": 0,
+            "startTimestamp": "0:00"
+          },
+          {
+            "title": "Apple & Norway",
+            "summary": "And in podcast news, the Vardø Witch Trials, an independent English-language documentary about Norway's deadliest witch hunt, is number o…",
+            "startTime": 157,
+            "startTimestamp": "2:37"
+          }
+        ],
+        "notableQuotes": [
+          {
+            "quote": "Adam Curry is to step back from No Agenda, with the show on October the 29th being his last.",
+            "speaker": "James Cridland",
+            "timestamp": "1:29"
+          },
+          {
+            "quote": "YouTube is readying an AI-powered tool that'll take a clip of audio and make it into a YouTube short, according to YouTube's Emma Sweet.",
+            "speaker": "James Cridland",
+            "timestamp": "2:01"
+          }
+        ],
+        "namedGuests": [
+          "Adam Curry"
+        ],
+        "actionItems": [
+          "You can find out more with a link in our show notes."
+        ]
+      },
+      "fetchedAt": "2026-10-16T15:33:45.237Z"
+    }
+  },
+  {
+    "name": "podcast-rss-scraper",
+    "title": "Podcast RSS Scraper — Episodes, Transcripts & Apple Podcasts",
+    "input": {
+      "feeds": [
+        "https://feeds.npr.org/510318/podcast.xml",
+        "https://podnews.net/rss"
+      ],
+      "maxEpisodesPerFeed": 10
+    },
+    "sample": {
+      "recordType": "episode",
+      "feedUrl": "https://podnews.net/rss",
+      "showTitle": "Podnews Daily - podcast industry and podcasting news",
+      "title": "PAVE Studios shows head to Disney+ and Hulu",
+      "pubDate": "2026-10-16T10:09:41.000Z",
+      "durationSeconds": 291,
+      "audioUrl": "https://op3.dev/e,pg=9b024349-ccf0-5f69-a609-6b82873eab3c/podnews.net/audio/podnews261016.mp3",
+      "link": "https://podnews.net/update/pave-disney-hulu-clues",
+      "transcriptUrl": "https://podnews.net/audio/podnews261016.mp3.vtt",
+      "transcriptFormat": "vtt",
+      "transcriptWords": 730,
+      "fetchedAt": "2026-10-16T13:13:06.512Z"
+    }
+  },
+  {
+    "name": "product-recall-feed",
+    "title": "Product Recall Feed — FDA, NHTSA & CPSC Recalls API",
+    "input": {
+      "agencies": [
+        "fda-drug",
+        "fda-device",
+        "fda-food",
+        "nhtsa",
+        "cpsc"
+      ],
+      "daysBack": 30,
+      "maxResultsPerSource": 5
+    },
+    "sample": {
+      "agency": "CPSC",
+      "source": "cpsc",
+      "recallId": "27055",
+      "date": "2026-10-29",
+      "title": "Bodum USA Recalls 5.9 Million French Press Coffee Makers with Replaceable Glass Carafes Due to Risk of Serious Burn Injury",
+      "hazard": "The carafe can unexpectedly break during use if the glass carafe is damaged or cracked, including by use of a metal spoon to stir the cof…",
+      "severity": null,
+      "firm": "Bodum USA, Inc., of New York, New York",
+      "url": "https://cpsc.gov/Recalls/2027/Bodum-USA-Recalls-5-9-Million-French-Press-Coffee-Makers-with-Replaceable-Glass-Carafes-Due-to-Risk-of-Seri…",
+      "fetchedAt": "2026-11-01T12:55:01.288Z"
+    }
+  },
+  {
+    "name": "shopify-catalog-monitor",
+    "title": "Shopify Catalog Monitor & Price Tracker — Products Scraper",
+    "input": {
+      "storeUrls": [
+        "allbirds.com",
+        "www.deathwishcoffee.com"
+      ],
+      "mode": "snapshot",
+      "maxProductsPerStore": 100
+    },
+    "sample": {
+      "recordType": "snapshot",
+      "storeDomain": "www.allbirds.com",
+      "productTitle": "Wool Runner",
+      "productUrl": "https://www.allbirds.com/products/wool-runner",
+      "variantTitle": "Natural Grey / 9",
+      "price": 98,
+      "available": true,
+      "fetchedAt": "2026-10-16T12:00:00.000Z"
+    }
+  },
+  {
+    "name": "us-license-verifier",
+    "title": "License Verification API — TDLR, DBPR, DORA, WA DOH, NPI",
+    "input": {
+      "queries": [
+        "npi:1003000126",
+        "name:John Smith:TX"
+      ],
+      "lookups": [],
+      "mode": "verify",
+      "sources": [
+        "TX_TDLR",
+        "FL_DBPR",
+        "CO_DORA",
+        "WA_DOH",
+        "NPI"
+      ],
+      "maxResultsPerQuery": 5,
+      "maxResults": 20,
+      "monitor": false
+    },
+    "sample": {
+      "state": "TX",
+      "board": "TDLR",
+      "source": "TX_TDLR",
+      "licenseNumber": "3365",
+      "licenseType": "Master Electrician",
+      "status": "ACTIVE",
+      "holderName": "Womack, Thomas F",
+      "businessName": null,
+      "expirationDate": "2027-03-19",
+      "disciplinaryActionFlag": null,
+      "sourceUrl": "https://www.tdlr.texas.gov/LicenseSearch/",
+      "fetchedAt": "2026-10-16T13:18:49.662Z",
+      "verified": true
+    }
+  },
+  {
+    "name": "website-change-monitor",
+    "title": "Website Change Monitor — Sitemap Monitor & Page Diff",
+    "input": {
+      "sites": [
+        "https://www.sitemaps.org/sitemap.xml"
+      ],
+      "mode": "discover",
+      "maxPages": 15
+    },
+    "sample": {
+      "changeType": "discovered",
+      "url": "https://www.sitemaps.org/protocol.html",
+      "lastmod": "2022-12-15",
+      "detectedAt": "2026-10-16T12:49:14.231Z"
+    }
+  }
+]
