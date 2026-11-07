@@ -133,3 +133,11 @@ q { font-style: italic; }
 
 .site-footer { border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; padding: 20px 0 32px; }
 .site-footer a { color: var(--muted); }
+
+/* PACER court reference table */
+.courts { font-size: 0.9rem; }
+.courts tr.group-start td { border-top: 2px solid var(--border); }
+.courts td.num, .courts th:last-child { text-align: right; white-space: nowrap; }
+.courts td:nth-child(2) { white-space: nowrap; }
+.codes { line-height: 2; }
+.courts td code, .court-list td code { white-space: nowrap; }

@@ -46,7 +46,7 @@
 <section id="source">
 <h2>The source and its limits</h2>
 <p>The feeds are the courts' own public endpoints, <code>https://ecf.&lt;court&gt;.uscourts.gov/cgi-bin/rss_outside.pl</code>. Each entry has the case number, the case title (the lead parties), the docket text, the document number with a link, and the filing time. Documents are linked, never downloaded; opening a document on PACER is subject to PACER's own fees.</p>
-<p>Coverage differs per court. In the Actor's sweep of 2026-10-17, 94 courts published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests. The Actor still tries every court you name and reports what happened.</p>
+<p>Coverage differs per court. In the Actor's sweep of 2026-10-17, 94 courts published every entry type, 41 published a subset (typically complaints, motions and orders), 23 answered with no entries, and 30 did not answer datacenter requests. The Actor still tries every court you name and reports what happened. The full list is on <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a>.</p>
 <p>For past dockets, the optional historical pass reads the RECAP archive through the Free Law Project's CourtListener API, in the same record shape with <code>source: "courtlistener-recap"</code>.</p>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -182,8 +182,10 @@ curl -sS -X POST \
 <section class="related">
 <h2>Related guides</h2>
 <ul>
-<li><a href="../grants-gov-api/">Grants.gov API: Federal Grant Opportunities as JSON</a></li>
-<li><a href="../product-recalls-api/">Product Recalls API: FDA, NHTSA and CPSC in One Feed</a></li>
+<li><a href="../pacer-rss-feeds-by-court/">PACER RSS Feeds by Court: All 188 Federal Courts Listed</a></li>
+<li><a href="../patent-litigation-docket-monitor/">Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets</a></li>
+<li><a href="../bankruptcy-filings-monitor/">New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds</a></li>
+<li><a href="../sdny-securities-class-action-monitor/">S.D.N.Y. Securities and Class Action Complaint Alerts</a></li>
 </ul>
 </section>
 </article>
