@@ -146,6 +146,7 @@ ${body}
 <div class="wrap wrap-wide">
 <p>${esc(disclaimer)}</p>
 <p><a href="${STORE_PROFILE_URL}">owlabee on Apify Store</a> · <a href="${REPO_URL}">Examples on GitHub</a> (MIT) · ${privacyNote}</p>
+<p>Contact: <a href="mailto:jacob@owlabee.com">jacob@owlabee.com</a></p>
 <p class="maker">© ${new Date().getUTCFullYear()} owlabee · <a href="${BASE_URL}">${esc(new URL(BASE_URL).hostname)}</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="${MAKER_URL}">${esc(MAKER_NAME)}</a></p>
 </div>
 </footer>
