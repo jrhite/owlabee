@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get New PACER Docket Entries in Slack with Zapier | owlabee</title>
+<meta name="description" content="Post new federal court filings that name your company or clients to a Slack channel: a scheduled Apify task reads the public PACER RSS feeds and Zapier's Apify app sends each new entry to Slack.">
+<link rel="canonical" href="https://owlabee.com/pacer-docket-alerts-slack-zapier/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Get New PACER Docket Entries in Slack with Zapier | owlabee">
+<meta property="og:description" content="Post new federal court filings that name your company or clients to a Slack channel: a scheduled Apify task reads the public PACER RSS feeds and Zapier's Apify app sends each new entry to Slack.">
+<meta property="og:url" content="https://owlabee.com/pacer-docket-alerts-slack-zapier/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Get New PACER Docket Entries in Slack with Zapier","description":"Post new federal court filings that name your company or clients to a Slack channel: a scheduled Apify task reads the public PACER RSS feeds and Zapier's Apify app sends each new entry to Slack.","url":"https://owlabee.com/pacer-docket-alerts-slack-zapier/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pacer-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pacer-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/pacer-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why a task and a trigger, and not the Run Actor action?","acceptedAnswer":{"@type":"Answer","text":"Zapier's Apify app can also start a run with Run Actor, but Apify's Zapier documentation gives synchronous runs a hard 30-second timeout. Feed checks across several courts can take longer, so the scheduled task with the Finished task run trigger is the dependable pattern."}},{"@type":"Question","name":"Can I skip Zapier entirely?","acceptedAnswer":{"@type":"Answer","text":"For a plain \"a run finished\" notice, yes: the task's Integrations tab in Apify Console has a Slack integration. To post the entries themselves without Zapier, set the Actor's webhookUrl to an endpoint you control; the POST body carries the run summary and up to 1,000 emitted entries."}},{"@type":"Question","name":"Do I need a PACER account?","acceptedAnswer":{"@type":"Answer","text":"No. The RSS feeds are public. Only opening a linked document on PACER is subject to PACER's own fees."}},{"@type":"Question","name":"How do I watch other courts or a single case?","acceptedAnswer":{"@type":"Answer","text":"Edit the task input: change courts, or replace partyKeywords with caseNumbers. Keep a separate stateStoreName for each task so their memories of seen entries stay apart."}},{"@type":"Question","name":"Is this affiliated with Zapier or Apify?","acceptedAnswer":{"@type":"Answer","text":"No. owlabee is an independent developer on Apify Store; the Zapier app used here is Apify's own. Not affiliated with or endorsed by Zapier, Slack, Apify or the federal courts."}}]}]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> PACER filings to Slack (Zapier)</nav>
+<p class="kicker">Zapier + Apify · Government and public records</p>
+<h1>Get New PACER Docket Entries in Slack with Zapier</h1>
+<p class="lede">The PACER Docket Monitor reads the free public RSS feeds of federal courts and, in monitor mode, returns only docket entries it has not returned before. Save it as an Apify task, schedule it hourly, and a Zap built on Apify's official Zapier app posts each new entry to Slack with the case title, the docket text and a link to the docket. No PACER account and no code.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open the Actor on Apify Store</a>
+<p class="note">PACER RSS Docket Monitor — New Federal Court Filings. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#what">What you build</a><a href="#before">Before you start</a><a href="#input">The input</a><a href="#steps">Zapier steps</a><a href="#fields">Fields to map</a><a href="#limits">Costs and limits</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="what">
+<h2>What you build</h2>
+<p>An Apify schedule runs a saved task every hour. The task watches the Southern and Eastern Districts of New York for new complaints whose case title contains a name you choose. When a run finishes, the Zap's Apify trigger fires, the Zap fetches that run's dataset, and Slack gets one message per new docket entry.</p>
+<p>Swap the filters and the same Zap covers other alerts: Chapter 11 petitions in Delaware (<code>bankruptcyChapters</code>), every new motion and order in a case you follow (<code>caseNumbers</code>), or patent complaints in Texas. The <a href="../pacer-rss-docket-monitor/">PACER RSS docket monitor guide</a> lists every filter.</p>
+</section>
+
+<section id="before">
+<h2>Before you start</h2>
+<ul>
+<li>An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. To cap what one run can cost, set a maximum total charge in the task's run options.</li>
+<li>A Zapier account with Slack connected. The Zap has more than two steps, so check that your Zapier plan allows multi-step Zaps.</li>
+<li>The court codes to watch. <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a> lists all 203 courts and whether each feed was live at the last probe.</li>
+</ul>
+</section>
+
+<section id="input">
+<h2>Step 1: Save the input as an Apify task</h2>
+<p>Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input, replace <code>Acme</code> with the names you watch, and click <strong>Save as a new task</strong>:</p>
+<pre tabindex="0" aria-label="Actor input"><code>{
+  &quot;courts&quot;: [
+    &quot;nysd&quot;,
+    &quot;nyed&quot;
+  ],
+  &quot;partyKeywords&quot;: [
+    &quot;Acme&quot;
+  ],
+  &quot;entryTypes&quot;: [
+    &quot;complaint&quot;
+  ],
+  &quot;newCasesOnly&quot;: true,
+  &quot;maxResults&quot;: 200,
+  &quot;onlyNewSinceLastRun&quot;: true,
+  &quot;stateStoreName&quot;: &quot;zapier-slack-ny-complaints&quot;
+}</code></pre>
+<p><code>onlyNewSinceLastRun</code> with a <code>stateStoreName</code> of its own makes every run return only entries that earlier runs of this task have not returned, so Slack never gets the same filing twice. On the first run nothing has been seen yet, so it returns every matching entry in the current feeds (the trailing 24 hours). Run the task once from Console now, so Zapier has a finished run to test with.</p>
+<p>Then open <strong>Schedules</strong> in Console, create a schedule that runs hourly, and add the task to it. Courts regenerate their feeds every 30 to 60 minutes and each feed covers only the last 24 hours, so hourly catches every entry; daily is the minimum.</p>
+</section>
+
+<section id="steps">
+<h2>Step 2: Build the Zap</h2>
+<h3>1. Trigger: Apify, Finished task run</h3>
+<p>Create a Zap and choose <strong>Apify</strong> as the trigger app with the <strong>Finished task run</strong> event. Connect your Apify account (Zapier opens an Apify sign-in window; click <strong>Allow Access</strong>), pick the task you saved, and click <strong>Test Trigger</strong>. Zapier fills the test from the run you just made.</p>
+<h3>2. Search: Apify, Fetch dataset items</h3>
+<p>Add an <strong>Apify</strong> step with the <strong>Fetch dataset items</strong> search and map the dataset ID to the default dataset of the run from the trigger step. Test the step: it returns the docket entries of that run.</p>
+<h3>3. Loop over the items</h3>
+<p>Add <strong>Looping by Zapier</strong> and loop over the fetched items, so each docket entry runs through the next steps on its own. Map <code>caseTitle</code>, <code>courtName</code>, <code>entryText</code>, <code>docketUrl</code> and <code>error</code> into the loop.</p>
+<h3>4. Filter out error items</h3>
+<p>Inside the loop, add <strong>Filter by Zapier</strong>: continue only if <code>error</code> does not exist. A court whose feed is down produces one item with an <code>error</code> code instead of failing the run, and you probably do not want that in the channel.</p>
+<h3>5. Action: Slack, Send Channel Message</h3>
+<p>Add <strong>Slack</strong> with <strong>Send Channel Message</strong>, pick the channel, and build the text from the mapped fields (insert each one with Zapier's field picker; the braces below stand for those fields), for example:</p>
+<pre tabindex="0" aria-label="Slack message template"><code>New filing in {courtName}: {caseTitle}
+{entryText}
+Docket: {docketUrl}</code></pre>
+<p>Test the step, then publish the Zap. From now on, the new entries of each scheduled run are posted to Slack.</p>
+</section>
+
+<section id="fields">
+<h2>Fields to map</h2>
+<p>Each dataset item is one docket entry. These fields make a useful Slack message:</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">Use it for</th></tr></thead>
+<tbody>
+<tr><td><code>caseTitle</code></td><td>The lead parties, for example <q>Acme Corp v. Example LLC</q></td></tr>
+<tr><td><code>courtName, court</code></td><td>Court name and CM/ECF code</td></tr>
+<tr><td><code>caseNumber</code></td><td>Case number as the court publishes it</td></tr>
+<tr><td><code>entryText, entryCategory</code></td><td>Docket text and a heuristic category (complaint, motion, order …)</td></tr>
+<tr><td><code>docketUrl, documentUrl</code></td><td>Links to the docket and the document on PACER (opening them is subject to PACER fees)</td></tr>
+<tr><td><code>filedAt</code></td><td>Filing time, ISO 8601</td></tr>
+<tr><td><code>error</code></td><td>Present only on error items; use it to filter them out</td></tr>
+</tbody>
+</table></div>
+<p>All fields are described in the <a href="../pacer-rss-docket-monitor/">PACER RSS docket monitor guide</a>.</p>
+</section>
+
+<section id="limits">
+<h2>Costs and limits</h2>
+<ul>
+<li>Apify bills the Actor per feed checked and per matching entry, at the prices on its Store page. An hourly schedule on two courts is 48 feed checks a day plus the entries that match.</li>
+<li>Zapier counts the steps a Zap runs against your Zapier plan's task allowance; with a loop, each entry adds its own filter and Slack steps.</li>
+<li>The trigger fires when a run finishes. A schedule that runs hourly therefore posts at most once an hour per batch of entries.</li>
+<li>Feeds cover only the trailing 24 hours and carry the lead parties, not every party. The <a href="../pacer-rss-docket-monitor/">docket monitor guide</a> covers the other source limits.</li>
+<li>Case titles name individuals. Not a consumer report. Not for employment, credit, insurance, housing or tenant-screening decisions.</li>
+</ul>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Why a task and a trigger, and not the Run Actor action?</h3>
+<p>Zapier's Apify app can also start a run with <strong>Run Actor</strong>, but Apify's Zapier documentation gives synchronous runs a hard 30-second timeout. Feed checks across several courts can take longer, so the scheduled task with the <strong>Finished task run</strong> trigger is the dependable pattern.</p>
+<h3>Can I skip Zapier entirely?</h3>
+<p>For a plain "a run finished" notice, yes: the task's <strong>Integrations</strong> tab in Apify Console has a Slack integration. To post the entries themselves without Zapier, set the Actor's <code>webhookUrl</code> to an endpoint you control; the POST body carries the run summary and up to 1,000 emitted entries.</p>
+<h3>Do I need a PACER account?</h3>
+<p>No. The RSS feeds are public. Only opening a linked document on PACER is subject to PACER's own fees.</p>
+<h3>How do I watch other courts or a single case?</h3>
+<p>Edit the task input: change <code>courts</code>, or replace <code>partyKeywords</code> with <code>caseNumbers</code>. Keep a separate <code>stateStoreName</code> for each task so their memories of seen entries stay apart.</p>
+<h3>Is this affiliated with Zapier or Apify?</h3>
+<p>No. owlabee is an independent developer on Apify Store; the Zapier app used here is Apify's own. Not affiliated with or endorsed by Zapier, Slack, Apify or the federal courts.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type.</p>
+<p><a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../pacer-rss-docket-monitor/">PACER RSS Feeds: Monitor New Federal Court Filings</a></li>
+<li><a href="../bankruptcy-filings-monitor/">New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds</a></li>
+<li><a href="../grants-gov-to-google-sheets-zapier/">New Grants.gov Opportunities to Google Sheets with Zapier</a></li>
+<li><a href="../website-changes-slack-n8n/">Website Change Alerts in Slack with n8n</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

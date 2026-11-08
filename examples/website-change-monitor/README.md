@@ -4,6 +4,8 @@ Apify Store: [apify.com/owlabee/website-change-monitor](https://apify.com/owlabe
 
 Guide on the site: [https://owlabee.com/sitemap-change-monitor/](https://owlabee.com/sitemap-change-monitor/)
 
+No-code recipe: [Website Change Alerts in Slack with n8n](https://owlabee.com/website-changes-slack-n8n/)
+
 Discovers every page of a site through its sitemaps (robots.txt, sitemap indexes, gzipped and text sitemaps). Discover mode lists the URLs with lastmod. Monitor mode keeps a snapshot per site and reports new, removed, lastmod-changed, content-changed and status-changed pages, with a word-level preview and a severity for each change. No browser is used.
 
 ## Inputs that matter

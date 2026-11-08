@@ -4,6 +4,8 @@ Apify Store: [apify.com/owlabee/grants-gov-api](https://apify.com/owlabee/grants
 
 Guide on the site: [https://owlabee.com/grants-gov-api/](https://owlabee.com/grants-gov-api/)
 
+No-code recipe: [New Grants.gov Opportunities to Google Sheets with Zapier](https://owlabee.com/grants-gov-to-google-sheets-zapier/)
+
 Searches the official Grants.gov API (no key) and the SAM.gov Get Opportunities API (free personal key) by keyword, optionally adds recent USAspending.gov awards and six state and local open-data bid datasets, and normalizes every record to the same field names. Monitor mode flags records as new or updated since the last run.
 
 ## Inputs that matter

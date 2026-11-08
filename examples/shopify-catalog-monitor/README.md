@@ -4,6 +4,8 @@ Apify Store: [apify.com/owlabee/shopify-catalog-monitor](https://apify.com/owlab
 
 Guide on the site: [https://owlabee.com/shopify-price-tracker/](https://owlabee.com/shopify-price-tracker/)
 
+No-code recipe: [Competitor Shopify Price Changes to Slack with Make](https://owlabee.com/shopify-price-changes-slack-make/)
+
 Reads the public catalog of a Shopify store from its storefront `products.json` and writes one record per variant (or per product) with price, compare-at price, availability, SKU, options and image. Changes mode keeps the previous snapshot and writes only what changed, with before and after values and the percentage price move.
 
 ## Inputs that matter

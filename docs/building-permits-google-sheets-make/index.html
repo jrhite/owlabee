@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building Permits to Google Sheets with Make | owlabee</title>
+<meta name="description" content="Send new roofing, solar or any other building permits from US city open-data portals to a Google Sheet every day with Make (formerly Integromat) and Apify's official Make app.">
+<link rel="canonical" href="https://owlabee.com/building-permits-google-sheets-make/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Building Permits to Google Sheets with Make | owlabee">
+<meta property="og:description" content="Send new roofing, solar or any other building permits from US city open-data portals to a Google Sheet every day with Make (formerly Integromat) and Apify's official Make app.">
+<meta property="og:url" content="https://owlabee.com/building-permits-google-sheets-make/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Building Permits to Google Sheets with Make","description":"Send new roofing, solar or any other building permits from US city open-data portals to a Google Sheet every day with Make (formerly Integromat) and Apify's official Make app.","url":"https://owlabee.com/building-permits-google-sheets-make/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/building-permits-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/building-permits-scraper","name":"Building Permits Scraper — Roofing & Construction Leads","description":"Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor","url":"https://apify.com/owlabee/building-permits-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Make run the Actor itself instead of a task schedule?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apify's Run an Actor module with Run synchronously set to Yes waits for the run, and Make's own scheduler can start the scenario. Apify's documentation warns that Make enforces a plan-dependent timeout on synchronous runs and that output is incomplete when a run exceeds it, so for many jurisdictions the task trigger is safer."}},{"@type":"Question","name":"Why are some contractor columns empty?","acceptedAnswer":{"@type":"Answer","text":"The city does not publish them. Set includeRaw to true once to see every column a portal does publish."}},{"@type":"Question","name":"Do I need API keys for the city portals?","acceptedAnswer":{"@type":"Answer","text":"No. They are public open-data APIs. A free Socrata app token is optional and only raises Socrata's rate limits."}},{"@type":"Question","name":"Is this affiliated with Make or Google?","acceptedAnswer":{"@type":"Answer","text":"No. owlabee is an independent developer on Apify Store, and the Make app used here is Apify's own. Not affiliated with or endorsed by Make, Google, Apify or any city named."}}]}]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Building permits to Sheets (Make)</nav>
+<p class="kicker">Make + Apify · Permits and property</p>
+<h1>Building Permits to Google Sheets with Make</h1>
+<p class="lede">The Building Permits Scraper reads 61 US city, county and state open-data portals and, in monitor mode, returns only permits it has not returned before. Save it as an Apify task, schedule it daily, and a three-module Make scenario built on Apify's official Make app adds each new permit to a Google Sheet: a lead list for contractors and suppliers that fills itself.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open the Actor on Apify Store</a>
+<p class="note">Building Permits Scraper — Roofing &amp; Construction Leads. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#what">What you build</a><a href="#before">Before you start</a><a href="#input">The input</a><a href="#steps">Make steps</a><a href="#fields">Fields to map</a><a href="#limits">Costs and limits</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="what">
+<h2>What you build</h2>
+<p>A daily Apify schedule runs a saved task that pulls roofing permits issued in Austin, Seattle and Denver over the last 7 days. When the run finishes, Make's <strong>Watch Task Runs</strong> trigger starts the scenario, <strong>Get Dataset Items</strong> reads the run's permits, and Google Sheets gets one row per new permit with the address, the work description, the declared cost and the contractor where the city publishes one.</p>
+<p>Change <code>jurisdictions</code> and <code>permitTypes</code> for your market: <code>solar</code>, <code>pool</code>, <code>hvac</code> or <code>demolition</code> work the same way. The <a href="../building-permits-api/">building permits guide</a> lists all 61 jurisdictions; cities on Accela or EnerGov portals use the <a href="../accela-energov-permits/">Accela and EnerGov scraper</a>, which has the same schema and works with this scenario.</p>
+</section>
+
+<section id="before">
+<h2>Before you start</h2>
+<ul>
+<li>An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. Set a maximum total charge in the task's run options to cap a run.</li>
+<li>A Make account with a Google connection.</li>
+<li>A Google Sheet with a header row, for example: <code>issuedDate</code>, <code>jurisdictionName</code>, <code>permitNumber</code>, <code>permitType</code>, <code>workDescription</code>, <code>address</code>, <code>city</code>, <code>zip</code>, <code>estimatedCost</code>, <code>contractorName</code>, <code>contractorPhone</code>, <code>sourceUrl</code>.</li>
+</ul>
+</section>
+
+<section id="input">
+<h2>Step 1: Save the input as an Apify task</h2>
+<p>Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input, set your own jurisdictions and permit words, and click <strong>Save as a new task</strong>:</p>
+<pre tabindex="0" aria-label="Actor input"><code>{
+  &quot;jurisdictions&quot;: [
+    &quot;austin&quot;,
+    &quot;seattle&quot;,
+    &quot;denver-residential&quot;
+  ],
+  &quot;permitTypes&quot;: [
+    &quot;roof&quot;,
+    &quot;re-roof&quot;
+  ],
+  &quot;issuedWithinDays&quot;: 7,
+  &quot;maxResultsPerJurisdiction&quot;: 500,
+  &quot;onlyNewSinceLastRun&quot;: true,
+  &quot;stateStoreName&quot;: &quot;make-sheets-roof-permits&quot;,
+  &quot;includeRaw&quot;: false
+}</code></pre>
+<p>With <code>onlyNewSinceLastRun</code> each run returns only permits that earlier runs of this task have not returned (flagged <code>isNew: true</code>), so the sheet gets no duplicates. The first run returns everything issued in the window. A 7-day window on a daily schedule also catches portals that publish a few days late. Run the task once from Console now, so Make has a run to map fields from.</p>
+<p>Then open <strong>Schedules</strong> in Console, create a daily schedule, and add the task to it.</p>
+</section>
+
+<section id="steps">
+<h2>Step 2: Build the Make scenario</h2>
+<h3>1. Trigger: Apify, Watch Task Runs</h3>
+<p>Create a scenario and add the <strong>Apify</strong> app's <strong>Watch Task Runs</strong> trigger. Create a connection (OAuth, or paste an API token from Console → Settings → API &amp; Integrations), then pick the task. The trigger registers a webhook in Apify that fires whenever a run of the task finishes.</p>
+<h3>2. Search: Apify, Get Dataset Items</h3>
+<p>Add <strong>Apify → Get Dataset Items</strong> and map <strong>Dataset ID</strong> to the default dataset ID from the trigger's output. If the variables do not show yet, run the scenario once while the task runs, then map them.</p>
+<h3>3. Filter out error items</h3>
+<p>On the link between Get Dataset Items and the next module, set up a filter: continue only if <code>error</code> does not exist. A portal that is down produces one error item, such as <code>HTTP_503</code>, instead of failing the run.</p>
+<h3>4. Action: Google Sheets, Add a Row</h3>
+<p>Add <strong>Google Sheets → Add a Row</strong>, pick the spreadsheet and sheet, and map each column to a permit field. Get Dataset Items outputs one bundle per permit, so the module adds one row per permit. (Apify's own Make guide uses <strong>Bulk Add Rows</strong> with an aggregator instead, which uses fewer operations on large runs.) Save the scenario and switch it on.</p>
+</section>
+
+<section id="fields">
+<h2>Fields to map</h2>
+<p>Each dataset item is one permit. Fields that make a useful lead row:</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">Use it for</th></tr></thead>
+<tbody>
+<tr><td><code>issuedDate, appliedDate</code></td><td>Dates as the portal publishes them</td></tr>
+<tr><td><code>jurisdictionName, permitNumber</code></td><td>Where the permit was issued and its number</td></tr>
+<tr><td><code>permitType, permitSubtype, workDescription</code></td><td>What the work is, in the city's own words</td></tr>
+<tr><td><code>address, city, state, zip</code></td><td>The job site</td></tr>
+<tr><td><code>estimatedCost</code></td><td>Declared job value, or empty where the city publishes none</td></tr>
+<tr><td><code>contractorName, contractorLicense, contractorPhone</code></td><td>Only where the city publishes them; nothing is inferred</td></tr>
+<tr><td><code>sourceUrl</code></td><td>Link to the source dataset or row, to check a value</td></tr>
+</tbody>
+</table></div>
+<p>All fields are described in the <a href="../building-permits-api/">Building permits API guide</a>.</p>
+</section>
+
+<section id="limits">
+<h2>Costs and limits</h2>
+<ul>
+<li>Apify bills the Actor per permit, per jurisdiction and per results page, at the prices on its Store page. In monitor mode you pay for new permits only after the first run.</li>
+<li>Make counts operations per module run; with one row per permit, a run with 100 new permits uses about 100 Google Sheets operations.</li>
+<li>Each city publishes its own columns: some have no cost or contractor columns, and update frequency ranges from daily to every few weeks. The <a href="../building-permits-api/">building permits guide</a> lists the gaps.</li>
+<li>If you contact people from the sheet, telemarketing and e-mail laws apply: the TCPA and the National Do Not Call Registry in the US, CASL in Canada.</li>
+<li>Not a consumer report. Not for employment, credit, insurance, housing or tenant-screening decisions.</li>
+</ul>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Can Make run the Actor itself instead of a task schedule?</h3>
+<p>Yes. Apify's <strong>Run an Actor</strong> module with <strong>Run synchronously</strong> set to Yes waits for the run, and Make's own scheduler can start the scenario. Apify's documentation warns that Make enforces a plan-dependent timeout on synchronous runs and that output is incomplete when a run exceeds it, so for many jurisdictions the task trigger is safer.</p>
+<h3>Why are some contractor columns empty?</h3>
+<p>The city does not publish them. Set <code>includeRaw</code> to <code>true</code> once to see every column a portal does publish.</p>
+<h3>Do I need API keys for the city portals?</h3>
+<p>No. They are public open-data APIs. A free Socrata app token is optional and only raises Socrata's rate limits.</p>
+<h3>Is this affiliated with Make or Google?</h3>
+<p>No. owlabee is an independent developer on Apify Store, and the Make app used here is Apify's own. Not affiliated with or endorsed by Make, Google, Apify or any city named.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Building Permits Scraper — Roofing &amp; Construction Leads. Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor.</p>
+<p><a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../building-permits-api/">Building Permits API: 61 US Open-Data Portals as JSON</a></li>
+<li><a href="../accela-energov-permits/">Accela Citizen Access and EnerGov Permit Data as JSON</a></li>
+<li><a href="../shopify-price-changes-slack-make/">Competitor Shopify Price Changes to Slack with Make</a></li>
+<li><a href="../grants-gov-to-google-sheets-zapier/">New Grants.gov Opportunities to Google Sheets with Zapier</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>
