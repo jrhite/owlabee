@@ -29,7 +29,30 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PACER RSS Feeds by Court: All 203 Federal Courts Listed","description":"Which federal courts publish a PACER RSS feed and what each carries: code, name, status and entry types for 203 district, bankruptcy, appellate and national courts.","url":"https://owlabee.com/pacer-rss-feeds-by-court/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pacer-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pacer-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/pacer-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I read a court's PACER RSS feed directly?","acceptedAnswer":{"@type":"Answer","text":"For district, bankruptcy and national courts, open https://ecf.\u003ccode>.uscourts.gov/cgi-bin/rss_outside.pl with the code from the table, for example https://ecf.nysd.uscourts.gov/cgi-bin/rss_outside.pl. Courts of appeals use https://ecf.\u003ccode>.uscourts.gov/n/beam/servlet/TransportRoom?servlet=RSSGenerator."}},{"@type":"Question","name":"Can I see new appeals in a court of appeals feed?","acceptedAnswer":{"@type":"Answer","text":"No. Appellate feeds carry orders, opinions and judgments only, never new appeals or briefs. Use them to follow an appeal you already know about, by its case number."}},{"@type":"Question","name":"Why can't I filter the Court of International Trade by party?","acceptedAnswer":{"@type":"Answer","text":"Its feed titles carry only the case number, with no party names, so party filters have nothing to match. Filter by case number or entry text."}},{"@type":"Question","name":"Do I need a PACER account?","acceptedAnswer":{"@type":"Answer","text":"Not to read the feeds. They are public, unauthenticated endpoints. Opening a linked document on PACER is subject to PACER's own fees."}},{"@type":"Question","name":"Why do some courts publish only some entry types?","acceptedAnswer":{"@type":"Answer","text":"Each court chooses which CM/ECF entry types its feed includes. The table lists the types a partial feed advertises, as the feed states them."}},{"@type":"Question","name":"What does \"did not answer\" mean?","acceptedAnswer":{"@type":"Answer","text":"During the probe the court's server timed out, sent an empty reply or returned an HTTP error to a request from a datacenter IP. The feed may still work from another network."}},{"@type":"Question","name":"How far back does a feed go?","acceptedAnswer":{"@type":"Answer","text":"District, bankruptcy and national feeds cover the trailing 24 hours. To keep a running record, read the feeds at least daily; the Actor's README suggests hourly, since courts regenerate feeds every 30 to 60 minutes."}},{"@type":"Question","name":"How current is this list?","acceptedAnswer":{"@type":"Answer","text":"It reflects the Actor's registry: district and bankruptcy courts from a sweep on 2026-10-17, courts of appeals and national courts from a probe on 2026-11-07. Feed settings change, so a court you name is always tried and each run reports what every court returned."}}]}]}</script>
-
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -414,7 +437,7 @@
 <footer class="site-footer">
 <div class="wrap wrap-wide">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies or trackers; fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
 <p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
 </div>
 </footer>

@@ -18,4 +18,4 @@ export const MAKER_URL = 'https://jacobhite.com/';
 // Google Analytics 4 Measurement ID ("G-XXXXXXXXXX") for the owlabee.com web data
 // stream. null builds a site with no analytics: no tag, and the footer and /privacy/
 // say so. See analyticsTag() in build-site.mjs for when it loads.
-export const GA_MEASUREMENT_ID = null;
+export const GA_MEASUREMENT_ID = 'G-9BVRW7Q52V';

@@ -29,7 +29,30 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
 
-
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -53,7 +76,9 @@
 </div>
 <section>
 <h2>Visit statistics</h2>
-<p>This site runs no analytics and sets no cookies.</p>
+<p>This site uses Google Analytics 4 to count visits and see which guides are read. It records things like the pages you view, how you arrived (a search, a link, or directly), whether you follow a link to an Actor on Apify Store, your approximate location at country or city level, and your device and browser type. Google does not give owlabee your IP address.</p>
+<p>Advertising features are turned off. If you visit from the European Economic Area, the UK or Switzerland, Google Analytics runs in a cookieless mode and sets no analytics cookies. Elsewhere it sets first-party cookies (named <code>_ga</code>) to tell new visits from return ones.</p>
+<p>Google processes this data under its own <a href="https://policies.google.com/privacy">privacy policy</a>. You can opt out on every site with Google's <a href="https://tools.google.com/dlpage/gaoptout">opt-out browser add-on</a>, or by blocking scripts from <code>googletagmanager.com</code>.</p>
 </section>
 <section>
 <h2>Fonts and hosting</h2>
@@ -68,7 +93,7 @@
 <footer class="site-footer">
 <div class="wrap wrap-wide">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies or trackers; fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
 <p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
 </div>
 </footer>

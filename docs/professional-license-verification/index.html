@@ -29,7 +29,30 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI","description":"Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.","url":"https://owlabee.com/professional-license-verification/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/license-verification-api"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/license-verification-api","name":"License Verification API — TDLR, DBPR, DORA, WA DOH, NPI","description":"Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry","url":"https://apify.com/owlabee/license-verification-api","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which states are covered?","acceptedAnswer":{"@type":"Answer","text":"Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry."}},{"@type":"Question","name":"What does verified mean?","acceptedAnswer":{"@type":"Answer","text":"The license was found, its status is ACTIVE and the expiration date is today or later. Statuses such as \"Active - With Conditions\" normalize to PROBATION and do not verify."}},{"@type":"Question","name":"Is this the board's official verification?","acceptedAnswer":{"@type":"Answer","text":"No. It reads the boards' public records and links each one. Confirm with the issuing board before relying on a result."}},{"@type":"Question","name":"Why do I get several records for one number?","acceptedAnswer":{"@type":"Answer","text":"License numbers repeat across license types in Texas and Colorado. Add the type, for example TX:3365:Master Electrician."}},{"@type":"Question","name":"Does it need proxies or a key?","acceptedAnswer":{"@type":"Answer","text":"No. A free Socrata app token is optional and only raises rate limits on the Texas, Colorado and Washington datasets."}}]}]}</script>
-
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -224,7 +247,7 @@ curl -sS -X POST \
 <footer class="site-footer">
 <div class="wrap wrap-wide">
 <p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
-<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · No cookies or trackers; fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
 <p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
 </div>
 </footer>
