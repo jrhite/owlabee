@@ -84,9 +84,28 @@ Claude Code expands `${APIFY_TOKEN}` from your environment; Cursor uses `${env:A
 |---|---|
 | `examples/<actor>/` | `input.json`, `curl.sh`, `python.py`, `node.mjs`, `mcp.json` and a README per Actor |
 | `docs/` | The static guide site, served by GitHub Pages (generated, plain HTML and one CSS file) |
-| `tools/` | Zero-dependency Node scripts that generate `examples/` and `docs/` |
+| `tools/` | Zero-dependency Node scripts that generate `examples/` and `docs/`, refresh the free data snapshots (`tools/data-pages/refresh.mjs`) and check links |
 
-To change the site's base URL, edit `tools/site-config.mjs`, then run `node tools/build-examples.mjs && node tools/build-site.mjs` and commit the output.
+To change the site's base URL, edit `tools/site-config.mjs`, then run `node tools/build-examples.mjs && node tools/build-site.mjs` and commit the output. Check the result with `node tools/check-links.mjs` (internal links, anchors, `sitemap.xml` and `llms.txt`; add `--external` to request every outside link once).
+
+## Free data and comparison pages
+
+Besides the guides, the site has:
+
+- **Free data** ([owlabee.com/data/](https://owlabee.com/data/)): weekly snapshots of product recalls, grant and bid opportunities, and building permits, each made by one or two small runs of our own Actors and published as a page plus `docs/data/<id>.json`. Records are cut to an allowlist of fields: no person names or contact details, permits at street level (no house number), and every licensed source's attribution line on its page. Rendered by `tools/data-pages.mjs`.
+- **Comparisons** ([owlabee.com/compare/](https://owlabee.com/compare/)): dated, sourced comparisons of the ways to get permit, PACER alert, recall and grant data, ours included, each saying where the alternatives are better. Content and sources live in `tools/compare-pages.mjs`; re-check the numbers when you edit it and update its `CHECKED` date.
+- **`llms.txt`** at the site root: a plain-text map of the Actors and pages for AI assistants, generated with the site.
+
+`tools/discovery-pages.mjs` registers all of these with `tools/build-site.mjs` (nav, home-page section, sitemap). The sitemap lists them, so the IndexNow workflow submits them on the next push to `main` that changes `docs/`.
+
+**Weekly refresh.** The mmm coordinator re-runs the snapshots once a week (its daily run does it on Mondays) and lands the result through a PR:
+
+```bash
+NODE_USE_ENV_PROXY=1 APIFY_TOKEN=<token from the environment> node tools/data-pages/refresh.mjs
+node tools/check-links.mjs
+```
+
+The script starts eight small runs on the owlabee Apify account, each capped with `maxTotalChargeUsd` 0.10, rewrites `docs/data/*.json` and rebuilds the site; `--build-only` re-renders from the saved snapshots, and `recalls`, `grants` or `permits` refreshes one. It reads the token from the environment and never prints or stores it. There is deliberately no GitHub Actions workflow for it, since that would need the token as a repository secret.
 
 ## Notes
 
