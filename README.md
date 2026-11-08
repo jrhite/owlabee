@@ -78,6 +78,17 @@ Apify hosts an MCP server at `mcp.apify.com`. Add `?tools=` to expose only the A
 
 Claude Code expands `${APIFY_TOKEN}` from your environment; Cursor uses `${env:APIFY_TOKEN}`. Each `examples/<actor>/mcp.json` is the same config for one Actor, and its README shows the `mcp-remote` variant for Claude Desktop.
 
+## Use without code (Zapier, Make, n8n)
+
+Apify has official apps on [Zapier](https://docs.apify.com/platform/integrations/zapier), [Make](https://docs.apify.com/platform/integrations/make) and [n8n](https://docs.apify.com/platform/integrations/n8n), so any owlabee Actor can run from them with your own Apify account. Step-by-step recipes with ready inputs:
+
+- [Get new PACER docket entries in Slack with Zapier](https://owlabee.com/pacer-docket-alerts-slack-zapier/)
+- [New Grants.gov opportunities to Google Sheets with Zapier](https://owlabee.com/grants-gov-to-google-sheets-zapier/)
+- [Building permits to Google Sheets with Make](https://owlabee.com/building-permits-google-sheets-make/)
+- [Competitor Shopify price changes to Slack with Make](https://owlabee.com/shopify-price-changes-slack-make/)
+- [FDA, NHTSA and CPSC product recalls to email with n8n](https://owlabee.com/product-recalls-email-n8n/)
+- [Website change alerts in Slack with n8n](https://owlabee.com/website-changes-slack-n8n/)
+
 ## Repository layout
 
 | Path | What it is |

@@ -4,6 +4,8 @@ Apify Store: [apify.com/owlabee/product-recall-feed](https://apify.com/owlabee/p
 
 Guide on the site: [https://owlabee.com/product-recalls-api/](https://owlabee.com/product-recalls-api/)
 
+No-code recipe: [FDA, NHTSA and CPSC Product Recalls to Email with n8n](https://owlabee.com/product-recalls-email-n8n/)
+
 Pulls US product recalls from openFDA enforcement reports, NHTSA and CPSC through their official public APIs and writes each recall in one normalized record: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Filter by date, keyword, firm, product type or vehicle; changes mode emits only recalls not seen before.
 
 ## Inputs that matter
