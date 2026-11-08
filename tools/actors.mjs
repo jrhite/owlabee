@@ -62,7 +62,7 @@ const meta = {
       ['scorer', '`rules` (no model), `byok` (your Anthropic key) or `hosted`.'],
     ],
   },
-  'federal-court-docket-monitor': {
+  'pacer-docket-monitor': {
     group: 'Government and public records',
     returns: 'New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type',
     purpose:

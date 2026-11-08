@@ -63,7 +63,7 @@ export const ACTOR_ICONS = [
     // [repo dir, platform name, code, subtitle, category]
     ['accela-energov-permit-scraper', 'accela-energov-permit-scraper', 'ACCELA', 'PERMIT PORTALS', 'records'],
     ['building-permits-scraper', 'building-permits-scraper', 'PERMITS', 'BUILDING PERMITS', 'records'],
-    ['federal-court-docket-monitor', 'federal-court-docket-monitor', 'PACER', 'FEDERAL DOCKETS', 'records'],
+    ['federal-court-docket-monitor', 'pacer-docket-monitor', 'PACER', 'FEDERAL DOCKETS', 'records'],
     ['gov-opportunity-feed', 'grants-gov-api', 'GRANTS', 'GRANTS & CONTRACTS', 'records'],
     ['osha-epa-enforcement-report', 'osha-epa-inspections', 'OSHA', 'EPA ENFORCEMENT', 'records'],
     ['product-recall-feed', 'product-recall-feed', 'RECALLS', 'FDA · NHTSA · CPSC', 'records'],

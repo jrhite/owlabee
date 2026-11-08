@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds","description":"Get new Chapter 11 and Chapter 7 bankruptcy petitions from the public PACER RSS feeds of Delaware, S.D.N.Y. and Texas bankruptcy courts, filtered by chapter.","url":"https://owlabee.com/bankruptcy-filings-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/federal-court-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/federal-court-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/federal-court-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where does the chapter come from?","acceptedAnswer":{"@type":"Answer","text":"From the \"Chapter:\" prefix most bankruptcy courts publish before the entry text, or from the entry text itself."}},{"@type":"Question","name":"Why are adversary proceedings left out?","acceptedAnswer":{"@type":"Answer","text":"They have their own case type, adversary. Remove caseTypes, or add adversary, to include them."}},{"@type":"Question","name":"Does the first run send everything?","acceptedAnswer":{"@type":"Answer","text":"The first run with onlyNewSinceLastRun is a baseline. Later runs emit only entries not seen before."}},{"@type":"Question","name":"Can I watch for a specific debtor?","acceptedAnswer":{"@type":"Answer","text":"Yes. partyKeywords matches the case title, and caseNumbers follows one case."}},{"@type":"Question","name":"Is this legal or financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. It describes public docket data and how to filter it."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds","description":"Get new Chapter 11 and Chapter 7 bankruptcy petitions from the public PACER RSS feeds of Delaware, S.D.N.Y. and Texas bankruptcy courts, filtered by chapter.","url":"https://owlabee.com/bankruptcy-filings-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pacer-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pacer-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/pacer-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where does the chapter come from?","acceptedAnswer":{"@type":"Answer","text":"From the \"Chapter:\" prefix most bankruptcy courts publish before the entry text, or from the entry text itself."}},{"@type":"Question","name":"Why are adversary proceedings left out?","acceptedAnswer":{"@type":"Answer","text":"They have their own case type, adversary. Remove caseTypes, or add adversary, to include them."}},{"@type":"Question","name":"Does the first run send everything?","acceptedAnswer":{"@type":"Answer","text":"The first run with onlyNewSinceLastRun is a baseline. Later runs emit only entries not seen before."}},{"@type":"Question","name":"Can I watch for a specific debtor?","acceptedAnswer":{"@type":"Answer","text":"Yes. partyKeywords matches the case title, and caseNumbers follows one case."}},{"@type":"Question","name":"Is this legal or financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. It describes public docket data and how to filter it."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@
 <h1>New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds</h1>
 <p class="lede">Bankruptcy courts publish their docket activity in public RSS feeds, and most put the chapter in front of each entry. This guide shows how to turn those feeds into a running list of new Chapter 11 and Chapter 7 petitions in Delaware, the Southern District of New York and the Texas bankruptcy courts.</p>
 <div class="cta">
-<a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open the Actor on Apify Store</a>
+<a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open the Actor on Apify Store</a>
 <p class="note">PACER RSS Docket Monitor — New Federal Court Filings. Pay per result; see the Store page for current pricing.</p>
 </div>
 </div>
@@ -157,7 +157,7 @@
 <pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
 
 curl -sS -X POST \
-  &quot;https://api.apify.com/v2/acts/owlabee~federal-court-docket-monitor/run-sync-get-dataset-items&quot; \
+  &quot;https://api.apify.com/v2/acts/owlabee~pacer-docket-monitor/run-sync-get-dataset-items&quot; \
   -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
   -H &quot;Content-Type: application/json&quot; \
   -d '{
@@ -184,8 +184,8 @@ curl -sS -X POST \
 <p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
 <pre tabindex="0" aria-label="MCP client configuration"><code>{
   &quot;mcpServers&quot;: {
-    &quot;owlabee-federal-court-docket-monitor&quot;: {
-      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/federal-court-docket-monitor&quot;,
+    &quot;owlabee-pacer-docket-monitor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/pacer-docket-monitor&quot;,
       &quot;headers&quot;: {
         &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
       }
@@ -194,7 +194,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>Alert me every hour to new Chapter 11 petitions filed in Delaware (deb) and SDNY Bankruptcy (nysb), only ones not seen before.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/federal-court-docket-monitor">examples/federal-court-docket-monitor</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/pacer-docket-monitor">examples/pacer-docket-monitor</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -214,7 +214,7 @@ curl -sS -X POST \
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
 <p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type.</p>
-<p><a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open on Apify Store</a></p>
+<p><a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
 

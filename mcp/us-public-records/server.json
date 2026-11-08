@@ -9,11 +9,11 @@
     "subfolder": "mcp/us-public-records"
   },
   "websiteUrl": "https://owlabee.com/",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=owlabee/building-permits-scraper,owlabee/accela-energov-permit-scraper,owlabee/grants-gov-api,owlabee/grant-matching,owlabee/osha-epa-inspections,owlabee/product-recall-feed,owlabee/license-verification-api,owlabee/federal-court-docket-monitor",
+      "url": "https://mcp.apify.com/?tools=owlabee/building-permits-scraper,owlabee/accela-energov-permit-scraper,owlabee/grants-gov-api,owlabee/grant-matching,owlabee/osha-epa-inspections,owlabee/product-recall-feed,owlabee/license-verification-api,owlabee/pacer-docket-monitor",
       "headers": [
         {
           "name": "Authorization",

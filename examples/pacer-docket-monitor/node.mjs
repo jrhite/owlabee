@@ -1,10 +1,10 @@
-// Run PACER RSS Docket Monitor — New Federal Court Filings (owlabee/federal-court-docket-monitor) once and print the dataset items.
+// Run PACER RSS Docket Monitor — New Federal Court Filings (owlabee/pacer-docket-monitor) once and print the dataset items.
 // Setup: npm install apify-client
 // Token: export APIFY_TOKEN=<your Apify API token>
 import { readFile } from 'node:fs/promises';
 import { ApifyClient } from 'apify-client';
 
-const ACTOR_ID = 'owlabee/federal-court-docket-monitor';
+const ACTOR_ID = 'owlabee/pacer-docket-monitor';
 
 const token = process.env.APIFY_TOKEN;
 if (!token) throw new Error('Set APIFY_TOKEN to your Apify API token');

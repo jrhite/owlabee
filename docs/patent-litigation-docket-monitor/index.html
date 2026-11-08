@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets","description":"Watch new civil cases in the District of Delaware and the Eastern and Western Districts of Texas from their PACER RSS feeds, and find patent dockets in the RECAP archive.","url":"https://owlabee.com/patent-litigation-docket-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/federal-court-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/federal-court-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/federal-court-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can the live feed tell me which new cases are patent cases?","acceptedAnswer":{"@type":"Answer","text":"Not directly. The feeds carry no nature of suit, and the docket text is short. Review new cases by title and docket, or use the archive pass, whose records include natureOfSuit."}},{"@type":"Question","name":"Why use a plain keyword instead of a regex for the archive?","acceptedAnswer":{"@type":"Answer","text":"Only plain keywords are sent to the archive's search. A regex is applied locally to the records the search returns."}},{"@type":"Question","name":"How many archive dockets can a run read?","acceptedAnswer":{"@type":"Answer","text":"Up to maxHistoricalPerCourt per court (1 to 1,000, default 100), paced at one page of 20 dockets every 12 seconds. Without your own CourtListener token, plan on about 100 dockets per court and a handful of courts per run."}},{"@type":"Question","name":"Does it download complaints?","acceptedAnswer":{"@type":"Answer","text":"No. Documents are linked, never downloaded. Opening one on PACER is subject to PACER's fees."}},{"@type":"Question","name":"Is this legal advice?","acceptedAnswer":{"@type":"Answer","text":"No. It describes public docket data and how to filter it."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets","description":"Watch new civil cases in the District of Delaware and the Eastern and Western Districts of Texas from their PACER RSS feeds, and find patent dockets in the RECAP archive.","url":"https://owlabee.com/patent-litigation-docket-monitor/","inLanguage":"en-US","dateModified":"2026-11-07","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pacer-docket-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pacer-docket-monitor","name":"PACER RSS Docket Monitor — New Federal Court Filings","description":"New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type","url":"https://apify.com/owlabee/pacer-docket-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can the live feed tell me which new cases are patent cases?","acceptedAnswer":{"@type":"Answer","text":"Not directly. The feeds carry no nature of suit, and the docket text is short. Review new cases by title and docket, or use the archive pass, whose records include natureOfSuit."}},{"@type":"Question","name":"Why use a plain keyword instead of a regex for the archive?","acceptedAnswer":{"@type":"Answer","text":"Only plain keywords are sent to the archive's search. A regex is applied locally to the records the search returns."}},{"@type":"Question","name":"How many archive dockets can a run read?","acceptedAnswer":{"@type":"Answer","text":"Up to maxHistoricalPerCourt per court (1 to 1,000, default 100), paced at one page of 20 dockets every 12 seconds. Without your own CourtListener token, plan on about 100 dockets per court and a handful of courts per run."}},{"@type":"Question","name":"Does it download complaints?","acceptedAnswer":{"@type":"Answer","text":"No. Documents are linked, never downloaded. Opening one on PACER is subject to PACER's fees."}},{"@type":"Question","name":"Is this legal advice?","acceptedAnswer":{"@type":"Answer","text":"No. It describes public docket data and how to filter it."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@
 <h1>Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets</h1>
 <p class="lede">This guide shows how to follow new cases in the District of Delaware (<code>ded</code>) and the Eastern and Western Districts of Texas (<code>txed</code>, <code>txwd</code>) from their public PACER RSS feeds, and how to narrow to patent cases. The live feeds do not say what a case is about, so the guide also covers the RECAP archive pass, which does.</p>
 <div class="cta">
-<a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open the Actor on Apify Store</a>
+<a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open the Actor on Apify Store</a>
 <p class="note">PACER RSS Docket Monitor — New Federal Court Filings. Pay per result; see the Store page for current pricing.</p>
 </div>
 </div>
@@ -150,7 +150,7 @@
 <pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
 
 curl -sS -X POST \
-  &quot;https://api.apify.com/v2/acts/owlabee~federal-court-docket-monitor/run-sync-get-dataset-items&quot; \
+  &quot;https://api.apify.com/v2/acts/owlabee~pacer-docket-monitor/run-sync-get-dataset-items&quot; \
   -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
   -H &quot;Content-Type: application/json&quot; \
   -d '{
@@ -192,8 +192,8 @@ curl -sS -X POST \
 <p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
 <pre tabindex="0" aria-label="MCP client configuration"><code>{
   &quot;mcpServers&quot;: {
-    &quot;owlabee-federal-court-docket-monitor&quot;: {
-      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/federal-court-docket-monitor&quot;,
+    &quot;owlabee-pacer-docket-monitor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/pacer-docket-monitor&quot;,
       &quot;headers&quot;: {
         &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
       }
@@ -202,7 +202,7 @@ curl -sS -X POST \
 }</code></pre>
 <p>Then ask, for example: <q>List the new civil cases filed today in the District of Delaware and the Eastern and Western Districts of Texas, with case titles and docket links.</q></p>
 <h3>Python, Node.js and more examples</h3>
-<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/federal-court-docket-monitor">examples/federal-court-docket-monitor</a> on GitHub.</p>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/pacer-docket-monitor">examples/pacer-docket-monitor</a> on GitHub.</p>
 </section>
 
 <section id="faq">
@@ -222,7 +222,7 @@ curl -sS -X POST \
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
 <p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type.</p>
-<p><a class="button" href="https://apify.com/owlabee/federal-court-docket-monitor">Open on Apify Store</a></p>
+<p><a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
 

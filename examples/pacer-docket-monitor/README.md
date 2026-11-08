@@ -1,6 +1,6 @@
 # PACER RSS Docket Monitor — New Federal Court Filings
 
-Apify Store: [apify.com/owlabee/federal-court-docket-monitor](https://apify.com/owlabee/federal-court-docket-monitor) · Pay per result; see the Store page for current pricing.
+Apify Store: [apify.com/owlabee/pacer-docket-monitor](https://apify.com/owlabee/pacer-docket-monitor) · Pay per result; see the Store page for current pricing.
 
 Guide on the site: [https://owlabee.com/pacer-rss-docket-monitor/](https://owlabee.com/pacer-rss-docket-monitor/)
 
@@ -50,8 +50,8 @@ Each run is billed to your Apify account per result. To cap spend, set a maximum
 ```json
 {
   "mcpServers": {
-    "owlabee-federal-court-docket-monitor": {
-      "url": "https://mcp.apify.com/?tools=owlabee/federal-court-docket-monitor",
+    "owlabee-pacer-docket-monitor": {
+      "url": "https://mcp.apify.com/?tools=owlabee/pacer-docket-monitor",
       "headers": {
         "Authorization": "Bearer ${APIFY_TOKEN}"
       }
@@ -65,12 +65,12 @@ Clients differ in how they expand environment variables in this file: Claude Cod
 ```json
 {
   "mcpServers": {
-    "owlabee-federal-court-docket-monitor": {
+    "owlabee-pacer-docket-monitor": {
       "command": "npx",
       "args": [
         "-y",
         "mcp-remote",
-        "https://mcp.apify.com/?tools=owlabee/federal-court-docket-monitor",
+        "https://mcp.apify.com/?tools=owlabee/pacer-docket-monitor",
         "--header",
         "Authorization:${AUTH_HEADER}"
       ],

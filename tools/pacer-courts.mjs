@@ -1,5 +1,5 @@
 // PACER RSS court registry for the guide pages. Data: pacer-courts.data.json, copied from the
-// court registry of the owlabee/federal-court-docket-monitor Actor: a live sweep of every CM/ECF
+// court registry of the owlabee/pacer-docket-monitor Actor: a live sweep of every CM/ECF
 // district and bankruptcy court, plus a later probe of the courts of appeals, the Court of Federal
 // Claims and the Court of International Trade. Nothing here adds facts beyond that registry.
 import { readFileSync } from 'node:fs';
