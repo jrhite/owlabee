@@ -1,0 +1,981 @@
+{
+ "dataset": "recalls",
+ "actor": "product-recall-feed",
+ "storeUrl": "https://apify.com/owlabee/product-recall-feed",
+ "generatedAt": "2026-11-08T04:14:59.187Z",
+ "runStatus": "SUCCEEDED",
+ "inputs": [
+  {
+   "agencies": [
+    "fda-drug",
+    "fda-device",
+    "fda-food",
+    "nhtsa",
+    "cpsc"
+   ],
+   "daysBack": 14,
+   "maxResultsPerSource": 6,
+   "maxSecondsPerSource": 120,
+   "onlyNewSinceLastRun": false,
+   "includeRaw": false
+  },
+  {
+   "agencies": [
+    "health-canada",
+    "uk-opss",
+    "uk-mhra",
+    "uk-fsa",
+    "eu-safety-gate"
+   ],
+   "daysBack": 7,
+   "maxResultsPerSource": 6,
+   "maxSecondsPerSource": 120,
+   "onlyNewSinceLastRun": false,
+   "includeRaw": false
+  }
+ ],
+ "sourcesFailed": [],
+ "count": 53,
+ "records": [
+  {
+   "agency": "OPSS",
+   "source": "uk-opss",
+   "jurisdiction": "GB",
+   "recallId": "2611-0018",
+   "date": "2026-11-06",
+   "title": "Product Recall: Petite Amélie Wooden Mobile Holder (2611-0018)",
+   "productType": "Childcare articles childrens equipment",
+   "productCategory": "consumer-product",
+   "hazard": "Product Recall for Petite Amélie Wooden Mobile Holder presenting a high risk of injuries.",
+   "hazardCategories": [
+    "injury"
+   ],
+   "classification": "High risk",
+   "severity": "high",
+   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-recall-petite-amelie-wooden-mobile-holder-2611-0018"
+  },
+  {
+   "agency": "HC",
+   "source": "health-canada",
+   "jurisdiction": "CA",
+   "recallId": "82930",
+   "date": "2026-11-06",
+   "title": "Health Canada warns about contaminated unauthorized injectable peptides and non-peptide drugs",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "Unauthorized product - Contamination",
+   "hazardCategories": [
+    "contamination",
+    "regulatory-violation"
+   ],
+   "url": "https://recalls-rappels.canada.ca/en/alert-recall/health-canada-warns-about-contaminated-unauthorized-injectable-peptides-and-non"
+  },
+  {
+   "agency": "OPSS",
+   "source": "uk-opss",
+   "jurisdiction": "GB",
+   "recallId": "2610-0246",
+   "date": "2026-11-06",
+   "title": "Product Recall: 1000W Bagless Cylinder Vacuum Cleaner sold via eBay (2610-0246)",
+   "productType": "Electrical appliances equipment",
+   "productCategory": "consumer-product",
+   "hazard": "Product Recall for 1000W Bagless Cylinder Vacuum Cleaner presenting a risk of fire.",
+   "hazardCategories": [
+    "fire"
+   ],
+   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-recall-1000w-bagless-cylinder-vacuum-cleaner-sold-via-ebay-2610-0246"
+  },
+  {
+   "agency": "HC",
+   "source": "health-canada",
+   "jurisdiction": "CA",
+   "recallId": "82927",
+   "date": "2026-11-06",
+   "title": "Automated Blood Coagulation Analyzers",
+   "productType": "Haematology",
+   "productCategory": "medical-device",
+   "hazard": "Performance",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Type II",
+   "severity": "medium",
+   "url": "https://recalls-rappels.canada.ca/en/alert-recall/automated-blood-coagulation-analyzers"
+  },
+  {
+   "agency": "OPSS",
+   "source": "uk-opss",
+   "jurisdiction": "GB",
+   "recallId": "2610-0235",
+   "date": "2026-11-06",
+   "title": "Product Safety Report: Yongkang Yongchang Electric Tools Co Ltd Cordless Drill sold via Amazon (2610-0235)",
+   "productType": "Machinery",
+   "productCategory": "consumer-product",
+   "hazard": "Product Safety Report for Yongkang Yongchang Electric Tools Co Ltd Cordless Drill presenting a serious risk of electric shock and fire.",
+   "hazardCategories": [
+    "fire",
+    "electric-shock"
+   ],
+   "classification": "Serious risk",
+   "severity": "high",
+   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-safety-report-yongkang-yongchang-electric-tools-co-ltd-cordless-drill-sold-via-amazon-2610-0235"
+  },
+  {
+   "agency": "HC",
+   "source": "health-canada",
+   "jurisdiction": "CA",
+   "recallId": "82926",
+   "date": "2026-11-06",
+   "title": "Smoothbore Breathing System",
+   "productType": "Anaesthesiology",
+   "productCategory": "medical-device",
+   "hazard": "Performance",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Type II",
+   "severity": "medium",
+   "url": "https://recalls-rappels.canada.ca/en/alert-recall/smoothbore-breathing-system"
+  },
+  {
+   "agency": "OPSS",
+   "source": "uk-opss",
+   "jurisdiction": "GB",
+   "recallId": "2610-0216",
+   "date": "2026-11-06",
+   "title": "Product Safety Report: Urban Arrow Cargo Bikes fitted with Satori Trident Seat Post (2610-0216)",
+   "productType": "Hobby sports equipment",
+   "productCategory": "consumer-product",
+   "hazard": "Product Safety Report for Urban Arrow Cargo Bikes fitted with Satori Trident Seat Post presenting a risk of injuries.",
+   "hazardCategories": [
+    "injury"
+   ],
+   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-safety-report-urban-arrow-cargo-bikes-fitted-with-satori-trident-seat-post-2610-0216"
+  },
+  {
+   "agency": "HC",
+   "source": "health-canada",
+   "jurisdiction": "CA",
+   "recallId": "82924",
+   "date": "2026-11-06",
+   "title": "ROTOFIX 32A Centrifuge",
+   "productType": "Chemistry",
+   "productCategory": "medical-device",
+   "hazard": "Performance",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Type II",
+   "severity": "medium",
+   "url": "https://recalls-rappels.canada.ca/en/alert-recall/rotofix-32a-centrifuge"
+  },
+  {
+   "agency": "OPSS",
+   "source": "uk-opss",
+   "jurisdiction": "GB",
+   "recallId": "2610-0149",
+   "date": "2026-11-06",
+   "title": "Product Safety Report: VTEK Cordless Reciprocating Saw sold via Amazon (2610-0149)",
+   "productType": "Machinery",
+   "productCategory": "consumer-product",
+   "hazard": "Product Safety Report for VTEK Cordless Reciprocating Saw presenting a high risk of fire and electric shock.",
+   "hazardCategories": [
+    "fire",
+    "electric-shock"
+   ],
+   "classification": "High risk",
+   "severity": "high",
+   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-safety-report-vtek-cordless-reciprocating-saw-sold-via-amazon-2610-0149"
+  },
+  {
+   "agency": "HC",
+   "source": "health-canada",
+   "jurisdiction": "CA",
+   "recallId": "82910",
+   "date": "2026-11-06",
+   "title": "Mermaid Princess Dress recalled due to flammability hazard",
+   "productType": "Toys and games",
+   "productCategory": "consumer-product",
+   "hazard": "Flammability hazard",
+   "hazardCategories": [
+    "fire"
+   ],
+   "url": "https://recalls-rappels.canada.ca/en/alert-recall/mermaid-princess-dress-recalled-due-flammability-hazard"
+  },
+  {
+   "agency": "OPSS",
+   "source": "uk-opss",
+   "jurisdiction": "GB",
+   "recallId": "2609-0078",
+   "date": "2026-11-06",
+   "title": "Product Safety Report: Cube Squeeze Ball sold via Amazon (2609-0078)",
+   "productType": "Toys",
+   "productCategory": "consumer-product",
+   "hazard": "Product Safety Report for Cube Squeeze Ball presenting a chemical risk.",
+   "hazardCategories": [
+    "chemical"
+   ],
+   "classification": "High risk",
+   "severity": "high",
+   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-safety-report-cube-squeeze-ball-2609-0078"
+  },
+  {
+   "agency": "HC",
+   "source": "health-canada",
+   "jurisdiction": "CA",
+   "recallId": "82909",
+   "date": "2026-11-06",
+   "title": "Costway Convertible High Chairs recalled due to fall and entrapment hazards",
+   "productType": "Household items",
+   "productCategory": "consumer-product",
+   "hazard": "Fall hazard - Entrapment hazard",
+   "hazardCategories": [
+    "entrapment",
+    "fall"
+   ],
+   "url": "https://recalls-rappels.canada.ca/en/alert-recall/costway-convertible-high-chairs-recalled-due-fall-and-entrapment-hazards"
+  },
+  {
+   "agency": "FSA",
+   "source": "uk-fsa",
+   "jurisdiction": "GB",
+   "recallId": "FSA-PRIN-52-2026",
+   "date": "2026-11-06",
+   "title": "Baxters recalls Chef Selections Cullen Skink soup because of a manufacturing fault which may cause spoilage and cans to rupture",
+   "productType": "Product recall information notice",
+   "productCategory": "food",
+   "hazard": "A manufacturing fault has occurred which may result in spoilage causing unpleasant odour and flavour, swelling and possible rupture of the can.",
+   "hazardCategories": [
+    "spoilage-process-failure"
+   ],
+   "classification": "PRIN",
+   "severity": "medium",
+   "firm": "Baxters",
+   "url": "https://alerts.food.gov.uk/news-alerts/alert/fsa-prin-52-2026"
+  },
+  {
+   "agency": "EC",
+   "source": "eu-safety-gate",
+   "jurisdiction": "EU",
+   "recallId": "SR/03109/26",
+   "date": "2026-11-06",
+   "title": "USB charger: Samsung Fast Charger with 15 W Power",
+   "productType": "Electrical appliances and equipment",
+   "productCategory": "consumer-product",
+   "hazard": "Electric shock: The creepage distance between the primary and secondary circuit are inadequate. Live parts of the product may become accessible to the user who can receive an electric shock. The product does not comply with the requirement…",
+   "hazardCategories": [
+    "electric-shock",
+    "regulatory-violation"
+   ],
+   "classification": "Serious risk",
+   "severity": "high",
+   "firm": "Samsung",
+   "url": "https://ec.europa.eu/safety-gate-alerts/screen/webReport/alertDetail/10119514"
+  },
+  {
+   "agency": "CPSC",
+   "source": "cpsc",
+   "jurisdiction": "US",
+   "recallId": "27066",
+   "date": "2026-11-05",
+   "title": "Arlopu Recalls Slide Playsets Due to Risk of Serious Injury and Death from Head and Neck Entrapment Hazards",
+   "productType": "Slides or Sliding Boards",
+   "productCategory": "consumer-product",
+   "hazard": "The recalled products contain multiple openings where a child’s torso can fit through the opening, but a child’s head cannot, posing a risk of serious injury and death due to head and neck entrapment hazards. Additionally, the basketball n…",
+   "hazardCategories": [
+    "injury",
+    "strangulation",
+    "entrapment"
+   ],
+   "classification": "Repair",
+   "firm": "SHENZHENSHIMINGXIAOSHANGMAOYOUXIANGONGSI dba Arlopu, of China",
+   "url": "https://cpsc.gov/Recalls/2027/Arlopu-Recalls-Slide-Playsets-Due-to-Risk-of-Serious-Injury-and-Death-from-Head-and-Neck-Entrapment-Hazards"
+  },
+  {
+   "agency": "CPSC",
+   "source": "cpsc",
+   "jurisdiction": "US",
+   "recallId": "27072",
+   "date": "2026-11-05",
+   "title": "Baby Brezza Enterprises Recalls SuperFast Sterilizer Dryers Due to Overheating and Burn Hazards",
+   "productType": "Dryers",
+   "productCategory": "consumer-product",
+   "hazard": "The recalled sterilizer dryers can overheat when plugged in and operating, posing a risk of injury from a burn hazard if the surface is handled.",
+   "hazardCategories": [
+    "injury",
+    "burns",
+    "fire"
+   ],
+   "classification": "Replace",
+   "firm": "Baby Brezza Enterprises LLC, of Newark, New Jersey",
+   "url": "https://www.cpsc.gov/Recalls/2027/Baby-Brezza-Enterprises-Recalls-SuperFast-Sterilizer-Dryers-Due-to-Overheating-and-Burn-Hazards"
+  },
+  {
+   "agency": "CPSC",
+   "source": "cpsc",
+   "jurisdiction": "US",
+   "recallId": "27065",
+   "date": "2026-11-05",
+   "title": "Bose Recalls Lithium-Ion Battery Packs for S1 Pro and S1 Pro+ Bluetooth Speaker Systems Due to Risk of Injury from Fire and Overheating Hazards",
+   "productType": "Speakers",
+   "productCategory": "consumer-product",
+   "hazard": "The recalled lithium-ion battery packs can overheat and ignite, posing a risk of injury from fire and overheating hazards.",
+   "hazardCategories": [
+    "injury",
+    "fire"
+   ],
+   "classification": "Replace",
+   "firm": "Bose Corporation, of Framingham, Massachusetts",
+   "url": "https://www.cpsc.gov/Recalls/2027/Bose-Recalls-Lithium-Ion-Battery-Packs-for-S1-Pro-and-S1-Pro-Bluetooth-Speaker-Systems-Due-to-Risk-of-Injury-from-Fire-and-Overheating-Hazards-0"
+  },
+  {
+   "agency": "CPSC",
+   "source": "cpsc",
+   "jurisdiction": "US",
+   "recallId": "27070",
+   "date": "2026-11-05",
+   "title": "C.A.M.P. Recalls Mountain Ice Axes Due to Risk of Serious Injury or Death from Fall Hazard",
+   "productType": "Hatchets or Axes",
+   "productCategory": "consumer-product",
+   "hazard": "A screw on the recalled mountain ice axes can loosen during use, causing the handle or pick to detach, posing a risk of serious injury or death from fall hazard.",
+   "hazardCategories": [
+    "injury",
+    "fall"
+   ],
+   "classification": "Repair",
+   "firm": "C.A.M.P. USA Inc., of Golden, Colorado",
+   "url": "https://www.cpsc.gov/Recalls/2027/CAMP-Recalls-Mountain-Ice-Axes-Due-to-Risk-of-Serious-Injury-or-Death-from-Fall-Hazard"
+  },
+  {
+   "agency": "CPSC",
+   "source": "cpsc",
+   "jurisdiction": "US",
+   "recallId": "27069",
+   "date": "2026-11-05",
+   "title": "Gourmia Recalls 9-Slice Digital Air Fryer Ovens Due to Burn Hazard",
+   "productType": "Electric Counter-top Ovens, Broilers or Toaster Ovens",
+   "productCategory": "consumer-product",
+   "hazard": "The oven’s doors can unexpectedly close when bumped, posing a burn hazard to consumers retrieving hot food.",
+   "hazardCategories": [
+    "burns"
+   ],
+   "classification": "Repair",
+   "firm": "The Steelstone Group LLC, dba Gourmia, of Brooklyn, New York.",
+   "url": "https://www.cpsc.gov/Recalls/2027/Gourmia-Recalls-9-Slice-Digital-Air-Fryer-Ovens-Due-to-Burn-Hazard"
+  },
+  {
+   "agency": "CPSC",
+   "source": "cpsc",
+   "jurisdiction": "US",
+   "recallId": "27068",
+   "date": "2026-11-05",
+   "title": "Jiastfeng Recalls HAUOMS Eight-drawer Dressers Due to Risk of Serious Injury or Death from Tip-Over and Entrapment Hazards; Violate Mandatory Standard for Clothing Storage Units",
+   "productType": "Desks, Dressers, Chests, Bureaus, or Buffets",
+   "productCategory": "consumer-product",
+   "hazard": "The recalled dressers are unstable if they are not anchored to the wall, posing tip-over and entrapment hazards that can result in risks of serious injuries or death to children. The dressers violate the mandatory safety standards as requi…",
+   "hazardCategories": [
+    "injury",
+    "entrapment",
+    "fall"
+   ],
+   "classification": "Refund",
+   "url": "https://www.cpsc.gov/Recalls/2027/Jiastfeng-Recalls-HAUOMS-Eight-drawer-Dressers-Due-to-Risk-of-Serious-Injury-or-Death-from-Tip-Over-and-Entrapment-Hazards-Violate-Mandatory-Standard-for-Clothing-Storage-Units"
+  },
+  {
+   "agency": "MHRA",
+   "source": "uk-mhra",
+   "jurisdiction": "GB",
+   "recallId": "EL(26)A/47",
+   "date": "2026-11-05",
+   "title": "Class 3 Medicines Recall: Aspire Pharma Limited, Tropicamide 1% Eye Drops, solution in single dose containers 20 x 0.5ml , EL(26)A/47",
+   "productType": "Medicines recall notification",
+   "productCategory": "drug",
+   "hazard": "Aspire Pharma Ltd is recalling specific batches of Tropicamide 1% Eye Drops, solution in single dose containers 0.5ml x 20, due to them being labelled with the incorrect expiry date. The correct expiry date for these batches should be 31/1…",
+   "hazardCategories": [
+    "mislabeling"
+   ],
+   "classification": "Class 3",
+   "severity": "low",
+   "firm": "Aspire Pharma Limited",
+   "url": "https://www.gov.uk/drug-device-alerts/class-3-medicines-recall-aspire-pharma-limited-tropicamide-1-percent-eye-drops-solution-in-single-dose-containers-20-x-0-dot-5ml-el-26-a-slash-47"
+  },
+  {
+   "agency": "MHRA",
+   "source": "uk-mhra",
+   "jurisdiction": "GB",
+   "recallId": "EL(26)A/46",
+   "date": "2026-11-05",
+   "title": "Class 4 Medicines Defect Notification: Sandoz Limited, Co-Amoxiclav powder for oral suspension 250/62.5 mg/5mL, EL(26)A/46",
+   "productType": "Medicines recall notification",
+   "productCategory": "drug",
+   "hazard": "Sandoz Limited have informed the MHRA of errors in the dosing table in the Summary of Product Characteristics (SmPC) for Co-amoxiclav 250/62.5 mg/5 ml Powder for Oral Suspension.",
+   "hazardCategories": [
+    "mislabeling"
+   ],
+   "classification": "Class 4",
+   "severity": "low",
+   "firm": "Sandoz Limited",
+   "url": "https://www.gov.uk/drug-device-alerts/class-4-medicines-defect-notification-sandoz-limited-co-amoxiclav-powder-for-oral-suspension-250-slash-62-dot-5-mg-slash-ml-el-26-a-slash-46"
+  },
+  {
+   "agency": "FSA",
+   "source": "uk-fsa",
+   "jurisdiction": "GB",
+   "recallId": "FSA-AA-51-2026",
+   "date": "2026-11-05",
+   "title": "AG Barr recalls Rubicon Yuzu & Pink Grapefruit Cartons because they may contain undeclared sulphites",
+   "productType": "Allergy alert",
+   "productCategory": "food",
+   "hazard": "This product may contain sulphites making it a possible health risk for anyone with a sensitivity to sulphur dioxide and/or sulphites.",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "AA",
+   "severity": "high",
+   "firm": "AG Barr",
+   "url": "https://alerts.food.gov.uk/news-alerts/alert/fsa-aa-51-2026"
+  },
+  {
+   "agency": "MHRA",
+   "source": "uk-mhra",
+   "jurisdiction": "GB",
+   "recallId": "field-safety-notices-26-to-30-october-2026",
+   "date": "2026-11-04",
+   "title": "Field Safety Notices: 26 to 30 October 2026",
+   "productType": "Field safety notices",
+   "productCategory": "medical-device",
+   "hazard": "List of Field Safety Notices from 26 to 30 October 2026.",
+   "hazardCategories": [
+    "other"
+   ],
+   "url": "https://www.gov.uk/drug-device-alerts/field-safety-notices-26-to-30-october-2026"
+  },
+  {
+   "agency": "EC",
+   "source": "eu-safety-gate",
+   "jurisdiction": "EU",
+   "recallId": "SR/03147/26",
+   "date": "2026-11-04",
+   "title": "Earrings: Bodymod Earring Labret with three stones",
+   "productType": "Jewellery",
+   "productCategory": "consumer-product",
+   "hazard": "Chemical: The rate of nickel release is too high (measured value up to 8.47 µg/cm2/week). Nickel is a strong sensitiser and causes allergic reactions if present in articles that come into direct and prolonged contact with the skin. The pro…",
+   "hazardCategories": [
+    "chemical",
+    "regulatory-violation"
+   ],
+   "classification": "Serious risk",
+   "severity": "high",
+   "firm": "Bodymod",
+   "url": "https://ec.europa.eu/safety-gate-alerts/screen/webReport/alertDetail/10119566"
+  },
+  {
+   "agency": "EC",
+   "source": "eu-safety-gate",
+   "jurisdiction": "EU",
+   "recallId": "SR/03146/26",
+   "date": "2026-11-04",
+   "title": "Earrings: Restyle Ankh Rose",
+   "productType": "Jewellery",
+   "productCategory": "consumer-product",
+   "hazard": "Chemical: The product has an excessive concentration of cadmium (measured value: 0.02% by weight). Cadmium is harmful to human health because it accumulates in the body, can damage the kidneys and bones and it may cause cancer. The product…",
+   "hazardCategories": [
+    "chemical",
+    "regulatory-violation"
+   ],
+   "classification": "Serious risk",
+   "severity": "high",
+   "firm": "Restyle",
+   "url": "https://ec.europa.eu/safety-gate-alerts/screen/webReport/alertDetail/10119565"
+  },
+  {
+   "agency": "EC",
+   "source": "eu-safety-gate",
+   "jurisdiction": "EU",
+   "recallId": "SR/03140/26",
+   "date": "2026-11-04",
+   "title": "Children's swimsuit: Sinsay",
+   "productType": "Clothing, textiles and fashion items",
+   "productCategory": "consumer-product",
+   "hazard": "Injuries: The product bears functional cords at the waist area. The cords may become trapped during various activities of a child, leading to injuries. If the ends of cords become entangled in the structures or moving mechanisms of water p…",
+   "hazardCategories": [
+    "injury",
+    "fall",
+    "regulatory-violation"
+   ],
+   "classification": "Serious risk",
+   "severity": "high",
+   "firm": "Sinsay",
+   "url": "https://ec.europa.eu/safety-gate-alerts/screen/webReport/alertDetail/10119413"
+  },
+  {
+   "agency": "EC",
+   "source": "eu-safety-gate",
+   "jurisdiction": "EU",
+   "recallId": "SR/03137/26",
+   "date": "2026-11-04",
+   "title": "LED booklight: Portabel läslampa",
+   "productType": "Electrical appliances and equipment",
+   "productCategory": "consumer-product",
+   "hazard": "Chemical, Environment: The plastic in the product has an excessive concentration of bis(2-ethylhexyl) phthalate (DEHP) (measured value up to 24.8% by weight).This phthalate poses a risk to human health and the environment. The product does…",
+   "hazardCategories": [
+    "chemical",
+    "regulatory-violation",
+    "environment"
+   ],
+   "classification": "Serious risk",
+   "severity": "high",
+   "url": "https://ec.europa.eu/safety-gate-alerts/screen/webReport/alertDetail/10119554"
+  },
+  {
+   "agency": "EC",
+   "source": "eu-safety-gate",
+   "jurisdiction": "EU",
+   "recallId": "SR/03136/26",
+   "date": "2026-11-04",
+   "title": "Lorry: Mercedes-Benz Actros, Arocs, eActros",
+   "productType": "Motor vehicles",
+   "productCategory": "vehicle",
+   "hazard": "Injuries: The bolts securing the hydraulic line clamps to the cylinder may not be tightened correctly and the clamps may come loose. This could cause hydraulic oil to leak onto the road, creating a risk of accidents. The product does not c…",
+   "hazardCategories": [
+    "injury",
+    "regulatory-violation"
+   ],
+   "classification": "Serious risk",
+   "severity": "high",
+   "firm": "Mercedes-Benz",
+   "url": "https://ec.europa.eu/safety-gate-alerts/screen/webReport/alertDetail/10119558"
+  },
+  {
+   "agency": "NHTSA",
+   "source": "nhtsa",
+   "jurisdiction": "US",
+   "recallId": "26V728000",
+   "date": "2026-11-03",
+   "title": "Air Bags & Seat Belt Pretensioners May Not Deploy in a Crash",
+   "productType": "Vehicle — AIR BAGS",
+   "productCategory": "vehicle",
+   "hazard": "Air bags and seat belt pretensioners that do not activate in a crash increases the risk of injury.",
+   "hazardCategories": [
+    "injury",
+    "crash",
+    "software"
+   ],
+   "severity": "medium",
+   "firm": "Hyundai Motor America",
+   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26V728000"
+  },
+  {
+   "agency": "NHTSA",
+   "source": "nhtsa",
+   "jurisdiction": "US",
+   "recallId": "26V729000",
+   "date": "2026-11-03",
+   "title": "Touch Screen Display May Fail",
+   "productType": "Vehicle — EQUIPMENT",
+   "productCategory": "vehicle",
+   "hazard": "A loss of exterior lights can reduce the visibility of the vehicle to other drivers, increasing the risk of a crash. Inoperative equipment can delay emergency response, increasing the risk of injury.",
+   "hazardCategories": [
+    "injury",
+    "fire",
+    "crash"
+   ],
+   "severity": "medium",
+   "firm": "Spencer Manufacturing, Inc.",
+   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26V729000"
+  },
+  {
+   "agency": "NHTSA",
+   "source": "nhtsa",
+   "jurisdiction": "US",
+   "recallId": "26V717000",
+   "date": "2026-10-29",
+   "title": "Loss of Braking",
+   "productType": "Vehicle — SERVICE BRAKES, HYDRAULIC",
+   "productCategory": "vehicle",
+   "hazard": "A loss of braking ability increases the risk of a crash.",
+   "hazardCategories": [
+    "crash",
+    "software"
+   ],
+   "severity": "medium",
+   "firm": "General Motors, LLC",
+   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26V717000"
+  },
+  {
+   "agency": "NHTSA",
+   "source": "nhtsa",
+   "jurisdiction": "US",
+   "recallId": "26V718000",
+   "date": "2026-10-29",
+   "title": "Improperly Tightened Steering Gear Assembly Nut",
+   "productType": "Vehicle — STEERING",
+   "productCategory": "vehicle",
+   "hazard": "A loose nut that separates from the steering gear assembly while driving can cause a loss of steering control, increasing the risk of a crash.",
+   "hazardCategories": [
+    "crash"
+   ],
+   "severity": "medium",
+   "firm": "General Motors, LLC",
+   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26V718000"
+  },
+  {
+   "agency": "NHTSA",
+   "source": "nhtsa",
+   "jurisdiction": "US",
+   "recallId": "26V719000",
+   "date": "2026-10-29",
+   "title": "Hill Start Assist Message Incorrectly Enabled",
+   "productType": "Vehicle — ELECTRICAL SYSTEM",
+   "productCategory": "vehicle",
+   "hazard": "A false hill start assist message can lead to unexpected vehicle rollback on an incline, increasing the risk of a crash.",
+   "hazardCategories": [
+    "crash"
+   ],
+   "severity": "medium",
+   "firm": "Mack Trucks, Inc.",
+   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26V719000"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0062-2027",
+   "date": "2026-10-28",
+   "title": "Brush Buddies, Mint Chocolate Chip Ice Cream Flavored Toothpaste, Anticavity Fluoride Toothpaste, (sodium fluoride 0.243%) Net Wt. 3.5 oz (99g), Distributed ...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0062-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0082-2027",
+   "date": "2026-10-28",
+   "title": "Argatroban Injection, USP, 250 mg/2.5mL (100 mg/mL), 2.5 mL x 1 Single Dose Vial, Rx only, Manufactured for: Endo USA, Malvern,PA 19355/Argatroban Injection,...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "Particulate matter: particulate matter identified as cellulose, polystyrene, polyethylene teraphalate, stainless steel, or stopper material in the product solution.",
+   "hazardCategories": [
+    "impurity"
+   ],
+   "classification": "Class I",
+   "severity": "high",
+   "firm": "Par Health USA, LLC",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0082-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0060-2027",
+   "date": "2026-10-28",
+   "title": "evo, Sensitive, Anticavity Fluoride Toothpaste, (potassium nitrate 5%, sodium fluoride 0.24%) Sweet Mint, Net Wt. 3.5 oz (99g), Distributed by Ashtel Studios...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0060-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0056-2027",
+   "date": "2026-10-28",
+   "title": "Brush Buddies, Crayola, Silly Scents, Anticavity Fluoride Toothpaste, (sodium fluoride0.243%) Watermelon Flavor, Net Wt. 4.0 oz (113g), Distributed by Ashtel...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0056-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0067-2027",
+   "date": "2026-10-28",
+   "title": "BB (Brush Buddies) Advanced Whitening, Anti-Cavity Fluoride Toothpaste, (sodium fluoride 0,24%) Peppermint, Net Wt 3.5 oz (99g), Distributed by Ashtel Studio...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0067-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-device",
+   "jurisdiction": "US",
+   "recallId": "Z-0232-2027",
+   "date": "2026-10-28",
+   "title": "Direxion Torqueable Microcatheter, NGMC/SINGLE/021/SWAN/1RO/105;  Material Number: M001195290",
+   "productType": "Devices",
+   "productCategory": "medical-device",
+   "hazard": "The product is defective due to insufficient UV curing of the hydrophilic coating which is present on the outer surface of the distal segment of the microcatheters and raised ridges on nitinol sleeves due to laser cutting misalignment.",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "Boston Scientific Cork, Ltd.",
+   "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-0232-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0058-2027",
+   "date": "2026-10-28",
+   "title": "Brush Buddies, My Little Pony Scents Anticavity Fluoride Toothpaste, (sodium fluoride 0.243%) Bubble Gum Flavor, Net Wt. 4.0 oz (113g), Distributed by Ashtel...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0058-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-device",
+   "jurisdiction": "US",
+   "recallId": "Z-0243-2027",
+   "date": "2026-10-28",
+   "title": "Direxion Torqueable Microcatheter, NGMC/SINGLE/027/BERN/1RO/130;  Material Number: M001195440",
+   "productType": "Devices",
+   "productCategory": "medical-device",
+   "hazard": "The product is defective due to insufficient UV curing of the hydrophilic coating which is present on the outer surface of the distal segment of the microcatheters and raised ridges on nitinol sleeves due to laser cutting misalignment.",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "Boston Scientific Cork, Ltd.",
+   "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-0243-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-device",
+   "jurisdiction": "US",
+   "recallId": "Z-0258-2027",
+   "date": "2026-10-28",
+   "title": "Direxion Torqueable Microcatheter, NGMC/FATHOM/027/BERN/1RO/155;  Material Number: M001195750",
+   "productType": "Devices",
+   "productCategory": "medical-device",
+   "hazard": "The product is defective due to insufficient UV curing of the hydrophilic coating which is present on the outer surface of the distal segment of the microcatheters and raised ridges on nitinol sleeves due to laser cutting misalignment.",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "Boston Scientific Cork, Ltd.",
+   "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-0258-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-device",
+   "jurisdiction": "US",
+   "recallId": "Z-0211-2027",
+   "date": "2026-10-28",
+   "title": "Ion Torrent Genexus Dx with software, Catalog: A40003539, which supports the Ion Torrent Genexus Dx Integrated Sequencer",
+   "productType": "Devices",
+   "productCategory": "medical-device",
+   "hazard": "DNA or RNA sequencing system software has vulnerabilities.",
+   "hazardCategories": [
+    "software"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "Life Technologies Holdings Pte Ltd",
+   "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-0211-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-device",
+   "jurisdiction": "US",
+   "recallId": "Z-0231-2027",
+   "date": "2026-10-28",
+   "title": "Direxion Torqueable Microcatheter, NGMC/SINGLE/021/J/1RO/155;  Material Number: M001195280",
+   "productType": "Devices",
+   "productCategory": "medical-device",
+   "hazard": "The product is defective due to insufficient UV curing of the hydrophilic coating which is present on the outer surface of the distal segment of the microcatheters and raised ridges on nitinol sleeves due to laser cutting misalignment.",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "Boston Scientific Cork, Ltd.",
+   "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-0231-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-device",
+   "jurisdiction": "US",
+   "recallId": "Z-0127-2027",
+   "date": "2026-10-28",
+   "title": "VOCSN (Japan)   Model Number: PRT-01100-100, Package PN:PRT-01126-100. used for ventilatory support.",
+   "productType": "Devices",
+   "productCategory": "medical-device",
+   "hazard": "Ventilator's Internal Flow transducer cable connector may disconnect from internal board, potentially resulting in system reboot and interruption of ventilation therapy.",
+   "hazardCategories": [
+    "other"
+   ],
+   "classification": "Class I",
+   "severity": "high",
+   "firm": "Ventec Life Systems, Inc.",
+   "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-0127-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-food",
+   "jurisdiction": "US",
+   "recallId": "H-0130-2027",
+   "date": "2026-10-28",
+   "title": "Jovy Gummy Worms Neon; packaged in 1lb plastic units. UPC 712199083411",
+   "productType": "Food",
+   "productCategory": "food",
+   "hazard": "undeclared allergen ingredient (Red#40, Yellow#5, Yellow#6, Blue#1)",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "El Ruisenor De Mexico, Inc.",
+   "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0130-2027%22"
+  },
+  {
+   "agency": "NHTSA",
+   "source": "nhtsa",
+   "jurisdiction": "US",
+   "recallId": "26E077000",
+   "date": "2026-10-28",
+   "title": "Driveline May Separate",
+   "productType": "Equipment — POWER TRAIN",
+   "productCategory": "vehicle-equipment",
+   "hazard": "A driveline separation can cause a loss of drive power, increasing the risk of a crash. Detached components can become a road hazard for other vehicles, increasing the risk of a crash.",
+   "hazardCategories": [
+    "crash"
+   ],
+   "severity": "medium",
+   "firm": "Cummins, Inc.",
+   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26E077000"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-food",
+   "jurisdiction": "US",
+   "recallId": "H-0158-2027",
+   "date": "2026-10-28",
+   "title": "Milk Chocolate Covered Raisins; packaged in 1lb, 5lb, 20lb clear plastic units. No UPC",
+   "productType": "Food",
+   "productCategory": "food",
+   "hazard": "undeclared allergen ingredient (Milk, Soy)",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "El Ruisenor De Mexico, Inc.",
+   "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0158-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-food",
+   "jurisdiction": "US",
+   "recallId": "H-0162-2027",
+   "date": "2026-10-28",
+   "title": "Whole wheat flour; packaged in 1lb, 5lb, 50lb clear plastic units.  No UPC",
+   "productType": "Food",
+   "productCategory": "food",
+   "hazard": "undeclared allergen ingredient (Wheat)",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "Class III",
+   "severity": "low",
+   "firm": "El Ruisenor De Mexico, Inc.",
+   "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0162-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-food",
+   "jurisdiction": "US",
+   "recallId": "H-0141-2027",
+   "date": "2026-10-28",
+   "title": "Special Red Almond Mole Powder; packaged in 1lb, 5lb, 11lb clear plastic units. No UPC",
+   "productType": "Food",
+   "productCategory": "food",
+   "hazard": "undeclared allergen ingredient (Sesame, Peanuts, Wheat, Soy, Almonds, Walnuts, Yellow#5, Yellow#6, Red#40, Blue#2)",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "Class I",
+   "severity": "high",
+   "firm": "El Ruisenor De Mexico, Inc.",
+   "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0141-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-food",
+   "jurisdiction": "US",
+   "recallId": "H-0120-2027",
+   "date": "2026-10-28",
+   "title": "Fritura mixed dry fruit; packed in a clear plastic 1lb, 5lb, 25lb unit sizes. no UPC",
+   "productType": "Food",
+   "productCategory": "food",
+   "hazard": "undeclared allergen ingredient (Wheat, Yellow #5, Yellow #6)",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "El Ruisenor De Mexico, Inc.",
+   "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0120-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-food",
+   "jurisdiction": "US",
+   "recallId": "H-0104-2027",
+   "date": "2026-10-28",
+   "title": "Black Sesame Seeds; packed in a clear plastic bag. 1lb, 5lb, 50lb unit size. No UPC",
+   "productType": "Food",
+   "productCategory": "food",
+   "hazard": "undeclared allergen ingredient (Sesame)",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "Class III",
+   "severity": "low",
+   "firm": "El Ruisenor De Mexico, Inc.",
+   "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0104-2027%22"
+  }
+ ]
+}

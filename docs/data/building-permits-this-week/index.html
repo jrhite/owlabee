@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New building permits by city this week | owlabee</title>
+<meta name="description" content="Building permits issued this week in ten US cities: permit type, status, valuation and street, updated weekly from official open data, with a JSON download.">
+<link rel="canonical" href="https://owlabee.com/data/building-permits-this-week/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="New building permits by city this week | owlabee">
+<meta property="og:description" content="Building permits issued this week in ten US cities: permit type, status, valuation and street, updated weekly from official open data, with a JSON download.">
+<meta property="og:url" content="https://owlabee.com/data/building-permits-this-week/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"New building permits by city this week","description":"Building permits issued this week in ten US cities: permit type, status, valuation and street, updated weekly from official open data, with a JSON download.","url":"https://owlabee.com/data/building-permits-this-week/","dateModified":"2026-11-08T04:16:05.963Z","creator":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"isAccessibleForFree":true,"creditText":"owlabee, from the open-data portals of the cities named","isBasedOn":["https://data.cityofnewyork.us/d/rbx6-tga4","https://data.cityofchicago.org/d/ydr8-5enu","https://data.sfgov.org/d/i98e-djp9","https://data.seattle.gov/d/76t5-zqzr","https://data.austintexas.gov/d/3syk-w9eu"],"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://owlabee.com/data/permits.json"}]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../../#guides">Guides</a>
+<a href="../../data/">Free data</a>
+<a href="../../compare/">Compare</a>
+<a href="../../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Free data</a> <span aria-hidden="true">›</span> Building permits</nav>
+<p class="kicker">Free data · updated November 8, 2026</p>
+<h1>New building permits by city this week</h1>
+<p class="lede">New building permits issued this week in New York, Chicago, San Francisco, Seattle, Austin, Boston, Nashville, Denver, Raleigh and Columbus: type, status, valuation and street. Generated November 8, 2026 from our own permits Actor.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/building-permits-scraper">Get every permit as JSON</a>
+<p class="note">Building Permits Scraper — Roofing &amp; Construction Leads on Apify Store. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#summary">At a glance</a><a href="#by-city">By city</a><a href="#method">How it is made</a><a href="#notice">Legal</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="summary">
+<h2>This week at a glance</h2>
+<p>The newest permits issued in ten US cities in the 7 days to November 8, 2026: at most seven per city, newest first. Valuation is the declared or estimated job cost as the city publishes it (some publish none, and some publish placeholder values such as $1).</p>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">City</th><th scope="col">Permits shown</th><th scope="col">Valuation of those shown</th><th scope="col">Most common types</th></tr></thead>
+<tbody>
+<tr><td><a href="#san-francisco">San Francisco, CA</a></td><td>6</td><td>$74,503</td><td>otc alterations permit</td></tr>
+<tr><td><a href="#chicago">Chicago, IL</a></td><td>7</td><td>$191,167</td><td>PERMIT – EXPRESS PERMIT PROGRAM, PERMIT - RENOVATION/ALTERATION</td></tr>
+<tr><td><a href="#nyc">New York City, NY</a></td><td>7</td><td>$426,980</td><td>General Construction, Sidewalk Shed, Mechanical Systems</td></tr>
+<tr><td><a href="#raleigh">Raleigh, NC</a></td><td>7</td><td>$57,787</td><td>Building</td></tr>
+<tr><td><a href="#seattle">Seattle, WA</a></td><td>7</td><td>$3,215,536</td><td>Building, Demolition</td></tr>
+<tr><td><a href="#austin">Austin, TX</a></td><td>7</td><td>$1</td><td>Electrical Permit, Building Permit, Driveway / Sidewalks</td></tr>
+<tr><td><a href="#nashville">Nashville / Davidson County, TN</a></td><td>7</td><td>$1,287,816</td><td>Building Residential - New, Building Demolition Permit, Building Sign Permit</td></tr>
+<tr><td><a href="#denver-residential">Denver, CO (residential construction)</a></td><td>7</td><td>$973,709</td><td>Residential construction</td></tr>
+<tr><td><a href="#boston">Boston, MA</a></td><td>7</td><td>$1,063,076</td><td>Short Form Bldg Permit, Gas Permit, Electrical Permit</td></tr>
+<tr><td><a href="#columbus">Columbus, OH</a></td><td>7</td><td>$4,065,000</td><td>1,2,3 Family, Commercial</td></tr>
+</tbody>
+</table></div>
+</section>
+<section id="by-city">
+<h2>By city</h2>
+<p>Location is shown at street level only: house numbers are removed. Names of owners, applicants and contractors are not shown on this page.</p>
+<h3 id="san-francisco">San Francisco, CA (6)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>otc alterations permit<br><span class="note">1 family dwelling</span></td><td>issued</td><td><span class="nowrap">$64,000</span></td><td>Longview Ct, San Francisco</td><td><code>202611060515</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>otc alterations permit<br><span class="note">retail sales</span></td><td>issued</td><td><span class="nowrap">$1</span></td><td>Powell St, San Francisco</td><td><code>202611060501</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>otc alterations permit<br><span class="note">1 family dwelling</span></td><td>issued</td><td><span class="nowrap">$5,000</span></td><td>Del Monte St, San Francisco</td><td><code>202611060510</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>otc alterations permit<br><span class="note">health studios &amp; gym</span></td><td>complete</td><td><span class="nowrap">$1</span></td><td>Market St, San Francisco</td><td><code>202611060512</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>otc alterations permit<br><span class="note">1 family dwelling</span></td><td>issued</td><td><span class="nowrap">$5,500</span></td><td>Curtis St, San Francisco</td><td><code>202611060487</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>otc alterations permit<br><span class="note">apartments</span></td><td>issued</td><td><span class="nowrap">$1</span></td><td>Pine St, San Francisco</td><td><code>202611060505</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: <a href="https://data.sfgov.org/d/i98e-djp9">DBI Building Permits</a>, the jurisdiction's open-data portal.</p>
+<h3 id="chicago">Chicago, IL (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>PERMIT – EXPRESS PERMIT PROGRAM<br><span class="note">Detached Frame Garage</span></td><td>ACTIVE</td><td><span class="nowrap">$47,300</span></td><td>W 109TH ST, Chicago</td><td><code>B200519106</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>PERMIT – EXPRESS PERMIT PROGRAM<br><span class="note">Masonry Work</span></td><td>ACTIVE</td><td><span class="nowrap">$18,900</span></td><td>S DR MARTIN LUTHER KING JR DR, Chicago</td><td><code>B200518823</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>PERMIT – EXPRESS PERMIT PROGRAM<br><span class="note">Electrical Work</span></td><td>ACTIVE</td><td><span class="nowrap">$45,600</span></td><td>W 83RD PL, Chicago</td><td><code>B200519041</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>PERMIT - RENOVATION/ALTERATION</td><td>ACTIVE</td><td><span class="nowrap">$18,000</span></td><td>N CLAREMONT AVE, Chicago</td><td><code>101082166</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>PERMIT - RENOVATION/ALTERATION</td><td>ACTIVE</td><td><span class="nowrap">$8,500</span></td><td>W 60TH ST, Chicago</td><td><code>101085136</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>PERMIT – EXPRESS PERMIT PROGRAM<br><span class="note">Electrical Work</span></td><td>ACTIVE</td><td><span class="nowrap">$867</span></td><td>S STATE ST, Chicago</td><td><code>B200512650</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>PERMIT – EXPRESS PERMIT PROGRAM<br><span class="note">Electrical Work</span></td><td>ACTIVE</td><td><span class="nowrap">$52,000</span></td><td>N LA SALLE ST, Chicago</td><td><code>B200517991</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: <a href="https://data.cityofchicago.org/d/ydr8-5enu">Building Permits</a>, the jurisdiction's open-data portal.</p>
+<h3 id="nyc">New York City, NY (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Sidewalk Shed<br><span class="note">Initial Permit</span></td><td>Permit Issued</td><td><span class="nowrap">$9,000</span></td><td>EAST 22 STREET, Brooklyn</td><td><code>B01483867-I1-SH</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Mechanical Systems<br><span class="note">Renewal Permit Without Changes</span></td><td>Permit Issued</td><td><span class="nowrap">$100,000</span></td><td>THIRD AVENUE, Manhattan</td><td><code>M01285552-S1-MS</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Supported Scaffold<br><span class="note">Initial Permit</span></td><td>Permit Issued</td><td><span class="nowrap">$1,000</span></td><td>CROSBY STREET, Manhattan</td><td><code>M01483872-I1-SF</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>General Construction<br><span class="note">Renewal Permit Without Changes</span></td><td>Permit Issued</td><td><span class="nowrap">–</span></td><td>CLINTON AVENUE, Bronx</td><td><code>X01194388-I1-GC</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>General Construction<br><span class="note">Renewal Permit Without Changes</span></td><td>Permit Issued</td><td><span class="nowrap">$310,000</span></td><td>MADISON AVENUE, Manhattan</td><td><code>M01167662-I1-GC</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Sidewalk Shed<br><span class="note">Initial Permit</span></td><td>Permit Issued</td><td><span class="nowrap">$1,000</span></td><td>SULLIVAN STREET, Manhattan</td><td><code>M01484554-I1-SH</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>General Construction<br><span class="note">Initial Permit</span></td><td>Permit Issued</td><td><span class="nowrap">$5,980</span></td><td>GARAGE TREADWELL AVENUE, Staten Island</td><td><code>S01456329-I1-GC</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: <a href="https://data.cityofnewyork.us/d/rbx6-tga4">DOB NOW: Build – Approved Permits</a>, the jurisdiction's open-data portal.</p>
+<h3 id="raleigh">Raleigh, NC (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Alteration/Repairs</span></td><td>Permit Issued</td><td><span class="nowrap">$5,000</span></td><td>Glascock St, RALEIGH</td><td><code>BLDR-051698-2026</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Alteration/Repairs</span></td><td>Permit Issued</td><td><span class="nowrap">$9,598</span></td><td>Ladys Slipper Ct, RALEIGH</td><td><code>BLDNR-050690-2026</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Alteration/Repairs</span></td><td>Permit Issued</td><td><span class="nowrap">$9,598</span></td><td>Trillium Cir, RALEIGH</td><td><code>BLDNR-050685-2026</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Alteration/Repairs</span></td><td>Permit Issued</td><td><span class="nowrap">$4,799</span></td><td>Trillium Cir, RALEIGH</td><td><code>BLDNR-050688-2026</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Alteration/Repairs</span></td><td>Permit Issued</td><td><span class="nowrap">$9,598</span></td><td>Lupine Ct, RALEIGH</td><td><code>BLDNR-050678-2026</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Alteration/Repairs</span></td><td>Permit Issued</td><td><span class="nowrap">$9,598</span></td><td>Lupine Ct, RALEIGH</td><td><code>BLDNR-050677-2026</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Alteration/Repairs</span></td><td>Permit Issued</td><td><span class="nowrap">$9,598</span></td><td>Trillium Cir, RALEIGH</td><td><code>BLDNR-050687-2026</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: Building Permits (ArcGIS), the jurisdiction's open-data portal.</p>
+<h3 id="seattle">Seattle, WA (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Addition/Alteration</span></td><td>Issued</td><td><span class="nowrap">$100,000</span></td><td>NE 63RD ST, SEATTLE</td><td><code>7143986-CN</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Addition/Alteration</span></td><td>Issued</td><td><span class="nowrap">$35,000</span></td><td>–, SEATTLE</td><td><code>7139612-CN</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Tenant Improvment</span></td><td>Issued</td><td><span class="nowrap">$404,400</span></td><td>OLIVE WAY, SEATTLE</td><td><code>7152447-BK</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">New</span></td><td>Issued</td><td><span class="nowrap">$352,518</span></td><td>–, SEATTLE</td><td><code>7136280-CN</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Demolition<br><span class="note">Demolition</span></td><td>Issued</td><td><span class="nowrap">$1,950,000</span></td><td>–, SEATTLE</td><td><code>7136281-DM</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">New</span></td><td>Issued</td><td><span class="nowrap">$348,618</span></td><td>NE 90TH ST, SEATTLE</td><td><code>7136979-CN</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building<br><span class="note">Addition/Alteration</span></td><td>Issued</td><td><span class="nowrap">$25,000</span></td><td>NOB HILL AVE N, SEATTLE</td><td><code>7123795-CN</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: <a href="https://data.seattle.gov/d/76t5-zqzr">SDCI Building Permits</a>, the jurisdiction's open-data portal.</p>
+<h3 id="austin">Austin, TX (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Electrical Permit<br><span class="note">Auxiliary Power</span></td><td>Active</td><td><span class="nowrap">–</span></td><td>DUSIK LN, AUSTIN</td><td><code>2026-142083 EP</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Driveway / Sidewalks<br><span class="note">New</span></td><td>Active</td><td><span class="nowrap">–</span></td><td>MC MURTRY ST, AUSTIN</td><td><code>2026-064019 DS</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Electrical Permit<br><span class="note">Homebuilder Loop</span></td><td>Active</td><td><span class="nowrap">–</span></td><td>MURANO DR, AUSTIN</td><td><code>2026-144319 EP</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Mechanical Permit<br><span class="note">New</span></td><td>Active</td><td><span class="nowrap">–</span></td><td>DOWNS DR, AUSTIN</td><td><code>2026-109370 MP</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Plumbing Permit<br><span class="note">Repair</span></td><td>Active</td><td><span class="nowrap">–</span></td><td>DENSON DR, AUSTIN</td><td><code>2026-143993 PP</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building Permit<br><span class="note">New</span></td><td>Active</td><td><span class="nowrap">–</span></td><td>LEON ST, AUSTIN</td><td><code>2026-142525 BP</code></td></tr>
+<tr><td><span class="nowrap">2026-11-06</span></td><td>Building Permit<br><span class="note">Repair</span></td><td>Active</td><td><span class="nowrap">$1</span></td><td>BELCLAIRE CIR, AUSTIN</td><td><code>2026-145487 BP</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: <a href="https://data.austintexas.gov/d/3syk-w9eu">Issued Construction Permits</a>, the jurisdiction's open-data portal.</p>
+<h3 id="nashville">Nashville / Davidson County, TN (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Building Residential - New<br><span class="note">Multifamily, Condominium &gt; 5 Unit Bldg</span></td><td>–</td><td><span class="nowrap">$364,438</span></td><td>RICHMOND BND, NASHVILLE</td><td><code>2025006464</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Building Residential - New<br><span class="note">Single Family Residence</span></td><td>–</td><td><span class="nowrap">$388,079</span></td><td>RICHMOND BND, NASHVILLE</td><td><code>2025006485</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Building Sign Permit<br><span class="note">Sign - Ground / Wall Signs</span></td><td>–</td><td><span class="nowrap">$1,207</span></td><td>–, NASHVILLE</td><td><code>2025069683</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Building Residential - Addition<br><span class="note">Single Family Residence</span></td><td>–</td><td><span class="nowrap">$277,092</span></td><td>TIMMONS ST, NASHVILLE</td><td><code>2026058963</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Building Demolition Permit<br><span class="note">Demolition Permit - Residential</span></td><td>–</td><td><span class="nowrap">$35,000</span></td><td>ELYSIAN FIELDS RD, NASHVILLE</td><td><code>2026060570</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Building Commercial - Addition<br><span class="note">Building Contractor Supply, Storage S-1</span></td><td>–</td><td><span class="nowrap">$200,000</span></td><td>B BRANDAU RD, HERMITAGE</td><td><code>2026060902</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Building Demolition Permit<br><span class="note">Demolition Permit - Residential</span></td><td>–</td><td><span class="nowrap">$22,000</span></td><td>ELYSIAN FIELDS RD, NASHVILLE</td><td><code>2026062412</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: Building Permits Issued (ArcGIS), the jurisdiction's open-data portal.</p>
+<h3 id="denver-residential">Denver, CO (residential construction) (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Residential construction<br><span class="note">Alteration/Tenant Finish</span></td><td>–</td><td><span class="nowrap">$6,825</span></td><td>W Mississippi AVE, Denver</td><td><code>2026-RESCON-0003503</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Residential construction<br><span class="note">Alteration/Tenant Finish</span></td><td>–</td><td><span class="nowrap">$135,000</span></td><td>E 8th AVE, Denver</td><td><code>2026-RESCON-0003519</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Residential construction<br><span class="note">Alteration/Tenant Finish</span></td><td>–</td><td><span class="nowrap">$75,000</span></td><td>S Vine ST, Denver</td><td><code>2026-RESCON-0003515</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Residential construction<br><span class="note">New Building</span></td><td>–</td><td><span class="nowrap">$750,000</span></td><td>S Gilpin ST, Denver</td><td><code>2026-RESCON-0002042</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Residential construction<br><span class="note">Alteration/Tenant Finish</span></td><td>–</td><td><span class="nowrap">$250</span></td><td>S Saint Paul ST, Denver</td><td><code>2026-RESCON-0003511</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Residential construction<br><span class="note">New Building</span></td><td>–</td><td><span class="nowrap">–</span></td><td>S York ST SFR, Denver</td><td><code>2026-RESCON-0001838</code></td></tr>
+<tr><td><span class="nowrap">2026-11-04</span></td><td>Residential construction<br><span class="note">Repair/Replace</span></td><td>–</td><td><span class="nowrap">$6,634</span></td><td>E Oberlin PL, Denver</td><td><code>2026-RESCON-0003138</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: Residential construction permits (ArcGIS), the jurisdiction's open-data portal.</p>
+<h3 id="boston">Boston, MA (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Short Form Bldg Permit<br><span class="note">ROOF</span></td><td>Open</td><td><span class="nowrap">$91,076</span></td><td>Beacon ST, Boston</td><td><code>SF1885940</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Gas Permit<br><span class="note">GAS</span></td><td>Open</td><td><span class="nowrap">$15,000</span></td><td>Train ST, Dorchester</td><td><code>G1916137</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Electrical Permit<br><span class="note">OTHER</span></td><td>Open</td><td><span class="nowrap">$800</span></td><td>Saratoga ST, East Boston</td><td><code>E1866906</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Electrical Low Voltage<br><span class="note">LVOLT</span></td><td>Open</td><td><span class="nowrap">$20,300</span></td><td>Federal ST, Boston</td><td><code>ELV1916525</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Short Form Bldg Permit<br><span class="note">ROOF</span></td><td>Open</td><td><span class="nowrap">$13,900</span></td><td>Hyde Park AV, Hyde Park</td><td><code>SF1907575</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Short Form Bldg Permit<br><span class="note">INTEXT</span></td><td>Open</td><td><span class="nowrap">$72,000</span></td><td>Endicott ST, Boston</td><td><code>SF1911596</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Short Form Bldg Permit<br><span class="note">INTREN</span></td><td>Open</td><td><span class="nowrap">$850,000</span></td><td>Fruit ST, Boston</td><td><code>SF1909370</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: Approved Building Permits (Analyze Boston, CKAN), the jurisdiction's open-data portal.</p>
+<h3 id="columbus">Columbus, OH (7)</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Issued</th><th scope="col">Permit type</th><th scope="col">Status</th><th scope="col">Valuation</th><th scope="col">Street, city</th><th scope="col">Permit number</th></tr></thead>
+<tbody>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>1,2,3 Family<br><span class="note">MEP — Electrical</span></td><td>Permit Issued</td><td><span class="nowrap">–</span></td><td>REINHARD AVE, Columbus</td><td><code>EMEPR2644964</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Commercial<br><span class="note">Special — Advance Construction Start</span></td><td>Permit Issued</td><td><span class="nowrap">$4,000,000</span></td><td>CHATHAM LN, Columbus</td><td><code>ACS2644821</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>1,2,3 Family<br><span class="note">MEP — Plumbing</span></td><td>Permit Issued</td><td><span class="nowrap">–</span></td><td>E NORTH BROADWAY, Columbus</td><td><code>PMEPR2645126</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>1,2,3 Family<br><span class="note">Structural — Roof, Siding, Windows, Doors</span></td><td>Permit Issued</td><td><span class="nowrap">$40,000</span></td><td>FAIR AVE, Columbus</td><td><code>RSWDR2644982</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>1,2,3 Family<br><span class="note">Structural — Roof, Siding, Windows, Doors</span></td><td>Permit Issued</td><td><span class="nowrap">$25,000</span></td><td>W COMO AVE, Columbus</td><td><code>RSWDR2645091</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>Commercial<br><span class="note">MEP — Electrical</span></td><td>Permit Issued</td><td><span class="nowrap">–</span></td><td>W 5TH AVE, Columbus</td><td><code>EMEPC2644950</code></td></tr>
+<tr><td><span class="nowrap">2026-11-05</span></td><td>1,2,3 Family<br><span class="note">MEP — Mechanical</span></td><td>Permit Issued</td><td><span class="nowrap">–</span></td><td>STUDER AVE, Columbus</td><td><code>MMEPR2645038</code></td></tr>
+</tbody>
+</table></div>
+<p class="note">Source: Building Permits (ArcGIS), the jurisdiction's open-data portal.</p>
+</section>
+<section id="method">
+<h2>How this page is made</h2>
+<p>Generated on <strong>November 8, 2026</strong> (2026-11-08T04:16:05Z) from 2 runs of our own <a href="https://apify.com/owlabee/building-permits-scraper">Building Permits Scraper — Roofing &amp; Construction Leads</a> Actor, each with a small fixed input and a spending cap. Each record is cut down to permit type, status, dates, valuation, permit number and the street and city of the site. It is refreshed once a week. The records shown are a sample, not the full feed: the Actor returns every record in the window.</p>
+<p>The same records as JSON: <a href="../permits.json">data/permits.json</a>. To reproduce them, run the Actor with these inputs:</p>
+<pre tabindex="0" aria-label="Actor input"><code>{
+  &quot;jurisdictions&quot;: [
+    &quot;nyc&quot;,
+    &quot;chicago&quot;,
+    &quot;san-francisco&quot;,
+    &quot;seattle&quot;,
+    &quot;raleigh&quot;
+  ],
+  &quot;issuedWithinDays&quot;: 7,
+  &quot;maxResultsPerJurisdiction&quot;: 7,
+  &quot;maxSecondsPerJurisdiction&quot;: 120,
+  &quot;onlyNewSinceLastRun&quot;: false,
+  &quot;includeRaw&quot;: false
+}</code></pre>
+<pre tabindex="0" aria-label="Actor input"><code>{
+  &quot;jurisdictions&quot;: [
+    &quot;austin&quot;,
+    &quot;boston&quot;,
+    &quot;nashville&quot;,
+    &quot;denver-residential&quot;,
+    &quot;columbus&quot;
+  ],
+  &quot;issuedWithinDays&quot;: 7,
+  &quot;maxResultsPerJurisdiction&quot;: 7,
+  &quot;maxSecondsPerJurisdiction&quot;: 120,
+  &quot;onlyNewSinceLastRun&quot;: false,
+  &quot;includeRaw&quot;: false
+}</code></pre>
+
+</section>
+<section id="notice">
+<h2>Legal</h2>
+<p><strong>Not a consumer report. Not for employment, credit, insurance, housing or tenant-screening decisions.</strong> These are public records published by each city under its open-data terms, shown as published (with the house number removed). Not affiliated with or endorsed by any of the cities named; their names identify the source of the records. If you use permit records for outreach, telemarketing laws apply (in the US the TCPA and the National Do Not Call Registry).</p>
+</section>
+<section id="faq">
+<h2>FAQ</h2>
+<h3>How do I get every permit, or only roofing or solar permits?</h3>
+<p>Run <a href="https://apify.com/owlabee/building-permits-scraper">Building Permits Scraper — Roofing &amp; Construction Leads</a> with your cities, a date window and <code>permitTypes</code> such as <code>["roof", "solar"]</code>, or a <code>minEstimatedCost</code>. Monitor mode (<code>onlyNewSinceLastRun</code>) on a daily schedule returns only permits not seen before.</p>
+<h3>Which cities are covered?</h3>
+<p>The Actor reads 120 official open-data datasets: 102 US cities, counties, states and trade-permit datasets, and 18 Canadian ones. The <a href="../../building-permits-api/">building permits API guide</a> explains the fields; the Actor's README lists every jurisdiction.</p>
+<h3>What about cities on Accela or EnerGov portals?</h3>
+<p>A sister Actor reads those: <a href="https://apify.com/owlabee/accela-energov-permit-scraper">Accela Citizen Access &amp; EnerGov Permit Scraper (Any City)</a>, in the same schema.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Get this as JSON, on a schedule</h2>
+<p>Building Permits Scraper — Roofing &amp; Construction Leads. Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor.</p>
+<p><a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open on Apify Store</a></p>
+<p class="note">Run it from the Console, the API or an AI agent (MCP), or save the input as a Task with a daily schedule. Pay per result, billed to your own Apify account.</p>
+</aside>
+
+<section class="related">
+<h2>Related</h2>
+<ul>
+<li><a href="../../building-permits-api/">Building permits API guide</a></li>
+<li><a href="../../accela-energov-permits/">Accela and EnerGov permits guide</a></li>
+<li><a href="../../compare/building-permit-data-apis/">Building permit data APIs compared</a></li>
+<li><a href="../">All free data pages</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

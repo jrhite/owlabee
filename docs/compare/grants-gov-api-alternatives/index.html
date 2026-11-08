@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grants.gov API vs alternatives | owlabee</title>
+<meta name="description" content="The Grants.gov search2 API, Simpler.Grants.gov API, the Grants.gov XML extract, SAM.gov, USAspending, Instrumentl and Apify Actors for finding grant opportunities.">
+<link rel="canonical" href="https://owlabee.com/compare/grants-gov-api-alternatives/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Grants.gov API vs alternatives | owlabee">
+<meta property="og:description" content="The Grants.gov search2 API, Simpler.Grants.gov API, the Grants.gov XML extract, SAM.gov, USAspending, Instrumentl and Apify Actors for finding grant opportunities.">
+<meta property="og:url" content="https://owlabee.com/compare/grants-gov-api-alternatives/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Grants.gov API vs alternatives","description":"The Grants.gov search2 API, Simpler.Grants.gov API, the Grants.gov XML extract, SAM.gov, USAspending, Instrumentl and Apify Actors for finding grant opportunities.","url":"https://owlabee.com/compare/grants-gov-api-alternatives/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"citation":["https://www.grants.gov/api/common/search2","https://simpler.grants.gov/developer","https://www.grants.gov/xml-extract","https://open.gsa.gov/api/get-opportunities-public-api/","https://api.usaspending.gov/","https://www.instrumentl.com/pricing","https://apify.com/owlabee/grants-gov-api","https://api.apify.com/v2/store?search=grants.gov"]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../../#guides">Guides</a>
+<a href="../../data/">Free data</a>
+<a href="../../compare/">Compare</a>
+<a href="../../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Compare</a> <span aria-hidden="true">›</span> Grants.gov API vs alternatives</nav>
+<p class="kicker">Comparison · checked November 8, 2026</p>
+<h1>Grants.gov API vs alternatives</h1>
+<p class="lede">Federal grant opportunities are free from the government in four shapes (two APIs, a daily file and the website), and commercial tools add foundation grants and workflow on top. What each one gives you, what it needs, and where it is the better choice.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/grants-gov-api">Open our Actor on Apify Store</a>
+<p class="note">Grants.gov API &amp; SAM.gov Scraper — Federal Grants Feed on Apify Store. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#summary">At a glance</a><a href="#better">Where alternatives are better</a><a href="#store">Apify Store</a><a href="#sources">Sources</a>
+</nav>
+
+<section id="summary">
+<h2>At a glance</h2>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Option</th><th scope="col">What you get</th><th scope="col">Cost, as published</th><th scope="col">Best for</th></tr></thead>
+<tbody>
+<tr><td><strong>Grants.gov search2 API</strong></td><td>Keyword and filter search of federal opportunities</td><td>Free; "Authentication and authorization is not required"</td><td>Simple searches from your own code</td></tr>
+<tr><td><strong>Simpler.Grants.gov API</strong></td><td>Search and full details for every opportunity</td><td>Free API key; 60 requests a minute and 10,000 a day per key by default</td><td>Production integrations that want richer fields</td></tr>
+<tr><td><strong>Grants.gov XML extract</strong></td><td>The whole opportunity database as one daily file</td><td>Free; about 78 MB zipped (November 2026)</td><td>Loading everything into your own database</td></tr>
+<tr><td><strong>SAM.gov Get Opportunities API</strong></td><td>Federal contract notices (not grants)</td><td>Free personal API key; daily limits by account role</td><td>Contracting, not grants</td></tr>
+<tr><td><strong>Instrumentl</strong></td><td>Grant discovery and workflow, including private foundations</td><td>From $299/month paid annually ($349 monthly), up to $999/month</td><td>Nonprofit grant teams</td></tr>
+<tr><td><strong>Our Actor: Grants.gov API &amp; SAM.gov Scraper</strong></td><td>Grants.gov, SAM.gov (your key), USAspending, NIH, NSF, Federal Register and 19 state and local bid datasets in one schema</td><td>$0.001 per record, $0.004 per source and keyword searched (Store API)</td><td>A scheduled multi-source feed without code</td></tr>
+</tbody>
+</table></div>
+<p class="note">Prices and limits as each provider published them on November 8, 2026; they change, so check the linked page before you decide.</p>
+</section>
+
+<section id="grants-gov">
+<h2>Grants.gov: two APIs and a daily file</h2>
+<p><strong>search2.</strong> The Grants.gov <code>search2</code> endpoint (<code>POST https://api.grants.gov/v1/api/search2</code>) searches opportunities by keyword, status, agency, eligibility, funding category and assistance listing; its documentation says "Authentication and authorization is not required for search2" (<a href="https://www.grants.gov/api/common/search2">Grants.gov: search2</a>). It returns summary fields; details take a second call per opportunity.</p>
+<p><strong>Simpler.Grants.gov API.</strong> The newer API needs a free key and, per its developer page, supports keyword and fielded search, pagination, sorting and full details for one opportunity, with default rate limits of "60 requests per minute and 10,000 requests per day per key"; inactive keys are disabled after 30 days without use (<a href="https://simpler.grants.gov/developer">Simpler.Grants.gov: Developers</a>).</p>
+<p><strong>XML extract.</strong> "Once a day, the Grants.gov database of grants is exported to an XML file"; the files listed on November 8, 2026 were 78.4 MB each (<a href="https://www.grants.gov/xml-extract">Grants.gov: XML Extract</a>). The best choice if you want the whole database locally.</p>
+</section>
+
+<section id="others">
+<h2>SAM.gov and USAspending</h2>
+<p>Federal <em>contract</em> opportunities are on SAM.gov, not Grants.gov. Its Get Opportunities API requires an API key, and "Request per day are limited based on the federal or non-federal or general roles" (<a href="https://open.gsa.gov/api/get-opportunities-public-api/">GSA: Get Opportunities Public API</a>). Past awards (who won what) are in the free USAspending API (<a href="https://api.usaspending.gov/">api.usaspending.gov</a>).</p>
+</section>
+
+<section id="commercial">
+<h2>Commercial grant tools</h2>
+<p>Instrumentl's pricing page lists Discover at $299 a month paid annually ($349 paid monthly, up to 3 users), Pre-Award at $499 ($579 monthly) and Full Lifecycle at $999 ($1,159 monthly), each with a 14-day trial, and says it lists more than 37,000 active grants (<a href="https://www.instrumentl.com/pricing">Instrumentl: Pricing</a>). Tools like this cover private foundation and corporate grants, which no government API does, and add application tracking.</p>
+</section>
+
+<section id="ours">
+<h2>Our Actor: Grants.gov API &amp; SAM.gov Scraper</h2>
+<p><a href="https://apify.com/owlabee/grants-gov-api">Grants.gov API &amp; SAM.gov Scraper</a> searches Grants.gov (no key), SAM.gov (your own free key), and optionally USAspending awards, NIH RePORTER, NSF awards, Federal Register funding notices and 19 state and local open-data bid datasets, and returns one schema. Monitor mode flags what is new or changed since the last run, and a webhook can deliver it. On November 8, 2026 the Store API listed $0.001 per record and $0.004 per source and keyword searched ($0.002 per optional detail fetch). This week's sample: <a href="../../data/grant-and-bid-opportunities-this-week/">New federal grant and bid opportunities this week</a>. To rank opportunities against your organization, <a href="https://apify.com/owlabee/grant-matching">Grant Matching &amp; RFP Bid/No-Bid Scorer</a> does the scoring.</p>
+</section>
+
+<section id="better">
+<h2>Where the alternatives are better</h2>
+<ul>
+<li><strong>Private foundations:</strong> Instrumentl and similar tools cover foundation and corporate funders; government APIs and our Actor do not.</li>
+<li><strong>The whole database:</strong> the free daily XML extract beats any per-record price.</li>
+<li><strong>Your own code, federal grants only:</strong> search2 and the Simpler.Grants.gov API are free.</li>
+<li><strong>Our Actor fits</strong> when you want grants, contracts and state and local bids in one feed on a schedule, without writing the integrations.</li>
+</ul>
+</section>
+
+<section id="store">
+<h2>Other Grants.gov Actors on Apify Store</h2>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Actor</th><th scope="col">Total users</th><th scope="col">Primary price per result</th></tr></thead>
+<tbody>
+<tr><td><a href="https://apify.com/taroyamada/procurement-intel-actor">TED, SAM.gov &amp; Grants.gov Scraper — Bid Alerts</a><br><span class="note"><code>taroyamada/procurement-intel-actor</code></span></td><td>20</td><td>$0.008</td></tr>
+<tr><td><a href="https://apify.com/solidcode/grants-gov-scraper">Grants.gov Federal Grants Scraper</a><br><span class="note"><code>solidcode/grants-gov-scraper</code></span></td><td>9</td><td>$0.0096</td></tr>
+<tr><td><a href="https://apify.com/hridayrungta/grants-gov-scraper">Federal Grants Database | Grants.gov Data | $1.5 / 1K</a><br><span class="note"><code>hridayrungta/grants-gov-scraper</code></span></td><td>6</td><td>$0.0015</td></tr>
+<tr><td><a href="https://apify.com/fortuitous_pirate/grants-gov-scraper">Grants Gov Scraper — No Login, $4.38/1k</a><br><span class="note"><code>fortuitous_pirate/grants-gov-scraper</code></span></td><td>6</td><td>$0.0014</td></tr>
+<tr><td><a href="https://apify.com/owlabee/grants-gov-api">Grants.gov API &amp; SAM.gov Scraper — Federal Grants Feed (ours)</a><br><span class="note"><code>owlabee/grants-gov-api</code></span></td><td>2</td><td>$0.001</td></tr>
+</tbody>
+</table></div>
+<p class="note">From the Apify Store API (<code>GET https://api.apify.com/v2/store?search=grants.gov</code>) on November 8, 2026, the most-used results. Store pages show current figures; most Actors also charge a small per-run start fee.</p>
+</section>
+<section id="sources">
+<h2>Sources</h2>
+<p>All checked on November 8, 2026 unless noted.</p>
+<ul>
+<li><a href="https://www.grants.gov/api/common/search2">Grants.gov: search2 API</a></li>
+<li><a href="https://simpler.grants.gov/developer">Simpler.Grants.gov: Developers</a></li>
+<li><a href="https://www.grants.gov/xml-extract">Grants.gov: XML Extract</a></li>
+<li><a href="https://open.gsa.gov/api/get-opportunities-public-api/">GSA: SAM.gov Get Opportunities Public API</a></li>
+<li><a href="https://api.usaspending.gov/">USAspending API</a></li>
+<li><a href="https://www.instrumentl.com/pricing">Instrumentl: Pricing</a></li>
+<li><a href="https://apify.com/owlabee/grants-gov-api">Grants.gov API &amp; SAM.gov Scraper on Apify Store</a></li>
+<li><a href="https://api.apify.com/v2/store?search=grants.gov">Apify Store API: search &quot;grants.gov&quot;</a></li>
+</ul>
+</section>
+
+
+<aside class="cta-box">
+<h2>Get this as JSON, on a schedule</h2>
+<p>Grants.gov API &amp; SAM.gov Scraper — Federal Grants Feed. Grants.gov grant opportunities and SAM.gov contract notices by keyword, plus optional USAspending awards and six state and local bid datasets.</p>
+<p><a class="button" href="https://apify.com/owlabee/grants-gov-api">Open on Apify Store</a></p>
+<p class="note">Run it from the Console, the API or an AI agent (MCP), or save the input as a Task with a daily schedule. Pay per result, billed to your own Apify account.</p>
+</aside>
+
+<section class="related">
+<h2>Related</h2>
+<ul>
+<li><a href="../../grants-gov-api/">Grants.gov API guide</a></li>
+<li><a href="../../sam-gov-contract-opportunities/">SAM.gov contract opportunities guide</a></li>
+<li><a href="../../data/grant-and-bid-opportunities-this-week/">New grant and bid opportunities this week</a></li>
+<li><a href="../">All comparisons</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

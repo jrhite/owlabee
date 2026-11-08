@@ -364,3 +364,8 @@ q { font-style: italic; }
 .courts td:nth-child(2) { white-space: nowrap; }
 .codes { line-height: 2; }
 .courts td code, .court-list td code { white-space: nowrap; }
+
+/* Free data and comparison tables (tools/data-pages.mjs, tools/compare-pages.mjs) */
+.data-table { font-size: 0.9rem; }
+.data-table td .note { font-size: 0.85rem; }
+.nowrap { white-space: nowrap; }
