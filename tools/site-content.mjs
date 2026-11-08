@@ -619,7 +619,7 @@ export const pages = [
 
   {
     slug: 'pacer-rss-docket-monitor',
-    actor: 'federal-court-docket-monitor',
+    actor: 'pacer-docket-monitor',
     title: 'PACER RSS Feeds: Monitor New Federal Court Filings',
     nav: 'PACER RSS docket monitor',
     description:
@@ -710,7 +710,7 @@ export const pages = [
   {
     slug: 'pacer-rss-feeds-by-court',
     kind: 'reference',
-    actor: 'federal-court-docket-monitor',
+    actor: 'pacer-docket-monitor',
     title: 'PACER RSS Feeds by Court: All 203 Federal Courts Listed',
     nav: 'PACER RSS feeds by court',
     description:
@@ -735,7 +735,7 @@ export const pages = [
 
   {
     slug: 'patent-litigation-docket-monitor',
-    actor: 'federal-court-docket-monitor',
+    actor: 'pacer-docket-monitor',
     title: 'Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets',
     nav: 'Patent cases: Delaware & Texas',
     description:
@@ -836,7 +836,7 @@ ${courtTable(['ded', 'txed', 'txwd'], '../pacer-rss-feeds-by-court/')}
 
   {
     slug: 'bankruptcy-filings-monitor',
-    actor: 'federal-court-docket-monitor',
+    actor: 'pacer-docket-monitor',
     title: 'New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds',
     nav: 'New bankruptcy filings',
     description:
@@ -924,7 +924,7 @@ ${courtTable(['deb', 'nysb', 'txsb', 'txnb', 'njb', 'vaeb', 'ilnb'], '../pacer-r
 
   {
     slug: 'sdny-securities-class-action-monitor',
-    actor: 'federal-court-docket-monitor',
+    actor: 'pacer-docket-monitor',
     title: 'S.D.N.Y. Securities and Class Action Complaint Alerts',
     nav: 'S.D.N.Y. securities & class actions',
     description:

@@ -1,5 +1,5 @@
 {
- "source": "Court registry of owlabee/federal-court-docket-monitor (src/lib/courts.ts), copied as published. District and bankruptcy rows: sweep of 2026-10-17 (REGISTRY_PROBED_AT). Appellate and national rows: probe of 2026-11-07 (APPELLATE_NATIONAL_PROBED_AT). Do not edit by hand; refresh from the registry.",
+ "source": "Court registry of owlabee/pacer-docket-monitor (src/lib/courts.ts), copied as published. District and bankruptcy rows: sweep of 2026-10-17 (REGISTRY_PROBED_AT). Appellate and national rows: probe of 2026-11-07 (APPELLATE_NATIONAL_PROBED_AT). Do not edit by hand; refresh from the registry.",
  "sweptAt": "2026-10-17",
  "appellateNationalProbedAt": "2026-11-07",
  "courts": [

@@ -246,7 +246,7 @@
     }
   },
   {
-    "name": "federal-court-docket-monitor",
+    "name": "pacer-docket-monitor",
     "title": "PACER RSS Docket Monitor — New Federal Court Filings",
     "input": {
       "courts": [

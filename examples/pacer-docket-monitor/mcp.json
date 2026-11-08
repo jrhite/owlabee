@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-pacer-docket-monitor": {
+      "url": "https://mcp.apify.com/?tools=owlabee/pacer-docket-monitor",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-"""Run PACER RSS Docket Monitor — New Federal Court Filings (owlabee/federal-court-docket-monitor) once and print each dataset item.
+"""Run PACER RSS Docket Monitor — New Federal Court Filings (owlabee/pacer-docket-monitor) once and print each dataset item.
 
 Setup:  pip install apify-client
 Token:  export APIFY_TOKEN=<your Apify API token>
@@ -9,7 +9,7 @@ from pathlib import Path
 
 from apify_client import ApifyClient
 
-ACTOR_ID = "owlabee/federal-court-docket-monitor"
+ACTOR_ID = "owlabee/pacer-docket-monitor"
 
 token = os.environ.get("APIFY_TOKEN")
 if not token:

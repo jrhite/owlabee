@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Run PACER RSS Docket Monitor — New Federal Court Filings
-# (owlabee/federal-court-docket-monitor) once and print its dataset items as JSON.
+# (owlabee/pacer-docket-monitor) once and print its dataset items as JSON.
 # Needs curl 7.76+ and your Apify API token in APIFY_TOKEN.
 # Short runs only: the sync endpoint waits up to 300 seconds. Use python.py or node.mjs for longer runs.
 set -euo pipefail
@@ -8,7 +8,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 curl -sS --fail-with-body -X POST \
-  "https://api.apify.com/v2/acts/owlabee~federal-court-docket-monitor/run-sync-get-dataset-items" \
+  "https://api.apify.com/v2/acts/owlabee~pacer-docket-monitor/run-sync-get-dataset-items" \
   -H "Authorization: Bearer ${APIFY_TOKEN}" \
   -H "Content-Type: application/json" \
   --data @input.json
