@@ -3,6 +3,7 @@
 // Zero dependencies: `node tools/build-site.mjs`. Commit the generated docs/ output.
 import { mkdirSync, writeFileSync, readFileSync, copyFileSync } from 'node:fs';
 import { pages } from './site-content.mjs';
+import { extraPages, navLinks, indexSection, writeExtraPages, sitemapEntries } from './discovery-pages.mjs';
 import { actors, storeUrl, apiUrl, mcpUrl } from './actors.mjs';
 import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY, MAKER_NAME, MAKER_URL, GA_MEASUREMENT_ID } from './site-config.mjs';
 import { referenceSections } from './pacer-courts.mjs';
@@ -131,6 +132,7 @@ ${analyticsTag()}
 <a class="brand" href="${href('')}">${logo}<span class="wordmark">${SITE_NAME}</span></a>
 <nav aria-label="Site">
 <a href="${href('')}#guides">Guides</a>
+${navLinks(href)}
 <a href="${href('')}#actors">All Actors</a>
 <a href="${REPO_URL}">GitHub</a>
 <a class="nav-store" href="${STORE_PROFILE_URL}">Apify Store</a>
@@ -396,7 +398,7 @@ ${pages
 </div>
 </section>
 
-<section id="actors" class="band band-alt">
+${indexSection(esc)}<section id="actors" class="band band-alt">
 <div class="wrap wrap-wide">
 <h2>All Actors</h2>
 <div class="actor-groups">
@@ -506,6 +508,7 @@ for (const p of pages) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(new URL('index.html', dir), guidePage(p));
 }
+const extraCount = writeExtraPages({ layout, esc, pre, actorByName, storeUrl, pages, actors, docs, BASE_URL, SITE_NAME, STORE_PROFILE_URL, REPO_URL });
 copyFileSync(new URL('site.css', import.meta.url), new URL('style.css', docs));
 for (const f of BRAND_FILES) copyFileSync(new URL(`brand/${f}`, root), new URL(f, docs));
 writeFileSync(new URL('.nojekyll', docs), '');
@@ -519,6 +522,7 @@ writeFileSync(
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${['', ...pages.map((p) => p.slug + '/')].map((p) => `<url><loc>${BASE_URL}${p}</loc><lastmod>${UPDATED}</lastmod></url>`).join('\n')}
+${sitemapEntries(UPDATED).map(([p, d]) => `<url><loc>${BASE_URL}${p}</loc><lastmod>${d}</lastmod></url>`).join('\n')}
 </urlset>
 `,
 );
@@ -529,4 +533,4 @@ const readme = readFileSync(readmeUrl, 'utf8');
 const shown = BASE_URL.replace(/^https?:\/\//, '').replace(/\/$/, '');
 writeFileSync(readmeUrl, readme.replace(/<!-- site -->[\s\S]*?<!-- \/site -->/, `<!-- site -->[${shown}](${BASE_URL})<!-- /site -->`));
 
-console.log(`site: index, 404 and ${pages.length} guides written to docs/ for ${BASE_URL}`);
+console.log(`site: index, 404, ${pages.length} guides and ${extraCount} data and comparison pages written to docs/ for ${BASE_URL}`);

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product recall data sources compared | owlabee</title>
+<meta name="description" content="openFDA, NHTSA, CPSC, USDA FSIS, Health Canada, UK and EU Safety Gate recall data, and Apify Actors that combine them: access, limits and licences.">
+<link rel="canonical" href="https://owlabee.com/compare/product-recall-data-sources/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Product recall data sources compared | owlabee">
+<meta property="og:description" content="openFDA, NHTSA, CPSC, USDA FSIS, Health Canada, UK and EU Safety Gate recall data, and Apify Actors that combine them: access, limits and licences.">
+<meta property="og:url" content="https://owlabee.com/compare/product-recall-data-sources/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Product recall data sources compared","description":"openFDA, NHTSA, CPSC, USDA FSIS, Health Canada, UK and EU Safety Gate recall data, and Apify Actors that combine them: access, limits and licences.","url":"https://owlabee.com/compare/product-recall-data-sources/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"citation":["https://open.fda.gov/apis/authentication/","https://api.nhtsa.gov/","https://www.cpsc.gov/Recalls/CPSC-Recalls-Application-Program-Interface-API-Information","https://www.fsis.usda.gov/news-events/news-press-releases/fsis-launches-new-data-tool-recall-and-public-health-alert-api","https://recalls-rappels.canada.ca/en","https://ec.europa.eu/safety-gate-alerts/screen/webReport","https://apify.com/owlabee/product-recall-feed","https://api.apify.com/v2/store?search=product%20recall"]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../../#guides">Guides</a>
+<a href="../../data/">Free data</a>
+<a href="../../compare/">Compare</a>
+<a href="../../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Compare</a> <span aria-hidden="true">›</span> Product recall data sources</nav>
+<p class="kicker">Comparison · checked November 8, 2026</p>
+<h1>Product recall data sources compared</h1>
+<p class="lede">Recall data is free from the agencies that publish it, but each agency has its own API, schema, update cadence and licence. This page lists the official sources, what each needs, and when a combined feed saves work.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/product-recall-feed">Open our Actor on Apify Store</a>
+<p class="note">Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API on Apify Store. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#summary">At a glance</a><a href="#better">Where alternatives are better</a><a href="#store">Apify Store</a><a href="#sources">Sources</a>
+</nav>
+
+<section id="summary">
+<h2>At a glance</h2>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Option</th><th scope="col">What you get</th><th scope="col">Cost, as published</th><th scope="col">Best for</th></tr></thead>
+<tbody>
+<tr><td><strong>openFDA (FDA)</strong></td><td>Drug, device and food enforcement reports; device recall database</td><td>Free API key; 240 requests a minute; 120,000 a day per key (1,000 a day per IP without one)</td><td>FDA-only work, adverse events and labels too</td></tr>
+<tr><td><strong>NHTSA</strong></td><td>Vehicle, equipment, tire and child-seat recall campaigns; lookups by make, model and year</td><td>Free</td><td>Vehicle recalls by VIN-level detail and model</td></tr>
+<tr><td><strong>CPSC (SaferProducts API)</strong></td><td>Consumer product recalls</td><td>Free; XML or JSON</td><td>Consumer products in the US</td></tr>
+<tr><td><strong>USDA FSIS Recall API</strong></td><td>Meat, poultry and egg product recalls and public health alerts</td><td>Free; JSON</td><td>Meat and poultry, which FDA does not cover</td></tr>
+<tr><td><strong>Health Canada, UK (OPSS, MHRA, FSA), EU Safety Gate</strong></td><td>National recall and alert feeds</td><td>Free under open licences that require attribution</td><td>Products sold outside the US</td></tr>
+<tr><td><strong>Our Actor: Product Recall Feed</strong></td><td>FDA, NHTSA and CPSC by default; Canada, UK and EU feeds opt-in; one schema, hazard categories, changes mode</td><td>$0.002 per recall, $0.004 per agency request, $0.01 per bulk file (Store API)</td><td>One normalized multi-agency feed on a schedule</td></tr>
+</tbody>
+</table></div>
+<p class="note">Prices and limits as each provider published them on November 8, 2026; they change, so check the linked page before you decide.</p>
+</section>
+
+<section id="us">
+<h2>US agencies</h2>
+<h3>openFDA</h3>
+<p>openFDA serves FDA's drug, device and food enforcement reports (and much more) as JSON. Its authentication page states the limits: "With no API key: 240 requests per minute, per IP address. 1,000 requests per day, per IP address. With an API key: 240 requests per minute, per key. 120,000 requests per day, per key." Its page also says a key is required and "is free of charge" (<a href="https://open.fda.gov/apis/authentication/">openFDA: Authentication</a>). FDA publishes enforcement reports weekly.</p>
+<h3>NHTSA</h3>
+<p>NHTSA publishes recall campaigns as open data and through its public API at <a href="https://api.nhtsa.gov/">api.nhtsa.gov</a>, including recalls by make, model and year, with no key.</p>
+<h3>CPSC</h3>
+<p>CPSC's recalls API page says the data "is publicly available to consumers and businesses as well as software and application developers" and "can be retrieved in XML or in JSON" (<a href="https://www.cpsc.gov/Recalls/CPSC-Recalls-Application-Program-Interface-API-Information">CPSC: Recalls API information</a>).</p>
+<h3>USDA FSIS</h3>
+<p>FSIS, which covers meat, poultry and processed egg products, launched a Recall API for recalls and public health alerts in JSON in 2023 (<a href="https://www.fsis.usda.gov/news-events/news-press-releases/fsis-launches-new-data-tool-recall-and-public-health-alert-api">FSIS press release</a>). Our Actor does not read it.</p>
+</section>
+
+<section id="intl">
+<h2>Canada, UK and EU</h2>
+<ul>
+<li><strong>Health Canada</strong> publishes recalls and safety alerts (including CFIA and Transport Canada) as one open-data JSON file on <a href="https://recalls-rappels.canada.ca/en">recalls-rappels.canada.ca</a>. Attribution: "Contains information licensed under the Open Government Licence – Canada."</li>
+<li><strong>UK:</strong> OPSS product safety reports and MHRA drug and device alerts are on GOV.UK, and Food Standards Agency alerts on <code>data.food.gov.uk</code>. Attribution: "Contains public sector information licensed under the Open Government Licence v3.0."</li>
+<li><strong>EU Safety Gate</strong> publishes weekly reports of dangerous non-food products (<a href="https://ec.europa.eu/safety-gate-alerts/screen/webReport">Safety Gate</a>). Attribution: "© European Union", reusable under Commission Decision 2011/833/EU (CC BY 4.0).</li>
+</ul>
+</section>
+
+<section id="ours">
+<h2>Our Actor: Product Recall Feed</h2>
+<p><a href="https://apify.com/owlabee/product-recall-feed">Product Recall Feed</a> reads FDA (drug, device, food), NHTSA and CPSC by default, and the FDA device recall database, FDA press releases, Health Canada, OPSS, MHRA, FSA and EU Safety Gate on request. Every record has the same fields (agency, date, title, product, hazard, classification, severity, firm, remedy, url) plus hazard categories read by a fixed keyword table, and a changes mode that returns only recalls not seen before. On November 8, 2026 the Store API listed $0.002 per recall, $0.004 per agency API request and $0.01 per bulk file download (the Health Canada file). This week's sample: <a href="../../data/product-recalls-this-week/">This week's product recalls</a>.</p>
+</section>
+
+<section id="better">
+<h2>Where the alternatives are better</h2>
+<ul>
+<li><strong>One agency only:</strong> calling openFDA, NHTSA or CPSC directly is free and gives every field the agency publishes.</li>
+<li><strong>Meat and poultry:</strong> use the FSIS Recall API; our Actor does not cover FSIS.</li>
+<li><strong>FDA beyond recalls:</strong> openFDA also serves adverse events, labels and NDC data, which our Actor does not.</li>
+<li><strong>Our Actor fits</strong> when you need several agencies, or several countries, in one schema on a daily schedule, without maintaining ten integrations.</li>
+</ul>
+</section>
+
+<section id="store">
+<h2>Other recall Actors on Apify Store</h2>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Actor</th><th scope="col">Total users</th><th scope="col">Primary price per result</th></tr></thead>
+<tbody>
+<tr><td><a href="https://apify.com/gabrielaxy/product-recall-aggregator">Product Recall Aggregator</a><br><span class="note"><code>gabrielaxy/product-recall-aggregator</code></span></td><td>6</td><td>free</td></tr>
+<tr><td><a href="https://apify.com/koalastuff/eu-safety-gate-alert-monitor">EU Safety Gate Product Recalls &amp; Alerts API</a><br><span class="note"><code>koalastuff/eu-safety-gate-alert-monitor</code></span></td><td>4</td><td>tiered, see Store</td></tr>
+<tr><td><a href="https://apify.com/datapilot/product-recall-monitor">Product Recall Monitor</a><br><span class="note"><code>datapilot/product-recall-monitor</code></span></td><td>3</td><td>$0.002</td></tr>
+<tr><td><a href="https://apify.com/foo121/recall-aggregator">Product Recall Aggregator — FDA, NHTSA &amp; CPSC</a><br><span class="note"><code>foo121/recall-aggregator</code></span></td><td>3</td><td>$0.004</td></tr>
+<tr><td><a href="https://apify.com/owlabee/product-recall-feed">Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API (ours)</a><br><span class="note"><code>owlabee/product-recall-feed</code></span></td><td>2</td><td>$0.002</td></tr>
+</tbody>
+</table></div>
+<p class="note">From the Apify Store API (<code>GET https://api.apify.com/v2/store?search=product%20recall</code>) on November 8, 2026, the most-used results. Store pages show current figures; most Actors also charge a small per-run start fee.</p>
+</section>
+<section id="sources">
+<h2>Sources</h2>
+<p>All checked on November 8, 2026 unless noted.</p>
+<ul>
+<li><a href="https://open.fda.gov/apis/authentication/">openFDA: Authentication and limits</a></li>
+<li><a href="https://api.nhtsa.gov/">NHTSA API</a></li>
+<li><a href="https://www.cpsc.gov/Recalls/CPSC-Recalls-Application-Program-Interface-API-Information">CPSC: Recalls API information</a></li>
+<li><a href="https://www.fsis.usda.gov/news-events/news-press-releases/fsis-launches-new-data-tool-recall-and-public-health-alert-api">USDA FSIS: Recall and public health alert API (press release)</a></li>
+<li><a href="https://recalls-rappels.canada.ca/en">Health Canada: Recalls and safety alerts</a></li>
+<li><a href="https://ec.europa.eu/safety-gate-alerts/screen/webReport">EU Safety Gate</a></li>
+<li><a href="https://apify.com/owlabee/product-recall-feed">Product Recall Feed on Apify Store</a></li>
+<li><a href="https://api.apify.com/v2/store?search=product%20recall">Apify Store API: search &quot;product recall&quot;</a></li>
+</ul>
+</section>
+
+
+<aside class="cta-box">
+<h2>Get this as JSON, on a schedule</h2>
+<p>Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API. FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record.</p>
+<p><a class="button" href="https://apify.com/owlabee/product-recall-feed">Open on Apify Store</a></p>
+<p class="note">Run it from the Console, the API or an AI agent (MCP), or save the input as a Task with a daily schedule. Pay per result, billed to your own Apify account.</p>
+</aside>
+
+<section class="related">
+<h2>Related</h2>
+<ul>
+<li><a href="../../product-recalls-api/">Product recalls API guide</a></li>
+<li><a href="../../data/product-recalls-this-week/">This week's product recalls</a></li>
+<li><a href="../">All comparisons</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

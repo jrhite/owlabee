@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PACER docket alert options compared | owlabee</title>
+<meta name="description" content="PACER itself, court RSS feeds, CourtListener docket alerts, PacerMonitor and Apify Actors for new federal court filing alerts: coverage, published prices and limits.">
+<link rel="canonical" href="https://owlabee.com/compare/pacer-docket-alert-options/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="PACER docket alert options compared | owlabee">
+<meta property="og:description" content="PACER itself, court RSS feeds, CourtListener docket alerts, PacerMonitor and Apify Actors for new federal court filing alerts: coverage, published prices and limits.">
+<meta property="og:url" content="https://owlabee.com/compare/pacer-docket-alert-options/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"PACER docket alert options compared","description":"PACER itself, court RSS feeds, CourtListener docket alerts, PacerMonitor and Apify Actors for new federal court filing alerts: coverage, published prices and limits.","url":"https://owlabee.com/compare/pacer-docket-alert-options/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"citation":["https://pacer.uscourts.gov/pacer-pricing-how-fees-work","https://wiki.free.law/c/courtlistener/help/alerts","https://wiki.free.law/c/courtlistener/help/alerts/docket-alerts-for-pacer","https://www.pacermonitor.com/pricing","https://apify.com/owlabee/pacer-docket-monitor","https://api.apify.com/v2/store?search=pacer"]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../../#guides">Guides</a>
+<a href="../../data/">Free data</a>
+<a href="../../compare/">Compare</a>
+<a href="../../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Compare</a> <span aria-hidden="true">›</span> PACER docket alerts</nav>
+<p class="kicker">Comparison · checked November 8, 2026</p>
+<h1>PACER docket alert options compared</h1>
+<p class="lede">Ways to hear about new filings in federal cases: check PACER yourself, read the courts' free RSS feeds, use CourtListener's docket alerts, subscribe to a commercial service such as PacerMonitor, or run an Actor on the RSS feeds. What each costs where the price is published, and what each misses.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open our Actor on Apify Store</a>
+<p class="note">PACER RSS Docket Monitor — New Federal Court Filings on Apify Store. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#summary">At a glance</a><a href="#better">Where alternatives are better</a><a href="#store">Apify Store</a><a href="#sources">Sources</a>
+</nav>
+
+<section id="summary">
+<h2>At a glance</h2>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Option</th><th scope="col">What you get</th><th scope="col">Cost, as published</th><th scope="col">Best for</th></tr></thead>
+<tbody>
+<tr><td><strong>PACER (pacer.uscourts.gov)</strong></td><td>The official record: dockets and documents for every federal court</td><td>$0.10 per page, at most $3 per document (searches, reports and transcripts uncapped); billed only above $30 a quarter</td><td>Reading the docket and the documents themselves</td></tr>
+<tr><td><strong>Court RSS feeds (CM/ECF)</strong></td><td>New docket entries as each court chooses to publish them</td><td>Free, no login</td><td>Watching whole courts, if the court publishes a full feed</td></tr>
+<tr><td><strong>CourtListener docket alerts (Free Law Project)</strong></td><td>Email or webhook alerts on dockets you follow, from RSS and other sources</td><td>A number of alerts free (more with the RECAP extension); members unlimited; bulk commercial rates on request</td><td>Individuals following specific cases</td></tr>
+<tr><td><strong>PacerMonitor</strong></td><td>Federal case research with custom alerts</td><td>Plus $49/month (5 alerts), Professional $99/month (20), Enterprise $499/month (15 users, unlimited); API by quote</td><td>Teams that want a research tool with alerts</td></tr>
+<tr><td><strong>Our Actor: PACER RSS Docket Monitor</strong></td><td>New entries from court RSS feeds, filtered by party, case, entry type or keyword, as JSON</td><td>$0.005 per court feed checked, $0.003 per matching entry, $0.001 per unfiltered entry (Store API)</td><td>Feeding new filings into your own systems on a schedule</td></tr>
+</tbody>
+</table></div>
+<p class="note">Prices and limits as each provider published them on November 8, 2026; they change, so check the linked page before you decide.</p>
+</section>
+
+<section id="pacer">
+<h2>PACER</h2>
+<p>PACER is the federal judiciary's own access service and the source every other option draws on. Its fee page: "$0.10 per page", "You won't be charged more than $3 per document", no maximum for search results, non-case-specific reports or transcripts, "$2.40 per audio file", and "Users are billed on a quarterly basis if they accrue more than $30 in the previous quarter" (<a href="https://pacer.uscourts.gov/pacer-pricing-how-fees-work">PACER: How fees work</a>). PACER is where you read the documents; it is not an alert service.</p>
+</section>
+
+<section id="rss">
+<h2>Court RSS feeds</h2>
+<p>Many district and bankruptcy courts publish an RSS feed of new docket entries from CM/ECF, free and without a login, but each court decides whether to publish one and which entry types it carries. Our own probe of every court's feed (district and bankruptcy courts on 2026-10-17, appellate and national courts on 2026-11-07) found: district courts 42 full, 22 partial, 17 empty, 13 that did not answer from a datacenter IP; bankruptcy courts 52 full, 19 partial, 6 empty, 17 no answer; courts of appeals 6 partial and 7 empty. The court-by-court table is on <a href="../../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a>.</p>
+</section>
+
+<section id="courtlistener">
+<h2>CourtListener docket alerts</h2>
+<p>Free Law Project's CourtListener sends docket alerts by email or webhook "when there are new filings in cases" (<a href="https://wiki.free.law/c/courtlistener/help/alerts">CourtListener help: Alerts</a>). Its help page says it allows a number of docket alerts for free, gives a bonus to users with the RECAP browser extension, lets members "create as many docket alerts as they need" while monitoring for commercial usage, and offers bulk commercial rates; it also says alerts "are only as good as our sources", and that for less active cases they may take longer "or may not arrive at all" (<a href="https://wiki.free.law/c/courtlistener/help/alerts/docket-alerts-for-pacer">CourtListener help: Docket Alerts for PACER</a>). For a person following a handful of cases, this is the best free option.</p>
+</section>
+
+<section id="pacermonitor">
+<h2>PacerMonitor</h2>
+<p>PacerMonitor's pricing page lists Plus at $49 a month (single user, documents 15¢ a page, 5 custom alerts), Professional at $99 a month (documents 10¢ a page, 20 custom alerts), Enterprise at $499 a month (15 users, unlimited custom alerts), an API by quote, and a free account at a flat $5 per document (<a href="https://www.pacermonitor.com/pricing">PacerMonitor: Plans and Pricing</a>).</p>
+</section>
+
+<section id="ours">
+<h2>Our Actor: PACER RSS Docket Monitor</h2>
+<p><a href="https://apify.com/owlabee/pacer-docket-monitor">PACER RSS Docket Monitor</a> reads the courts' public RSS feeds, normalizes each entry (court, case number, case type, entry text, document link, filed time) and filters by party, case number, case type, entry type, keyword or bankruptcy chapter; monitor mode returns only entries not seen on earlier runs, with an optional webhook. On November 8, 2026 the Store API listed $0.005 per court feed checked, $0.003 per matching entry and $0.001 per entry when no filter is set. It sees only what the feeds publish: no documents, nothing from courts with empty feeds, and older filings only through an optional CourtListener pass with your own CourtListener token.</p>
+</section>
+
+<section id="better">
+<h2>Where the alternatives are better</h2>
+<ul>
+<li><strong>Following a few specific cases:</strong> CourtListener docket alerts are free up to its limit and draw on more sources than RSS alone.</li>
+<li><strong>Reading documents:</strong> PACER (or a service that resells its documents, such as PacerMonitor) is required; RSS feeds and our Actor give the entry and a link, not the PDF.</li>
+<li><strong>Courts without a full feed:</strong> a commercial service that polls dockets will see entries that a partial or empty feed never publishes.</li>
+<li><strong>Our Actor fits</strong> when you want every new entry matching a filter across many courts, as structured JSON in your own pipeline, on a schedule.</li>
+</ul>
+</section>
+
+<section id="store">
+<h2>Other PACER Actors on Apify Store</h2>
+<p>Most of these search the RECAP archive (historical dockets) rather than monitoring live feeds.</p>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Actor</th><th scope="col">Total users</th><th scope="col">Primary price per result</th></tr></thead>
+<tbody>
+<tr><td><a href="https://apify.com/pink_comic/recap-federal-court-dockets">Federal Court Dockets Search - PACER/RECAP Diligence API</a><br><span class="note"><code>pink_comic/recap-federal-court-dockets</code></span></td><td>22</td><td>$0.002</td></tr>
+<tr><td><a href="https://apify.com/haketa/federal-court-records-scraper">Federal Court Records Scraper - PACER RECAP &amp; Opinions</a><br><span class="note"><code>haketa/federal-court-records-scraper</code></span></td><td>18</td><td>$0.003</td></tr>
+<tr><td><a href="https://apify.com/andrew_avina/pacer-intelligence-mcp">PACER Court Records Intelligence MCP — 1B+ Federal Cases</a><br><span class="note"><code>andrew_avina/pacer-intelligence-mcp</code></span></td><td>17</td><td>$0.003</td></tr>
+<tr><td><a href="https://apify.com/moving_beacon-owner1/pacer-rss-docket-monitor">PACER RSS Docket Monitor</a><br><span class="note"><code>moving_beacon-owner1/pacer-rss-docket-monitor</code></span></td><td>3</td><td>$0.00999</td></tr>
+<tr><td><a href="https://apify.com/owlabee/pacer-docket-monitor">PACER RSS Docket Monitor — New Federal Court Filings (ours)</a><br><span class="note"><code>owlabee/pacer-docket-monitor</code></span></td><td>1</td><td>$0.003 per match</td></tr>
+</tbody>
+</table></div>
+<p class="note">From the Apify Store API (<code>GET https://api.apify.com/v2/store?search=pacer</code>) on November 8, 2026, the most-used results. Store pages show current figures; most Actors also charge a small per-run start fee.</p>
+</section>
+<section id="sources">
+<h2>Sources</h2>
+<p>All checked on November 8, 2026 unless noted.</p>
+<ul>
+<li><a href="https://pacer.uscourts.gov/pacer-pricing-how-fees-work">PACER: Pricing, how fees work</a></li>
+<li><a href="https://wiki.free.law/c/courtlistener/help/alerts">CourtListener help: Alerts</a></li>
+<li><a href="https://wiki.free.law/c/courtlistener/help/alerts/docket-alerts-for-pacer">CourtListener help: Docket Alerts for PACER</a></li>
+<li><a href="https://www.pacermonitor.com/pricing">PacerMonitor: Plans and Pricing</a></li>
+<li><a href="../../pacer-rss-feeds-by-court/">owlabee: PACER RSS feeds by court (our probe of every feed)</a></li>
+<li><a href="https://apify.com/owlabee/pacer-docket-monitor">PACER RSS Docket Monitor on Apify Store</a></li>
+<li><a href="https://api.apify.com/v2/store?search=pacer">Apify Store API: search &quot;pacer&quot;</a></li>
+</ul>
+</section>
+
+
+<aside class="cta-box">
+<h2>Get this as JSON, on a schedule</h2>
+<p>PACER RSS Docket Monitor — New Federal Court Filings. New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type.</p>
+<p><a class="button" href="https://apify.com/owlabee/pacer-docket-monitor">Open on Apify Store</a></p>
+<p class="note">Run it from the Console, the API or an AI agent (MCP), or save the input as a Task with a daily schedule. Pay per result, billed to your own Apify account.</p>
+</aside>
+
+<section class="related">
+<h2>Related</h2>
+<ul>
+<li><a href="../../pacer-rss-docket-monitor/">PACER RSS docket monitor guide</a></li>
+<li><a href="../../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a></li>
+<li><a href="../">All comparisons</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

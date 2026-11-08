@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building permit data APIs compared | owlabee</title>
+<meta name="description" content="City open-data portals, Shovels, ATTOM and Apify Actors for building permit data: coverage, freshness and published prices, checked November 2026.">
+<link rel="canonical" href="https://owlabee.com/compare/building-permit-data-apis/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Building permit data APIs compared | owlabee">
+<meta property="og:description" content="City open-data portals, Shovels, ATTOM and Apify Actors for building permit data: coverage, freshness and published prices, checked November 2026.">
+<meta property="og:url" content="https://owlabee.com/compare/building-permit-data-apis/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Building permit data APIs compared","description":"City open-data portals, Shovels, ATTOM and Apify Actors for building permit data: coverage, freshness and published prices, checked November 2026.","url":"https://owlabee.com/compare/building-permit-data-apis/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"citation":["https://dev.socrata.com/docs/app-tokens.html","https://www.shovels.ai/pricing","https://www.attomdata.com/solutions/nationwide-building-permit-data/","https://www.attomdata.com/solutions/delivery/property-data-api/pricing/","https://apify.com/owlabee/building-permits-scraper","https://api.apify.com/v2/store?search=building%20permits"]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../../#guides">Guides</a>
+<a href="../../data/">Free data</a>
+<a href="../../compare/">Compare</a>
+<a href="../../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Compare</a> <span aria-hidden="true">›</span> Building permit data APIs</nav>
+<p class="kicker">Comparison · checked November 8, 2026</p>
+<h1>Building permit data APIs compared</h1>
+<p class="lede">Four ways to get building permit records into your own systems: read each city's open-data portal yourself, buy a national dataset (Shovels, ATTOM), or run an Actor that reads the portals for you. What each one is, what it costs where the price is published, and where each is the better choice.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open our Actor on Apify Store</a>
+<p class="note">Building Permits Scraper — Roofing &amp; Construction Leads on Apify Store. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#summary">At a glance</a><a href="#better">Where alternatives are better</a><a href="#store">Apify Store</a><a href="#sources">Sources</a>
+</nav>
+
+<section id="summary">
+<h2>At a glance</h2>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Option</th><th scope="col">What you get</th><th scope="col">Cost, as published</th><th scope="col">Best for</th></tr></thead>
+<tbody>
+<tr><td><strong>City open-data portals (Socrata, ArcGIS, CKAN)</strong></td><td>Each city's own permit dataset, through its public API</td><td>Free; a free app token raises Socrata rate limits</td><td>One or two cities, full control, no vendor</td></tr>
+<tr><td><strong>Shovels</strong></td><td>National permit, contractor and property data, AI-classified; web app, API, CLI</td><td>Free plan with 500 credits a month and 1 year of history; Basic $599/month (25,000 credits); Pro $999/month (50,000); 1 credit = 1 record</td><td>National coverage and long history</td></tr>
+<tr><td><strong>ATTOM</strong></td><td>Building permits within its national property data</td><td>Permit data by quote; its Property Data API lists Basic plans from $500/month</td><td>Property-level history alongside assessor, sales and mortgage data</td></tr>
+<tr><td><strong>Our Actor: Building Permits Scraper</strong></td><td>120 official open-data datasets (102 US, 18 Canadian) in one normalized schema, with monitor mode</td><td>$0.002 per permit, per jurisdiction queried and per results page (Store API)</td><td>Fresh daily permits from the cities it covers, pay per use</td></tr>
+</tbody>
+</table></div>
+<p class="note">Prices and limits as each provider published them on November 8, 2026; they change, so check the linked page before you decide.</p>
+</section>
+
+<section id="portals">
+<h2>City open-data portals</h2>
+<p>Most large US cities publish issued permits on an open-data portal, usually Socrata (Tyler Data &amp; Insights), ArcGIS or CKAN, with a public API and no login. It is the original source, it is free, and it is usually updated daily. Socrata's documentation says requests without an application token "come from a shared pool via IP address" and may be throttled, while a free token lets the portal throttle by application instead, with a higher limit (<a href="https://dev.socrata.com/docs/app-tokens.html">Socrata: Application Tokens</a>).</p>
+<p>The cost is your time: every city names its columns differently, stores dates and valuations differently, and some publish no valuation or contractor at all. Two cities are easy; twenty is a maintenance job.</p>
+</section>
+
+<section id="shovels">
+<h2>Shovels</h2>
+<p>Shovels sells national permit data with AI-classified permit types, contractor profiles, properties, zoning decisions and resident records, through a web app, a REST API, a CLI and a Google Sheets add-on. Its pricing page lists a Free plan (500 credits a month, 1 year of record history, 1 seat), Basic at $599 a month (25,000 credits, full history), Pro at $999 a month (50,000 credits, up to 2 seats) and custom Enterprise plans; "1 credit = 1 record" (<a href="https://www.shovels.ai/pricing">shovels.ai/pricing</a>).</p>
+</section>
+
+<section id="attom">
+<h2>ATTOM</h2>
+<p>ATTOM's building permit page says it holds "over 300 million building permits from over 2,000 building departments nationwide", updated monthly, with permit type classification, status, job cost, description and contractor information; pricing is by quote (<a href="https://www.attomdata.com/solutions/nationwide-building-permit-data/">ATTOM: Nationwide Building Permit Data</a>). Its Property Data API pricing page lists Basic Property plans starting at $500 a month and notes that endpoint availability varies by licence (<a href="https://www.attomdata.com/solutions/delivery/property-data-api/pricing/">ATTOM: Property Data API pricing</a>).</p>
+</section>
+
+<section id="ours">
+<h2>Our Actor: Building Permits Scraper</h2>
+<p><a href="https://apify.com/owlabee/building-permits-scraper">Building Permits Scraper</a> reads 120 official open-data datasets (61 original US cities, counties and states, 14 trade-permit datasets, 27 more US entries and 18 Canadian ones) and returns one schema: permit number, type, status, dates, valuation, site address, and contractor name, licence and phone where the city publishes them. Monitor mode returns only permits not seen on earlier runs. On November 8, 2026 the Store API listed $0.002 per permit, $0.002 per jurisdiction queried and $0.002 per results page. A sister Actor, <a href="https://apify.com/owlabee/accela-energov-permit-scraper">Accela Citizen Access &amp; EnerGov Permit Scraper</a>, covers 31 cities and counties on those portals. See this week's sample on <a href="../../data/building-permits-this-week/">New building permits by city this week</a>.</p>
+<p>Limits: only jurisdictions that publish open data are covered, history goes back as far as each portal keeps, and it does not classify permits beyond the city's own type and subtype.</p>
+</section>
+
+<section id="better">
+<h2>Where the alternatives are better</h2>
+<ul>
+<li><strong>National coverage and history:</strong> Shovels and ATTOM cover thousands of building departments, including ones with no open-data portal. Our Actor covers only the 120 datasets it lists.</li>
+<li><strong>Permit classification:</strong> Shovels classifies permits with AI and ATTOM lists permit type classifiers; our Actor keeps each city's own type and subtype, which you filter by keyword.</li>
+<li><strong>One city, no vendor:</strong> the city's own API is free and is the source of record.</li>
+<li><strong>Our Actor fits</strong> when you want the newest permits from many of the covered cities in one schema, on a daily schedule, and pay only for what a run returns.</li>
+</ul>
+</section>
+
+<section id="store">
+<h2>Other building permit Actors on Apify Store</h2>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th scope="col">Actor</th><th scope="col">Total users</th><th scope="col">Primary price per result</th></tr></thead>
+<tbody>
+<tr><td><a href="https://apify.com/pink_comic/building-permits-construction-leads">Building Permits Scraper - Contractor &amp; Construction Leads</a><br><span class="note"><code>pink_comic/building-permits-construction-leads</code></span></td><td>162</td><td>$0.002</td></tr>
+<tr><td><a href="https://apify.com/intelscrape/building-permit-scraper">Building Permits Scraper — Contractor &amp; Construction Leads</a><br><span class="note"><code>intelscrape/building-permit-scraper</code></span></td><td>113</td><td>$0.005</td></tr>
+<tr><td><a href="https://apify.com/hanamira/building-permits-search">Building Permits Search</a><br><span class="note"><code>hanamira/building-permits-search</code></span></td><td>66</td><td>$0.004</td></tr>
+<tr><td><a href="https://apify.com/inexhaustible_glass/us-building-permits-scraper">US Building Permits Scraper — Construction Leads</a><br><span class="note"><code>inexhaustible_glass/us-building-permits-scraper</code></span></td><td>53</td><td>$0.008</td></tr>
+<tr><td><a href="https://apify.com/owlabee/building-permits-scraper">Building Permits Scraper — Roofing &amp; Construction Leads (ours)</a><br><span class="note"><code>owlabee/building-permits-scraper</code></span></td><td>3</td><td>$0.002</td></tr>
+</tbody>
+</table></div>
+<p class="note">From the Apify Store API (<code>GET https://api.apify.com/v2/store?search=building%20permits</code>) on November 8, 2026, the most-used results. Store pages show current figures; most Actors also charge a small per-run start fee.</p>
+</section>
+<section id="sources">
+<h2>Sources</h2>
+<p>All checked on November 8, 2026 unless noted.</p>
+<ul>
+<li><a href="https://dev.socrata.com/docs/app-tokens.html">Socrata developer docs: Application Tokens</a></li>
+<li><a href="https://www.shovels.ai/pricing">Shovels: Pricing</a></li>
+<li><a href="https://www.attomdata.com/solutions/nationwide-building-permit-data/">ATTOM: Nationwide Building Permit Data</a></li>
+<li><a href="https://www.attomdata.com/solutions/delivery/property-data-api/pricing/">ATTOM: Property Data API pricing</a></li>
+<li><a href="https://apify.com/owlabee/building-permits-scraper">Building Permits Scraper on Apify Store</a></li>
+<li><a href="https://api.apify.com/v2/store?search=building%20permits">Apify Store API: search &quot;building permits&quot;</a></li>
+</ul>
+</section>
+
+
+<aside class="cta-box">
+<h2>Get this as JSON, on a schedule</h2>
+<p>Building Permits Scraper — Roofing &amp; Construction Leads. Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor.</p>
+<p><a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open on Apify Store</a></p>
+<p class="note">Run it from the Console, the API or an AI agent (MCP), or save the input as a Task with a daily schedule. Pay per result, billed to your own Apify account.</p>
+</aside>
+
+<section class="related">
+<h2>Related</h2>
+<ul>
+<li><a href="../../building-permits-api/">Building permits API guide</a></li>
+<li><a href="../../data/building-permits-this-week/">New building permits by city this week</a></li>
+<li><a href="../">All comparisons</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

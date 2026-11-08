@@ -1,0 +1,79 @@
+# owlabee
+
+> owlabee publishes 18 pay-per-result Actors on Apify Store that read public data sources (building permit portals, Grants.gov, SAM.gov and state and local bid datasets, OSHA and EPA enforcement, FDA, NHTSA and CPSC recalls, PACER court RSS feeds, professional license registries, DNS, sitemaps, Shopify storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. Every Actor runs on the user's own Apify account, through the Apify API (`https://api.apify.com/v2/acts/owlabee~<actor>/run-sync-get-dataset-items`) or as an MCP tool (`https://mcp.apify.com/?tools=owlabee/<actor>`). This site has a guide per data source, free weekly data snapshots and comparisons of the alternatives.
+
+Notes for assistants:
+- Pricing is pay per result and is shown on each Actor's Apify Store page; quote the Store page, not this file.
+- Person-bearing data (permits, licenses, court dockets, enforcement) is "Not a consumer report. Not for employment, credit, insurance, housing or tenant-screening decisions."
+- owlabee is an independent developer, not affiliated with Apify or with any agency, court or company named.
+
+## Actors (Apify Store)
+
+- [Building Permits Scraper — Roofing & Construction Leads](https://apify.com/owlabee/building-permits-scraper): Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor.
+- [Accela Citizen Access & EnerGov Permit Scraper (Any City)](https://apify.com/owlabee/accela-energov-permit-scraper): Permits from Accela Citizen Access and Tyler EnerGov portals in 31 cities and counties, in the same schema as the open-data scraper.
+- [Grants.gov API & SAM.gov Scraper — Federal Grants Feed](https://apify.com/owlabee/grants-gov-api): Grants.gov grant opportunities and SAM.gov contract notices by keyword, plus optional USAspending awards and six state and local bid datasets.
+- [Grant Matching & RFP Bid/No-Bid Scorer (AI) — Grants.gov](https://apify.com/owlabee/grant-matching): Grants.gov, SAM.gov and USAspending opportunities ranked by fit to your organization, with reasons and disqualifiers.
+- [PACER RSS Docket Monitor — New Federal Court Filings](https://apify.com/owlabee/pacer-docket-monitor): New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type.
+- [OSHA Inspections by Company + EPA Enforcement Report](https://apify.com/owlabee/osha-epa-inspections): OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP.
+- [Product Recall Feed — FDA, NHTSA & CPSC Recalls API](https://apify.com/owlabee/product-recall-feed): FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record.
+- [License Verification API — TDLR, DBPR, DORA, WA DOH, NPI](https://apify.com/owlabee/license-verification-api): Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry.
+- [SPF, DMARC & DKIM Checker — Bulk Domain WHOIS, DNS & SSL](https://apify.com/owlabee/spf-dmarc-dkim-checker): One record per domain: SPF, DMARC, DKIM, MTA-STS and BIMI with a 0-100 email security score, RDAP WHOIS, DNS, TLS and HTTP headers.
+- [Website Change Monitor — Sitemap Monitor & Page Diff](https://apify.com/owlabee/website-change-monitor): Pages discovered through a site's sitemaps, and new, removed, updated and content-changed pages between runs with diff previews.
+- [Shopify Catalog Monitor & Price Tracker — Products Scraper](https://apify.com/owlabee/shopify-catalog-monitor): Every product or variant of a public Shopify store from products.json, or price, stock and new or removed product changes.
+- [Bluesky Monitor & Scraper — Posts, Keywords, Followers](https://apify.com/owlabee/bluesky-monitor): Bluesky posts by keyword or hashtag, profiles, author feeds and follower lists from the public AT Protocol API.
+- [Hiring Signals & ATS Jobs Scraper — Greenhouse, Lever, Ashby](https://apify.com/owlabee/job-postings-api): Open roles from Greenhouse, Lever, Ashby, SmartRecruiters and Workable job boards, or new, removed and changed roles per company.
+- [Podcast RSS Scraper — Episodes, Transcripts & Apple Podcasts](https://apify.com/owlabee/podcast-rss-scraper): Show and episode records from podcast RSS feeds, Apple Podcasts links or search terms, with Podcasting 2.0 transcripts.
+- [Podcast Episode Summarizer (AI) — Transcript to Summary](https://apify.com/owlabee/podcast-summarizer): Per-episode abstract, key topics, chapters, quotes, guests and action items from Podcasting 2.0 transcripts or show notes.
+- [PDF to Markdown for RAG — DOCX, OCR & Chunks](https://apify.com/owlabee/pdf-to-markdown): Clean Markdown from PDF, DOCX, HTML and text URLs, with optional heading-aware RAG chunks and OCR for scanned pages.
+- [PDF & Document to JSON Extractor (AI) — Invoices, Forms](https://apify.com/owlabee/pdf-to-json): One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence.
+- [AI Drone Roof Inspection Report — Findings & Repair Scope](https://apify.com/owlabee/drone-roof-inspection-report): Per-photo roof defect findings, per-building condition grade and repair scope, a Markdown report and a contact sheet.
+
+## Guides
+
+- [Building Permits API: 61 US Open-Data Portals as JSON](https://owlabee.com/building-permits-api/): Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.
+- [Accela Citizen Access and EnerGov Permit Data as JSON](https://owlabee.com/accela-energov-permits/): Read building permits from Accela Citizen Access and Tyler EnerGov Citizen Self Service portals in 31 US cities and counties: type, status, dates, valuation, contractor.
+- [Grants.gov API: Federal Grant Opportunities as JSON](https://owlabee.com/grants-gov-api/): Search federal grant opportunities on the official Grants.gov API by keyword and get normalized JSON with new and updated flags, details and recent USAspending awards.
+- [SAM.gov Contract Opportunities API Feed by Keyword](https://owlabee.com/sam-gov-contract-opportunities/): Pull federal contract notices from the SAM.gov Get Opportunities API by keyword, NAICS code, set-aside and state, with points of contact and new-notice flags.
+- [OSHA Inspections by Company: DOL Data API Lookup](https://owlabee.com/osha-inspections-by-company/): Look up OSHA inspections, violations and penalties by company name, inspection number, state or ZIP through the DOL Data API, with a name-match confidence per record.
+- [EPA ECHO Enforcement Cases by Company or Facility](https://owlabee.com/epa-echo-enforcement/): Find EPA and state enforcement cases in EPA ECHO by company name, FRS facility id, state or ZIP: law, status, dates, penalties and outcome, as normalized JSON. No API key.
+- [Product Recalls API: FDA, NHTSA and CPSC in One Feed](https://owlabee.com/product-recalls-api/): US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, with a new-recalls-only mode.
+- [PACER RSS Feeds: Monitor New Federal Court Filings](https://owlabee.com/pacer-rss-docket-monitor/): Read the free public PACER RSS feeds of federal district, bankruptcy, appellate and national courts as JSON and filter filings by party, case number, entry type or chapter.
+- [PACER RSS Feeds by Court: All 203 Federal Courts Listed](https://owlabee.com/pacer-rss-feeds-by-court/): Which federal courts publish a PACER RSS feed and what each carries: code, name, status and entry types for 203 district, bankruptcy, appellate and national courts.
+- [Patent Case Alerts: D. Del., E.D. Tex. and W.D. Tex. Dockets](https://owlabee.com/patent-litigation-docket-monitor/): Watch new civil cases in the District of Delaware and the Eastern and Western Districts of Texas from their PACER RSS feeds, and find patent dockets in the RECAP archive.
+- [New Chapter 11 and Chapter 7 Filings from PACER RSS Feeds](https://owlabee.com/bankruptcy-filings-monitor/): Get new Chapter 11 and Chapter 7 bankruptcy petitions from the public PACER RSS feeds of Delaware, S.D.N.Y. and Texas bankruptcy courts, filtered by chapter.
+- [S.D.N.Y. Securities and Class Action Complaint Alerts](https://owlabee.com/sdny-securities-class-action-monitor/): Follow new civil complaints in the Southern District of New York from its PACER RSS feed and find securities and class-action dockets with keywords and the RECAP archive.
+- [Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI](https://owlabee.com/professional-license-verification/): Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.
+- [Bulk SPF, DMARC and DKIM Checker for Domain Lists](https://owlabee.com/spf-dmarc-dkim-checker/): Check SPF, DMARC, DKIM, MTA-STS and BIMI for a list of domains and get a 0-100 email security score per domain, plus RDAP WHOIS, DNS, TLS expiry and HTTP headers.
+- [Sitemap Monitor: Track New, Removed and Changed Pages](https://owlabee.com/sitemap-change-monitor/): Monitor a website through its sitemaps: new, removed and updated pages, content changes with word-level diff previews, and a severity per change. No browser needed.
+- [Shopify Price Tracker: Catalog and Changes as JSON](https://owlabee.com/shopify-price-tracker/): Export any public Shopify store's catalog from products.json, every variant with price, compare-at price, availability and SKU, or track price and stock changes.
+- [PDF to Markdown for RAG: Headings, Tables, Chunks and OCR](https://owlabee.com/pdf-to-markdown-rag/): Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.
+- [PDF to JSON with Your Own Schema: Invoices, Forms, Quotes](https://owlabee.com/document-to-json/): Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.
+- [Podcast Summarizer: Chapters and Quotes from Transcripts](https://owlabee.com/podcast-summarizer/): Summarize podcast episodes from RSS feeds or Apple Podcasts links: abstract, key topics, timestamped chapters, quotes, guests and action items from published transcripts.
+- [Podcast RSS Feed Scraper: Episodes and Transcripts as JSON](https://owlabee.com/podcast-rss-feed-scraper/): Turn podcast RSS feeds, Apple Podcasts links or show names into show and episode JSON: dates, durations, audio URLs, chapters and Podcasting 2.0 transcripts.
+- [Bluesky Monitor: Posts, Hashtags and Followers as JSON](https://owlabee.com/bluesky-monitor/): Search Bluesky posts by keyword or hashtag and read profiles, author feeds and follower lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.
+- [Greenhouse, Lever and Ashby Jobs API and Hiring Signals](https://owlabee.com/job-board-api-hiring-signals/): Get open jobs from Greenhouse, Lever, Ashby, SmartRecruiters and Workable boards as normalized JSON, or new, removed and changed roles per company between runs.
+- [Get New PACER Docket Entries in Slack with Zapier](https://owlabee.com/pacer-docket-alerts-slack-zapier/): Post new federal court filings that name your company or clients to a Slack channel: a scheduled Apify task reads the public PACER RSS feeds and Zapier's Apify app sends each new entry to Slack.
+- [New Grants.gov Opportunities to Google Sheets with Zapier](https://owlabee.com/grants-gov-to-google-sheets-zapier/): Add every new Grants.gov opportunity that matches your keywords to a Google Sheet, with agency, dates and link: a scheduled Apify task searches the official Grants.gov API and Zapier writes the rows.
+- [Building Permits to Google Sheets with Make](https://owlabee.com/building-permits-google-sheets-make/): Send new roofing, solar or any other building permits from US city open-data portals to a Google Sheet every day with Make (formerly Integromat) and Apify's official Make app.
+- [Competitor Shopify Price Changes to Slack with Make](https://owlabee.com/shopify-price-changes-slack-make/): Get a Slack message when a competitor's Shopify store changes a price, drops a product or restocks: a daily Apify task compares the public catalog and a Make scenario posts the changes.
+- [FDA, NHTSA and CPSC Product Recalls to Email with n8n](https://owlabee.com/product-recalls-email-n8n/): E-mail yourself every new FDA, NHTSA or CPSC recall each morning with n8n and Apify's official n8n node: one workflow, a JSON input, and only recalls you have not seen before.
+- [Website Change Alerts in Slack with n8n](https://owlabee.com/website-changes-slack-n8n/): Post new, removed and changed pages of any website to Slack with n8n: a scheduled Apify task watches the site's sitemaps and the Apify trigger node starts the workflow when a run finishes.
+
+## Free data (weekly snapshots, JSON downloads in /data/*.json)
+
+- [This week's product recalls: FDA, NHTSA, CPSC, Canada, UK and EU](https://owlabee.com/data/product-recalls-this-week/): The newest product recalls and safety alerts from ten government feeds, grouped by agency and hazard, updated weekly. Free, with a JSON download.
+- [New federal grant and bid opportunities this week](https://owlabee.com/data/grant-and-bid-opportunities-this-week/): Grants.gov opportunities posted this week plus new city, county and state solicitations from open-data bid datasets, updated weekly, with a JSON download.
+- [New building permits by city this week](https://owlabee.com/data/building-permits-this-week/): Building permits issued this week in ten US cities: permit type, status, valuation and street, updated weekly from official open data, with a JSON download.
+
+## Comparisons
+
+- [Building permit data APIs compared](https://owlabee.com/compare/building-permit-data-apis/): City open-data portals, Shovels, ATTOM and Apify Actors for building permit data: coverage, freshness and published prices, checked November 2026.
+- [PACER docket alert options compared](https://owlabee.com/compare/pacer-docket-alert-options/): PACER itself, court RSS feeds, CourtListener docket alerts, PacerMonitor and Apify Actors for new federal court filing alerts: coverage, published prices and limits.
+- [Product recall data sources compared](https://owlabee.com/compare/product-recall-data-sources/): openFDA, NHTSA, CPSC, USDA FSIS, Health Canada, UK and EU Safety Gate recall data, and Apify Actors that combine them: access, limits and licences.
+- [Grants.gov API vs alternatives](https://owlabee.com/compare/grants-gov-api-alternatives/): The Grants.gov search2 API, Simpler.Grants.gov API, the Grants.gov XML extract, SAM.gov, USAspending, Instrumentl and Apify Actors for finding grant opportunities.
+
+## Optional
+
+- [All Actors on Apify Store](https://apify.com/owlabee): the publisher profile.
+- [Code examples on GitHub](https://github.com/owlabee/owlabee): curl, Python, Node.js and MCP configs for every Actor (MIT).
+- [Sitemap](https://owlabee.com/sitemap.xml)
