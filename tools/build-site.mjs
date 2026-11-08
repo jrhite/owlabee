@@ -4,7 +4,7 @@
 import { mkdirSync, writeFileSync, readFileSync, copyFileSync } from 'node:fs';
 import { pages } from './site-content.mjs';
 import { actors, storeUrl, apiUrl, mcpUrl } from './actors.mjs';
-import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY, MAKER_NAME, MAKER_URL } from './site-config.mjs';
+import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY, MAKER_NAME, MAKER_URL, GA_MEASUREMENT_ID } from './site-config.mjs';
 import { referenceSections } from './pacer-courts.mjs';
 import { mark, C } from './brand/render.mjs';
 
@@ -37,6 +37,50 @@ const BRAND_FILES = ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'og-i
 const FONTS_URL = 'https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap';
 
 const disclaimer = `owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.`;
+
+// Google Analytics 4, only when GA_MEASUREMENT_ID is set.
+// - Loads only on owlabee.com itself, so local previews and forks never count as visits.
+// - Consent Mode v2: ad storage and ad signals denied everywhere (no ads here); analytics
+//   storage granted, but denied in the EEA, UK and Switzerland, where GA sends cookieless
+//   pings, so no cookie banner is needed there.
+// - A click on any Apify Store link sends GA4's recommended `generate_lead`, with
+//   `lead_method: "apify_store"` and `link_location` (nav, page or footer): the site's
+//   job is sending readers to the Store. Mark generate_lead as a key event in GA.
+// Disclosed in the footer and on /privacy/, which Google's Analytics terms require.
+const STRICT_REGIONS = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO', 'GB', 'CH'];
+function analyticsTag() {
+  if (!GA_MEASUREMENT_ID) return '';
+  const host = new URL(BASE_URL).hostname;
+  const cfg = JSON.stringify({ id: GA_MEASUREMENT_ID, hosts: [host, `www.${host}`], regions: STRICT_REGIONS });
+  return `<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})(${cfg.replace(/</g, '\\u003c')});
+</script>`;
+}
+
+const privacyNote = GA_MEASUREMENT_ID
+  ? `Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="${BASE_URL}privacy/">Privacy</a>`
+  : `No cookies or trackers; fonts load from Google Fonts. <a href="${BASE_URL}privacy/">Privacy</a>`;
 
 function layout({ title, description, path, body, jsonld, prefix, type = 'article', absolute = false, home = false }) {
   const url = BASE_URL + path;
@@ -72,6 +116,7 @@ ${absolute ? '<meta name="robots" content="noindex">' : `<link rel="canonical" h
 <link rel="stylesheet" href="${FONTS_URL}">
 <link rel="stylesheet" href="${href('style.css')}">
 ${jsonld ? ld(jsonld) : ''}
+${analyticsTag()}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -92,7 +137,7 @@ ${body}
 <footer class="site-footer">
 <div class="wrap wrap-wide">
 <p>${esc(disclaimer)}</p>
-<p><a href="${STORE_PROFILE_URL}">owlabee on Apify Store</a> · <a href="${REPO_URL}">Examples on GitHub</a> (MIT) · No cookies or trackers; fonts load from Google Fonts.</p>
+<p><a href="${STORE_PROFILE_URL}">owlabee on Apify Store</a> · <a href="${REPO_URL}">Examples on GitHub</a> (MIT) · ${privacyNote}</p>
 <p class="maker">© ${new Date().getUTCFullYear()} owlabee · <a href="${BASE_URL}">${esc(new URL(BASE_URL).hostname)}</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="${MAKER_URL}">${esc(MAKER_NAME)}</a></p>
 </div>
 </footer>
@@ -349,6 +394,34 @@ ${actors
   });
 }
 
+function privacyPage() {
+  const analytics = GA_MEASUREMENT_ID
+    ? `<p>This site uses Google Analytics 4 to count visits and see which guides are read. It records things like the pages you view, how you arrived (a search, a link, or directly), whether you follow a link to an Actor on Apify Store, your approximate location at country or city level, and your device and browser type. Google does not give owlabee your IP address.</p>
+<p>Advertising features are turned off. If you visit from the European Economic Area, the UK or Switzerland, Google Analytics runs in a cookieless mode and sets no analytics cookies. Elsewhere it sets first-party cookies (named <code>_ga</code>) to tell new visits from return ones.</p>
+<p>Google processes this data under its own <a href="https://policies.google.com/privacy">privacy policy</a>. You can opt out on every site with Google's <a href="https://tools.google.com/dlpage/gaoptout">opt-out browser add-on</a>, or by blocking scripts from <code>googletagmanager.com</code>.</p>`
+    : `<p>This site runs no analytics and sets no cookies.</p>`;
+  const body = `
+<article>
+<div class="guide-head">
+<h1>Privacy</h1>
+<p class="lede">What owlabee.com collects. No accounts, no forms, no ads.</p>
+</div>
+<section>
+<h2>Visit statistics</h2>
+${analytics}
+</section>
+<section>
+<h2>Fonts and hosting</h2>
+<p>The fonts (Jost and Cormorant Garamond) load from Google Fonts, so your browser asks Google's servers for them. The site is hosted on GitHub Pages, which, like any web host, handles the requests your browser makes and keeps routine logs to run and protect the service.</p>
+</section>
+<section>
+<h2>Running an Actor</h2>
+<p>The Actors themselves run on Apify, under your own Apify account. What you send them and what they return is covered by <a href="https://apify.com/privacy-policy">Apify's privacy policy</a>, not this site.</p>
+</section>
+</article>`;
+  return layout({ title: `Privacy | ${SITE_NAME}`, description: 'What owlabee.com collects: visit statistics, fonts from Google Fonts, and hosting on GitHub Pages.', path: 'privacy/', body, prefix: '../', type: 'website' });
+}
+
 function notFoundPage() {
   const body = `
 <h1>Page not found</h1>
@@ -364,6 +437,8 @@ ${pages.map((p) => `<li><a href="${BASE_URL}${p.slug}/">${esc(p.title)}</a></li>
 mkdirSync(docs, { recursive: true });
 writeFileSync(new URL('index.html', docs), indexPage());
 writeFileSync(new URL('404.html', docs), notFoundPage());
+mkdirSync(new URL('privacy/', docs), { recursive: true });
+writeFileSync(new URL('privacy/index.html', docs), privacyPage());
 for (const p of pages) {
   const dir = new URL(`${p.slug}/`, docs);
   mkdirSync(dir, { recursive: true });
