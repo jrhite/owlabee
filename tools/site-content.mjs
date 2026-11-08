@@ -1874,4 +1874,411 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
     ],
     related: ['spf-dmarc-dkim-checker', 'bluesky-monitor'],
   },
+
+  // ---------------------------------------------------------------------------------------------
+  // No-code recipes (kind: 'integration'). They use Apify's own official apps on Zapier, Make and
+  // n8n; the module names follow docs.apify.com/platform/integrations/{zapier,make,n8n} as read on
+  // 2026-11-08. Each recipe runs a saved Apify task in monitor mode so the platform only ever sees
+  // records that are new since the last run.
+  // ---------------------------------------------------------------------------------------------
+
+  {
+    slug: 'pacer-docket-alerts-slack-zapier',
+    kind: 'integration',
+    platform: 'Zapier',
+    actor: 'pacer-docket-monitor',
+    title: 'Get New PACER Docket Entries in Slack with Zapier',
+    nav: 'PACER filings to Slack (Zapier)',
+    description:
+      'Post new federal court filings that name your company or clients to a Slack channel: a scheduled Apify task reads the public PACER RSS feeds and Zapier\'s Apify app sends each new entry to Slack.',
+    lede:
+      'The PACER Docket Monitor reads the free public RSS feeds of federal courts and, in monitor mode, returns only docket entries it has not returned before. Save it as an Apify task, schedule it hourly, and a Zap built on Apify\'s official Zapier app posts each new entry to Slack with the case title, the docket text and a link to the docket. No PACER account and no code.',
+    what: `
+<p>An Apify schedule runs a saved task every hour. The task watches the Southern and Eastern Districts of New York for new complaints whose case title contains a name you choose. When a run finishes, the Zap's Apify trigger fires, the Zap fetches that run's dataset, and Slack gets one message per new docket entry.</p>
+<p>Swap the filters and the same Zap covers other alerts: Chapter 11 petitions in Delaware (<code>bankruptcyChapters</code>), every new motion and order in a case you follow (<code>caseNumbers</code>), or patent complaints in Texas. The <a href="../pacer-rss-docket-monitor/">PACER RSS docket monitor guide</a> lists every filter.</p>`,
+    before: [
+      'An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. To cap what one run can cost, set a maximum total charge in the task\'s run options.',
+      'A Zapier account with Slack connected. The Zap has more than two steps, so check that your Zapier plan allows multi-step Zaps.',
+      'The court codes to watch. <a href="../pacer-rss-feeds-by-court/">PACER RSS feeds by court</a> lists all 203 courts and whether each feed was live at the last probe.',
+    ],
+    inputHeading: 'Step 1: Save the input as an Apify task',
+    inputIntro:
+      'Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input, replace <code>Acme</code> with the names you watch, and click <strong>Save as a new task</strong>:',
+    input: {
+      courts: ['nysd', 'nyed'],
+      partyKeywords: ['Acme'],
+      entryTypes: ['complaint'],
+      newCasesOnly: true,
+      maxResults: 200,
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'zapier-slack-ny-complaints',
+    },
+    inputAfter: `
+<p><code>onlyNewSinceLastRun</code> with a <code>stateStoreName</code> of its own makes every run return only entries that earlier runs of this task have not returned, so Slack never gets the same filing twice. On the first run nothing has been seen yet, so it returns every matching entry in the current feeds (the trailing 24 hours). Run the task once from Console now, so Zapier has a finished run to test with.</p>
+<p>Then open <strong>Schedules</strong> in Console, create a schedule that runs hourly, and add the task to it. Courts regenerate their feeds every 30 to 60 minutes and each feed covers only the last 24 hours, so hourly catches every entry; daily is the minimum.</p>`,
+    stepsHeading: 'Step 2: Build the Zap',
+    steps: [
+      ['Trigger: Apify, Finished task run', 'Create a Zap and choose <strong>Apify</strong> as the trigger app with the <strong>Finished task run</strong> event. Connect your Apify account (Zapier opens an Apify sign-in window; click <strong>Allow Access</strong>), pick the task you saved, and click <strong>Test Trigger</strong>. Zapier fills the test from the run you just made.'],
+      ['Search: Apify, Fetch dataset items', 'Add an <strong>Apify</strong> step with the <strong>Fetch dataset items</strong> search and map the dataset ID to the default dataset of the run from the trigger step. Test the step: it returns the docket entries of that run.'],
+      ['Loop over the items', 'Add <strong>Looping by Zapier</strong> and loop over the fetched items, so each docket entry runs through the next steps on its own. Map <code>caseTitle</code>, <code>courtName</code>, <code>entryText</code>, <code>docketUrl</code> and <code>error</code> into the loop.'],
+      ['Filter out error items', 'Inside the loop, add <strong>Filter by Zapier</strong>: continue only if <code>error</code> does not exist. A court whose feed is down produces one item with an <code>error</code> code instead of failing the run, and you probably do not want that in the channel.'],
+      ['Action: Slack, Send Channel Message', `<p>Add <strong>Slack</strong> with <strong>Send Channel Message</strong>, pick the channel, and build the text from the mapped fields (insert each one with Zapier's field picker; the braces below stand for those fields), for example:</p>
+${'<pre tabindex="0" aria-label="Slack message template"><code>New filing in {courtName}: {caseTitle}\n{entryText}\nDocket: {docketUrl}</code></pre>'}
+<p>Test the step, then publish the Zap. From now on, the new entries of each scheduled run are posted to Slack.</p>`],
+    ],
+    fieldsIntro: 'Each dataset item is one docket entry. These fields make a useful Slack message:',
+    mapping: [
+      ['caseTitle', 'The lead parties, for example <q>Acme Corp v. Example LLC</q>'],
+      ['courtName, court', 'Court name and CM/ECF code'],
+      ['caseNumber', 'Case number as the court publishes it'],
+      ['entryText, entryCategory', 'Docket text and a heuristic category (complaint, motion, order …)'],
+      ['docketUrl, documentUrl', 'Links to the docket and the document on PACER (opening them is subject to PACER fees)'],
+      ['filedAt', 'Filing time, ISO 8601'],
+      ['error', 'Present only on error items; use it to filter them out'],
+    ],
+    limits: [
+      'Apify bills the Actor per feed checked and per matching entry, at the prices on its Store page. An hourly schedule on two courts is 48 feed checks a day plus the entries that match.',
+      'Zapier counts the steps a Zap runs against your Zapier plan\'s task allowance; with a loop, each entry adds its own filter and Slack steps.',
+      'The trigger fires when a run finishes. A schedule that runs hourly therefore posts at most once an hour per batch of entries.',
+      'Feeds cover only the trailing 24 hours and carry the lead parties, not every party. The <a href="../pacer-rss-docket-monitor/">docket monitor guide</a> covers the other source limits.',
+      'Case titles name individuals. Not a consumer report. Not for employment, credit, insurance, housing or tenant-screening decisions.',
+    ],
+    faq: [
+      ['Why a task and a trigger, and not the Run Actor action?', 'Zapier\'s Apify app can also start a run with <strong>Run Actor</strong>, but Apify\'s Zapier documentation gives synchronous runs a hard 30-second timeout. Feed checks across several courts can take longer, so the scheduled task with the <strong>Finished task run</strong> trigger is the dependable pattern.'],
+      ['Can I skip Zapier entirely?', 'For a plain "a run finished" notice, yes: the task\'s <strong>Integrations</strong> tab in Apify Console has a Slack integration. To post the entries themselves without Zapier, set the Actor\'s <code>webhookUrl</code> to an endpoint you control; the POST body carries the run summary and up to 1,000 emitted entries.'],
+      ['Do I need a PACER account?', 'No. The RSS feeds are public. Only opening a linked document on PACER is subject to PACER\'s own fees.'],
+      ['How do I watch other courts or a single case?', 'Edit the task input: change <code>courts</code>, or replace <code>partyKeywords</code> with <code>caseNumbers</code>. Keep a separate <code>stateStoreName</code> for each task so their memories of seen entries stay apart.'],
+      ['Is this affiliated with Zapier or Apify?', 'No. owlabee is an independent developer on Apify Store; the Zapier app used here is Apify\'s own. Not affiliated with or endorsed by Zapier, Slack, Apify or the federal courts.'],
+    ],
+    related: ['pacer-rss-docket-monitor', 'bankruptcy-filings-monitor', 'grants-gov-to-google-sheets-zapier', 'website-changes-slack-n8n'],
+  },
+
+  {
+    slug: 'grants-gov-to-google-sheets-zapier',
+    kind: 'integration',
+    platform: 'Zapier',
+    actor: 'grants-gov-api',
+    title: 'New Grants.gov Opportunities to Google Sheets with Zapier',
+    nav: 'Grants.gov to Google Sheets (Zapier)',
+    description:
+      'Add every new Grants.gov opportunity that matches your keywords to a Google Sheet, with agency, dates and link: a scheduled Apify task searches the official Grants.gov API and Zapier writes the rows.',
+    lede:
+      'The Grants.gov API & SAM.gov Scraper searches the official Grants.gov API by keyword and, in monitor mode, returns only opportunities that are new or updated since its last run. Save it as an Apify task, schedule it daily, and a Zap built on Apify\'s official Zapier app adds one Google Sheets row per opportunity: a running pipeline sheet with no copy and paste.',
+    what: `
+<p>A daily Apify schedule runs a saved task that searches Grants.gov for posted and forecasted opportunities about rural broadband and digital equity. When the run finishes, the Zap fetches its dataset and appends one row per opportunity to your sheet: number, title, agency, status, posted and close dates, award ceiling and the Grants.gov link.</p>
+<p>Add <code>"samGov"</code> to <code>sources</code> (with your own free SAM.gov API key) to also get federal contract notices in the same sheet; see the <a href="../sam-gov-contract-opportunities/">SAM.gov guide</a>.</p>`,
+    before: [
+      'An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. Set a maximum total charge in the task\'s run options to cap a run.',
+      'A Zapier account with Google Sheets connected. The Zap has more than two steps, so check that your Zapier plan allows multi-step Zaps.',
+      'A Google Sheet with a header row, for example: <code>number</code>, <code>title</code>, <code>agency</code>, <code>status</code>, <code>postedDate</code>, <code>closeDate</code>, <code>awardCeiling</code>, <code>url</code>, <code>isUpdated</code>.',
+    ],
+    inputHeading: 'Step 1: Save the input as an Apify task',
+    inputIntro:
+      'Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input, change the keywords to your own, and click <strong>Save as a new task</strong>:',
+    input: {
+      keywords: ['rural broadband', 'digital equity'],
+      sources: ['grantsGov'],
+      oppStatuses: ['posted', 'forecasted'],
+      postedWithinDays: 30,
+      maxResults: 200,
+      fetchDetails: true,
+      maxDetails: 100,
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'zapier-sheets-broadband-grants',
+    },
+    inputAfter: `
+<p>In monitor mode each run returns only opportunities that are new (<code>isNew: true</code>) or changed (<code>isUpdated: true</code>) since the last run of this task. The first run has nothing to compare with, so it returns everything posted in the last 30 days: a good way to fill the sheet once. <code>fetchDetails</code> adds the award ceiling, eligibility and the agency contact for up to <code>maxDetails</code> records. Run the task once from Console now, so Zapier has a finished run to test with.</p>
+<p>Then open <strong>Schedules</strong> in Console, create a daily schedule, and add the task to it.</p>`,
+    stepsHeading: 'Step 2: Build the Zap',
+    steps: [
+      ['Trigger: Apify, Finished task run', 'Create a Zap with <strong>Apify</strong> as the trigger app and the <strong>Finished task run</strong> event. Connect your Apify account (click <strong>Allow Access</strong> in the window that opens), pick the task, and click <strong>Test Trigger</strong>.'],
+      ['Search: Apify, Fetch dataset items', 'Add an <strong>Apify</strong> step with the <strong>Fetch dataset items</strong> search, map the dataset ID to the default dataset of the run from the trigger, and test it.'],
+      ['Loop over the items', 'Add <strong>Looping by Zapier</strong> and loop over the fetched items, mapping the fields you want in the sheet plus <code>error</code>.'],
+      ['Filter out error items', 'Add <strong>Filter by Zapier</strong>: continue only if <code>error</code> does not exist. A source that is down produces one coded error item instead of failing the run.'],
+      ['Action: Google Sheets, Create Spreadsheet Row', 'Add <strong>Google Sheets</strong> with <strong>Create Spreadsheet Row</strong>, pick the spreadsheet and worksheet, and map each column to a field from the loop. Test, then publish the Zap.'],
+    ],
+    fieldsIntro: 'Each dataset item is one opportunity (<code>recordType: "opportunity"</code>). Useful columns:',
+    mapping: [
+      ['number, title', 'Opportunity number and title'],
+      ['agency, agencyCode', 'Posting agency'],
+      ['status, docType', 'forecasted, posted, closed or archived; synopsis or forecast'],
+      ['postedDate, closeDate', 'Key dates, YYYY-MM-DD'],
+      ['awardCeiling, awardFloor, estimatedTotalFunding', 'With <code>fetchDetails</code>; null when the agency did not set them'],
+      ['url', 'The Grants.gov listing'],
+      ['isNew, isUpdated', 'Whether the row is a new opportunity or a change to one already in your sheet'],
+    ],
+    limits: [
+      'Apify bills the Actor per opportunity and per detail fetched, at the prices on its Store page. In monitor mode you pay only for new and updated records after the first run.',
+      'Zapier counts each step a Zap runs against your plan\'s task allowance; with a loop, each opportunity adds its own steps.',
+      'An updated opportunity arrives as a new row with <code>isUpdated: true</code>; the Zap does not edit the earlier row. Sort or filter the sheet on <code>number</code> to see an opportunity\'s history.',
+      'Grants.gov search matches keywords the way Grants.gov does; check a first run and tighten the keywords if it returns too much.',
+    ],
+    faq: [
+      ['Why not the Run Actor action on a Zapier schedule?', 'Apify\'s Zapier documentation gives synchronous runs a hard 30-second timeout, and a run with details for many records can take longer. The scheduled task with the <strong>Finished task run</strong> trigger has no such limit.'],
+      ['Can I export to Google Sheets without Zapier?', 'Apify Console lists a Google Sheets export among the ready-made integrations on a task\'s <strong>Integrations</strong> tab. Zapier is useful when you also want filters, other apps, or one row per record in a sheet you already have.'],
+      ['Do I need a Grants.gov key?', 'No. The Grants.gov API needs no key. SAM.gov, if you add it, needs your own free personal key in <code>samApiKey</code>.'],
+      ['Can I also rank opportunities by fit?', 'The <a href="https://apify.com/owlabee/grant-matching">Grant Matching & RFP Bid/No-Bid Scorer</a> scores Grants.gov, SAM.gov and USAspending records against a description of your organization. The same Zap pattern works with its output.'],
+      ['Is this affiliated with Zapier, Google or Grants.gov?', 'No. owlabee is an independent developer on Apify Store, and the Zapier app used here is Apify\'s own. Not affiliated with or endorsed by Zapier, Google, Apify or any agency named.'],
+    ],
+    related: ['grants-gov-api', 'sam-gov-contract-opportunities', 'pacer-docket-alerts-slack-zapier', 'building-permits-google-sheets-make'],
+  },
+
+  {
+    slug: 'building-permits-google-sheets-make',
+    kind: 'integration',
+    platform: 'Make',
+    actor: 'building-permits-scraper',
+    title: 'Building Permits to Google Sheets with Make',
+    nav: 'Building permits to Sheets (Make)',
+    description:
+      'Send new roofing, solar or any other building permits from US city open-data portals to a Google Sheet every day with Make (formerly Integromat) and Apify\'s official Make app.',
+    lede:
+      'The Building Permits Scraper reads 61 US city, county and state open-data portals and, in monitor mode, returns only permits it has not returned before. Save it as an Apify task, schedule it daily, and a three-module Make scenario built on Apify\'s official Make app adds each new permit to a Google Sheet: a lead list for contractors and suppliers that fills itself.',
+    what: `
+<p>A daily Apify schedule runs a saved task that pulls roofing permits issued in Austin, Seattle and Denver over the last 7 days. When the run finishes, Make's <strong>Watch Task Runs</strong> trigger starts the scenario, <strong>Get Dataset Items</strong> reads the run's permits, and Google Sheets gets one row per new permit with the address, the work description, the declared cost and the contractor where the city publishes one.</p>
+<p>Change <code>jurisdictions</code> and <code>permitTypes</code> for your market: <code>solar</code>, <code>pool</code>, <code>hvac</code> or <code>demolition</code> work the same way. The <a href="../building-permits-api/">building permits guide</a> lists all 61 jurisdictions; cities on Accela or EnerGov portals use the <a href="../accela-energov-permits/">Accela and EnerGov scraper</a>, which has the same schema and works with this scenario.</p>`,
+    before: [
+      'An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. Set a maximum total charge in the task\'s run options to cap a run.',
+      'A Make account with a Google connection.',
+      'A Google Sheet with a header row, for example: <code>issuedDate</code>, <code>jurisdictionName</code>, <code>permitNumber</code>, <code>permitType</code>, <code>workDescription</code>, <code>address</code>, <code>city</code>, <code>zip</code>, <code>estimatedCost</code>, <code>contractorName</code>, <code>contractorPhone</code>, <code>sourceUrl</code>.',
+    ],
+    inputHeading: 'Step 1: Save the input as an Apify task',
+    inputIntro:
+      'Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input, set your own jurisdictions and permit words, and click <strong>Save as a new task</strong>:',
+    input: {
+      jurisdictions: ['austin', 'seattle', 'denver-residential'],
+      permitTypes: ['roof', 're-roof'],
+      issuedWithinDays: 7,
+      maxResultsPerJurisdiction: 500,
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'make-sheets-roof-permits',
+      includeRaw: false,
+    },
+    inputAfter: `
+<p>With <code>onlyNewSinceLastRun</code> each run returns only permits that earlier runs of this task have not returned (flagged <code>isNew: true</code>), so the sheet gets no duplicates. The first run returns everything issued in the window. A 7-day window on a daily schedule also catches portals that publish a few days late. Run the task once from Console now, so Make has a run to map fields from.</p>
+<p>Then open <strong>Schedules</strong> in Console, create a daily schedule, and add the task to it.</p>`,
+    stepsHeading: 'Step 2: Build the Make scenario',
+    steps: [
+      ['Trigger: Apify, Watch Task Runs', 'Create a scenario and add the <strong>Apify</strong> app\'s <strong>Watch Task Runs</strong> trigger. Create a connection (OAuth, or paste an API token from Console → Settings → API &amp; Integrations), then pick the task. The trigger registers a webhook in Apify that fires whenever a run of the task finishes.'],
+      ['Search: Apify, Get Dataset Items', 'Add <strong>Apify → Get Dataset Items</strong> and map <strong>Dataset ID</strong> to the default dataset ID from the trigger\'s output. If the variables do not show yet, run the scenario once while the task runs, then map them.'],
+      ['Filter out error items', 'On the link between Get Dataset Items and the next module, set up a filter: continue only if <code>error</code> does not exist. A portal that is down produces one error item, such as <code>HTTP_503</code>, instead of failing the run.'],
+      ['Action: Google Sheets, Add a Row', 'Add <strong>Google Sheets → Add a Row</strong>, pick the spreadsheet and sheet, and map each column to a permit field. Get Dataset Items outputs one bundle per permit, so the module adds one row per permit. (Apify\'s own Make guide uses <strong>Bulk Add Rows</strong> with an aggregator instead, which uses fewer operations on large runs.) Save the scenario and switch it on.'],
+    ],
+    fieldsIntro: 'Each dataset item is one permit. Fields that make a useful lead row:',
+    mapping: [
+      ['issuedDate, appliedDate', 'Dates as the portal publishes them'],
+      ['jurisdictionName, permitNumber', 'Where the permit was issued and its number'],
+      ['permitType, permitSubtype, workDescription', 'What the work is, in the city\'s own words'],
+      ['address, city, state, zip', 'The job site'],
+      ['estimatedCost', 'Declared job value, or empty where the city publishes none'],
+      ['contractorName, contractorLicense, contractorPhone', 'Only where the city publishes them; nothing is inferred'],
+      ['sourceUrl', 'Link to the source dataset or row, to check a value'],
+    ],
+    limits: [
+      'Apify bills the Actor per permit, per jurisdiction and per results page, at the prices on its Store page. In monitor mode you pay for new permits only after the first run.',
+      'Make counts operations per module run; with one row per permit, a run with 100 new permits uses about 100 Google Sheets operations.',
+      'Each city publishes its own columns: some have no cost or contractor columns, and update frequency ranges from daily to every few weeks. The <a href="../building-permits-api/">building permits guide</a> lists the gaps.',
+      'If you contact people from the sheet, telemarketing and e-mail laws apply: the TCPA and the National Do Not Call Registry in the US, CASL in Canada.',
+      'Not a consumer report. Not for employment, credit, insurance, housing or tenant-screening decisions.',
+    ],
+    faq: [
+      ['Can Make run the Actor itself instead of a task schedule?', 'Yes. Apify\'s <strong>Run an Actor</strong> module with <strong>Run synchronously</strong> set to Yes waits for the run, and Make\'s own scheduler can start the scenario. Apify\'s documentation warns that Make enforces a plan-dependent timeout on synchronous runs and that output is incomplete when a run exceeds it, so for many jurisdictions the task trigger is safer.'],
+      ['Why are some contractor columns empty?', 'The city does not publish them. Set <code>includeRaw</code> to <code>true</code> once to see every column a portal does publish.'],
+      ['Do I need API keys for the city portals?', 'No. They are public open-data APIs. A free Socrata app token is optional and only raises Socrata\'s rate limits.'],
+      ['Is this affiliated with Make or Google?', 'No. owlabee is an independent developer on Apify Store, and the Make app used here is Apify\'s own. Not affiliated with or endorsed by Make, Google, Apify or any city named.'],
+    ],
+    related: ['building-permits-api', 'accela-energov-permits', 'shopify-price-changes-slack-make', 'grants-gov-to-google-sheets-zapier'],
+  },
+
+  {
+    slug: 'shopify-price-changes-slack-make',
+    kind: 'integration',
+    platform: 'Make',
+    actor: 'shopify-catalog-monitor',
+    title: 'Competitor Shopify Price Changes to Slack with Make',
+    nav: 'Shopify price changes to Slack (Make)',
+    description:
+      'Get a Slack message when a competitor\'s Shopify store changes a price, drops a product or restocks: a daily Apify task compares the public catalog and a Make scenario posts the changes.',
+    lede:
+      'The Shopify Catalog Monitor reads a store\'s public product catalog and, in changes mode, compares it with the previous run and returns only what changed: prices, availability, new and removed products. Save it as an Apify task, schedule it daily, and a Make scenario built on Apify\'s official Make app posts each price change to Slack with the old and new price.',
+    what: `
+<p>A daily Apify schedule runs a saved task on one or more competitor stores. The first run stores a baseline of every variant; every later run returns change records. Make's <strong>Watch Task Runs</strong> trigger starts the scenario when a run finishes, <strong>Get Dataset Items</strong> reads the changes, a filter keeps price changes, and Slack gets one message each: product, variant, before and after price, and the percent change.</p>
+<p>Keep other <code>changeType</code> values in the filter to also hear about <code>new-product</code>, <code>removed-product</code> or <code>availability-changed</code>. The <a href="../shopify-price-tracker/">Shopify price tracker guide</a> lists every field.</p>`,
+    before: [
+      'An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. Set a maximum total charge in the task\'s run options to cap a run.',
+      'A Make account with a Slack connection.',
+      'The competitor stores\' domains. Only public storefronts work: a password-protected or blocked store returns one error item, and the Actor does not work around it.',
+    ],
+    inputHeading: 'Step 1: Save the input as an Apify task',
+    inputIntro:
+      'Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input with your competitors\' domains, and click <strong>Save as a new task</strong>:',
+    input: {
+      storeUrls: ['www.allbirds.com', 'www.deathwishcoffee.com'],
+      mode: 'changes',
+      granularity: 'variant',
+      maxProductsPerStore: 2000,
+      includeCollections: false,
+      stateStoreName: 'make-slack-competitor-prices',
+    },
+    inputAfter: `
+<p>The first <code>changes</code> run writes one <code>baseline</code> record per variant and is billed like a snapshot; the Store page has the rate. From the second run on, the dataset holds only <code>change</code> records, so later runs bill for what changed rather than for the whole catalog. Run the task once from Console now to write the baseline.</p>
+<p>Then open <strong>Schedules</strong> in Console, create a daily schedule, and add the task to it.</p>`,
+    stepsHeading: 'Step 2: Build the Make scenario',
+    steps: [
+      ['Trigger: Apify, Watch Task Runs', 'Create a scenario and add <strong>Apify → Watch Task Runs</strong>. Create a connection (OAuth, or an API token from Console → Settings → API &amp; Integrations) and pick the task.'],
+      ['Search: Apify, Get Dataset Items', 'Add <strong>Apify → Get Dataset Items</strong> and map <strong>Dataset ID</strong> to the default dataset ID from the trigger.'],
+      ['Filter: price changes only', 'On the link to the next module, set up a filter with two conditions: <code>recordType</code> equals <code>change</code>, and <code>changeType</code> equals <code>price-changed</code>. This also drops the baseline records of the first run and any error items.'],
+      ['Action: Slack, Create a Message', `<p>Add <strong>Slack → Create a Message</strong>, pick the channel, and build the text from the mapped fields (insert each one from Make's mapping panel; the braces below stand for those fields), for example:</p>
+${'<pre tabindex="0" aria-label="Slack message template"><code>{storeDomain}: {productTitle} ({variantTitle})\n{before.price} → {after.price} ({percentChange}%)\n{productUrl}</code></pre>'}
+<p>Save the scenario and switch it on.</p>`],
+    ],
+    fieldsIntro: 'Each change record carries the current variant fields plus what changed:',
+    mapping: [
+      ['recordType, changeType', '<code>change</code>, and one of <code>price-changed</code>, <code>availability-changed</code>, <code>new-product</code>, <code>removed-product</code>, <code>new-variant</code>, <code>removed-variant</code>, <code>title-changed</code>'],
+      ['storeDomain, productTitle, variantTitle', 'Which store and product'],
+      ['before.price, after.price, percentChange', 'The old and new price (in the store\'s currency) and the change in percent'],
+      ['before.compareAtPrice, after.compareAtPrice', 'The "was" price, to spot a sale starting or ending'],
+      ['available', 'Whether the variant can be bought now'],
+      ['productUrl', 'Link to the product page'],
+    ],
+    limits: [
+      'Apify bills the first run per baseline record and later runs per change, at the prices on the Store page. A daily check of a store whose prices rarely change costs little after the baseline.',
+      'Make counts operations per module run; each change that passes the filter adds one Slack operation.',
+      'The catalog is the store\'s public <code>products.json</code>: stock quantities appear only where the store publishes them.',
+    ],
+    faq: [
+      ['Can I put the changes in a sheet instead?', 'Yes. Replace the Slack module with Google Sheets → Add a Row and map the same fields. The <a href="../building-permits-google-sheets-make/">permits-to-Sheets recipe</a> shows that module.'],
+      ['How do I start over with a fresh baseline?', 'Use a new <code>stateStoreName</code> in the task, or delete the key for that store in the named key-value store.'],
+      ['Does it work for non-Shopify stores?', 'No. A store that is not on Shopify returns one <code>NOT_SHOPIFY</code> error item.'],
+      ['Is this affiliated with Shopify, Make or Slack?', 'No. owlabee is an independent developer on Apify Store, and the Make app used here is Apify\'s own. Not affiliated with or endorsed by Shopify, Make, Slack, Apify or any store named; the store names are examples.'],
+    ],
+    related: ['shopify-price-tracker', 'website-changes-slack-n8n', 'building-permits-google-sheets-make', 'pacer-docket-alerts-slack-zapier'],
+  },
+
+  {
+    slug: 'product-recalls-email-n8n',
+    kind: 'integration',
+    platform: 'n8n',
+    actor: 'product-recall-feed',
+    title: 'FDA, NHTSA and CPSC Product Recalls to Email with n8n',
+    nav: 'Product recalls to email (n8n)',
+    description:
+      'E-mail yourself every new FDA, NHTSA or CPSC recall each morning with n8n and Apify\'s official n8n node: one workflow, a JSON input, and only recalls you have not seen before.',
+    lede:
+      'The Product Recall Feed reads FDA, NHTSA and CPSC recalls (plus Health Canada, UK and EU feeds) into one record shape and, in monitor mode, returns only recalls it has not returned before. A four-node n8n workflow built on Apify\'s official n8n node runs it every morning and e-mails the new recalls. No task or schedule in Apify is needed: n8n does the scheduling.',
+    what: `
+<p>An n8n <strong>Schedule Trigger</strong> starts the workflow at 7:00 every day. The Apify node runs the Actor with the input below and waits for it, a second Apify node reads the run's dataset, a filter drops error items, and an e-mail node sends one message per new recall with the product, the hazard and the agency link.</p>
+<p>The input watches Class I FDA food and drug recalls plus CPSC consumer product recalls. Add a <code>vehicles</code> list for a fleet, or set <code>keyword</code> or <code>firm</code> to follow one product line or supplier. The <a href="../product-recalls-api/">product recalls guide</a> covers every source and field.</p>`,
+    before: [
+      'An Apify account and its API token (Console → Settings → API &amp; Integrations). The Actor is billed per result to that account; the Store page lists the current prices.',
+      'An n8n instance, on n8n Cloud or self-hosted, with the Apify node installed. On self-hosted n8n: Settings → Community Nodes → Install, package <code>@apify/n8n-nodes-apify</code>. On n8n Cloud: search for Apify in the nodes panel and install it (the instance owner may need to allow verified community nodes in the Cloud Admin Panel first).',
+      'An e-mail node with credentials: <strong>Gmail</strong>, or <strong>Send Email</strong> over SMTP.',
+    ],
+    inputHeading: 'Step 1: The input',
+    inputIntro: 'This JSON goes into the <strong>Custom input</strong> field of the Run an Actor node in step 2:',
+    input: {
+      agencies: ['fda-food', 'fda-drug', 'cpsc'],
+      daysBack: 30,
+      fdaClassifications: ['Class I'],
+      maxResultsPerSource: 100,
+      onlyNewSinceLastRun: true,
+      stateStoreName: 'n8n-email-recalls',
+    },
+    inputAfter: `
+<p>With <code>onlyNewSinceLastRun</code> the Actor remembers, in a key-value store named <code>n8n-email-recalls</code> in your Apify account, which recalls it has returned, and each run returns only the new ones. The first run returns everything in the 30-day window. The window is long on purpose: FDA lists a recall in its enforcement report only after classifying it, which can be weeks after the firm's announcement, and monitor mode keeps the long window from sending anything twice. <code>fdaClassifications</code> applies to the FDA sources only; CPSC recalls pass through.</p>`,
+    stepsHeading: 'Step 2: Build the n8n workflow',
+    steps: [
+      ['Schedule Trigger', 'Create a workflow and add a <strong>Schedule Trigger</strong> that fires daily at the hour you want.'],
+      ['Apify: Run an Actor', 'Add the <strong>Apify</strong> node with the <strong>Run an Actor</strong> operation. Create a credential (<strong>Apify API</strong> with your token, or <strong>Apify OAuth2 API</strong> on n8n Cloud), choose the Product Recall Feed Actor (<code>owlabee/product-recall-feed</code>), paste the input above into <strong>Custom input</strong>, and set <strong>Wait for finish</strong> to true so the next node runs only after the run completes.'],
+      ['Apify: Get dataset items', 'Add a second <strong>Apify</strong> node with <strong>Get dataset items</strong> and set <strong>Dataset ID</strong> to the <code>defaultDatasetId</code> value from the Run an Actor output. It outputs one item per recall.'],
+      ['Filter', 'Add a <strong>Filter</strong> node that keeps items where <code>error</code> does not exist. An agency API that is down produces one error item such as <code>FETCH_FAILED</code> instead of failing the run.'],
+      ['E-mail: Gmail or Send Email', `<p>Add <strong>Gmail</strong> (send a message) or <strong>Send Email</strong>. n8n runs it once per recall. Use expressions for the subject and body, for example:</p>
+${'<pre tabindex="0" aria-label="E-mail template"><code>Subject: {{ $json.agency }} recall: {{ $json.title }}\n\n{{ $json.product }}\nHazard: {{ $json.hazard }}\nFirm: {{ $json.firm }}\nClassification: {{ $json.classification }}\n{{ $json.url }}</code></pre>'}
+<p>For one digest e-mail instead, put an <strong>Aggregate</strong> node before it. Save the workflow and activate it.</p>`],
+    ],
+    fieldsIntro: 'Each dataset item is one recall in the shared record shape:',
+    mapping: [
+      ['agency, recallId', 'FDA, NHTSA or CPSC and the agency\'s recall number'],
+      ['date, title, product', 'When and what was recalled'],
+      ['hazard', 'FDA reason for recall, NHTSA consequence summary, or CPSC hazards'],
+      ['classification, severity', 'FDA Class I/II/III, NHTSA or CPSC remedy type; severity where it can be derived'],
+      ['firm, distribution, quantity', 'Recalling firm and distribution as published'],
+      ['url', 'The agency record'],
+    ],
+    limits: [
+      'Apify bills the Actor per recall record and per agency API request, at the prices on its Store page. In monitor mode later runs only return, and only charge per record for, new recalls.',
+      'Apify\'s documentation lists OAuth2 credentials for n8n Cloud only; self-hosted n8n uses the API token credential.',
+      'Agencies publish on their own schedules: openFDA enforcement reports update weekly, NHTSA and CPSC within days. The <a href="../product-recalls-api/">recalls guide</a> covers each source.',
+    ],
+    faq: [
+      ['Can I trigger the workflow from an Apify schedule instead?', 'Yes. Save the input as a task with an Apify schedule and start the workflow with the Apify node\'s <strong>On new Apify event</strong> trigger (Resource to Watch: your task; Event Type: Succeeded), then read the dataset as in step 3. The <a href="../website-changes-slack-n8n/">website changes recipe</a> uses that trigger.'],
+      ['Does it need an openFDA key?', 'No. An optional <code>fdaApiKey</code> only raises openFDA\'s rate limits.'],
+      ['Can I watch recalls for specific vehicles?', 'Yes. Add <code>vehicles</code>, one entry per vehicle as <code>"make, model, year"</code> (for example <code>"Ford, F-150, 2021"</code>). Each lookup returns every NHTSA recall on that vehicle.'],
+      ['Is this affiliated with n8n or the agencies?', 'No. owlabee is an independent developer on Apify Store, and the n8n node used here is Apify\'s own. Not affiliated with or endorsed by n8n, Google, Apify, the FDA, NHTSA or CPSC.'],
+    ],
+    related: ['product-recalls-api', 'website-changes-slack-n8n', 'epa-echo-enforcement', 'pacer-docket-alerts-slack-zapier'],
+  },
+
+  {
+    slug: 'website-changes-slack-n8n',
+    kind: 'integration',
+    platform: 'n8n',
+    actor: 'website-change-monitor',
+    title: 'Website Change Alerts in Slack with n8n',
+    nav: 'Website changes to Slack (n8n)',
+    description:
+      'Post new, removed and changed pages of any website to Slack with n8n: a scheduled Apify task watches the site\'s sitemaps and the Apify trigger node starts the workflow when a run finishes.',
+    lede:
+      'The Website Change Monitor reads a site\'s sitemaps, fetches the pages, and on every run after the first returns only what changed: new pages, removed pages and pages whose text changed, with a preview of the words added and removed. Save it as an Apify task on a schedule, and an n8n workflow built on Apify\'s official node posts the changes that matter to Slack.',
+    what: `
+<p>An Apify schedule runs a saved task that watches a competitor's site. When a run succeeds, the Apify node's <strong>On new Apify event</strong> trigger starts the workflow, a second Apify node reads the run's dataset, a filter keeps new, removed and content-changed pages of medium or high severity, and Slack gets one message per change with the page title, the URL and a preview of the edit.</p>
+<p>Use <code>includePatterns</code> to watch only part of a site, such as <code>/pricing</code> or <code>/blog/</code>, and <code>contentSelector</code> to ignore headers and footers. The <a href="../sitemap-change-monitor/">sitemap change monitor guide</a> covers every option.</p>`,
+    before: [
+      'An Apify account and its API token (Console → Settings → API &amp; Integrations). The Actor is billed per result to that account; the Store page lists the current prices. Set a maximum total charge in the task\'s run options to cap a run.',
+      'An n8n instance with the Apify node installed (self-hosted: Settings → Community Nodes → Install <code>@apify/n8n-nodes-apify</code>; n8n Cloud: search for Apify in the nodes panel) and a Slack credential.',
+    ],
+    inputHeading: 'Step 1: Save the input as an Apify task',
+    inputIntro:
+      'Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input with the site you watch, and click <strong>Save as a new task</strong>:',
+    input: {
+      sites: ['https://www.sitemaps.org/'],
+      mode: 'monitor',
+      checkContent: true,
+      maxPages: 200,
+      stateStoreName: 'n8n-slack-site-changes',
+      resetBaseline: false,
+    },
+    inputAfter: `
+<p>In <code>monitor</code> mode the first run records a baseline of every page; each later run compares with the previous one and emits only changes. Run the task once from Console now to record the baseline. Then open <strong>Schedules</strong> in Console, create a daily (or hourly) schedule, and add the task to it.</p>`,
+    stepsHeading: 'Step 2: Build the n8n workflow',
+    steps: [
+      ['Trigger: Apify, On new Apify event', 'Create a workflow and add the <strong>Apify</strong> node\'s <strong>On new Apify event</strong> trigger with your Apify credential. Set <strong>Resource to Watch</strong> to the task you saved and <strong>Event Type</strong> to <strong>Succeeded</strong>.'],
+      ['Apify: Get dataset items', 'Add an <strong>Apify</strong> node with <strong>Get dataset items</strong> and set <strong>Dataset ID</strong> to the run\'s default dataset ID from the trigger output (in Apify\'s run webhook payload it is <code>resource.defaultDatasetId</code>; check the trigger\'s test output for the exact path).'],
+      ['Filter', 'Add a <strong>Filter</strong> node with two conditions: <code>changeType</code> is one of <code>new-url</code>, <code>removed-url</code> or <code>content-changed</code>, and <code>severity</code> is not <code>low</code>. This also drops the baseline records of the first run.'],
+      ['Slack: Send Message', `<p>Add the <strong>Slack</strong> node, send a message to your channel, and build the text with expressions, for example:</p>
+${'<pre tabindex="0" aria-label="Slack message template"><code>{{ $json.changeType }} ({{ $json.severity }}): {{ $json.title }}\n{{ $json.url }}\n+ {{ $json.changedPreview.addedPreview }}\n- {{ $json.changedPreview.removedPreview }}</code></pre>'}
+<p>Save the workflow and activate it.</p>`],
+    ],
+    fieldsIntro: 'Each dataset item is one page event:',
+    mapping: [
+      ['changeType', '<code>new-url</code>, <code>removed-url</code>, <code>lastmod-changed</code>, <code>content-changed</code>, <code>status-changed</code>, <code>baseline</code> or <code>error</code>'],
+      ['url, title', 'The page'],
+      ['severity, severityReason', 'low, medium or high, with a one-phrase reason'],
+      ['changedPreview.addedPreview, changedPreview.removedPreview', 'Short previews of the text added and removed'],
+      ['changedPreview.similarity', 'How similar the new text is to the old, 0 to 1'],
+      ['lastmod, status', 'Sitemap lastmod and the HTTP status'],
+    ],
+    limits: [
+      'Apify bills the Actor per page checked and per change, at the prices on its Store page. <code>maxPages</code> caps the pages checked per run.',
+      'The Actor finds pages through the site\'s sitemaps (and optionally its feeds); a page that is in no sitemap is not watched.',
+      'The trigger fires only on finished runs with the event type you choose; add a second workflow on <strong>Failed</strong> if you want to hear about failures.',
+    ],
+    faq: [
+      ['Can I skip n8n?', 'The Actor can POST its own alert: set <code>webhookUrl</code> to an endpoint you control, and with <code>notifyOnlyOnChanges</code> it posts only when something changed. n8n is useful for filtering on severity and formatting the Slack message.'],
+      ['How do I watch only the pricing page?', 'Add <code>"includePatterns": ["/pricing"]</code> to the input. Patterns can be globs, regular expressions or substrings of the URL.'],
+      ['How do I reset the baseline?', 'Run the task once with <code>resetBaseline</code> set to <code>true</code>, or use a new <code>stateStoreName</code>.'],
+      ['Is this affiliated with n8n or Slack?', 'No. owlabee is an independent developer on Apify Store, and the n8n node used here is Apify\'s own. Not affiliated with or endorsed by n8n, Slack, Apify or any site named.'],
+    ],
+    related: ['sitemap-change-monitor', 'shopify-price-changes-slack-make', 'product-recalls-email-n8n', 'pacer-docket-alerts-slack-zapier'],
+  },
 ];

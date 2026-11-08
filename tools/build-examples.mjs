@@ -4,6 +4,7 @@
 import { mkdirSync, writeFileSync, readFileSync, chmodSync } from 'node:fs';
 import { actors, storeUrl, apiUrl, mcpUrl } from './actors.mjs';
 import { BASE_URL } from './site-config.mjs';
+import { pages } from './site-content.mjs';
 
 const root = new URL('../', import.meta.url);
 const json = (v) => JSON.stringify(v, null, 2) + '\n';
@@ -99,6 +100,10 @@ function exampleReadme(a) {
   const guideLines = guides.length
     ? `\nGuide on the site: ${guides.map((p) => `[${BASE_URL}${p}/](${BASE_URL}${p}/)`).join(' and ')}\n`
     : '';
+  const recipes = pages.filter((p) => p.kind === 'integration' && p.actor === a.name);
+  const recipeLines = recipes.length
+    ? `\nNo-code recipe${recipes.length > 1 ? 's' : ''}: ${recipes.map((p) => `[${p.title}](${BASE_URL}${p.slug}/)`).join(' · ')}\n`
+    : '';
   const desktop = {
     mcpServers: {
       [`owlabee-${a.name}`]: {
@@ -111,7 +116,7 @@ function exampleReadme(a) {
   return `# ${a.title}
 
 Apify Store: [apify.com/owlabee/${a.name}](${storeUrl(a.name)}) · Pay per result; see the Store page for current pricing.
-${guideLines}
+${guideLines}${recipeLines}
 ${a.purpose}
 
 ## Inputs that matter

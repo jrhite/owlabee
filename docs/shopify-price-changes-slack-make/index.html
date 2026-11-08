@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competitor Shopify Price Changes to Slack with Make | owlabee</title>
+<meta name="description" content="Get a Slack message when a competitor's Shopify store changes a price, drops a product or restocks: a daily Apify task compares the public catalog and a Make scenario posts the changes.">
+<link rel="canonical" href="https://owlabee.com/shopify-price-changes-slack-make/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Competitor Shopify Price Changes to Slack with Make | owlabee">
+<meta property="og:description" content="Get a Slack message when a competitor's Shopify store changes a price, drops a product or restocks: a daily Apify task compares the public catalog and a Make scenario posts the changes.">
+<meta property="og:url" content="https://owlabee.com/shopify-price-changes-slack-make/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Competitor Shopify Price Changes to Slack with Make","description":"Get a Slack message when a competitor's Shopify store changes a price, drops a product or restocks: a daily Apify task compares the public catalog and a Make scenario posts the changes.","url":"https://owlabee.com/shopify-price-changes-slack-make/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/shopify-catalog-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/shopify-catalog-monitor","name":"Shopify Catalog Monitor & Price Tracker — Products Scraper","description":"Every product or variant of a public Shopify store from products.json, or price, stock and new or removed product changes","url":"https://apify.com/owlabee/shopify-catalog-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I put the changes in a sheet instead?","acceptedAnswer":{"@type":"Answer","text":"Yes. Replace the Slack module with Google Sheets → Add a Row and map the same fields. The permits-to-Sheets recipe shows that module."}},{"@type":"Question","name":"How do I start over with a fresh baseline?","acceptedAnswer":{"@type":"Answer","text":"Use a new stateStoreName in the task, or delete the key for that store in the named key-value store."}},{"@type":"Question","name":"Does it work for non-Shopify stores?","acceptedAnswer":{"@type":"Answer","text":"No. A store that is not on Shopify returns one NOT_SHOPIFY error item."}},{"@type":"Question","name":"Is this affiliated with Shopify, Make or Slack?","acceptedAnswer":{"@type":"Answer","text":"No. owlabee is an independent developer on Apify Store, and the Make app used here is Apify's own. Not affiliated with or endorsed by Shopify, Make, Slack, Apify or any store named; the store names are examples."}}]}]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Shopify price changes to Slack (Make)</nav>
+<p class="kicker">Make + Apify · Web and domains</p>
+<h1>Competitor Shopify Price Changes to Slack with Make</h1>
+<p class="lede">The Shopify Catalog Monitor reads a store's public product catalog and, in changes mode, compares it with the previous run and returns only what changed: prices, availability, new and removed products. Save it as an Apify task, schedule it daily, and a Make scenario built on Apify's official Make app posts each price change to Slack with the old and new price.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/shopify-catalog-monitor">Open the Actor on Apify Store</a>
+<p class="note">Shopify Catalog Monitor &amp; Price Tracker — Products Scraper. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#what">What you build</a><a href="#before">Before you start</a><a href="#input">The input</a><a href="#steps">Make steps</a><a href="#fields">Fields to map</a><a href="#limits">Costs and limits</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="what">
+<h2>What you build</h2>
+<p>A daily Apify schedule runs a saved task on one or more competitor stores. The first run stores a baseline of every variant; every later run returns change records. Make's <strong>Watch Task Runs</strong> trigger starts the scenario when a run finishes, <strong>Get Dataset Items</strong> reads the changes, a filter keeps price changes, and Slack gets one message each: product, variant, before and after price, and the percent change.</p>
+<p>Keep other <code>changeType</code> values in the filter to also hear about <code>new-product</code>, <code>removed-product</code> or <code>availability-changed</code>. The <a href="../shopify-price-tracker/">Shopify price tracker guide</a> lists every field.</p>
+</section>
+
+<section id="before">
+<h2>Before you start</h2>
+<ul>
+<li>An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. Set a maximum total charge in the task's run options to cap a run.</li>
+<li>A Make account with a Slack connection.</li>
+<li>The competitor stores' domains. Only public storefronts work: a password-protected or blocked store returns one error item, and the Actor does not work around it.</li>
+</ul>
+</section>
+
+<section id="input">
+<h2>Step 1: Save the input as an Apify task</h2>
+<p>Open the Actor in Apify Console from its Store page. On the <strong>Input</strong> tab, switch to the JSON editor, paste this input with your competitors' domains, and click <strong>Save as a new task</strong>:</p>
+<pre tabindex="0" aria-label="Actor input"><code>{
+  &quot;storeUrls&quot;: [
+    &quot;www.allbirds.com&quot;,
+    &quot;www.deathwishcoffee.com&quot;
+  ],
+  &quot;mode&quot;: &quot;changes&quot;,
+  &quot;granularity&quot;: &quot;variant&quot;,
+  &quot;maxProductsPerStore&quot;: 2000,
+  &quot;includeCollections&quot;: false,
+  &quot;stateStoreName&quot;: &quot;make-slack-competitor-prices&quot;
+}</code></pre>
+<p>The first <code>changes</code> run writes one <code>baseline</code> record per variant and is billed like a snapshot; the Store page has the rate. From the second run on, the dataset holds only <code>change</code> records, so later runs bill for what changed rather than for the whole catalog. Run the task once from Console now to write the baseline.</p>
+<p>Then open <strong>Schedules</strong> in Console, create a daily schedule, and add the task to it.</p>
+</section>
+
+<section id="steps">
+<h2>Step 2: Build the Make scenario</h2>
+<h3>1. Trigger: Apify, Watch Task Runs</h3>
+<p>Create a scenario and add <strong>Apify → Watch Task Runs</strong>. Create a connection (OAuth, or an API token from Console → Settings → API &amp; Integrations) and pick the task.</p>
+<h3>2. Search: Apify, Get Dataset Items</h3>
+<p>Add <strong>Apify → Get Dataset Items</strong> and map <strong>Dataset ID</strong> to the default dataset ID from the trigger.</p>
+<h3>3. Filter: price changes only</h3>
+<p>On the link to the next module, set up a filter with two conditions: <code>recordType</code> equals <code>change</code>, and <code>changeType</code> equals <code>price-changed</code>. This also drops the baseline records of the first run and any error items.</p>
+<h3>4. Action: Slack, Create a Message</h3>
+<p>Add <strong>Slack → Create a Message</strong>, pick the channel, and build the text from the mapped fields (insert each one from Make's mapping panel; the braces below stand for those fields), for example:</p>
+<pre tabindex="0" aria-label="Slack message template"><code>{storeDomain}: {productTitle} ({variantTitle})
+{before.price} → {after.price} ({percentChange}%)
+{productUrl}</code></pre>
+<p>Save the scenario and switch it on.</p>
+</section>
+
+<section id="fields">
+<h2>Fields to map</h2>
+<p>Each change record carries the current variant fields plus what changed:</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">Use it for</th></tr></thead>
+<tbody>
+<tr><td><code>recordType, changeType</code></td><td><code>change</code>, and one of <code>price-changed</code>, <code>availability-changed</code>, <code>new-product</code>, <code>removed-product</code>, <code>new-variant</code>, <code>removed-variant</code>, <code>title-changed</code></td></tr>
+<tr><td><code>storeDomain, productTitle, variantTitle</code></td><td>Which store and product</td></tr>
+<tr><td><code>before.price, after.price, percentChange</code></td><td>The old and new price (in the store's currency) and the change in percent</td></tr>
+<tr><td><code>before.compareAtPrice, after.compareAtPrice</code></td><td>The "was" price, to spot a sale starting or ending</td></tr>
+<tr><td><code>available</code></td><td>Whether the variant can be bought now</td></tr>
+<tr><td><code>productUrl</code></td><td>Link to the product page</td></tr>
+</tbody>
+</table></div>
+<p>All fields are described in the <a href="../shopify-price-tracker/">Shopify price tracker guide</a>.</p>
+</section>
+
+<section id="limits">
+<h2>Costs and limits</h2>
+<ul>
+<li>Apify bills the first run per baseline record and later runs per change, at the prices on the Store page. A daily check of a store whose prices rarely change costs little after the baseline.</li>
+<li>Make counts operations per module run; each change that passes the filter adds one Slack operation.</li>
+<li>The catalog is the store's public <code>products.json</code>: stock quantities appear only where the store publishes them.</li>
+</ul>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Can I put the changes in a sheet instead?</h3>
+<p>Yes. Replace the Slack module with Google Sheets → Add a Row and map the same fields. The <a href="../building-permits-google-sheets-make/">permits-to-Sheets recipe</a> shows that module.</p>
+<h3>How do I start over with a fresh baseline?</h3>
+<p>Use a new <code>stateStoreName</code> in the task, or delete the key for that store in the named key-value store.</p>
+<h3>Does it work for non-Shopify stores?</h3>
+<p>No. A store that is not on Shopify returns one <code>NOT_SHOPIFY</code> error item.</p>
+<h3>Is this affiliated with Shopify, Make or Slack?</h3>
+<p>No. owlabee is an independent developer on Apify Store, and the Make app used here is Apify's own. Not affiliated with or endorsed by Shopify, Make, Slack, Apify or any store named; the store names are examples.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Shopify Catalog Monitor &amp; Price Tracker — Products Scraper. Every product or variant of a public Shopify store from products.json, or price, stock and new or removed product changes.</p>
+<p><a class="button" href="https://apify.com/owlabee/shopify-catalog-monitor">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../shopify-price-tracker/">Shopify Price Tracker: Catalog and Changes as JSON</a></li>
+<li><a href="../website-changes-slack-n8n/">Website Change Alerts in Slack with n8n</a></li>
+<li><a href="../building-permits-google-sheets-make/">Building Permits to Google Sheets with Make</a></li>
+<li><a href="../pacer-docket-alerts-slack-zapier/">Get New PACER Docket Entries in Slack with Zapier</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

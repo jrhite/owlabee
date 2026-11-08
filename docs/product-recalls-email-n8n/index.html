@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FDA, NHTSA and CPSC Product Recalls to Email with n8n | owlabee</title>
+<meta name="description" content="E-mail yourself every new FDA, NHTSA or CPSC recall each morning with n8n and Apify's official n8n node: one workflow, a JSON input, and only recalls you have not seen before.">
+<link rel="canonical" href="https://owlabee.com/product-recalls-email-n8n/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="FDA, NHTSA and CPSC Product Recalls to Email with n8n | owlabee">
+<meta property="og:description" content="E-mail yourself every new FDA, NHTSA or CPSC recall each morning with n8n and Apify's official n8n node: one workflow, a JSON input, and only recalls you have not seen before.">
+<meta property="og:url" content="https://owlabee.com/product-recalls-email-n8n/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"FDA, NHTSA and CPSC Product Recalls to Email with n8n","description":"E-mail yourself every new FDA, NHTSA or CPSC recall each morning with n8n and Apify's official n8n node: one workflow, a JSON input, and only recalls you have not seen before.","url":"https://owlabee.com/product-recalls-email-n8n/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/product-recall-feed"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/product-recall-feed","name":"Product Recall Feed — FDA, NHTSA & CPSC Recalls API","description":"FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record","url":"https://apify.com/owlabee/product-recall-feed","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I trigger the workflow from an Apify schedule instead?","acceptedAnswer":{"@type":"Answer","text":"Yes. Save the input as a task with an Apify schedule and start the workflow with the Apify node's On new Apify event trigger (Resource to Watch: your task; Event Type: Succeeded), then read the dataset as in step 3. The website changes recipe uses that trigger."}},{"@type":"Question","name":"Does it need an openFDA key?","acceptedAnswer":{"@type":"Answer","text":"No. An optional fdaApiKey only raises openFDA's rate limits."}},{"@type":"Question","name":"Can I watch recalls for specific vehicles?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add vehicles, one entry per vehicle as \"make, model, year\" (for example \"Ford, F-150, 2021\"). Each lookup returns every NHTSA recall on that vehicle."}},{"@type":"Question","name":"Is this affiliated with n8n or the agencies?","acceptedAnswer":{"@type":"Answer","text":"No. owlabee is an independent developer on Apify Store, and the n8n node used here is Apify's own. Not affiliated with or endorsed by n8n, Google, Apify, the FDA, NHTSA or CPSC."}}]}]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Product recalls to email (n8n)</nav>
+<p class="kicker">n8n + Apify · Government and public records</p>
+<h1>FDA, NHTSA and CPSC Product Recalls to Email with n8n</h1>
+<p class="lede">The Product Recall Feed reads FDA, NHTSA and CPSC recalls (plus Health Canada, UK and EU feeds) into one record shape and, in monitor mode, returns only recalls it has not returned before. A four-node n8n workflow built on Apify's official n8n node runs it every morning and e-mails the new recalls. No task or schedule in Apify is needed: n8n does the scheduling.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/product-recall-feed">Open the Actor on Apify Store</a>
+<p class="note">Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#what">What you build</a><a href="#before">Before you start</a><a href="#input">The input</a><a href="#steps">n8n steps</a><a href="#fields">Fields to map</a><a href="#limits">Costs and limits</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="what">
+<h2>What you build</h2>
+<p>An n8n <strong>Schedule Trigger</strong> starts the workflow at 7:00 every day. The Apify node runs the Actor with the input below and waits for it, a second Apify node reads the run's dataset, a filter drops error items, and an e-mail node sends one message per new recall with the product, the hazard and the agency link.</p>
+<p>The input watches Class I FDA food and drug recalls plus CPSC consumer product recalls. Add a <code>vehicles</code> list for a fleet, or set <code>keyword</code> or <code>firm</code> to follow one product line or supplier. The <a href="../product-recalls-api/">product recalls guide</a> covers every source and field.</p>
+</section>
+
+<section id="before">
+<h2>Before you start</h2>
+<ul>
+<li>An Apify account and its API token (Console → Settings → API &amp; Integrations). The Actor is billed per result to that account; the Store page lists the current prices.</li>
+<li>An n8n instance, on n8n Cloud or self-hosted, with the Apify node installed. On self-hosted n8n: Settings → Community Nodes → Install, package <code>@apify/n8n-nodes-apify</code>. On n8n Cloud: search for Apify in the nodes panel and install it (the instance owner may need to allow verified community nodes in the Cloud Admin Panel first).</li>
+<li>An e-mail node with credentials: <strong>Gmail</strong>, or <strong>Send Email</strong> over SMTP.</li>
+</ul>
+</section>
+
+<section id="input">
+<h2>Step 1: The input</h2>
+<p>This JSON goes into the <strong>Custom input</strong> field of the Run an Actor node in step 2:</p>
+<pre tabindex="0" aria-label="Actor input"><code>{
+  &quot;agencies&quot;: [
+    &quot;fda-food&quot;,
+    &quot;fda-drug&quot;,
+    &quot;cpsc&quot;
+  ],
+  &quot;daysBack&quot;: 30,
+  &quot;fdaClassifications&quot;: [
+    &quot;Class I&quot;
+  ],
+  &quot;maxResultsPerSource&quot;: 100,
+  &quot;onlyNewSinceLastRun&quot;: true,
+  &quot;stateStoreName&quot;: &quot;n8n-email-recalls&quot;
+}</code></pre>
+<p>With <code>onlyNewSinceLastRun</code> the Actor remembers, in a key-value store named <code>n8n-email-recalls</code> in your Apify account, which recalls it has returned, and each run returns only the new ones. The first run returns everything in the 30-day window. The window is long on purpose: FDA lists a recall in its enforcement report only after classifying it, which can be weeks after the firm's announcement, and monitor mode keeps the long window from sending anything twice. <code>fdaClassifications</code> applies to the FDA sources only; CPSC recalls pass through.</p>
+</section>
+
+<section id="steps">
+<h2>Step 2: Build the n8n workflow</h2>
+<h3>1. Schedule Trigger</h3>
+<p>Create a workflow and add a <strong>Schedule Trigger</strong> that fires daily at the hour you want.</p>
+<h3>2. Apify: Run an Actor</h3>
+<p>Add the <strong>Apify</strong> node with the <strong>Run an Actor</strong> operation. Create a credential (<strong>Apify API</strong> with your token, or <strong>Apify OAuth2 API</strong> on n8n Cloud), choose the Product Recall Feed Actor (<code>owlabee/product-recall-feed</code>), paste the input above into <strong>Custom input</strong>, and set <strong>Wait for finish</strong> to true so the next node runs only after the run completes.</p>
+<h3>3. Apify: Get dataset items</h3>
+<p>Add a second <strong>Apify</strong> node with <strong>Get dataset items</strong> and set <strong>Dataset ID</strong> to the <code>defaultDatasetId</code> value from the Run an Actor output. It outputs one item per recall.</p>
+<h3>4. Filter</h3>
+<p>Add a <strong>Filter</strong> node that keeps items where <code>error</code> does not exist. An agency API that is down produces one error item such as <code>FETCH_FAILED</code> instead of failing the run.</p>
+<h3>5. E-mail: Gmail or Send Email</h3>
+<p>Add <strong>Gmail</strong> (send a message) or <strong>Send Email</strong>. n8n runs it once per recall. Use expressions for the subject and body, for example:</p>
+<pre tabindex="0" aria-label="E-mail template"><code>Subject: {{ $json.agency }} recall: {{ $json.title }}
+
+{{ $json.product }}
+Hazard: {{ $json.hazard }}
+Firm: {{ $json.firm }}
+Classification: {{ $json.classification }}
+{{ $json.url }}</code></pre>
+<p>For one digest e-mail instead, put an <strong>Aggregate</strong> node before it. Save the workflow and activate it.</p>
+</section>
+
+<section id="fields">
+<h2>Fields to map</h2>
+<p>Each dataset item is one recall in the shared record shape:</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">Use it for</th></tr></thead>
+<tbody>
+<tr><td><code>agency, recallId</code></td><td>FDA, NHTSA or CPSC and the agency's recall number</td></tr>
+<tr><td><code>date, title, product</code></td><td>When and what was recalled</td></tr>
+<tr><td><code>hazard</code></td><td>FDA reason for recall, NHTSA consequence summary, or CPSC hazards</td></tr>
+<tr><td><code>classification, severity</code></td><td>FDA Class I/II/III, NHTSA or CPSC remedy type; severity where it can be derived</td></tr>
+<tr><td><code>firm, distribution, quantity</code></td><td>Recalling firm and distribution as published</td></tr>
+<tr><td><code>url</code></td><td>The agency record</td></tr>
+</tbody>
+</table></div>
+<p>All fields are described in the <a href="../product-recalls-api/">Product recalls API guide</a>.</p>
+</section>
+
+<section id="limits">
+<h2>Costs and limits</h2>
+<ul>
+<li>Apify bills the Actor per recall record and per agency API request, at the prices on its Store page. In monitor mode later runs only return, and only charge per record for, new recalls.</li>
+<li>Apify's documentation lists OAuth2 credentials for n8n Cloud only; self-hosted n8n uses the API token credential.</li>
+<li>Agencies publish on their own schedules: openFDA enforcement reports update weekly, NHTSA and CPSC within days. The <a href="../product-recalls-api/">recalls guide</a> covers each source.</li>
+</ul>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Can I trigger the workflow from an Apify schedule instead?</h3>
+<p>Yes. Save the input as a task with an Apify schedule and start the workflow with the Apify node's <strong>On new Apify event</strong> trigger (Resource to Watch: your task; Event Type: Succeeded), then read the dataset as in step 3. The <a href="../website-changes-slack-n8n/">website changes recipe</a> uses that trigger.</p>
+<h3>Does it need an openFDA key?</h3>
+<p>No. An optional <code>fdaApiKey</code> only raises openFDA's rate limits.</p>
+<h3>Can I watch recalls for specific vehicles?</h3>
+<p>Yes. Add <code>vehicles</code>, one entry per vehicle as <code>"make, model, year"</code> (for example <code>"Ford, F-150, 2021"</code>). Each lookup returns every NHTSA recall on that vehicle.</p>
+<h3>Is this affiliated with n8n or the agencies?</h3>
+<p>No. owlabee is an independent developer on Apify Store, and the n8n node used here is Apify's own. Not affiliated with or endorsed by n8n, Google, Apify, the FDA, NHTSA or CPSC.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API. FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record.</p>
+<p><a class="button" href="https://apify.com/owlabee/product-recall-feed">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../product-recalls-api/">Product Recalls API: FDA, NHTSA and CPSC in One Feed</a></li>
+<li><a href="../website-changes-slack-n8n/">Website Change Alerts in Slack with n8n</a></li>
+<li><a href="../epa-echo-enforcement/">EPA ECHO Enforcement Cases by Company or Facility</a></li>
+<li><a href="../pacer-docket-alerts-slack-zapier/">Get New PACER Docket Entries in Slack with Zapier</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

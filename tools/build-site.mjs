@@ -8,7 +8,7 @@ import { BASE_URL, SITE_NAME, REPO_URL, STORE_PROFILE_URL, INDEXNOW_KEY, MAKER_N
 import { referenceSections } from './pacer-courts.mjs';
 import { mark, C } from './brand/render.mjs';
 
-const UPDATED = '2026-11-07';
+const UPDATED = '2026-11-08';
 const root = new URL('../', import.meta.url);
 const docs = new URL('docs/', root);
 
@@ -20,6 +20,12 @@ const ld = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).re
 const pre = (text, label) => `<pre tabindex="0"${label ? ` aria-label="${esc(label)}"` : ''}><code>${esc(text)}</code></pre>`;
 const actorByName = Object.fromEntries(actors.map((a) => [a.name, a]));
 const pageBySlug = Object.fromEntries(pages.map((p) => [p.slug, p]));
+
+// Integration pages (kind: 'integration') are recipes for Apify's own apps on Zapier, Make and n8n.
+// They get their own group on the index and are linked from the source guides of the same Actor.
+const INTEGRATIONS_GROUP = 'No-code automations: Zapier, Make and n8n';
+const recipesFor = (actor) => pages.filter((p) => p.kind === 'integration' && p.actor === actor);
+for (const p of pages) for (const s of p.related) if (!pageBySlug[s]) throw new Error(`${p.slug}: unknown related page ${s}`);
 
 // The brand mark (tools/brand/render.mjs), inlined so it costs no request. Its lines take
 // currentColor, so CSS turns it charcoal on cream and cream on charcoal (the reversed mark);
@@ -170,7 +176,62 @@ function guidePage(p) {
   const store = storeUrl(a.name);
   const examples = `${REPO_URL}/tree/main/examples/${a.name}`;
   const fullTitle = `${p.title} | ${SITE_NAME}`;
-  const middle = p.kind === 'reference'
+  const recipes = recipesFor(a.name).filter((r) => r.slug !== p.slug);
+  const noCode = recipes.length
+    ? `<h3>No code: Zapier, Make or n8n</h3>
+<p>Apify's official apps on these platforms can run this Actor and pass its results on. Step-by-step recipes: ${recipes.map((r) => `<a href="../${r.slug}/">${esc(r.title)}</a>`).join('; ')}.</p>
+`
+    : '';
+  const middle = p.kind === 'integration'
+    ? `<nav class="toc" aria-label="On this page">
+<a href="#what">What you build</a><a href="#before">Before you start</a><a href="#input">The input</a><a href="#steps">${esc(p.platform)} steps</a><a href="#fields">Fields to map</a><a href="#limits">Costs and limits</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="what">
+<h2>What you build</h2>
+${p.what.trim()}
+</section>
+
+<section id="before">
+<h2>Before you start</h2>
+<ul>
+${p.before.map((b) => `<li>${b}</li>`).join('\n')}
+</ul>
+</section>
+
+<section id="input">
+<h2>${esc(p.inputHeading)}</h2>
+<p>${p.inputIntro}</p>
+${pre(JSON.stringify(p.input, null, 2), 'Actor input')}
+${p.inputAfter.trim()}
+</section>
+
+<section id="steps">
+<h2>${esc(p.stepsHeading)}</h2>
+${p.steps.map(([h, t], i) => `<h3>${i + 1}. ${esc(h)}</h3>\n${t.trim().startsWith('<') ? t.trim() : `<p>${t}</p>`}`).join('\n')}
+</section>
+
+<section id="fields">
+<h2>Fields to map</h2>
+<p>${p.fieldsIntro}</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">Use it for</th></tr></thead>
+<tbody>
+${p.mapping.map(([f, d]) => `<tr><td><code>${esc(f)}</code></td><td>${d}</td></tr>`).join('\n')}
+</tbody>
+</table></div>
+<p>All fields are described in the <a href="../${a.page}/">${esc(pageBySlug[a.page].nav)} guide</a>.</p>
+</section>
+
+<section id="limits">
+<h2>Costs and limits</h2>
+<ul>
+${p.limits.map((l) => `<li>${l}</li>`).join('\n')}
+</ul>
+</section>
+
+`
+    : p.kind === 'reference'
     ? `<nav class="toc" aria-label="On this page">
 <a href="#source">Source and date</a><a href="#courts">District &amp; bankruptcy</a><a href="#appellate">Courts of appeals</a><a href="#national">National courts</a><a href="#by-status">By status</a><a href="#monitor">Monitor a court</a><a href="#faq">FAQ</a>
 </nav>
@@ -218,14 +279,14 @@ ${pre(mcpFor(a.name), 'MCP client configuration')}
 <p>Then ask, for example: <q>${esc(p.prompt)}</q></p>
 <h3>Python, Node.js and more examples</h3>
 <p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="${examples}">examples/${esc(a.name)}</a> on GitHub.</p>
-</section>
+${noCode}</section>
 
 `;
   const body = `
 <article>
 <div class="guide-head">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> ${esc(p.nav)}</nav>
-<p class="kicker">${esc(a.group)}</p>
+<p class="kicker">${esc(p.kind === 'integration' ? `${p.platform} + Apify · ${a.group}` : a.group)}</p>
 <h1>${esc(p.title)}</h1>
 <p class="lede">${p.lede}</p>
 <div class="cta">
@@ -289,8 +350,8 @@ function indexPage() {
   const description =
     'Guides to public data (permits, grants, SAM.gov, OSHA, EPA, recalls, PACER, licenses, DNS, sitemaps, Shopify, podcasts, Bluesky, job boards) and documents as JSON.';
   const groups = [...new Set(actors.map((a) => a.group))];
-  const groupOf = (p) => actorByName[p.actor].group;
-  const guideGroups = groups.filter((g) => pages.some((p) => groupOf(p) === g));
+  const groupOf = (p) => (p.kind === 'integration' ? INTEGRATIONS_GROUP : actorByName[p.actor].group);
+  const guideGroups = [...groups, INTEGRATIONS_GROUP].filter((g) => pages.some((p) => groupOf(p) === g));
   const body = `
 <section class="hero">
 <div class="wrap wrap-wide">
@@ -304,7 +365,7 @@ ${inlineMark('lockup-mark', 132)}
 <div class="hero-copy">
 <p class="kicker">Apify Actors · pay per result · ready for AI agents</p>
 <h1>Public data sources, <span class="hl">as clean JSON</span></h1>
-<p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl or from an AI agent.</p>
+<p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl, from an AI agent, or from Zapier, Make and n8n without code.</p>
 <p class="hero-cta"><a class="button" href="#guides">Browse the guides</a> <a class="button button-ghost" href="${STORE_PROFILE_URL}">See them on Apify Store</a></p>
 </div>
 </div>
@@ -366,6 +427,7 @@ ${actors
 <li>Create an Apify account and copy your API token from Console → Settings → API &amp; Integrations.</li>
 <li>Send the Actor's input as JSON to <code>https://api.apify.com/v2/acts/owlabee~&lt;actor&gt;/run-sync-get-dataset-items</code> with <code>Authorization: Bearer &lt;token&gt;</code>, or use the Python and Node.js clients.</li>
 <li>Or connect an AI agent to <code>https://mcp.apify.com/?tools=owlabee/&lt;actor&gt;</code>, Apify's hosted MCP server.</li>
+<li>Or, without code, run it from Zapier, Make or n8n with Apify's official app on each platform. The <a href="#guides">no-code automation guides</a> walk through a recipe on each.</li>
 </ol>
 <p>Each guide has a ready-to-run input. More examples, one folder per Actor, are on <a href="${REPO_URL}">GitHub</a>.</p>
 </div>
