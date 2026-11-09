@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bluesky Monitor: Posts, Hashtags and Followers as JSON | owlabee</title>
-<meta name="description" content="Search Bluesky posts by keyword or hashtag and read profiles, author feeds and follower lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.">
+<meta name="description" content="Search Bluesky posts by keyword or hashtag and read profiles, author feeds, follower lists, threads, quotes and lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.">
 <link rel="canonical" href="https://owlabee.com/bluesky-monitor/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="Bluesky Monitor: Posts, Hashtags and Followers as JSON | owlabee">
-<meta property="og:description" content="Search Bluesky posts by keyword or hashtag and read profiles, author feeds and follower lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.">
+<meta property="og:description" content="Search Bluesky posts by keyword or hashtag and read profiles, author feeds, follower lists, threads, quotes and lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.">
 <meta property="og:url" content="https://owlabee.com/bluesky-monitor/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://owlabee.com/og-image.png">
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Bluesky Monitor: Posts, Hashtags and Followers as JSON","description":"Search Bluesky posts by keyword or hashtag and read profiles, author feeds and follower lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.","url":"https://owlabee.com/bluesky-monitor/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/bluesky-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/bluesky-monitor","name":"Bluesky Monitor & Scraper — Posts, Keywords, Followers","description":"Bluesky posts by keyword or hashtag, profiles, author feeds and follower lists from the public AT Protocol API","url":"https://apify.com/owlabee/bluesky-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it need a Bluesky login or API key?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Bluesky's public, unauthenticated API endpoints."}},{"@type":"Question","name":"Can I search hashtags or exact phrases?","acceptedAnswer":{"@type":"Answer","text":"Yes. #opensource, \"exact phrase\" and operators such as from:handle, lang:en or domain:example.com are passed to Bluesky's search."}},{"@type":"Question","name":"How does new-since-last-run work?","acceptedAnswer":{"@type":"Answer","text":"Per mode and query, the Actor stores the keys of records it already emitted (the most recent 10,000) and stops paging when it reaches known records. Profiles are re-emitted only when something changed, listed in changedFields."}},{"@type":"Question","name":"Why do I get at most 100 posts for a search?","acceptedAnswer":{"@type":"Answer","text":"Post search from datacenter networks returns only the first page of results without a login. Split broad topics into several queries or narrow them with since."}},{"@type":"Question","name":"What happens with a bad handle?","acceptedAnswer":{"@type":"Answer","text":"It produces an error item such as PROFILE_NOT_FOUND and the rest of the run continues."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Bluesky Monitor: Posts, Hashtags and Followers as JSON","description":"Search Bluesky posts by keyword or hashtag and read profiles, author feeds, follower lists, threads, quotes and lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.","url":"https://owlabee.com/bluesky-monitor/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/bluesky-monitor"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/bluesky-monitor","name":"Bluesky Monitor & Scraper — Posts, Keywords, Followers","description":"Bluesky posts by keyword or hashtag, profiles, author feeds, follower lists, post threads and quotes, custom feeds and lists from the public AT Protocol API","url":"https://apify.com/owlabee/bluesky-monitor","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it need a Bluesky login or API key?","acceptedAnswer":{"@type":"Answer","text":"No. It uses Bluesky's public, unauthenticated API endpoints."}},{"@type":"Question","name":"Can I search hashtags or exact phrases?","acceptedAnswer":{"@type":"Answer","text":"Yes. #opensource, \"exact phrase\" and operators such as from:handle, lang:en or domain:example.com are passed to Bluesky's search."}},{"@type":"Question","name":"How does new-since-last-run work?","acceptedAnswer":{"@type":"Answer","text":"Per mode and query, the Actor stores the keys of records it already emitted (the most recent 10,000) and stops paging when it reaches known records. Profiles are re-emitted only when something changed, listed in changedFields."}},{"@type":"Question","name":"Why do I get at most 100 posts for a search?","acceptedAnswer":{"@type":"Answer","text":"Post search from datacenter networks returns only the first page of results without a login. Split broad topics into several queries or narrow them with since."}},{"@type":"Question","name":"What happens with a bad handle?","acceptedAnswer":{"@type":"Answer","text":"It produces an error item such as PROFILE_NOT_FOUND and the rest of the run continues."}}]}]}</script>
 <script>
 (function (c) {
   if (c.hosts.indexOf(location.hostname) === -1) return;
@@ -76,7 +76,7 @@
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Bluesky monitor</nav>
 <p class="kicker">Web and domains</p>
 <h1>Bluesky Monitor: Posts, Hashtags and Followers as JSON</h1>
-<p class="lede">Bluesky runs on the open AT Protocol, and its public API answers without a login. This Actor reads it in six modes (post search, profiles, author feeds, followers, following and account search) and writes every result as a flat record, so you can follow keywords, hashtags or accounts on a schedule.</p>
+<p class="lede">Bluesky runs on the open AT Protocol, and its public API answers without a login. This Actor reads it in six main modes (post search, profiles, author feeds, followers, following and account search), plus opt-in modes for a post's thread, quotes, likes and reposts and for custom feeds, lists and starter packs, and writes every result as a flat record, so you can follow keywords, hashtags or accounts on a schedule.</p>
 <div class="cta">
 <a class="button" href="https://apify.com/owlabee/bluesky-monitor">Open the Actor on Apify Store</a>
 <p class="note">Bluesky Monitor &amp; Scraper — Posts, Keywords, Followers. Pay per result; see the Store page for current pricing.</p>
@@ -97,6 +97,10 @@
 <tr><td><code>profiles</code></td><td>Handles, DIDs or profile URLs</td><td>Profiles with follower, following and post counts</td></tr>
 <tr><td><code>followers</code>, <code>following</code></td><td>Handles, DIDs or profile URLs</td><td>Follower or following lists</td></tr>
 <tr><td><code>searchActors</code></td><td>Search terms</td><td>Matching accounts</td></tr>
+<tr><td><code>postThread</code>, <code>quotes</code> (opt-in)</td><td>Post URLs</td><td>Every reply in the post's thread, or the posts quoting it</td></tr>
+<tr><td><code>likedBy</code>, <code>repostedBy</code> (opt-in)</td><td>Post URLs</td><td>The accounts that liked or reposted the post</td></tr>
+<tr><td><code>customFeed</code>, <code>listFeed</code> (opt-in)</td><td>Custom feed or list URLs</td><td>The feed's posts, or posts by the list's members</td></tr>
+<tr><td><code>listMembers</code>, <code>starterPack</code> (opt-in)</td><td>List or starter pack URLs</td><td>Member profiles with counts</td></tr>
 </tbody>
 </table>
 <h3>Limits worth knowing</h3>
@@ -217,7 +221,7 @@ curl -sS -X POST \
 
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
-<p>Bluesky Monitor &amp; Scraper — Posts, Keywords, Followers. Bluesky posts by keyword or hashtag, profiles, author feeds and follower lists from the public AT Protocol API.</p>
+<p>Bluesky Monitor &amp; Scraper — Posts, Keywords, Followers. Bluesky posts by keyword or hashtag, profiles, author feeds, follower lists, post threads and quotes, custom feeds and lists from the public AT Protocol API.</p>
 <p><a class="button" href="https://apify.com/owlabee/bluesky-monitor">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>

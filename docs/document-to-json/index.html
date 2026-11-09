@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PDF to JSON with Your Own Schema: Invoices, Forms, Quotes | owlabee</title>
-<meta name="description" content="Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.">
+<meta name="description" content="Extract PDF, Office, EPUB, HTML and scanned documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.">
 <link rel="canonical" href="https://owlabee.com/document-to-json/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="PDF to JSON with Your Own Schema: Invoices, Forms, Quotes | owlabee">
-<meta property="og:description" content="Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.">
+<meta property="og:description" content="Extract PDF, Office, EPUB, HTML and scanned documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.">
 <meta property="og:url" content="https://owlabee.com/document-to-json/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://owlabee.com/og-image.png">
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to JSON with Your Own Schema: Invoices, Forms, Quotes","description":"Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.","url":"https://owlabee.com/document-to-json/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pdf-to-json"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pdf-to-json","name":"PDF & Document to JSON Extractor (AI) — Invoices, Forms","description":"One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence","url":"https://apify.com/owlabee/pdf-to-json","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which extractor should I use?","acceptedAnswer":{"@type":"Answer","text":"Use rules for well-labeled documents with a known layout, bulk first passes, and data that must not go to a model. Use a model mode for fields that need reading comprehension or long, messy documents."}},{"@type":"Question","name":"How do I write the schema?","acceptedAnswer":{"@type":"Answer","text":"As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use format: \"date\" for ISO dates and enum for fixed choices."}},{"@type":"Question","name":"Is my Anthropic key safe in byok mode?","acceptedAnswer":{"@type":"Answer","text":"It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset."}},{"@type":"Question","name":"What happens if the model fails?","acceptedAnswer":{"@type":"Answer","text":"The document gets the rules extraction, marked rules-fallback with the reason, so a run does not fail because of the model."}},{"@type":"Question","name":"Does it work on scanned documents?","acceptedAnswer":{"@type":"Answer","text":"Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by kvs:// reference."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to JSON with Your Own Schema: Invoices, Forms, Quotes","description":"Extract PDF, Office, EPUB, HTML and scanned documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.","url":"https://owlabee.com/document-to-json/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pdf-to-json"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pdf-to-json","name":"PDF & Document to JSON Extractor (AI) — Invoices, Forms","description":"One JSON object per PDF, Office, EPUB, HTML or scanned document that matches the JSON Schema you supply, with per-field confidence","url":"https://apify.com/owlabee/pdf-to-json","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which extractor should I use?","acceptedAnswer":{"@type":"Answer","text":"Use rules for well-labeled documents with a known layout, bulk first passes, and data that must not go to a model. Use a model mode for fields that need reading comprehension or long, messy documents."}},{"@type":"Question","name":"How do I write the schema?","acceptedAnswer":{"@type":"Answer","text":"As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use format: \"date\" for ISO dates and enum for fixed choices."}},{"@type":"Question","name":"Is my Anthropic key safe in byok mode?","acceptedAnswer":{"@type":"Answer","text":"It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset."}},{"@type":"Question","name":"What happens if the model fails?","acceptedAnswer":{"@type":"Answer","text":"The document gets the rules extraction, marked rules-fallback with the reason, so a run does not fail because of the model."}},{"@type":"Question","name":"Does it work on scanned documents?","acceptedAnswer":{"@type":"Answer","text":"Yes, in rules mode: set ocr: true with extractor: \"rules\" and scanned pages and photos are read with the built-in OCR. For a model mode, run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by kvs:// reference."}}]}]}</script>
 <script>
 (function (c) {
   if (c.hosts.indexOf(location.hostname) === -1) return;
@@ -88,7 +88,7 @@
 
 <section id="source">
 <h2>The source and its limits</h2>
-<p>Documents are read from public URLs, your own key-value stores (<code>kvs://</code>) or <code>data:</code> URLs: <strong>PDF</strong> with a text layer, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> and <strong>plain text</strong>. They go through a layout engine first (headings, tables, lists and page markers), so table rows stay rows and labels stay next to their values.</p>
+<p>Documents are read from public URLs, your own key-value stores (<code>kvs://</code>) or <code>data:</code> URLs: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>PPTX</strong>, <strong>XLSX/XLSM</strong>, <strong>OpenDocument</strong> (ODT, ODP, ODS), <strong>EPUB</strong>, <strong>HTML</strong>, <strong>Markdown</strong>, <strong>plain text</strong>, <strong>CSV/TSV</strong> and <strong>images</strong> (PNG, JPEG, GIF, WebP, TIFF, BMP, AVIF). They go through a layout engine first (headings, tables, lists and page markers), so table rows stay rows and labels stay next to their values.</p>
 <p>The <code>schema</code> input is a JSON Schema (draft-07 subset): <code>type: object</code> at the top, field types string, number, integer, boolean, array and object, with <code>description</code>, <code>format</code> (date, date-time, email, uri) and <code>enum</code>. Nested objects and arrays of objects work; <code>$ref</code>, <code>oneOf</code> and <code>anyOf</code> do not.</p>
 <h3>Three extractors</h3>
 <ul>
@@ -99,7 +99,7 @@
 <p>In model modes, document text is sent to the Anthropic API only to produce the extraction. Each mode is priced differently; see the Store page.</p>
 <h3>Limits worth knowing</h3>
 <ul>
-<li>Scanned PDFs without a text layer return a <code>NO_TEXT</code> error item. Convert them first with the <a href="../pdf-to-markdown-rag/">PDF to Markdown Actor</a> with OCR on, save the Markdown to a key-value store, and pass the <code>kvs://</code> reference.</li>
+<li>Scanned PDFs and photos are read with the built-in OCR (21 bundled languages, up to three per run) when you set <code>ocr: true</code> with <code>extractor: "rules"</code>. OCR does not run in the model modes; for model extraction of a scan, convert it first with the <a href="../pdf-to-markdown-rag/">PDF to Markdown Actor</a> with OCR on, save the Markdown to a key-value store, and pass the <code>kvs://</code> reference. With OCR off, a scan returns a <code>NO_TEXT</code> error item.</li>
 <li>Schemas can be up to 6 levels deep and 200 fields. Model modes cut documents at <code>maxInputTokens</code> (at most 40,000, about 60 pages) and cap output at 4,000 tokens per document, so very long line-item tables may be cut.</li>
 <li>The rules extractor's date and amount parsing is tuned to English-language business documents.</li>
 <li>URLs that resolve to private or local network addresses are rejected.</li>
@@ -246,12 +246,12 @@ curl -sS -X POST \
 <h3>What happens if the model fails?</h3>
 <p>The document gets the rules extraction, marked <code>rules-fallback</code> with the reason, so a run does not fail because of the model.</p>
 <h3>Does it work on scanned documents?</h3>
-<p>Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by <code>kvs://</code> reference.</p>
+<p>Yes, in rules mode: set <code>ocr: true</code> with <code>extractor: "rules"</code> and scanned pages and photos are read with the built-in OCR. For a model mode, run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by <code>kvs://</code> reference.</p>
 </section>
 
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
-<p>PDF &amp; Document to JSON Extractor (AI) — Invoices, Forms. One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence.</p>
+<p>PDF &amp; Document to JSON Extractor (AI) — Invoices, Forms. One JSON object per PDF, Office, EPUB, HTML or scanned document that matches the JSON Schema you supply, with per-field confidence.</p>
 <p><a class="button" href="https://apify.com/owlabee/pdf-to-json">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>

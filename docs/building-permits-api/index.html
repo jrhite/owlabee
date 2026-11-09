@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Building Permits API: 61 US Open-Data Portals as JSON | owlabee</title>
-<meta name="description" content="Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
+<title>Building Permits API: 97 US and Canadian Jurisdictions as JSON | owlabee</title>
+<meta name="description" content="Get building permits from 120 open-data datasets in 97 US and Canadian cities, counties and states as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
 <link rel="canonical" href="https://owlabee.com/building-permits-api/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
-<meta property="og:title" content="Building Permits API: 61 US Open-Data Portals as JSON | owlabee">
-<meta property="og:description" content="Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
+<meta property="og:title" content="Building Permits API: 97 US and Canadian Jurisdictions as JSON | owlabee">
+<meta property="og:description" content="Get building permits from 120 open-data datasets in 97 US and Canadian cities, counties and states as one JSON schema: permit type, status, dates, cost, address and contractor where published.">
 <meta property="og:url" content="https://owlabee.com/building-permits-api/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://owlabee.com/og-image.png">
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Building Permits API: 61 US Open-Data Portals as JSON","description":"Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.","url":"https://owlabee.com/building-permits-api/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/building-permits-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/building-permits-scraper","name":"Building Permits Scraper — Roofing & Construction Leads","description":"Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor","url":"https://apify.com/owlabee/building-permits-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need an API key for the city portals?","acceptedAnswer":{"@type":"Answer","text":"No. The portals are public open-data APIs. A Socrata app token is optional and only raises Socrata's rate limits."}},{"@type":"Question","name":"Why is estimatedCost or the contractor empty?","acceptedAnswer":{"@type":"Answer","text":"The jurisdiction does not publish that column. Turn on includeRaw to see every field the portal does publish."}},{"@type":"Question","name":"My city runs Accela or EnerGov instead of an open-data portal.","acceptedAnswer":{"@type":"Answer","text":"Use the Accela Citizen Access and EnerGov permit scraper, which returns the same schema."}},{"@type":"Question","name":"What happens when a portal is down?","acceptedAnswer":{"@type":"Answer","text":"That jurisdiction produces one error item and the rest of the run continues."}},{"@type":"Question","name":"How do I control what a run costs?","acceptedAnswer":{"@type":"Answer","text":"Set maxResultsPerJurisdiction, keep the date window short, and set a maximum total charge for the run. In monitor mode you pay only for new permits."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Building Permits API: 97 US and Canadian Jurisdictions as JSON","description":"Get building permits from 120 open-data datasets in 97 US and Canadian cities, counties and states as one JSON schema: permit type, status, dates, cost, address and contractor where published.","url":"https://owlabee.com/building-permits-api/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/building-permits-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/building-permits-scraper","name":"Building Permits Scraper — Roofing & Construction Leads","description":"Building permits from 120 open-data datasets in 97 US and Canadian cities, counties and states: type, status, dates, cost, address, contractor","url":"https://apify.com/owlabee/building-permits-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need an API key for the city portals?","acceptedAnswer":{"@type":"Answer","text":"No. The portals are public open-data APIs. A Socrata app token is optional and only raises Socrata's rate limits."}},{"@type":"Question","name":"Why is estimatedCost or the contractor empty?","acceptedAnswer":{"@type":"Answer","text":"The jurisdiction does not publish that column. Turn on includeRaw to see every field the portal does publish."}},{"@type":"Question","name":"My city runs Accela or EnerGov instead of an open-data portal.","acceptedAnswer":{"@type":"Answer","text":"Use the Accela Citizen Access and EnerGov permit scraper, which returns the same schema."}},{"@type":"Question","name":"What happens when a portal is down?","acceptedAnswer":{"@type":"Answer","text":"That jurisdiction produces one error item and the rest of the run continues."}},{"@type":"Question","name":"How do I control what a run costs?","acceptedAnswer":{"@type":"Answer","text":"Set maxResultsPerJurisdiction, keep the date window short, and set a maximum total charge for the run. In monitor mode you pay only for new permits."}}]}]}</script>
 <script>
 (function (c) {
   if (c.hosts.indexOf(location.hostname) === -1) return;
@@ -75,8 +75,8 @@
 <div class="guide-head">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Building permits API</nav>
 <p class="kicker">Permits and property</p>
-<h1>Building Permits API: 61 US Open-Data Portals as JSON</h1>
-<p class="lede">Many US cities and counties publish their building permits on open-data portals, but each portal has its own API, column names and permit-type labels. The Building Permits Scraper reads 61 of them and returns every permit in one schema, with a link back to the source row.</p>
+<h1>Building Permits API: 97 US and Canadian Jurisdictions as JSON</h1>
+<p class="lede">Many US and Canadian cities and counties publish their building permits on open-data portals, but each portal has its own API, column names and permit-type labels. The Building Permits Scraper reads 120 datasets from 97 of them and returns every permit in one schema, with a link back to the source row.</p>
 <div class="cta">
 <a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open the Actor on Apify Store</a>
 <p class="note">Building Permits Scraper — Roofing &amp; Construction Leads. Pay per result; see the Store page for current pricing.</p>
@@ -88,7 +88,7 @@
 
 <section id="source">
 <h2>The source and its limits</h2>
-<p>The data comes from the jurisdictions' own open-data portals, which run on four kinds of software: <strong>Socrata</strong> (the SODA API), <strong>CKAN DataStore</strong>, <strong>ArcGIS REST</strong> and <strong>CARTO SQL</strong>. Examples are New York City (DOB NOW approved permits), Chicago, Los Angeles (LADBS), Seattle (SDCI), Austin, Philadelphia (L&amp;I, via CARTO), Boston (CKAN), Washington, DC and Miami-Dade County (ArcGIS), plus one state, New Jersey. Each entry was checked live, and the Actor calls the portal APIs directly over HTTPS: no browser, no login, no proxies.</p>
+<p>The data comes from the jurisdictions' own open-data portals, which run on four kinds of software: <strong>Socrata</strong> (the SODA API), <strong>CKAN DataStore</strong>, <strong>ArcGIS REST</strong> and <strong>CARTO SQL</strong>. Examples are New York City (DOB NOW approved permits), Chicago, Los Angeles (LADBS), Seattle (SDCI), Austin, Philadelphia (L&amp;I, via CARTO), Boston (CKAN), Washington, DC and Miami-Dade County (ArcGIS), plus one state, New Jersey, and 14 Canadian cities and regions such as Toronto, Montréal, Calgary, Edmonton, Winnipeg and Halifax. Where a city publishes separate electrical, HVAC, plumbing, roof or solar permit datasets, those are entries of their own. Each entry was checked live, and the Actor calls the portal APIs directly over HTTPS: no browser, no login, no proxies.</p>
 <p>For a place that is not in the list, Socrata auto-discovery sends one request to the public Socrata Discovery API, finds datasets whose name says "permit" for that place, maps their columns by name and crawls them. Records from a discovered dataset carry a <code>mappingConfidence</code> of <code>high</code>, <code>medium</code> or <code>low</code>. Discovery only searches Socrata portals.</p>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -107,7 +107,7 @@
 <tr><td><code>permitNumber, permitType, permitSubtype</code></td><td>The permit as the jurisdiction labels it</td></tr>
 <tr><td><code>workDescription, status</code></td><td>Free-text scope of work and the current status</td></tr>
 <tr><td><code>appliedDate, issuedDate, finalizedDate, expirationDate</code></td><td>ISO-8601 dates as published</td></tr>
-<tr><td><code>estimatedCost</code></td><td>Declared job value in USD, or null where the jurisdiction publishes none</td></tr>
+<tr><td><code>estimatedCost</code></td><td>Declared job value in the local currency (USD in the US, CAD in Canada, never converted), or null where the jurisdiction publishes none</td></tr>
 <tr><td><code>address, city, state, zip, parcelId, latitude, longitude</code></td><td>Location of the work</td></tr>
 <tr><td><code>contractorName, contractorLicense, contractorPhone</code></td><td>Only where the jurisdiction publishes them; nothing is inferred</td></tr>
 <tr><td><code>ownerName, applicantName</code></td><td>Where published</td></tr>
@@ -219,7 +219,7 @@ curl -sS -X POST \
 
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
-<p>Building Permits Scraper — Roofing &amp; Construction Leads. Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor.</p>
+<p>Building Permits Scraper — Roofing &amp; Construction Leads. Building permits from 120 open-data datasets in 97 US and Canadian cities, counties and states: type, status, dates, cost, address, contractor.</p>
 <p><a class="button" href="https://apify.com/owlabee/building-permits-scraper">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
@@ -228,7 +228,7 @@ curl -sS -X POST \
 <h2>Related guides</h2>
 <ul>
 <li><a href="../accela-energov-permits/">Accela Citizen Access and EnerGov Permit Data as JSON</a></li>
-<li><a href="../professional-license-verification/">Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI</a></li>
+<li><a href="../professional-license-verification/">Professional License Lookup: 7 States and the NPI Registry</a></li>
 </ul>
 </section>
 </article>

@@ -4,15 +4,16 @@ Apify Store: [apify.com/owlabee/podcast-rss-scraper](https://apify.com/owlabee/p
 
 Guide on the site: [https://owlabee.com/podcast-rss-feed-scraper/](https://owlabee.com/podcast-rss-feed-scraper/)
 
-Turns podcast RSS feeds, Apple Podcasts show links or search terms into show and episode records: title, publish date, duration, audio URL, chapters and Podcasting 2.0 transcript links, with optional transcript text. No browser and no login.
+Turns podcast RSS feeds, Apple Podcasts show links or search terms into show and episode records: title, publish date, duration, audio URL, chapters and Podcasting 2.0 transcript links, with optional transcript text and JSON chapters. Opt-in inputs read Apple's top-shows charts, fyyd.de and gpodder.net directory searches, and Podcast Index GUIDs (with your own free Podcast Index key). No browser and no login.
 
 ## Inputs that matter
 
 | Field | What it does |
 |---|---|
-| `feeds` | Required. RSS feed URLs, Apple Podcasts show URLs or search terms. |
+| `feeds` | Required. RSS feed URLs, Apple Podcasts show URLs, `search:` terms, `charts:us`, `fyyd:` or `gpodder:` terms, or `pi:` Podcast Index GUIDs. |
 | `maxEpisodesPerFeed` | Newest-first cap on episode records per feed. |
 | `fetchTranscripts` | Download each episode's transcript and attach the text. |
+| `fetchChapters` | Download each episode's Podcasting 2.0 JSON chapters file. |
 | `onlyNewSinceLastRun` | Return only episodes not seen before. |
 
 The full list of fields, defaults and limits is on the Store page under **Input**. [`input.json`](input.json) holds the Actor's own quick-start input, which every script here sends:

@@ -4,17 +4,17 @@ Apify Store: [apify.com/owlabee/osha-epa-inspections](https://apify.com/owlabee/
 
 Guide on the site: [https://owlabee.com/osha-inspections-by-company/](https://owlabee.com/osha-inspections-by-company/) and [https://owlabee.com/epa-echo-enforcement/](https://owlabee.com/epa-echo-enforcement/)
 
-Looks up OSHA inspections with their violations and penalties through the U.S. Department of Labor Data API, and EPA and state enforcement cases recorded in EPA ECHO, by company name, identifier, state or ZIP. Each inspection or case is one normalized record with a name-match confidence, plus an optional per-company summary record. OSHA needs your own free DOL API key; EPA needs none.
+Looks up OSHA inspections with their violations and penalties through the U.S. Department of Labor Data API, and EPA and state enforcement cases recorded in EPA ECHO, by company name, identifier, state or ZIP. Opt-in sources add MSHA mine inspections, Wage and Hour Division cases, OSHA fatality and catastrophe investigations and FMCSA carrier safety by USDOT number. Each inspection or case is one normalized record with a name-match confidence, plus an optional per-company summary record. OSHA, MSHA and Wage and Hour need your own free DOL API key; EPA and FMCSA need none.
 
 ## Inputs that matter
 
 | Field | What it does |
 |---|---|
 | `companies` | Company or establishment names. |
-| `identifiers` | `osha:<inspection number>` or `frs:<EPA FRS registry id>`. |
+| `identifiers` | `osha:<inspection number>`, `frs:<EPA FRS registry id>`, `msha:<mine id>`, `whd:<case id>` or `usdot:<USDOT number>`. |
 | `state` | Two-letter state code for the site or facility. |
-| `sources` | `osha`, `epa`. Default both. |
-| `dolApiKey` | Your free DOL Data API key. Required for OSHA only. |
+| `sources` | `osha`, `epa`, and opt-in `msha`, `whd`, `fmcsa`. Default `osha` and `epa`. |
+| `dolApiKey` | Your free DOL Data API key. Required for OSHA, MSHA and Wage and Hour. |
 
 The full list of fields, defaults and limits is on the Store page under **Input**. [`input.json`](input.json) holds the Actor's own quick-start input, which every script here sends:
 

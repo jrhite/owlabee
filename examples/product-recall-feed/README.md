@@ -6,13 +6,14 @@ Guide on the site: [https://owlabee.com/product-recalls-api/](https://owlabee.co
 
 No-code recipe: [FDA, NHTSA and CPSC Product Recalls to Email with n8n](https://owlabee.com/product-recalls-email-n8n/)
 
-Pulls US product recalls from openFDA enforcement reports, NHTSA and CPSC through their official public APIs and writes each recall in one normalized record: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Filter by date, keyword, firm, product type or vehicle; changes mode emits only recalls not seen before.
+Pulls US product recalls from openFDA enforcement reports, NHTSA and CPSC through their official public APIs, and on request recalls and alerts from Health Canada (with CFIA and Transport Canada), the UK (OPSS, MHRA, FSA) and the EU Safety Gate, and writes each recall in one normalized record: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Filter by date, keyword, firm, product type or vehicle; changes mode emits only recalls not seen before.
 
 ## Inputs that matter
 
 | Field | What it does |
 |---|---|
-| `agencies` | `fda-drug`, `fda-device`, `fda-food`, `nhtsa`, `cpsc`. Default all five. |
+| `agencies` | `fda-drug`, `fda-device`, `fda-food`, `nhtsa`, `cpsc` (the default five), plus opt-in feeds such as `health-canada`, `uk-fsa` or `eu-safety-gate`. |
+| `jurisdictions` | `US`, `CA`, `GB`, `EU`: adds every feed of each. |
 | `daysBack` | Window ending today (1 to 3650). Default 30. |
 | `keyword` | Product, description or hazard text. |
 | `vehicles` | NHTSA lookups, one per line: `make, model, year`. |

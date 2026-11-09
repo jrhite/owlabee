@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run License Verification API — TDLR, DBPR, DORA, WA DOH, NPI
+# Run License Verification API — 7 States + NPI Registry
 # (owlabee/license-verification-api) once and print its dataset items as JSON.
 # Needs curl 7.76+ and your Apify API token in APIFY_TOKEN.
 # Short runs only: the sync endpoint waits up to 300 seconds. Use python.py or node.mjs for longer runs.

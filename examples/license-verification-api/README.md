@@ -1,10 +1,10 @@
-# License Verification API — TDLR, DBPR, DORA, WA DOH, NPI
+# License Verification API — 7 States + NPI Registry
 
 Apify Store: [apify.com/owlabee/license-verification-api](https://apify.com/owlabee/license-verification-api) · Pay per result; see the Store page for current pricing.
 
 Guide on the site: [https://owlabee.com/professional-license-verification/](https://owlabee.com/professional-license-verification/)
 
-Looks up professional licenses by name or license number in five official public registries (Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the federal NPI Registry) and returns one normalized record per license with a normalized status, expiration date, a disciplinary-action flag and a link to the source. Verify mode adds `verified` and plain-English notes.
+Looks up professional licenses by license number, or by name within one board, in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the federal NPI Registry, plus six opt-in boards (Texas Board of Nursing, Texas Medical Board, Texas Real Estate Commission, Connecticut eLicense, New Jersey MyLicense and Michigan LARA), and returns one normalized record per license with a normalized status, expiration date and a link to the source; the board's disciplinary fields come on request. Verify mode adds `verified` and plain-English notes.
 
 ## Inputs that matter
 
@@ -13,7 +13,7 @@ Looks up professional licenses by name or license number in five official public
 | `queries` | One-line queries such as `TX:3365:Master Electrician`, `name:Jane Smith:FL` or `npi:1003000126`. |
 | `lookups` | Structured alternative to `queries`. |
 | `mode` | `lookup` or `verify`. |
-| `sources` | Subset of `TX_TDLR`, `FL_DBPR`, `CO_DORA`, `WA_DOH`, `NPI`. |
+| `sources` | `TX_TDLR`, `FL_DBPR`, `CO_DORA`, `WA_DOH`, `NPI` (the default), plus opt-in `TX_BON`, `TX_TMB`, `TX_TREC`, `CT_ELICENSE`, `NJ_MYLICENSE`, `MI_LARA`. |
 | `maxResultsPerQuery` | Cap per query across sources (1 to 200). |
 
 The full list of fields, defaults and limits is on the Store page under **Input**. [`input.json`](input.json) holds the Actor's own quick-start input, which every script here sends:

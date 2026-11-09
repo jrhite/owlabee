@@ -346,6 +346,48 @@
     }
   },
   {
+    "name": "tenders-scraper",
+    "title": "Tenders Scraper: EU TED, UK Find a Tender & AusTender",
+    "input": {
+      "keywords": [
+        "software"
+      ],
+      "sources": [
+        "ted"
+      ],
+      "noticeTypes": [
+        "bid"
+      ],
+      "postedWithinDays": 7,
+      "maxResults": 20
+    },
+    "sample": {
+      "source": "ted",
+      "recordType": "opportunity",
+      "opportunityId": "ted:779189-2026",
+      "title": "Slovakia – Financial transaction processing and clearing-house services – Akceptácia platobných kariet prostredníctvom internetu",
+      "agency": "Železničná spoločnosť Slovensko, a.s.",
+      "status": "open",
+      "postedDate": "2026-11-09",
+      "closeDate": "2026-12-08",
+      "url": "https://ted.europa.eu/en/notice/-/detail/779189-2026",
+      "country": "SK",
+      "noticeType": "bid",
+      "estimatedValue": 2794882,
+      "currency": "EUR",
+      "classifications": [
+        {
+          "scheme": "CPV",
+          "code": "66172000",
+          "description": null
+        }
+      ],
+      "sourceLicense": "CC-BY-4.0 (Commission Decision 2011/833/EU)",
+      "attribution": "© European Union, 1998–2026, data from TED (Decision 2011/833/EU)",
+      "fetchedAt": "2026-11-09T06:02:33.288Z"
+    }
+  },
+  {
     "name": "grants-gov-api",
     "title": "Grants.gov API & SAM.gov Scraper — Federal Grants Feed",
     "input": {
@@ -566,8 +608,35 @@
     }
   },
   {
+    "name": "ecommerce-scraper",
+    "title": "E-commerce Scraper & Price Monitor — WooCommerce, Magento",
+    "input": {
+      "storeUrls": [
+        "venia.magento.com",
+        "mercantile.wordpress.org"
+      ],
+      "mode": "snapshot",
+      "maxProductsPerStore": 10
+    },
+    "sample": {
+      "recordType": "snapshot",
+      "storeDomain": "mercantile.wordpress.org",
+      "platform": "woocommerce",
+      "source": "woocommerce-store-api",
+      "productTitle": "Blue WordPress Flannel Button-down",
+      "productUrl": "https://mercantile.wordpress.org/product/blue-wordpress-flannel-button-down/",
+      "variantTitle": "Adult Unisex MD",
+      "sku": "A8C-151-M",
+      "price": 48,
+      "compareAtPrice": null,
+      "currency": "USD",
+      "available": true,
+      "fetchedAt": "2026-11-09T06:04:35.773Z"
+    }
+  },
+  {
     "name": "license-verification-api",
-    "title": "License Verification API — TDLR, DBPR, DORA, WA DOH, NPI",
+    "title": "License Verification API — 7 States + NPI Registry",
     "input": {
       "queries": [
         "npi:1003000126",

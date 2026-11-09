@@ -6,13 +6,13 @@ Guide on the site: [https://owlabee.com/building-permits-api/](https://owlabee.c
 
 No-code recipe: [Building Permits to Google Sheets with Make](https://owlabee.com/building-permits-google-sheets-make/)
 
-Pulls building permits from official US open-data portals (Socrata, CKAN, ArcGIS and CARTO APIs) and writes them in one normalized schema: permit number, type, work description, status, dates, estimated cost, address with coordinates and parcel id, and the contractor's name, license and phone where the jurisdiction publishes them. Monitor mode emits only permits not seen on earlier runs.
+Pulls building permits from official US and Canadian open-data portals (Socrata, CKAN, ArcGIS and CARTO APIs), including dedicated electrical, HVAC, plumbing, roof and solar permit datasets, and writes them in one normalized schema: permit number, type, work description, status, dates, estimated cost, address with coordinates and parcel id, and the contractor's name, license and phone where the jurisdiction publishes them. Monitor mode emits only permits not seen on earlier runs.
 
 ## Inputs that matter
 
 | Field | What it does |
 |---|---|
-| `jurisdictions` | Required. Registry ids such as `chicago` or `seattle`, or `all`. |
+| `jurisdictions` | Required. Registry ids such as `chicago`, `seattle` or `toronto-on`, or a group such as `all`. |
 | `issuedWithinDays` | Only permits issued in the last N days (1 to 3650). |
 | `permitTypes` | Words matched against permit type and subtype, for example `roof` or `solar`. |
 | `maxResultsPerJurisdiction` | Newest-first cap per jurisdiction. |

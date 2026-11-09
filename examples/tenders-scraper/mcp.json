@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-tenders-scraper": {
+      "url": "https://mcp.apify.com/?tools=owlabee/tenders-scraper",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

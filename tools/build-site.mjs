@@ -368,7 +368,7 @@ ${inlineMark('lockup-mark', 132)}
 <div class="hero-copy">
 <p class="kicker">Apify Actors · pay per result · ready for AI agents</p>
 <h1>Public data sources, <span class="hl">as clean JSON</span></h1>
-<p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, federal APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl, from an AI agent, or from Zapier, Make and n8n without code.</p>
+<p class="lede">owlabee publishes ${actors.length} Actors on Apify Store that read public data sources (permit portals, government and procurement APIs, court feeds, license registries, DNS, sitemaps, storefronts, podcast feeds, Bluesky and job boards) or convert documents, and return normalized JSON. These guides explain each source, what you get from it, and how to run it with curl, from an AI agent, or from Zapier, Make and n8n without code.</p>
 <p class="hero-cta"><a class="button" href="#guides">Browse the guides</a> <a class="button button-ghost" href="${STORE_PROFILE_URL}">See them on Apify Store</a></p>
 </div>
 </div>
