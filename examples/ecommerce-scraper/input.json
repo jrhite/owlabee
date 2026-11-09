@@ -1,0 +1,8 @@
+{
+  "storeUrls": [
+    "venia.magento.com",
+    "mercantile.wordpress.org"
+  ],
+  "mode": "snapshot",
+  "maxProductsPerStore": 10
+}

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "owlabee-ecommerce-scraper": {
+      "url": "https://mcp.apify.com/?tools=owlabee/ecommerce-scraper",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    }
+  }
+}

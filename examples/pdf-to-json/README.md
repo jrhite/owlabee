@@ -4,7 +4,7 @@ Apify Store: [apify.com/owlabee/pdf-to-json](https://apify.com/owlabee/pdf-to-js
 
 Guide on the site: [https://owlabee.com/document-to-json/](https://owlabee.com/document-to-json/)
 
-Takes PDF, DOCX or HTML documents by URL plus your own JSON Schema and returns one JSON object per document that matches it, for invoices, contracts, forms and statements. The rules extractor needs no model; Claude extraction is available with your own Anthropic key or the hosted tiers.
+Takes PDF, DOCX, PPTX, XLSX, OpenDocument, EPUB, HTML, text or CSV documents by URL plus your own JSON Schema and returns one JSON object per document that matches it, for invoices, contracts, forms and statements. Scans and photos are read with the built-in OCR in rules mode. The rules extractor needs no model; Claude extraction is available with your own Anthropic key or the hosted tiers.
 
 ## Inputs that matter
 
@@ -13,6 +13,7 @@ Takes PDF, DOCX or HTML documents by URL plus your own JSON Schema and returns o
 | `urls` | Required. Document URLs. |
 | `schema` | Required. A JSON Schema (draft-07 subset) of the object you want per document. |
 | `extractor` | `rules` (no model), `byok` (your Anthropic key) or `hosted`. |
+| `ocr` | Read scans and photos with the built-in OCR (rules mode only). |
 | `includeMarkdown` | Also return the converted document text. |
 
 The full list of fields, defaults and limits is on the Store page under **Input**. [`input.json`](input.json) holds the Actor's own quick-start input, which every script here sends:

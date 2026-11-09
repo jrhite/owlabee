@@ -9,11 +9,11 @@ const data = JSON.parse(readFileSync(new URL('./actors.data.json', import.meta.u
 const meta = {
   'building-permits-scraper': {
     group: 'Permits and property',
-    returns: 'Building permits from 61 US city, county and state open-data portals: type, status, dates, cost, address, contractor',
+    returns: 'Building permits from 120 open-data datasets in 97 US and Canadian cities, counties and states: type, status, dates, cost, address, contractor',
     purpose:
-      'Pulls building permits from official US open-data portals (Socrata, CKAN, ArcGIS and CARTO APIs) and writes them in one normalized schema: permit number, type, work description, status, dates, estimated cost, address with coordinates and parcel id, and the contractor\'s name, license and phone where the jurisdiction publishes them. Monitor mode emits only permits not seen on earlier runs.',
+      'Pulls building permits from official US and Canadian open-data portals (Socrata, CKAN, ArcGIS and CARTO APIs), including dedicated electrical, HVAC, plumbing, roof and solar permit datasets, and writes them in one normalized schema: permit number, type, work description, status, dates, estimated cost, address with coordinates and parcel id, and the contractor\'s name, license and phone where the jurisdiction publishes them. Monitor mode emits only permits not seen on earlier runs.',
     keyInputs: [
-      ['jurisdictions', 'Required. Registry ids such as `chicago` or `seattle`, or `all`.'],
+      ['jurisdictions', 'Required. Registry ids such as `chicago`, `seattle` or `toronto-on`, or a group such as `all`.'],
       ['issuedWithinDays', 'Only permits issued in the last N days (1 to 3650).'],
       ['permitTypes', 'Words matched against permit type and subtype, for example `roof` or `solar`.'],
       ['maxResultsPerJurisdiction', 'Newest-first cap per jurisdiction.'],
@@ -62,6 +62,20 @@ const meta = {
       ['scorer', '`rules` (no model), `byok` (your Anthropic key) or `hosted`.'],
     ],
   },
+  'tenders-scraper': {
+    group: 'Government and public records',
+    returns: 'Public tenders and contract award notices from EU TED, UK Find a Tender, UK Contracts Finder and AusTender in one record shape',
+    purpose:
+      'Collects public tenders and contract award notices from four official open procurement APIs (EU TED, UK Find a Tender, UK Contracts Finder and AusTender) and returns them in one normalized record with the deadline, estimated value and currency, buyer, CPV or UNSPSC classifications, lots, notice and document links, and the source\'s license and attribution line. The record shape matches the Grants.gov API opportunity records. Monitor mode emits only new or updated notices. No API key, login or proxy.',
+    keyInputs: [
+      ['keywords', 'Required. Search terms; `*` returns every notice in the window.'],
+      ['sources', '`ted`, `findATender`, `contractsFinder`, `ausTender`. Default `ted`.'],
+      ['noticeTypes', '`bid`, `award`, `planning`. Default `bid`.'],
+      ['countries', 'Buyer countries for TED, as ISO codes.'],
+      ['cpvCodes', 'CPV codes or prefixes (TED and UK); `unspscCodes` for AusTender.'],
+      ['onlyNewSinceLastRun', 'Monitor mode: emit only notices that are new or changed.'],
+    ],
+  },
   'pacer-docket-monitor': {
     group: 'Government and public records',
     returns: 'New docket entries from the public PACER RSS feeds of federal district, bankruptcy, appellate and national courts, filtered by party, case or entry type',
@@ -78,25 +92,26 @@ const meta = {
   },
   'osha-epa-inspections': {
     group: 'Government and public records',
-    returns: 'OSHA inspections, violations and penalties (DOL Data API) and EPA ECHO enforcement cases by company, facility, state or ZIP',
+    returns: 'OSHA inspections, violations and penalties and EPA ECHO enforcement cases by company, facility, state or ZIP, plus opt-in MSHA, Wage and Hour, FMCSA and OSHA accident records',
     purpose:
-      'Looks up OSHA inspections with their violations and penalties through the U.S. Department of Labor Data API, and EPA and state enforcement cases recorded in EPA ECHO, by company name, identifier, state or ZIP. Each inspection or case is one normalized record with a name-match confidence, plus an optional per-company summary record. OSHA needs your own free DOL API key; EPA needs none.',
+      'Looks up OSHA inspections with their violations and penalties through the U.S. Department of Labor Data API, and EPA and state enforcement cases recorded in EPA ECHO, by company name, identifier, state or ZIP. Opt-in sources add MSHA mine inspections, Wage and Hour Division cases, OSHA fatality and catastrophe investigations and FMCSA carrier safety by USDOT number. Each inspection or case is one normalized record with a name-match confidence, plus an optional per-company summary record. OSHA, MSHA and Wage and Hour need your own free DOL API key; EPA and FMCSA need none.',
     keyInputs: [
       ['companies', 'Company or establishment names.'],
-      ['identifiers', '`osha:<inspection number>` or `frs:<EPA FRS registry id>`.'],
+      ['identifiers', '`osha:<inspection number>`, `frs:<EPA FRS registry id>`, `msha:<mine id>`, `whd:<case id>` or `usdot:<USDOT number>`.'],
       ['state', 'Two-letter state code for the site or facility.'],
-      ['sources', '`osha`, `epa`. Default both.'],
-      ['dolApiKey', 'Your free DOL Data API key. Required for OSHA only.'],
+      ['sources', '`osha`, `epa`, and opt-in `msha`, `whd`, `fmcsa`. Default `osha` and `epa`.'],
+      ['dolApiKey', 'Your free DOL Data API key. Required for OSHA, MSHA and Wage and Hour.'],
     ],
     pages: ['osha-inspections-by-company', 'epa-echo-enforcement'],
   },
   'product-recall-feed': {
     group: 'Government and public records',
-    returns: 'FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record',
+    returns: 'FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record, plus opt-in Canada, UK and EU recall feeds',
     purpose:
-      'Pulls US product recalls from openFDA enforcement reports, NHTSA and CPSC through their official public APIs and writes each recall in one normalized record: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Filter by date, keyword, firm, product type or vehicle; changes mode emits only recalls not seen before.',
+      'Pulls US product recalls from openFDA enforcement reports, NHTSA and CPSC through their official public APIs, and on request recalls and alerts from Health Canada (with CFIA and Transport Canada), the UK (OPSS, MHRA, FSA) and the EU Safety Gate, and writes each recall in one normalized record: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Filter by date, keyword, firm, product type or vehicle; changes mode emits only recalls not seen before.',
     keyInputs: [
-      ['agencies', '`fda-drug`, `fda-device`, `fda-food`, `nhtsa`, `cpsc`. Default all five.'],
+      ['agencies', '`fda-drug`, `fda-device`, `fda-food`, `nhtsa`, `cpsc` (the default five), plus opt-in feeds such as `health-canada`, `uk-fsa` or `eu-safety-gate`.'],
+      ['jurisdictions', '`US`, `CA`, `GB`, `EU`: adds every feed of each.'],
       ['daysBack', 'Window ending today (1 to 3650). Default 30.'],
       ['keyword', 'Product, description or hazard text.'],
       ['vehicles', 'NHTSA lookups, one per line: `make, model, year`.'],
@@ -106,14 +121,14 @@ const meta = {
   },
   'license-verification-api': {
     group: 'Government and public records',
-    returns: 'Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry',
+    returns: 'Professional license records by number, or by name within one board, from 10 boards in 7 states (TX, FL, CO, WA, CT, NJ, MI) and the NPI Registry',
     purpose:
-      'Looks up professional licenses by name or license number in five official public registries (Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the federal NPI Registry) and returns one normalized record per license with a normalized status, expiration date, a disciplinary-action flag and a link to the source. Verify mode adds `verified` and plain-English notes.',
+      'Looks up professional licenses by license number, or by name within one board, in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the federal NPI Registry, plus six opt-in boards (Texas Board of Nursing, Texas Medical Board, Texas Real Estate Commission, Connecticut eLicense, New Jersey MyLicense and Michigan LARA), and returns one normalized record per license with a normalized status, expiration date and a link to the source; the board\'s disciplinary fields come on request. Verify mode adds `verified` and plain-English notes.',
     keyInputs: [
       ['queries', 'One-line queries such as `TX:3365:Master Electrician`, `name:Jane Smith:FL` or `npi:1003000126`.'],
       ['lookups', 'Structured alternative to `queries`.'],
       ['mode', '`lookup` or `verify`.'],
-      ['sources', 'Subset of `TX_TDLR`, `FL_DBPR`, `CO_DORA`, `WA_DOH`, `NPI`.'],
+      ['sources', '`TX_TDLR`, `FL_DBPR`, `CO_DORA`, `WA_DOH`, `NPI` (the default), plus opt-in `TX_BON`, `TX_TMB`, `TX_TREC`, `CT_ELICENSE`, `NJ_MYLICENSE`, `MI_LARA`.'],
       ['maxResultsPerQuery', 'Cap per query across sources (1 to 200).'],
     ],
     page: 'professional-license-verification',
@@ -158,13 +173,26 @@ const meta = {
     ],
     page: 'shopify-price-tracker',
   },
+  'ecommerce-scraper': {
+    group: 'Web and domains',
+    returns: 'Products and variants of WooCommerce, Magento, Shopify and other stores (schema.org Product JSON-LD), or price, stock and new or removed product changes',
+    purpose:
+      'Detects a store\'s platform and reads its catalog the cheapest public way: the WooCommerce Store API, Magento GraphQL, Shopify `products.json`, or, on Squarespace, BigCommerce, Wix and custom stores, the schema.org Product JSON-LD on each product page. Every product or variant becomes one record with price, compare-at price, currency, availability, SKU and image, in the Shopify Catalog Monitor\'s shape. Changes mode keeps the previous snapshot and writes only price, stock, title and new or removed product changes. No browser, proxy, login or API key.',
+    keyInputs: [
+      ['storeUrls', 'Store domains or any store URL (or use `productUrls`).'],
+      ['productUrls', 'Product pages to watch on any platform, read from their JSON-LD.'],
+      ['mode', '`snapshot` (full catalog) or `changes` (only changes since the last run).'],
+      ['platform', '`auto` (default), `woocommerce`, `magento`, `shopify` or `jsonld`.'],
+      ['maxProductsPerStore', 'Cap per store (default 1000).'],
+    ],
+  },
   'bluesky-monitor': {
     group: 'Web and domains',
-    returns: 'Bluesky posts by keyword or hashtag, profiles, author feeds and follower lists from the public AT Protocol API',
+    returns: 'Bluesky posts by keyword or hashtag, profiles, author feeds, follower lists, post threads and quotes, custom feeds and lists from the public AT Protocol API',
     purpose:
-      'Searches Bluesky posts by keyword or hashtag and reads profiles, author feeds, followers and following lists from the public AT Protocol API, as flat JSON records. With "Only new since last run" a schedule emits only posts or followers that appeared since the previous run.',
+      'Searches Bluesky posts by keyword or hashtag and reads profiles, author feeds, followers and following lists from the public AT Protocol API, as flat JSON records. Opt-in modes read a post\'s thread, quotes, likes and reposts, the posts of a custom feed or list, and the members of a list or starter pack. With "Only new since last run" a schedule emits only posts or followers that appeared since the previous run.',
     keyInputs: [
-      ['mode', 'Required. `searchPosts`, `profiles`, `authorFeed`, `followers`, `following` or `searchActors`.'],
+      ['mode', 'Required. `searchPosts`, `profiles`, `authorFeed`, `followers`, `following` or `searchActors`; opt-in `postThread`, `quotes`, `likedBy`, `repostedBy`, `customFeed`, `listFeed`, `listMembers`, `starterPack`.'],
       ['queries', 'Required. Search terms, hashtags or handles, depending on the mode.'],
       ['maxResults', 'Cap on dataset items across all queries.'],
       ['sort', '`latest` or `top` (searchPosts only).'],
@@ -186,13 +214,14 @@ const meta = {
   },
   'podcast-rss-scraper': {
     group: 'Documents and media',
-    returns: 'Show and episode records from podcast RSS feeds, Apple Podcasts links or search terms, with Podcasting 2.0 transcripts',
+    returns: 'Show and episode records from podcast RSS feeds, Apple Podcasts links, Apple charts, directory searches or Podcast Index GUIDs, with Podcasting 2.0 transcripts and chapters',
     purpose:
-      'Turns podcast RSS feeds, Apple Podcasts show links or search terms into show and episode records: title, publish date, duration, audio URL, chapters and Podcasting 2.0 transcript links, with optional transcript text. No browser and no login.',
+      'Turns podcast RSS feeds, Apple Podcasts show links or search terms into show and episode records: title, publish date, duration, audio URL, chapters and Podcasting 2.0 transcript links, with optional transcript text and JSON chapters. Opt-in inputs read Apple\'s top-shows charts, fyyd.de and gpodder.net directory searches, and Podcast Index GUIDs (with your own free Podcast Index key). No browser and no login.',
     keyInputs: [
-      ['feeds', 'Required. RSS feed URLs, Apple Podcasts show URLs or search terms.'],
+      ['feeds', 'Required. RSS feed URLs, Apple Podcasts show URLs, `search:` terms, `charts:us`, `fyyd:` or `gpodder:` terms, or `pi:` Podcast Index GUIDs.'],
       ['maxEpisodesPerFeed', 'Newest-first cap on episode records per feed.'],
       ['fetchTranscripts', 'Download each episode\'s transcript and attach the text.'],
+      ['fetchChapters', 'Download each episode\'s Podcasting 2.0 JSON chapters file.'],
       ['onlyNewSinceLastRun', 'Return only episodes not seen before.'],
     ],
     page: 'podcast-rss-feed-scraper',
@@ -212,26 +241,28 @@ const meta = {
   },
   'pdf-to-markdown': {
     group: 'Documents and media',
-    returns: 'Clean Markdown from PDF, DOCX, HTML and text URLs, with optional heading-aware RAG chunks and OCR for scanned pages',
+    returns: 'Clean Markdown from PDF, Office, OpenDocument, EPUB, HTML, text, CSV and image URLs, with optional RAG chunks, OCR in 21 languages, table records and images',
     purpose:
-      'Converts PDF, DOCX, HTML, Markdown and text documents from URLs into Markdown with headings, lists, tables and links, plus metadata. Optional heading-aware chunks are ready for embedding, and optional OCR handles scanned pages. No browser and no external API.',
+      'Converts PDF, DOCX, PPTX, XLSX, OpenDocument, EPUB, HTML, Markdown, text, CSV and image documents from URLs into Markdown with headings, lists, tables and links, plus metadata. Optional heading-aware chunks are ready for embedding, optional OCR in 21 languages handles scans and photos, and optional table records (with CSV files) and embedded images come on request. No browser and no external API.',
     keyInputs: [
       ['urls', 'Required. Document URLs.'],
       ['chunk', 'Also emit heading-aware chunk records.'],
-      ['ocr', 'Run OCR on pages without extractable text.'],
+      ['ocr', 'Run OCR on pages without extractable text and on image inputs.'],
+      ['extractTables', 'Also emit one table record and one CSV file per table.'],
       ['saveToKeyValueStore', 'Also save each document as a `.md` file.'],
     ],
     page: 'pdf-to-markdown-rag',
   },
   'pdf-to-json': {
     group: 'Documents and media',
-    returns: 'One JSON object per PDF, DOCX or HTML document that matches the JSON Schema you supply, with per-field confidence',
+    returns: 'One JSON object per PDF, Office, EPUB, HTML or scanned document that matches the JSON Schema you supply, with per-field confidence',
     purpose:
-      'Takes PDF, DOCX or HTML documents by URL plus your own JSON Schema and returns one JSON object per document that matches it, for invoices, contracts, forms and statements. The rules extractor needs no model; Claude extraction is available with your own Anthropic key or the hosted tiers.',
+      'Takes PDF, DOCX, PPTX, XLSX, OpenDocument, EPUB, HTML, text or CSV documents by URL plus your own JSON Schema and returns one JSON object per document that matches it, for invoices, contracts, forms and statements. Scans and photos are read with the built-in OCR in rules mode. The rules extractor needs no model; Claude extraction is available with your own Anthropic key or the hosted tiers.',
     keyInputs: [
       ['urls', 'Required. Document URLs.'],
       ['schema', 'Required. A JSON Schema (draft-07 subset) of the object you want per document.'],
       ['extractor', '`rules` (no model), `byok` (your Anthropic key) or `hosted`.'],
+      ['ocr', 'Read scans and photos with the built-in OCR (rules mode only).'],
       ['includeMarkdown', 'Also return the converted document text.'],
     ],
     page: 'document-to-json',

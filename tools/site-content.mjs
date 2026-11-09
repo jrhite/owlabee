@@ -8,14 +8,14 @@ export const pages = [
   {
     slug: 'building-permits-api',
     actor: 'building-permits-scraper',
-    title: 'Building Permits API: 61 US Open-Data Portals as JSON',
+    title: 'Building Permits API: 97 US and Canadian Jurisdictions as JSON',
     nav: 'Building permits API',
     description:
-      'Get building permits from 61 US city, county and state open-data portals as one JSON schema: permit type, status, dates, cost, address and contractor where published.',
+      'Get building permits from 120 open-data datasets in 97 US and Canadian cities, counties and states as one JSON schema: permit type, status, dates, cost, address and contractor where published.',
     lede:
-      'Many US cities and counties publish their building permits on open-data portals, but each portal has its own API, column names and permit-type labels. The Building Permits Scraper reads 61 of them and returns every permit in one schema, with a link back to the source row.',
+      'Many US and Canadian cities and counties publish their building permits on open-data portals, but each portal has its own API, column names and permit-type labels. The Building Permits Scraper reads 120 datasets from 97 of them and returns every permit in one schema, with a link back to the source row.',
     source: `
-<p>The data comes from the jurisdictions' own open-data portals, which run on four kinds of software: <strong>Socrata</strong> (the SODA API), <strong>CKAN DataStore</strong>, <strong>ArcGIS REST</strong> and <strong>CARTO SQL</strong>. Examples are New York City (DOB NOW approved permits), Chicago, Los Angeles (LADBS), Seattle (SDCI), Austin, Philadelphia (L&amp;I, via CARTO), Boston (CKAN), Washington, DC and Miami-Dade County (ArcGIS), plus one state, New Jersey. Each entry was checked live, and the Actor calls the portal APIs directly over HTTPS: no browser, no login, no proxies.</p>
+<p>The data comes from the jurisdictions' own open-data portals, which run on four kinds of software: <strong>Socrata</strong> (the SODA API), <strong>CKAN DataStore</strong>, <strong>ArcGIS REST</strong> and <strong>CARTO SQL</strong>. Examples are New York City (DOB NOW approved permits), Chicago, Los Angeles (LADBS), Seattle (SDCI), Austin, Philadelphia (L&amp;I, via CARTO), Boston (CKAN), Washington, DC and Miami-Dade County (ArcGIS), plus one state, New Jersey, and 14 Canadian cities and regions such as Toronto, Montréal, Calgary, Edmonton, Winnipeg and Halifax. Where a city publishes separate electrical, HVAC, plumbing, roof or solar permit datasets, those are entries of their own. Each entry was checked live, and the Actor calls the portal APIs directly over HTTPS: no browser, no login, no proxies.</p>
 <p>For a place that is not in the list, Socrata auto-discovery sends one request to the public Socrata Discovery API, finds datasets whose name says "permit" for that place, maps their columns by name and crawls them. Records from a discovered dataset carry a <code>mappingConfidence</code> of <code>high</code>, <code>medium</code> or <code>low</code>. Discovery only searches Socrata portals.</p>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -28,7 +28,7 @@ export const pages = [
       ['permitNumber, permitType, permitSubtype', 'The permit as the jurisdiction labels it'],
       ['workDescription, status', 'Free-text scope of work and the current status'],
       ['appliedDate, issuedDate, finalizedDate, expirationDate', 'ISO-8601 dates as published'],
-      ['estimatedCost', 'Declared job value in USD, or null where the jurisdiction publishes none'],
+      ['estimatedCost', 'Declared job value in the local currency (USD in the US, CAD in Canada, never converted), or null where the jurisdiction publishes none'],
       ['address, city, state, zip, parcelId, latitude, longitude', 'Location of the work'],
       ['contractorName, contractorLicense, contractorPhone', 'Only where the jurisdiction publishes them; nothing is inferred'],
       ['ownerName, applicantName', 'Where published'],
@@ -374,7 +374,8 @@ export const pages = [
       'OSHA inspection and citation data is published by the U.S. Department of Labor through its Data API. This Actor looks up inspections by company name or inspection number and returns one record per inspection with its violations and penalties, graded by how well the establishment name matched.',
     source: `
 <p>The data comes from the <strong>DOL Data API v4</strong> (<code>apiprod.dol.gov</code>), datasets <code>OSHA/inspection</code> and <code>OSHA/violation</code>. It includes federal OSHA and State Plan inspections as DOL publishes them.</p>
-<p><strong>The DOL API needs a key.</strong> Keys are free: sign in at <a href="https://dataportal.dol.gov">dataportal.dol.gov</a>, open your account's API keys page, and pass the key as <code>dolApiKey</code>. It is stored as an encrypted secret and only sent to <code>apiprod.dol.gov</code>. Without a key the Actor still runs its EPA source (see <a href="../epa-echo-enforcement/">EPA ECHO enforcement</a>) and writes one <code>DOL_API_KEY_MISSING</code> item for OSHA.</p>
+<p><strong>The DOL API needs a key.</strong> Keys are free: sign in at <a href="https://dataportal.dol.gov">dataportal.dol.gov</a>, open your account's API keys page, and pass the key as <code>dolApiKey</code>. It is stored as an encrypted secret and only sent to <code>apiprod.dol.gov</code>. Without a key the Actor still runs its EPA source (see <a href="../epa-echo-enforcement/">EPA ECHO enforcement</a>) and writes one <code>DOL_API_KEY_MISSING</code> item for each DOL source.</p>
+<p><strong>Opt-in sources.</strong> The default is still <code>sources: ["osha", "epa"]</code>. Add <code>msha</code> for Mine Safety and Health Administration inspections with their citations and assessed penalties, <code>whd</code> for Wage and Hour Division compliance actions since FY 2005 (back wages, employees owed, civil money penalties), or <code>fmcsa</code> for a motor carrier's profile and roadside inspections, looked up by <code>usdot:&lt;USDOT number&gt;</code> only. <code>includeAccidents</code> adds OSHA fatality and catastrophe investigations linked to the inspections found, with personal names redacted from the abstract. MSHA and WHD use the same DOL key; FMCSA uses U.S. DOT open data and needs none.</p>
 <h3>How name matching works</h3>
 <p>Agencies record establishment names, not company ids, so every record carries <code>matchConfidence</code> and <code>matchBasis</code>:</p>
 <ul>
@@ -447,6 +448,7 @@ export const pages = [
       ['Why did I get records for a different company?', 'Agencies record establishment names. Check <code>matchConfidence</code> and <code>matchBasis</code>, raise <code>minMatchConfidence</code> to <code>high</code>, add a state or ZIP, or look up exact identifiers.'],
       ['Are State Plan inspections included?', 'Yes, as DOL publishes them in the same datasets.'],
       ['Is this a rating of the company?', 'No. Records describe what the agency published, nothing more.'],
+      ['Does it cover mines, wage cases or trucking companies?', 'Yes, as opt-in sources: <code>msha</code> (mine inspections), <code>whd</code> (Wage and Hour cases) and <code>fmcsa</code> (carrier safety, by <code>usdot:</code> number only). They are off unless you add them, so a saved input returns the same records at the same cost.'],
       ['Can I get EPA cases in the same run?', 'Yes. Add <code>epa</code> to <code>sources</code>. The per-company summary then counts records and penalties by agency.'],
     ],
     related: ['epa-echo-enforcement', 'professional-license-verification'],
@@ -523,7 +525,7 @@ export const pages = [
     inputCaption: 'EPA ECHO cases for facilities matching "Tesla" in California (the Actor\'s own quick-start input):',
     prompt: 'Which EPA enforcement cases are on record for Tesla facilities in California, and under which law was each filed?',
     faq: [
-      ['Does EPA ECHO need an API key?', 'No. ECHO web services are public. Only the OSHA source needs a key.'],
+      ['Does EPA ECHO need an API key?', 'No. ECHO web services are public. Only the DOL sources (OSHA and the opt-in MSHA and Wage and Hour sources) need a key.'],
       ['Why does it search facilities first?', 'ECHO\'s company-name filter for cases is not usable, so cases are found through the facilities that match the name.'],
       ['Are state cases included?', 'Cases that states report to EPA are in ECHO and are returned (the lead agency is in the raw case data). State agencies\' own databases are not queried.'],
       ['How do I avoid records for similarly named companies?', 'Add a state or ZIP, raise <code>minMatchConfidence</code>, or look up facilities by FRS id.'],
@@ -538,9 +540,9 @@ export const pages = [
     title: 'Product Recalls API: FDA, NHTSA and CPSC in One Feed',
     nav: 'Product recalls API',
     description:
-      'US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, with a new-recalls-only mode.',
+      'US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, plus opt-in Canada, UK and EU feeds, with a new-recalls-only mode.',
     lede:
-      'Three federal agencies publish US recalls, each with its own API and field names. This Actor reads all three and writes each recall as one record with the same fields: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice.',
+      'Three federal agencies publish US recalls, each with its own API and field names. This Actor reads all three and writes each recall as one record with the same fields: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Opt-in feeds add Canada, the UK and the EU Safety Gate in the same record.',
     source: `
 <table>
 <thead><tr><th>Source id</th><th>Agency feed</th><th>Official API</th><th>Freshness</th></tr></thead>
@@ -551,8 +553,16 @@ export const pages = [
 <tr><td><code>nhtsa</code></td><td>NHTSA recall campaigns: vehicles, equipment, tires, child seats</td><td>DOT open data <code>datahub.transportation.gov</code>, dataset <code>6axg-epim</code></td><td>Daily</td></tr>
 <tr><td><code>vehicles</code> input</td><td>NHTSA recalls for one make, model and year</td><td><code>api.nhtsa.gov/recalls/recallsByVehicle</code></td><td>Daily</td></tr>
 <tr><td><code>cpsc</code></td><td>CPSC consumer product recalls</td><td><code>www.saferproducts.gov/RestWebServices/Recall</code></td><td>Daily</td></tr>
+<tr><td><code>fda-device-recall</code> (opt-in)</td><td>FDA medical device recall database</td><td><code>api.fda.gov/device/recall.json</code> (openFDA)</td><td>Weekly</td></tr>
+<tr><td><code>fda-rss</code> (opt-in)</td><td>FDA recall press releases</td><td>FDA recalls RSS feed on fda.gov</td><td>Daily; newest 20</td></tr>
+<tr><td><code>health-canada</code> (opt-in)</td><td>Health Canada recalls and safety alerts, including CFIA and Transport Canada</td><td>Open data JSON on <code>recalls-rappels.canada.ca</code></td><td>Daily</td></tr>
+<tr><td><code>uk-opss</code> (opt-in)</td><td>UK Office for Product Safety and Standards reports and recalls</td><td>GOV.UK Search API</td><td>Daily</td></tr>
+<tr><td><code>uk-mhra</code> (opt-in)</td><td>UK MHRA drug and medical device alerts</td><td>GOV.UK Search API</td><td>Daily</td></tr>
+<tr><td><code>uk-fsa</code> (opt-in)</td><td>UK Food Standards Agency allergy alerts and recall notices</td><td><code>data.food.gov.uk/food-alerts</code></td><td>Daily</td></tr>
+<tr><td><code>eu-safety-gate</code> (opt-in)</td><td>EU Safety Gate alerts for dangerous non-food products</td><td>Weekly report XML on <code>ec.europa.eu/safety-gate-alerts</code></td><td>Weekly</td></tr>
 </tbody>
 </table>
+<p>The first five feeds are the default. The opt-in feeds run only when you list them in <code>agencies</code> or pick their country in <code>jurisdictions</code> (<code>US</code>, <code>CA</code>, <code>GB</code>, <code>EU</code>). Every record carries <code>jurisdiction</code>, <code>recordType</code>, <code>productCategory</code> and <code>hazardCategories</code> from one shared taxonomy. Keep the source's attribution with any redistribution: Open Government Licence – Canada (Health Canada, CFIA, Transport Canada), Open Government Licence v3.0 (OPSS, MHRA, FSA), and for EU Safety Gate data © European Union, reusable under Commission Decision 2011/833/EU (CC BY 4.0).</p>
 <h3>Limits worth knowing</h3>
 <ul>
 <li>openFDA allows 240 requests per minute and 1,000 per day per IP without a key. A free openFDA key (<code>fdaApiKey</code>) raises those limits.</li>
@@ -608,7 +618,8 @@ export const pages = [
     inputCaption: 'Class I food and drug recalls from the last 14 days, new ones only, posted to a webhook:',
     prompt: 'List the Class I FDA drug and food recalls from the last two weeks with the firm, the reason and the distribution.',
     faq: [
-      ['Do I need API keys?', 'No. All three agencies have public APIs. An openFDA key is optional and only raises openFDA\'s rate limits.'],
+      ['Do I need API keys?', 'No. Every feed is a public API or open-data file. An openFDA key is optional and only raises openFDA\'s rate limits.'],
+      ['Which countries are covered?', 'The US by default; Canada, the United Kingdom and the EU/EEA when you choose them in <code>jurisdictions</code> or pick their feeds in <code>agencies</code>. Each record says where it came from in <code>jurisdiction</code> and <code>agency</code>.'],
       ['Why is a recall from the news missing?', 'FDA lists recalls in enforcement reports after classifying them, often weeks later. NHTSA and CPSC publish faster.'],
       ['Why is <code>severity</code> null for CPSC?', 'CPSC publishes no recall class. FDA classes map to high, medium and low, and NHTSA recalls with a do-not-drive or park-outside advisory are high.'],
       ['What happens if one agency API is down?', 'That feed yields one error item and the others continue.'],
@@ -1023,12 +1034,12 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
   {
     slug: 'professional-license-verification',
     actor: 'license-verification-api',
-    title: 'Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI',
+    title: 'Professional License Lookup: 7 States and the NPI Registry',
     nav: 'License verification',
     description:
-      'Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.',
+      'Look up professional licenses by number, or by name within one board, in Texas, Florida, Colorado, Washington, Connecticut, New Jersey, Michigan and the NPI Registry: status and expiration.',
     lede:
-      'State licensing boards publish their license records in different places and formats. This Actor queries five official public registries by name or license number and returns one normalized record per license, with a status, an expiration date and a disciplinary-action flag.',
+      'State licensing boards publish their license records in different places and formats. This Actor queries ten official boards in seven states plus the federal NPI Registry, by license number or by name within one board, and returns one normalized record per license with a status and an expiration date. The board\'s disciplinary fields are available on request.',
     source: `
 <table>
 <thead><tr><th>Source id</th><th>Board</th><th>Coverage</th><th>How it is queried</th></tr></thead>
@@ -1038,14 +1049,21 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 <tr><td><code>CO_DORA</code></td><td>Colorado Department of Regulatory Agencies</td><td>About 1.6 M licenses across every DORA profession, with disciplinary case numbers</td><td>Socrata open-data API on data.colorado.gov, updated daily</td></tr>
 <tr><td><code>WA_DOH</code></td><td>Washington State Department of Health</td><td>About 2.5 M health-care credentials, with an "action taken" flag</td><td>Socrata open-data API on data.wa.gov, updated daily</td></tr>
 <tr><td><code>NPI</code></td><td>CMS NPPES NPI Registry (federal)</td><td>Every US health-care provider and organization with an NPI</td><td>Official JSON API at npiregistry.cms.hhs.gov</td></tr>
+<tr><td><code>CT_ELICENSE</code> (opt-in)</td><td>Connecticut eLicense (Consumer Protection and Public Health)</td><td>About 2.1 M credentials: home improvement and trade contractors, nurses, physicians, real estate and more</td><td>Socrata open-data API on data.ct.gov, updated daily</td></tr>
+<tr><td><code>TX_BON</code> (opt-in)</td><td>Texas Board of Nursing</td><td>Registered and licensed vocational nurses, with a current-board-action flag</td><td>Socrata open-data API on data.texas.gov, updated weekly</td></tr>
+<tr><td><code>TX_TMB</code> (opt-in)</td><td>Texas Medical Board</td><td>About 514 k licenses and permits: physicians, physician assistants and more</td><td>Socrata open-data API on data.texas.gov, updated daily</td></tr>
+<tr><td><code>TX_TREC</code> (opt-in)</td><td>Texas Real Estate Commission</td><td>Sales agents, brokers and broker companies, and real estate inspectors</td><td>Socrata open-data API on data.texas.gov, updated daily</td></tr>
+<tr><td><code>NJ_MYLICENSE</code> (opt-in)</td><td>New Jersey Division of Consumer Affairs</td><td>Every profession on the state's License Verification System</td><td>The public verification site, one lookup at a time at one request per second</td></tr>
+<tr><td><code>MI_LARA</code> (opt-in)</td><td>Michigan Department of Licensing and Regulatory Affairs</td><td>Every license type on LARA's public licensee search (about 170)</td><td>The public licensee search, one lookup at a time at one request per second</td></tr>
 </tbody>
 </table>
-<p>Queries are one line each: <code>TX:3365:Master Electrician</code>, <code>name:Jane Smith:FL</code>, <code>npi:1003000126</code>, or pinned to a board with <code>tdlr:</code>, <code>dbpr:</code>, <code>dora:</code>, <code>doh:</code>. A query with a state goes only to that state's board; a query without one goes to every enabled source.</p>
+<p>The first five sources are the default; the six opt-in boards answer only when you list them in <code>sources</code> or name their board in a query. Queries are one line each: <code>TX:3365:Master Electrician</code>, <code>name:Jane Smith:FL</code>, <code>npi:1003000126</code>, or pinned to a board with <code>tdlr:</code>, <code>dbpr:</code>, <code>dora:</code>, <code>doh:</code>, <code>elicense:</code>, <code>bon:</code>, <code>tmb:</code>, <code>trec:</code>, <code>mylicense:</code> or <code>lara:</code>. A query with a state goes only to that state's enabled boards. A license number without a state goes to every enabled source; a name without a state or board is answered only when exactly one source is enabled, because name lookups work within one board and are never a search across states.</p>
 <h3>Limits worth knowing</h3>
 <ul>
 <li>Texas publishes no status column, so its status is derived from the expiration date (<code>statusDerived: true</code>).</li>
 <li>Open-data extracts can lag the board's live database: Colorado and Washington refresh daily, Texas less often.</li>
 <li>Florida returns the first 50 matches of the portal's result page. Common names can match hundreds of licenses; narrow with a state, license type or city.</li>
+<li>New Jersey and Michigan are read one lookup at a time.</li>
 <li>Other states return an <code>INVALID_QUERY</code> item that names the supported ones. California's DCA and CSLB lookups are not included.</li>
 <li>Each record notes that you should confirm with the issuing board before relying on it.</li>
 </ul>`,
@@ -1056,7 +1074,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
       ['status, rawStatus, statusDerived', 'Normalized status (ACTIVE, EXPIRED, SUSPENDED, REVOKED, PROBATION, PENDING, INACTIVE, UNKNOWN) and the board\'s own value'],
       ['issueDate, expirationDate', 'Where published'],
       ['city, county, zip', 'Where published'],
-      ['disciplinaryActionFlag', 'True when the board records an action (Colorado adds case details)'],
+      ['disciplinaryActionFlag, disciplinaryAction', 'Only with <code>includeDiscipline: true</code>: the board\'s own disciplinary fields as published, where the board publishes them'],
       ['verified, verificationNotes', 'Verify mode: found, active and not expired, with plain-English notes'],
       ['sourceUrl, sourceRecordId', 'Where to confirm the record'],
     ],
@@ -1078,7 +1096,6 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
         issueDate: null,
         expirationDate: '2027-03-19',
         county: 'Walker',
-        disciplinaryActionFlag: null,
         sourceUrl: 'https://www.tdlr.texas.gov/LicenseSearch/',
         sourceRecordId: 'MASTER ELECTRICIAN#3365',
         query: 'TX:3365:Master Electrician',
@@ -1108,11 +1125,12 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
     inputCaption: 'One NPI and one Texas name search in verify mode (the Actor\'s own quick-start input):',
     prompt: 'Is Texas master electrician license 3365 active, and when does it expire?',
     faq: [
-      ['Which states are covered?', 'Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry.'],
+      ['Which states are covered?', 'By default Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry. Opt-in: Texas nursing (BON), medicine (TMB) and real estate (TREC), Connecticut (all eLicense credentials), New Jersey (all Division of Consumer Affairs professions) and Michigan (all LARA license types).'],
+      ['Where is the disciplinary flag?', 'Off by default. Set <code>includeDiscipline: true</code> and boards that publish disciplinary fields (Colorado, Washington, Texas BON, Texas Medical Board, New Jersey and Michigan) return them as published. The Actor adds no severity or risk score.'],
       ['What does <code>verified</code> mean?', 'The license was found, its status is ACTIVE and the expiration date is today or later. Statuses such as "Active - With Conditions" normalize to PROBATION and do not verify.'],
       ['Is this the board\'s official verification?', 'No. It reads the boards\' public records and links each one. Confirm with the issuing board before relying on a result.'],
       ['Why do I get several records for one number?', 'License numbers repeat across license types in Texas and Colorado. Add the type, for example <code>TX:3365:Master Electrician</code>.'],
-      ['Does it need proxies or a key?', 'No. A free Socrata app token is optional and only raises rate limits on the Texas, Colorado and Washington datasets.'],
+      ['Does it need proxies or a key?', 'No. A free Socrata app token is optional and only raises rate limits on the Socrata open-data datasets.'],
     ],
     related: ['building-permits-api', 'osha-inspections-by-company'],
   },
@@ -1379,26 +1397,29 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
     title: 'PDF to Markdown for RAG: Headings, Tables, Chunks and OCR',
     nav: 'PDF to Markdown for RAG',
     description:
-      'Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.',
+      'Convert PDF, Office, OpenDocument, EPUB, HTML, text, CSV and image URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR in 21 languages.',
     lede:
       'Retrieval pipelines work best on text that keeps a document\'s structure: headings at the right level, tables as tables, and page numbers you can cite. This Actor turns document URLs into that kind of Markdown and can split it into heading-aware chunks ready to embed.',
     source: `
-<p>The input is any public document URL: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> or <strong>plain text</strong>, plus <code>kvs://&lt;storeId&gt;/&lt;key&gt;</code> references to files in your own Apify key-value stores and <code>data:</code> URLs. Conversion runs inside the Actor with open-source libraries (pdf.js, mammoth, turndown and tesseract.js). There is no browser and no external conversion service; the Actor contacts only the URLs you give it and your optional webhook.</p>
+<p>The input is any public document URL: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>PPTX</strong> (one page per slide, speaker notes kept), <strong>XLSX/XLSM</strong> (one table per sheet), <strong>OpenDocument</strong> (ODT, ODP, ODS), <strong>EPUB</strong>, <strong>HTML</strong>, <strong>Markdown</strong>, <strong>plain text</strong>, <strong>CSV/TSV</strong> and <strong>images</strong> (PNG, JPEG, GIF, WebP, TIFF, BMP, AVIF, HEIC, read with OCR), plus <code>kvs://&lt;storeId&gt;/&lt;key&gt;</code> references to files in your own Apify key-value stores and <code>data:</code> URLs. Conversion runs inside the Actor with open-source libraries (pdf.js, mammoth, turndown and tesseract.js). There is no browser and no external conversion service; the Actor contacts only the URLs you give it and your optional webhook.</p>
 <p>For PDFs it rebuilds the layout from the file's own text layer: headings from font-size and bold clusters, tables from column alignment, two-column pages read column by column, and running headers, footers and page numbers stripped. Each document becomes one record with the Markdown and its metadata (title, author, producer, creation date, page count, headings, tables and links).</p>
 <h3>Chunks and OCR</h3>
 <ul>
 <li><code>chunk: true</code> adds one <code>chunk</code> record per heading-aware chunk, with <code>startPage</code>, <code>endPage</code>, the <code>headingPath</code> it sits under and a token estimate. Chunk size and overlap are configurable.</li>
-<li><code>ocr: true</code> runs the bundled English OCR model on PDF pages that have no text layer. Without it, those pages are listed in <code>needsOcrPages</code> and marked in the Markdown, and nothing is recognized.</li>
+<li><code>ocr: true</code> runs bundled OCR models on PDF pages that have no text layer and on image inputs, in up to three of 21 languages per run (<code>ocrLanguages</code>, English by default). Without it, those pages are listed in <code>needsOcrPages</code> and marked in the Markdown, and nothing is recognized.</li>
+<li><code>extractTables: true</code> adds one <code>table</code> record per table, with its rows as objects, and writes a CSV file per table to the key-value store.</li>
+<li><code>extractImages: true</code> saves the images embedded in PDF, DOCX, PPTX, OpenDocument and EPUB files to the key-value store and links them from the Markdown.</li>
 </ul>
 <h3>Limits worth knowing</h3>
 <ul>
 <li>Files up to 25 MB by default (<code>maxFileSizeMb</code>, at most 50), a 20-second download timeout by default, and 10 minutes of conversion per file. After that, the pages converted so far are returned with a <code>PROCESSING_TIMEOUT</code> warning.</li>
-<li>Layout reconstruction is heuristic. Complex forms, rotated text, equations and multi-line table cells are best effort, and images are not extracted.</li>
-<li>OCR is English only and runs at about two to five seconds per page.</li>
+<li>Layout reconstruction is heuristic. Complex forms, rotated text, equations and multi-line table cells are best effort.</li>
+<li>Image inputs are capped at 10 MB each.</li>
+<li>OCR reads at most three languages per run and takes about two to five seconds per page.</li>
 <li>Password-protected, corrupt or unsupported files return an error item with a clear code instead of failing the run.</li>
 </ul>`,
     fields: [
-      ['recordType', '<code>document</code>, or <code>chunk</code> when chunking is on'],
+      ['recordType', '<code>document</code>, <code>chunk</code> when chunking is on, or <code>table</code> when <code>extractTables</code> is on'],
       ['url, filename, mimeType, bytes', 'The source file'],
       ['pages, pagesProcessed', 'Page count and pages converted'],
       ['title, author, producer, creationDate', 'Document metadata, where the file has it'],
@@ -1459,11 +1480,11 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
     title: 'PDF to JSON with Your Own Schema: Invoices, Forms, Quotes',
     nav: 'Document to JSON',
     description:
-      'Extract PDF, DOCX and HTML documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.',
+      'Extract PDF, Office, EPUB, HTML and scanned documents into JSON that matches a JSON Schema you define, with per-field confidence and missing fields. Rules mode or Claude.',
     lede:
       'Pass document URLs and a JSON Schema describing the object you want (invoice number, line items, totals, form fields, dates) and get back one JSON object per document in exactly that shape, with a confidence score per field and a list of fields that were not found.',
     source: `
-<p>Documents are read from public URLs, your own key-value stores (<code>kvs://</code>) or <code>data:</code> URLs: <strong>PDF</strong> with a text layer, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> and <strong>plain text</strong>. They go through a layout engine first (headings, tables, lists and page markers), so table rows stay rows and labels stay next to their values.</p>
+<p>Documents are read from public URLs, your own key-value stores (<code>kvs://</code>) or <code>data:</code> URLs: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>PPTX</strong>, <strong>XLSX/XLSM</strong>, <strong>OpenDocument</strong> (ODT, ODP, ODS), <strong>EPUB</strong>, <strong>HTML</strong>, <strong>Markdown</strong>, <strong>plain text</strong>, <strong>CSV/TSV</strong> and <strong>images</strong> (PNG, JPEG, GIF, WebP, TIFF, BMP, AVIF). They go through a layout engine first (headings, tables, lists and page markers), so table rows stay rows and labels stay next to their values.</p>
 <p>The <code>schema</code> input is a JSON Schema (draft-07 subset): <code>type: object</code> at the top, field types string, number, integer, boolean, array and object, with <code>description</code>, <code>format</code> (date, date-time, email, uri) and <code>enum</code>. Nested objects and arrays of objects work; <code>$ref</code>, <code>oneOf</code> and <code>anyOf</code> do not.</p>
 <h3>Three extractors</h3>
 <ul>
@@ -1474,7 +1495,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 <p>In model modes, document text is sent to the Anthropic API only to produce the extraction. Each mode is priced differently; see the Store page.</p>
 <h3>Limits worth knowing</h3>
 <ul>
-<li>Scanned PDFs without a text layer return a <code>NO_TEXT</code> error item. Convert them first with the <a href="../pdf-to-markdown-rag/">PDF to Markdown Actor</a> with OCR on, save the Markdown to a key-value store, and pass the <code>kvs://</code> reference.</li>
+<li>Scanned PDFs and photos are read with the built-in OCR (21 bundled languages, up to three per run) when you set <code>ocr: true</code> with <code>extractor: "rules"</code>. OCR does not run in the model modes; for model extraction of a scan, convert it first with the <a href="../pdf-to-markdown-rag/">PDF to Markdown Actor</a> with OCR on, save the Markdown to a key-value store, and pass the <code>kvs://</code> reference. With OCR off, a scan returns a <code>NO_TEXT</code> error item.</li>
 <li>Schemas can be up to 6 levels deep and 200 fields. Model modes cut documents at <code>maxInputTokens</code> (at most 40,000, about 60 pages) and cap output at 4,000 tokens per document, so very long line-item tables may be cut.</li>
 <li>The rules extractor's date and amount parsing is tuned to English-language business documents.</li>
 <li>URLs that resolve to private or local network addresses are rejected.</li>
@@ -1542,7 +1563,7 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
       ['How do I write the schema?', 'As ordinary JSON Schema. Descriptions matter in every mode: the rules extractor matches them against labels, and the model reads them as instructions. Use <code>format: "date"</code> for ISO dates and <code>enum</code> for fixed choices.'],
       ['Is my Anthropic key safe in <code>byok</code> mode?', 'It is stored as an encrypted secret input, sent only to api.anthropic.com, and never logged or written to the dataset.'],
       ['What happens if the model fails?', 'The document gets the rules extraction, marked <code>rules-fallback</code> with the reason, so a run does not fail because of the model.'],
-      ['Does it work on scanned documents?', 'Not directly. Run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by <code>kvs://</code> reference.'],
+      ['Does it work on scanned documents?', 'Yes, in rules mode: set <code>ocr: true</code> with <code>extractor: "rules"</code> and scanned pages and photos are read with the built-in OCR. For a model mode, run them through the PDF to Markdown Actor with OCR first, then pass the saved Markdown by <code>kvs://</code> reference.'],
     ],
     related: ['pdf-to-markdown-rag', 'grants-gov-api'],
   },
@@ -1643,6 +1664,8 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
     source: `
 <p>The Actor parses the <strong>RSS 2.0</strong>, <strong>iTunes</strong> and <strong>Podcasting 2.0</strong> namespaces with an XML parser; no browser and no proxies. It handles odd feeds: non-standard namespace prefixes, missing GUIDs, durations given as <code>MM:SS</code>, <code>HH:MM:SS</code> or seconds, and HTML show notes.</p>
 <p>Apple Podcasts URLs, bare Apple IDs and <code>search:&lt;term&gt;</code> entries are resolved through Apple's public iTunes Lookup and Search API, which needs no key. A show web page with an RSS autodiscovery link also works.</p>
+<p>Opt-in discovery and lookup inputs: <code>charts:us</code> or <code>charts:gb/technology</code> reads Apple's top-shows chart for a country (optionally one genre) and scrapes each show's own feed; records carry the chart they came from, never the rank. <code>fyyd:&lt;term&gt;</code> and <code>gpodder:&lt;term&gt;</code> take the top result of a fyyd.de or gpodder.net directory search. Podcast Index GUIDs (<code>pi:&lt;guid&gt;</code>) resolve to the publisher's feed with your own free Podcast Index API key and secret.</p>
+<p>With <code>fetchChapters</code>, each episode's Podcasting 2.0 JSON chapters file is downloaded and attached as <code>chapters</code> (start and end time, title, image, link).</p>
 <p>With <code>fetchTranscripts</code>, each episode's <code>&lt;podcast:transcript&gt;</code> file is downloaded (plain text first, then WebVTT, SRT, JSON or HTML, up to 2 MB) and returned as <code>transcriptText</code> with timestamps and cue numbers removed and speaker names kept as labels.</p>
 <h3>Limits worth knowing</h3>
 <ul>
@@ -1716,9 +1739,9 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
     title: 'Bluesky Monitor: Posts, Hashtags and Followers as JSON',
     nav: 'Bluesky monitor',
     description:
-      'Search Bluesky posts by keyword or hashtag and read profiles, author feeds and follower lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.',
+      'Search Bluesky posts by keyword or hashtag and read profiles, author feeds, follower lists, threads, quotes and lists from the public AT Protocol API as flat JSON, with a new-since-last-run mode.',
     lede:
-      'Bluesky runs on the open AT Protocol, and its public API answers without a login. This Actor reads it in six modes (post search, profiles, author feeds, followers, following and account search) and writes every result as a flat record, so you can follow keywords, hashtags or accounts on a schedule.',
+      'Bluesky runs on the open AT Protocol, and its public API answers without a login. This Actor reads it in six main modes (post search, profiles, author feeds, followers, following and account search), plus opt-in modes for a post\'s thread, quotes, likes and reposts and for custom feeds, lists and starter packs, and writes every result as a flat record, so you can follow keywords, hashtags or accounts on a schedule.',
     source: `
 <p>The data comes from Bluesky's <strong>public, unauthenticated AT Protocol API</strong>: the <code>public.api.bsky.app</code> AppView, with its origin <code>api.bsky.app</code> as a fallback for post search. These are the same public endpoints the Bluesky app uses. No login, API key, proxies or browser.</p>
 <table>
@@ -1729,6 +1752,10 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
 <tr><td><code>profiles</code></td><td>Handles, DIDs or profile URLs</td><td>Profiles with follower, following and post counts</td></tr>
 <tr><td><code>followers</code>, <code>following</code></td><td>Handles, DIDs or profile URLs</td><td>Follower or following lists</td></tr>
 <tr><td><code>searchActors</code></td><td>Search terms</td><td>Matching accounts</td></tr>
+<tr><td><code>postThread</code>, <code>quotes</code> (opt-in)</td><td>Post URLs</td><td>Every reply in the post's thread, or the posts quoting it</td></tr>
+<tr><td><code>likedBy</code>, <code>repostedBy</code> (opt-in)</td><td>Post URLs</td><td>The accounts that liked or reposted the post</td></tr>
+<tr><td><code>customFeed</code>, <code>listFeed</code> (opt-in)</td><td>Custom feed or list URLs</td><td>The feed's posts, or posts by the list's members</td></tr>
+<tr><td><code>listMembers</code>, <code>starterPack</code> (opt-in)</td><td>List or starter pack URLs</td><td>Member profiles with counts</td></tr>
 </tbody>
 </table>
 <h3>Limits worth knowing</h3>
@@ -2033,10 +2060,10 @@ ${'<pre tabindex="0" aria-label="Slack message template"><code>New filing in {co
     description:
       'Send new roofing, solar or any other building permits from US city open-data portals to a Google Sheet every day with Make (formerly Integromat) and Apify\'s official Make app.',
     lede:
-      'The Building Permits Scraper reads 61 US city, county and state open-data portals and, in monitor mode, returns only permits it has not returned before. Save it as an Apify task, schedule it daily, and a three-module Make scenario built on Apify\'s official Make app adds each new permit to a Google Sheet: a lead list for contractors and suppliers that fills itself.',
+      'The Building Permits Scraper reads 120 open-data datasets from 97 US and Canadian cities, counties and states and, in monitor mode, returns only permits it has not returned before. Save it as an Apify task, schedule it daily, and a three-module Make scenario built on Apify\'s official Make app adds each new permit to a Google Sheet: a lead list for contractors and suppliers that fills itself.',
     what: `
 <p>A daily Apify schedule runs a saved task that pulls roofing permits issued in Austin, Seattle and Denver over the last 7 days. When the run finishes, Make's <strong>Watch Task Runs</strong> trigger starts the scenario, <strong>Get Dataset Items</strong> reads the run's permits, and Google Sheets gets one row per new permit with the address, the work description, the declared cost and the contractor where the city publishes one.</p>
-<p>Change <code>jurisdictions</code> and <code>permitTypes</code> for your market: <code>solar</code>, <code>pool</code>, <code>hvac</code> or <code>demolition</code> work the same way. The <a href="../building-permits-api/">building permits guide</a> lists all 61 jurisdictions; cities on Accela or EnerGov portals use the <a href="../accela-energov-permits/">Accela and EnerGov scraper</a>, which has the same schema and works with this scenario.</p>`,
+<p>Change <code>jurisdictions</code> and <code>permitTypes</code> for your market: <code>solar</code>, <code>pool</code>, <code>hvac</code> or <code>demolition</code> work the same way. The <a href="../building-permits-api/">building permits guide</a> describes the sources, and the Actor's Store page lists all 120 datasets; cities on Accela or EnerGov portals use the <a href="../accela-energov-permits/">Accela and EnerGov scraper</a>, which has the same schema and works with this scenario.</p>`,
     before: [
       'An Apify account. The Actor is billed per result to that account; the Store page lists the current prices. Set a maximum total charge in the task\'s run options to cap a run.',
       'A Make account with a Google connection.',

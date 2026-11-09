@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Product Recalls API: FDA, NHTSA and CPSC in One Feed | owlabee</title>
-<meta name="description" content="US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, with a new-recalls-only mode.">
+<meta name="description" content="US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, plus opt-in Canada, UK and EU feeds, with a new-recalls-only mode.">
 <link rel="canonical" href="https://owlabee.com/product-recalls-api/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="Product Recalls API: FDA, NHTSA and CPSC in One Feed | owlabee">
-<meta property="og:description" content="US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, with a new-recalls-only mode.">
+<meta property="og:description" content="US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, plus opt-in Canada, UK and EU feeds, with a new-recalls-only mode.">
 <meta property="og:url" content="https://owlabee.com/product-recalls-api/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://owlabee.com/og-image.png">
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Product Recalls API: FDA, NHTSA and CPSC in One Feed","description":"US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, with a new-recalls-only mode.","url":"https://owlabee.com/product-recalls-api/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/product-recall-feed"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/product-recall-feed","name":"Product Recall Feed — FDA, NHTSA & CPSC Recalls API","description":"FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record","url":"https://apify.com/owlabee/product-recall-feed","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys?","acceptedAnswer":{"@type":"Answer","text":"No. All three agencies have public APIs. An openFDA key is optional and only raises openFDA's rate limits."}},{"@type":"Question","name":"Why is a recall from the news missing?","acceptedAnswer":{"@type":"Answer","text":"FDA lists recalls in enforcement reports after classifying them, often weeks later. NHTSA and CPSC publish faster."}},{"@type":"Question","name":"Why is severity null for CPSC?","acceptedAnswer":{"@type":"Answer","text":"CPSC publishes no recall class. FDA classes map to high, medium and low, and NHTSA recalls with a do-not-drive or park-outside advisory are high."}},{"@type":"Question","name":"What happens if one agency API is down?","acceptedAnswer":{"@type":"Answer","text":"That feed yields one error item and the others continue."}},{"@type":"Question","name":"Can I see the agency's original fields?","acceptedAnswer":{"@type":"Answer","text":"Yes. includeRaw attaches the agency record as a nested raw object."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Product Recalls API: FDA, NHTSA and CPSC in One Feed","description":"US product recalls from openFDA (drugs, devices, food), NHTSA (vehicles) and CPSC (consumer products) in one normalized JSON record, plus opt-in Canada, UK and EU feeds, with a new-recalls-only mode.","url":"https://owlabee.com/product-recalls-api/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/product-recall-feed"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/product-recall-feed","name":"Product Recall Feed — FDA, NHTSA & CPSC Recalls API","description":"FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record, plus opt-in Canada, UK and EU recall feeds","url":"https://apify.com/owlabee/product-recall-feed","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need API keys?","acceptedAnswer":{"@type":"Answer","text":"No. Every feed is a public API or open-data file. An openFDA key is optional and only raises openFDA's rate limits."}},{"@type":"Question","name":"Which countries are covered?","acceptedAnswer":{"@type":"Answer","text":"The US by default; Canada, the United Kingdom and the EU/EEA when you choose them in jurisdictions or pick their feeds in agencies. Each record says where it came from in jurisdiction and agency."}},{"@type":"Question","name":"Why is a recall from the news missing?","acceptedAnswer":{"@type":"Answer","text":"FDA lists recalls in enforcement reports after classifying them, often weeks later. NHTSA and CPSC publish faster."}},{"@type":"Question","name":"Why is severity null for CPSC?","acceptedAnswer":{"@type":"Answer","text":"CPSC publishes no recall class. FDA classes map to high, medium and low, and NHTSA recalls with a do-not-drive or park-outside advisory are high."}},{"@type":"Question","name":"What happens if one agency API is down?","acceptedAnswer":{"@type":"Answer","text":"That feed yields one error item and the others continue."}},{"@type":"Question","name":"Can I see the agency's original fields?","acceptedAnswer":{"@type":"Answer","text":"Yes. includeRaw attaches the agency record as a nested raw object."}}]}]}</script>
 <script>
 (function (c) {
   if (c.hosts.indexOf(location.hostname) === -1) return;
@@ -76,7 +76,7 @@
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> Product recalls API</nav>
 <p class="kicker">Government and public records</p>
 <h1>Product Recalls API: FDA, NHTSA and CPSC in One Feed</h1>
-<p class="lede">Three federal agencies publish US recalls, each with its own API and field names. This Actor reads all three and writes each recall as one record with the same fields: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice.</p>
+<p class="lede">Three federal agencies publish US recalls, each with its own API and field names. This Actor reads all three and writes each recall as one record with the same fields: agency, recall id, date, product, hazard, classification, firm, remedy and a link to the official notice. Opt-in feeds add Canada, the UK and the EU Safety Gate in the same record.</p>
 <div class="cta">
 <a class="button" href="https://apify.com/owlabee/product-recall-feed">Open the Actor on Apify Store</a>
 <p class="note">Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API. Pay per result; see the Store page for current pricing.</p>
@@ -97,8 +97,16 @@
 <tr><td><code>nhtsa</code></td><td>NHTSA recall campaigns: vehicles, equipment, tires, child seats</td><td>DOT open data <code>datahub.transportation.gov</code>, dataset <code>6axg-epim</code></td><td>Daily</td></tr>
 <tr><td><code>vehicles</code> input</td><td>NHTSA recalls for one make, model and year</td><td><code>api.nhtsa.gov/recalls/recallsByVehicle</code></td><td>Daily</td></tr>
 <tr><td><code>cpsc</code></td><td>CPSC consumer product recalls</td><td><code>www.saferproducts.gov/RestWebServices/Recall</code></td><td>Daily</td></tr>
+<tr><td><code>fda-device-recall</code> (opt-in)</td><td>FDA medical device recall database</td><td><code>api.fda.gov/device/recall.json</code> (openFDA)</td><td>Weekly</td></tr>
+<tr><td><code>fda-rss</code> (opt-in)</td><td>FDA recall press releases</td><td>FDA recalls RSS feed on fda.gov</td><td>Daily; newest 20</td></tr>
+<tr><td><code>health-canada</code> (opt-in)</td><td>Health Canada recalls and safety alerts, including CFIA and Transport Canada</td><td>Open data JSON on <code>recalls-rappels.canada.ca</code></td><td>Daily</td></tr>
+<tr><td><code>uk-opss</code> (opt-in)</td><td>UK Office for Product Safety and Standards reports and recalls</td><td>GOV.UK Search API</td><td>Daily</td></tr>
+<tr><td><code>uk-mhra</code> (opt-in)</td><td>UK MHRA drug and medical device alerts</td><td>GOV.UK Search API</td><td>Daily</td></tr>
+<tr><td><code>uk-fsa</code> (opt-in)</td><td>UK Food Standards Agency allergy alerts and recall notices</td><td><code>data.food.gov.uk/food-alerts</code></td><td>Daily</td></tr>
+<tr><td><code>eu-safety-gate</code> (opt-in)</td><td>EU Safety Gate alerts for dangerous non-food products</td><td>Weekly report XML on <code>ec.europa.eu/safety-gate-alerts</code></td><td>Weekly</td></tr>
 </tbody>
 </table>
+<p>The first five feeds are the default. The opt-in feeds run only when you list them in <code>agencies</code> or pick their country in <code>jurisdictions</code> (<code>US</code>, <code>CA</code>, <code>GB</code>, <code>EU</code>). Every record carries <code>jurisdiction</code>, <code>recordType</code>, <code>productCategory</code> and <code>hazardCategories</code> from one shared taxonomy. Keep the source's attribution with any redistribution: Open Government Licence – Canada (Health Canada, CFIA, Transport Canada), Open Government Licence v3.0 (OPSS, MHRA, FSA), and for EU Safety Gate data © European Union, reusable under Commission Decision 2011/833/EU (CC BY 4.0).</p>
 <h3>Limits worth knowing</h3>
 <ul>
 <li>openFDA allows 240 requests per minute and 1,000 per day per IP without a key. A free openFDA key (<code>fdaApiKey</code>) raises those limits.</li>
@@ -205,7 +213,9 @@ curl -sS -X POST \
 <section id="faq">
 <h2>FAQ</h2>
 <h3>Do I need API keys?</h3>
-<p>No. All three agencies have public APIs. An openFDA key is optional and only raises openFDA's rate limits.</p>
+<p>No. Every feed is a public API or open-data file. An openFDA key is optional and only raises openFDA's rate limits.</p>
+<h3>Which countries are covered?</h3>
+<p>The US by default; Canada, the United Kingdom and the EU/EEA when you choose them in <code>jurisdictions</code> or pick their feeds in <code>agencies</code>. Each record says where it came from in <code>jurisdiction</code> and <code>agency</code>.</p>
 <h3>Why is a recall from the news missing?</h3>
 <p>FDA lists recalls in enforcement reports after classifying them, often weeks later. NHTSA and CPSC publish faster.</p>
 <h3>Why is <code>severity</code> null for CPSC?</h3>
@@ -218,7 +228,7 @@ curl -sS -X POST \
 
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
-<p>Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API. FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record.</p>
+<p>Product Recall Feed — FDA, NHTSA &amp; CPSC Recalls API. FDA drug, device and food recalls, NHTSA vehicle recalls and CPSC consumer product recalls in one normalized record, plus opt-in Canada, UK and EU recall feeds.</p>
 <p><a class="button" href="https://apify.com/owlabee/product-recall-feed">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>

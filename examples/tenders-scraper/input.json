@@ -1,0 +1,13 @@
+{
+  "keywords": [
+    "software"
+  ],
+  "sources": [
+    "ted"
+  ],
+  "noticeTypes": [
+    "bid"
+  ],
+  "postedWithinDays": 7,
+  "maxResults": 20
+}

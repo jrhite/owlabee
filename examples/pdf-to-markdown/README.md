@@ -4,7 +4,7 @@ Apify Store: [apify.com/owlabee/pdf-to-markdown](https://apify.com/owlabee/pdf-t
 
 Guide on the site: [https://owlabee.com/pdf-to-markdown-rag/](https://owlabee.com/pdf-to-markdown-rag/)
 
-Converts PDF, DOCX, HTML, Markdown and text documents from URLs into Markdown with headings, lists, tables and links, plus metadata. Optional heading-aware chunks are ready for embedding, and optional OCR handles scanned pages. No browser and no external API.
+Converts PDF, DOCX, PPTX, XLSX, OpenDocument, EPUB, HTML, Markdown, text, CSV and image documents from URLs into Markdown with headings, lists, tables and links, plus metadata. Optional heading-aware chunks are ready for embedding, optional OCR in 21 languages handles scans and photos, and optional table records (with CSV files) and embedded images come on request. No browser and no external API.
 
 ## Inputs that matter
 
@@ -12,7 +12,8 @@ Converts PDF, DOCX, HTML, Markdown and text documents from URLs into Markdown wi
 |---|---|
 | `urls` | Required. Document URLs. |
 | `chunk` | Also emit heading-aware chunk records. |
-| `ocr` | Run OCR on pages without extractable text. |
+| `ocr` | Run OCR on pages without extractable text and on image inputs. |
+| `extractTables` | Also emit one table record and one CSV file per table. |
 | `saveToKeyValueStore` | Also save each document as a `.md` file. |
 
 The full list of fields, defaults and limits is on the Store page under **Input**. [`input.json`](input.json) holds the Actor's own quick-start input, which every script here sends:

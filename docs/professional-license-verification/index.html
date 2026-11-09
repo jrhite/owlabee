@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI | owlabee</title>
-<meta name="description" content="Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.">
+<title>Professional License Lookup: 7 States and the NPI Registry | owlabee</title>
+<meta name="description" content="Look up professional licenses by number, or by name within one board, in Texas, Florida, Colorado, Washington, Connecticut, New Jersey, Michigan and the NPI Registry: status and expiration.">
 <link rel="canonical" href="https://owlabee.com/professional-license-verification/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
-<meta property="og:title" content="Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI | owlabee">
-<meta property="og:description" content="Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.">
+<meta property="og:title" content="Professional License Lookup: 7 States and the NPI Registry | owlabee">
+<meta property="og:description" content="Look up professional licenses by number, or by name within one board, in Texas, Florida, Colorado, Washington, Connecticut, New Jersey, Michigan and the NPI Registry: status and expiration.">
 <meta property="og:url" content="https://owlabee.com/professional-license-verification/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://owlabee.com/og-image.png">
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI","description":"Look up professional licenses by name or number in Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry: status, expiration, discipline flag.","url":"https://owlabee.com/professional-license-verification/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/license-verification-api"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/license-verification-api","name":"License Verification API — TDLR, DBPR, DORA, WA DOH, NPI","description":"Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry","url":"https://apify.com/owlabee/license-verification-api","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which states are covered?","acceptedAnswer":{"@type":"Answer","text":"Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry."}},{"@type":"Question","name":"What does verified mean?","acceptedAnswer":{"@type":"Answer","text":"The license was found, its status is ACTIVE and the expiration date is today or later. Statuses such as \"Active - With Conditions\" normalize to PROBATION and do not verify."}},{"@type":"Question","name":"Is this the board's official verification?","acceptedAnswer":{"@type":"Answer","text":"No. It reads the boards' public records and links each one. Confirm with the issuing board before relying on a result."}},{"@type":"Question","name":"Why do I get several records for one number?","acceptedAnswer":{"@type":"Answer","text":"License numbers repeat across license types in Texas and Colorado. Add the type, for example TX:3365:Master Electrician."}},{"@type":"Question","name":"Does it need proxies or a key?","acceptedAnswer":{"@type":"Answer","text":"No. A free Socrata app token is optional and only raises rate limits on the Texas, Colorado and Washington datasets."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Professional License Lookup: 7 States and the NPI Registry","description":"Look up professional licenses by number, or by name within one board, in Texas, Florida, Colorado, Washington, Connecticut, New Jersey, Michigan and the NPI Registry: status and expiration.","url":"https://owlabee.com/professional-license-verification/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/license-verification-api"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/license-verification-api","name":"License Verification API — 7 States + NPI Registry","description":"Professional license records by number, or by name within one board, from 10 boards in 7 states (TX, FL, CO, WA, CT, NJ, MI) and the NPI Registry","url":"https://apify.com/owlabee/license-verification-api","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which states are covered?","acceptedAnswer":{"@type":"Answer","text":"By default Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry. Opt-in: Texas nursing (BON), medicine (TMB) and real estate (TREC), Connecticut (all eLicense credentials), New Jersey (all Division of Consumer Affairs professions) and Michigan (all LARA license types)."}},{"@type":"Question","name":"Where is the disciplinary flag?","acceptedAnswer":{"@type":"Answer","text":"Off by default. Set includeDiscipline: true and boards that publish disciplinary fields (Colorado, Washington, Texas BON, Texas Medical Board, New Jersey and Michigan) return them as published. The Actor adds no severity or risk score."}},{"@type":"Question","name":"What does verified mean?","acceptedAnswer":{"@type":"Answer","text":"The license was found, its status is ACTIVE and the expiration date is today or later. Statuses such as \"Active - With Conditions\" normalize to PROBATION and do not verify."}},{"@type":"Question","name":"Is this the board's official verification?","acceptedAnswer":{"@type":"Answer","text":"No. It reads the boards' public records and links each one. Confirm with the issuing board before relying on a result."}},{"@type":"Question","name":"Why do I get several records for one number?","acceptedAnswer":{"@type":"Answer","text":"License numbers repeat across license types in Texas and Colorado. Add the type, for example TX:3365:Master Electrician."}},{"@type":"Question","name":"Does it need proxies or a key?","acceptedAnswer":{"@type":"Answer","text":"No. A free Socrata app token is optional and only raises rate limits on the Socrata open-data datasets."}}]}]}</script>
 <script>
 (function (c) {
   if (c.hosts.indexOf(location.hostname) === -1) return;
@@ -75,11 +75,11 @@
 <div class="guide-head">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> License verification</nav>
 <p class="kicker">Government and public records</p>
-<h1>Professional License Lookup: TDLR, DBPR, DORA, WA DOH, NPI</h1>
-<p class="lede">State licensing boards publish their license records in different places and formats. This Actor queries five official public registries by name or license number and returns one normalized record per license, with a status, an expiration date and a disciplinary-action flag.</p>
+<h1>Professional License Lookup: 7 States and the NPI Registry</h1>
+<p class="lede">State licensing boards publish their license records in different places and formats. This Actor queries ten official boards in seven states plus the federal NPI Registry, by license number or by name within one board, and returns one normalized record per license with a status and an expiration date. The board's disciplinary fields are available on request.</p>
 <div class="cta">
 <a class="button" href="https://apify.com/owlabee/license-verification-api">Open the Actor on Apify Store</a>
-<p class="note">License Verification API — TDLR, DBPR, DORA, WA DOH, NPI. Pay per result; see the Store page for current pricing.</p>
+<p class="note">License Verification API — 7 States + NPI Registry. Pay per result; see the Store page for current pricing.</p>
 </div>
 </div>
 <nav class="toc" aria-label="On this page">
@@ -96,14 +96,21 @@
 <tr><td><code>CO_DORA</code></td><td>Colorado Department of Regulatory Agencies</td><td>About 1.6 M licenses across every DORA profession, with disciplinary case numbers</td><td>Socrata open-data API on data.colorado.gov, updated daily</td></tr>
 <tr><td><code>WA_DOH</code></td><td>Washington State Department of Health</td><td>About 2.5 M health-care credentials, with an "action taken" flag</td><td>Socrata open-data API on data.wa.gov, updated daily</td></tr>
 <tr><td><code>NPI</code></td><td>CMS NPPES NPI Registry (federal)</td><td>Every US health-care provider and organization with an NPI</td><td>Official JSON API at npiregistry.cms.hhs.gov</td></tr>
+<tr><td><code>CT_ELICENSE</code> (opt-in)</td><td>Connecticut eLicense (Consumer Protection and Public Health)</td><td>About 2.1 M credentials: home improvement and trade contractors, nurses, physicians, real estate and more</td><td>Socrata open-data API on data.ct.gov, updated daily</td></tr>
+<tr><td><code>TX_BON</code> (opt-in)</td><td>Texas Board of Nursing</td><td>Registered and licensed vocational nurses, with a current-board-action flag</td><td>Socrata open-data API on data.texas.gov, updated weekly</td></tr>
+<tr><td><code>TX_TMB</code> (opt-in)</td><td>Texas Medical Board</td><td>About 514 k licenses and permits: physicians, physician assistants and more</td><td>Socrata open-data API on data.texas.gov, updated daily</td></tr>
+<tr><td><code>TX_TREC</code> (opt-in)</td><td>Texas Real Estate Commission</td><td>Sales agents, brokers and broker companies, and real estate inspectors</td><td>Socrata open-data API on data.texas.gov, updated daily</td></tr>
+<tr><td><code>NJ_MYLICENSE</code> (opt-in)</td><td>New Jersey Division of Consumer Affairs</td><td>Every profession on the state's License Verification System</td><td>The public verification site, one lookup at a time at one request per second</td></tr>
+<tr><td><code>MI_LARA</code> (opt-in)</td><td>Michigan Department of Licensing and Regulatory Affairs</td><td>Every license type on LARA's public licensee search (about 170)</td><td>The public licensee search, one lookup at a time at one request per second</td></tr>
 </tbody>
 </table>
-<p>Queries are one line each: <code>TX:3365:Master Electrician</code>, <code>name:Jane Smith:FL</code>, <code>npi:1003000126</code>, or pinned to a board with <code>tdlr:</code>, <code>dbpr:</code>, <code>dora:</code>, <code>doh:</code>. A query with a state goes only to that state's board; a query without one goes to every enabled source.</p>
+<p>The first five sources are the default; the six opt-in boards answer only when you list them in <code>sources</code> or name their board in a query. Queries are one line each: <code>TX:3365:Master Electrician</code>, <code>name:Jane Smith:FL</code>, <code>npi:1003000126</code>, or pinned to a board with <code>tdlr:</code>, <code>dbpr:</code>, <code>dora:</code>, <code>doh:</code>, <code>elicense:</code>, <code>bon:</code>, <code>tmb:</code>, <code>trec:</code>, <code>mylicense:</code> or <code>lara:</code>. A query with a state goes only to that state's enabled boards. A license number without a state goes to every enabled source; a name without a state or board is answered only when exactly one source is enabled, because name lookups work within one board and are never a search across states.</p>
 <h3>Limits worth knowing</h3>
 <ul>
 <li>Texas publishes no status column, so its status is derived from the expiration date (<code>statusDerived: true</code>).</li>
 <li>Open-data extracts can lag the board's live database: Colorado and Washington refresh daily, Texas less often.</li>
 <li>Florida returns the first 50 matches of the portal's result page. Common names can match hundreds of licenses; narrow with a state, license type or city.</li>
+<li>New Jersey and Michigan are read one lookup at a time.</li>
 <li>Other states return an <code>INVALID_QUERY</code> item that names the supported ones. California's DCA and CSLB lookups are not included.</li>
 <li>Each record notes that you should confirm with the issuing board before relying on it.</li>
 </ul>
@@ -120,7 +127,7 @@
 <tr><td><code>status, rawStatus, statusDerived</code></td><td>Normalized status (ACTIVE, EXPIRED, SUSPENDED, REVOKED, PROBATION, PENDING, INACTIVE, UNKNOWN) and the board's own value</td></tr>
 <tr><td><code>issueDate, expirationDate</code></td><td>Where published</td></tr>
 <tr><td><code>city, county, zip</code></td><td>Where published</td></tr>
-<tr><td><code>disciplinaryActionFlag</code></td><td>True when the board records an action (Colorado adds case details)</td></tr>
+<tr><td><code>disciplinaryActionFlag, disciplinaryAction</code></td><td>Only with <code>includeDiscipline: true</code>: the board's own disciplinary fields as published, where the board publishes them</td></tr>
 <tr><td><code>verified, verificationNotes</code></td><td>Verify mode: found, active and not expired, with plain-English notes</td></tr>
 <tr><td><code>sourceUrl, sourceRecordId</code></td><td>Where to confirm the record</td></tr>
 </tbody>
@@ -146,7 +153,6 @@
   &quot;issueDate&quot;: null,
   &quot;expirationDate&quot;: &quot;2027-03-19&quot;,
   &quot;county&quot;: &quot;Walker&quot;,
-  &quot;disciplinaryActionFlag&quot;: null,
   &quot;sourceUrl&quot;: &quot;https://www.tdlr.texas.gov/LicenseSearch/&quot;,
   &quot;sourceRecordId&quot;: &quot;MASTER ELECTRICIAN#3365&quot;,
   &quot;query&quot;: &quot;TX:3365:Master Electrician&quot;,
@@ -219,7 +225,9 @@ curl -sS -X POST \
 <section id="faq">
 <h2>FAQ</h2>
 <h3>Which states are covered?</h3>
-<p>Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry.</p>
+<p>By default Texas (TDLR trades and occupations), Florida (DBPR professions), Colorado (all DORA professions) and Washington (health-care credentials), plus every US health-care provider through the NPI Registry. Opt-in: Texas nursing (BON), medicine (TMB) and real estate (TREC), Connecticut (all eLicense credentials), New Jersey (all Division of Consumer Affairs professions) and Michigan (all LARA license types).</p>
+<h3>Where is the disciplinary flag?</h3>
+<p>Off by default. Set <code>includeDiscipline: true</code> and boards that publish disciplinary fields (Colorado, Washington, Texas BON, Texas Medical Board, New Jersey and Michigan) return them as published. The Actor adds no severity or risk score.</p>
 <h3>What does <code>verified</code> mean?</h3>
 <p>The license was found, its status is ACTIVE and the expiration date is today or later. Statuses such as "Active - With Conditions" normalize to PROBATION and do not verify.</p>
 <h3>Is this the board's official verification?</h3>
@@ -227,12 +235,12 @@ curl -sS -X POST \
 <h3>Why do I get several records for one number?</h3>
 <p>License numbers repeat across license types in Texas and Colorado. Add the type, for example <code>TX:3365:Master Electrician</code>.</p>
 <h3>Does it need proxies or a key?</h3>
-<p>No. A free Socrata app token is optional and only raises rate limits on the Texas, Colorado and Washington datasets.</p>
+<p>No. A free Socrata app token is optional and only raises rate limits on the Socrata open-data datasets.</p>
 </section>
 
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
-<p>License Verification API — TDLR, DBPR, DORA, WA DOH, NPI. Professional license records by name or number from Texas TDLR, Florida DBPR, Colorado DORA, Washington DOH and the NPI Registry.</p>
+<p>License Verification API — 7 States + NPI Registry. Professional license records by number, or by name within one board, from 10 boards in 7 states (TX, FL, CO, WA, CT, NJ, MI) and the NPI Registry.</p>
 <p><a class="button" href="https://apify.com/owlabee/license-verification-api">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>
@@ -240,7 +248,7 @@ curl -sS -X POST \
 <section class="related">
 <h2>Related guides</h2>
 <ul>
-<li><a href="../building-permits-api/">Building Permits API: 61 US Open-Data Portals as JSON</a></li>
+<li><a href="../building-permits-api/">Building Permits API: 97 US and Canadian Jurisdictions as JSON</a></li>
 <li><a href="../osha-inspections-by-company/">OSHA Inspections by Company: DOL Data API Lookup</a></li>
 </ul>
 </section>

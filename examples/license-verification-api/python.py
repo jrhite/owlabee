@@ -1,4 +1,4 @@
-"""Run License Verification API — TDLR, DBPR, DORA, WA DOH, NPI (owlabee/license-verification-api) once and print each dataset item.
+"""Run License Verification API — 7 States + NPI Registry (owlabee/license-verification-api) once and print each dataset item.
 
 Setup:  pip install apify-client
 Token:  export APIFY_TOKEN=<your Apify API token>

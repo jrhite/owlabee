@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PDF to Markdown for RAG: Headings, Tables, Chunks and OCR | owlabee</title>
-<meta name="description" content="Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.">
+<meta name="description" content="Convert PDF, Office, OpenDocument, EPUB, HTML, text, CSV and image URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR in 21 languages.">
 <link rel="canonical" href="https://owlabee.com/pdf-to-markdown-rag/">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="owlabee">
 <meta property="og:title" content="PDF to Markdown for RAG: Headings, Tables, Chunks and OCR | owlabee">
-<meta property="og:description" content="Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.">
+<meta property="og:description" content="Convert PDF, Office, OpenDocument, EPUB, HTML, text, CSV and image URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR in 21 languages.">
 <meta property="og:url" content="https://owlabee.com/pdf-to-markdown-rag/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://owlabee.com/og-image.png">
@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
 <link rel="stylesheet" href="../style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to Markdown for RAG: Headings, Tables, Chunks and OCR","description":"Convert PDF, DOCX, HTML and text URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR for scanned pages.","url":"https://owlabee.com/pdf-to-markdown-rag/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pdf-to-markdown"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pdf-to-markdown","name":"PDF to Markdown for RAG — DOCX, OCR & Chunks","description":"Clean Markdown from PDF, DOCX, HTML and text URLs, with optional heading-aware RAG chunks and OCR for scanned pages","url":"https://apify.com/owlabee/pdf-to-markdown","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it send my documents to another service?","acceptedAnswer":{"@type":"Answer","text":"No. Files are downloaded over HTTPS and converted inside the Actor. Only the URLs you give and your optional webhook are contacted."}},{"@type":"Question","name":"How do chunks reference pages?","acceptedAnswer":{"@type":"Answer","text":"Each chunk carries startPage and endPage from the page markers, and headingPath, the headings it sits under."}},{"@type":"Question","name":"What happens with a scanned PDF?","acceptedAnswer":{"@type":"Answer","text":"Pages with no text layer are listed in needsOcrPages and marked in the Markdown. Turn on ocr to have them recognized; they then appear in ocrPages."}},{"@type":"Question","name":"How are DOCX and HTML pages counted?","acceptedAnswer":{"@type":"Answer","text":"DOCX files use their saved page count. When that is missing, and for HTML, Markdown and text, pages are estimated at one per roughly 3,000 characters (pagesEstimated: true)."}},{"@type":"Question","name":"I need specific fields, not Markdown.","acceptedAnswer":{"@type":"Answer","text":"Use the document to JSON extractor, which runs the same layout engine against a schema you define."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"PDF to Markdown for RAG: Headings, Tables, Chunks and OCR","description":"Convert PDF, Office, OpenDocument, EPUB, HTML, text, CSV and image URLs to clean Markdown with headings, GFM tables and page markers, plus heading-aware chunks for embedding and OCR in 21 languages.","url":"https://owlabee.com/pdf-to-markdown-rag/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/pdf-to-markdown"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/pdf-to-markdown","name":"PDF to Markdown for RAG — DOCX, OCR & Chunks","description":"Clean Markdown from PDF, Office, OpenDocument, EPUB, HTML, text, CSV and image URLs, with optional RAG chunks, OCR in 21 languages, table records and images","url":"https://apify.com/owlabee/pdf-to-markdown","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it send my documents to another service?","acceptedAnswer":{"@type":"Answer","text":"No. Files are downloaded over HTTPS and converted inside the Actor. Only the URLs you give and your optional webhook are contacted."}},{"@type":"Question","name":"How do chunks reference pages?","acceptedAnswer":{"@type":"Answer","text":"Each chunk carries startPage and endPage from the page markers, and headingPath, the headings it sits under."}},{"@type":"Question","name":"What happens with a scanned PDF?","acceptedAnswer":{"@type":"Answer","text":"Pages with no text layer are listed in needsOcrPages and marked in the Markdown. Turn on ocr to have them recognized; they then appear in ocrPages."}},{"@type":"Question","name":"How are DOCX and HTML pages counted?","acceptedAnswer":{"@type":"Answer","text":"DOCX files use their saved page count. When that is missing, and for HTML, Markdown and text, pages are estimated at one per roughly 3,000 characters (pagesEstimated: true)."}},{"@type":"Question","name":"I need specific fields, not Markdown.","acceptedAnswer":{"@type":"Answer","text":"Use the document to JSON extractor, which runs the same layout engine against a schema you define."}}]}]}</script>
 <script>
 (function (c) {
   if (c.hosts.indexOf(location.hostname) === -1) return;
@@ -88,18 +88,21 @@
 
 <section id="source">
 <h2>The source and its limits</h2>
-<p>The input is any public document URL: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>HTML</strong>, <strong>Markdown</strong> or <strong>plain text</strong>, plus <code>kvs://&lt;storeId&gt;/&lt;key&gt;</code> references to files in your own Apify key-value stores and <code>data:</code> URLs. Conversion runs inside the Actor with open-source libraries (pdf.js, mammoth, turndown and tesseract.js). There is no browser and no external conversion service; the Actor contacts only the URLs you give it and your optional webhook.</p>
+<p>The input is any public document URL: <strong>PDF</strong>, <strong>DOCX</strong>, <strong>PPTX</strong> (one page per slide, speaker notes kept), <strong>XLSX/XLSM</strong> (one table per sheet), <strong>OpenDocument</strong> (ODT, ODP, ODS), <strong>EPUB</strong>, <strong>HTML</strong>, <strong>Markdown</strong>, <strong>plain text</strong>, <strong>CSV/TSV</strong> and <strong>images</strong> (PNG, JPEG, GIF, WebP, TIFF, BMP, AVIF, HEIC, read with OCR), plus <code>kvs://&lt;storeId&gt;/&lt;key&gt;</code> references to files in your own Apify key-value stores and <code>data:</code> URLs. Conversion runs inside the Actor with open-source libraries (pdf.js, mammoth, turndown and tesseract.js). There is no browser and no external conversion service; the Actor contacts only the URLs you give it and your optional webhook.</p>
 <p>For PDFs it rebuilds the layout from the file's own text layer: headings from font-size and bold clusters, tables from column alignment, two-column pages read column by column, and running headers, footers and page numbers stripped. Each document becomes one record with the Markdown and its metadata (title, author, producer, creation date, page count, headings, tables and links).</p>
 <h3>Chunks and OCR</h3>
 <ul>
 <li><code>chunk: true</code> adds one <code>chunk</code> record per heading-aware chunk, with <code>startPage</code>, <code>endPage</code>, the <code>headingPath</code> it sits under and a token estimate. Chunk size and overlap are configurable.</li>
-<li><code>ocr: true</code> runs the bundled English OCR model on PDF pages that have no text layer. Without it, those pages are listed in <code>needsOcrPages</code> and marked in the Markdown, and nothing is recognized.</li>
+<li><code>ocr: true</code> runs bundled OCR models on PDF pages that have no text layer and on image inputs, in up to three of 21 languages per run (<code>ocrLanguages</code>, English by default). Without it, those pages are listed in <code>needsOcrPages</code> and marked in the Markdown, and nothing is recognized.</li>
+<li><code>extractTables: true</code> adds one <code>table</code> record per table, with its rows as objects, and writes a CSV file per table to the key-value store.</li>
+<li><code>extractImages: true</code> saves the images embedded in PDF, DOCX, PPTX, OpenDocument and EPUB files to the key-value store and links them from the Markdown.</li>
 </ul>
 <h3>Limits worth knowing</h3>
 <ul>
 <li>Files up to 25 MB by default (<code>maxFileSizeMb</code>, at most 50), a 20-second download timeout by default, and 10 minutes of conversion per file. After that, the pages converted so far are returned with a <code>PROCESSING_TIMEOUT</code> warning.</li>
-<li>Layout reconstruction is heuristic. Complex forms, rotated text, equations and multi-line table cells are best effort, and images are not extracted.</li>
-<li>OCR is English only and runs at about two to five seconds per page.</li>
+<li>Layout reconstruction is heuristic. Complex forms, rotated text, equations and multi-line table cells are best effort.</li>
+<li>Image inputs are capped at 10 MB each.</li>
+<li>OCR reads at most three languages per run and takes about two to five seconds per page.</li>
 <li>Password-protected, corrupt or unsupported files return an error item with a clear code instead of failing the run.</li>
 </ul>
 </section>
@@ -109,7 +112,7 @@
 <div class="table-wrap"><table>
 <thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
 <tbody>
-<tr><td><code>recordType</code></td><td><code>document</code>, or <code>chunk</code> when chunking is on</td></tr>
+<tr><td><code>recordType</code></td><td><code>document</code>, <code>chunk</code> when chunking is on, or <code>table</code> when <code>extractTables</code> is on</td></tr>
 <tr><td><code>url, filename, mimeType, bytes</code></td><td>The source file</td></tr>
 <tr><td><code>pages, pagesProcessed</code></td><td>Page count and pages converted</td></tr>
 <tr><td><code>title, author, producer, creationDate</code></td><td>Document metadata, where the file has it</td></tr>
@@ -212,7 +215,7 @@ curl -sS -X POST \
 
 <aside class="cta-box">
 <h2>Try it on Apify Store</h2>
-<p>PDF to Markdown for RAG — DOCX, OCR &amp; Chunks. Clean Markdown from PDF, DOCX, HTML and text URLs, with optional heading-aware RAG chunks and OCR for scanned pages.</p>
+<p>PDF to Markdown for RAG — DOCX, OCR &amp; Chunks. Clean Markdown from PDF, Office, OpenDocument, EPUB, HTML, text, CSV and image URLs, with optional RAG chunks, OCR in 21 languages, table records and images.</p>
 <p><a class="button" href="https://apify.com/owlabee/pdf-to-markdown">Open on Apify Store</a></p>
 <p class="note">Pay per result; see the Store page for current pricing.</p>
 </aside>

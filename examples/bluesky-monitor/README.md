@@ -4,13 +4,13 @@ Apify Store: [apify.com/owlabee/bluesky-monitor](https://apify.com/owlabee/blues
 
 Guide on the site: [https://owlabee.com/bluesky-monitor/](https://owlabee.com/bluesky-monitor/)
 
-Searches Bluesky posts by keyword or hashtag and reads profiles, author feeds, followers and following lists from the public AT Protocol API, as flat JSON records. With "Only new since last run" a schedule emits only posts or followers that appeared since the previous run.
+Searches Bluesky posts by keyword or hashtag and reads profiles, author feeds, followers and following lists from the public AT Protocol API, as flat JSON records. Opt-in modes read a post's thread, quotes, likes and reposts, the posts of a custom feed or list, and the members of a list or starter pack. With "Only new since last run" a schedule emits only posts or followers that appeared since the previous run.
 
 ## Inputs that matter
 
 | Field | What it does |
 |---|---|
-| `mode` | Required. `searchPosts`, `profiles`, `authorFeed`, `followers`, `following` or `searchActors`. |
+| `mode` | Required. `searchPosts`, `profiles`, `authorFeed`, `followers`, `following` or `searchActors`; opt-in `postThread`, `quotes`, `likedBy`, `repostedBy`, `customFeed`, `listFeed`, `listMembers`, `starterPack`. |
 | `queries` | Required. Search terms, hashtags or handles, depending on the mode. |
 | `maxResults` | Cap on dataset items across all queries. |
 | `sort` | `latest` or `top` (searchPosts only). |
