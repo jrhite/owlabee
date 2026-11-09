@@ -2,7 +2,7 @@
  "dataset": "grants",
  "actor": "grants-gov-api",
  "storeUrl": "https://apify.com/owlabee/grants-gov-api",
- "generatedAt": "2026-11-08T04:15:57.028Z",
+ "generatedAt": "2026-11-09T03:20:07.090Z",
  "runStatus": "SUCCEEDED",
  "inputs": [
   {
@@ -530,14 +530,14 @@
    "dataset": "la-city",
    "datasetUrl": "https://data.lacity.org/d/hf3r-utnq",
    "noticeType": "bid",
-   "opportunityId": "la-city:232942",
-   "number": "232942",
-   "title": "LACDA26-103 - Senior Grant Program SG22-326 - Closing: 11/12/2026 3:00 PM",
+   "opportunityId": "la-city:232943",
+   "number": "232943",
+   "title": "LACDA26-105 - Senior Grant Program Construction Rehabilitation Services-335 - Closing: 11/12/2026 3:00 PM",
    "agency": "Los Angeles County",
    "status": "Open",
    "postedDate": "2026-11-05",
    "closeDate": "2026-11-12",
-   "url": "https://www.rampla.org/s/opportunity-details?id=006Ql00000oAC9ZIAW"
+   "url": "https://www.rampla.org/s/opportunity-details?id=006Ql00000oAC9aIAG"
   },
   {
    "source": "socrata",
@@ -547,14 +547,14 @@
    "dataset": "la-city",
    "datasetUrl": "https://data.lacity.org/d/hf3r-utnq",
    "noticeType": "bid",
-   "opportunityId": "la-city:232943",
-   "number": "232943",
-   "title": "LACDA26-105 - Senior Grant Program Construction Rehabilitation Services-335 - Closing: 11/12/2026 3:00 PM",
+   "opportunityId": "la-city:232942",
+   "number": "232942",
+   "title": "LACDA26-103 - Senior Grant Program SG22-326 - Closing: 11/12/2026 3:00 PM",
    "agency": "Los Angeles County",
    "status": "Open",
    "postedDate": "2026-11-05",
    "closeDate": "2026-11-12",
-   "url": "https://www.rampla.org/s/opportunity-details?id=006Ql00000oAC9aIAG"
+   "url": "https://www.rampla.org/s/opportunity-details?id=006Ql00000oAC9ZIAW"
   },
   {
    "source": "socrata",
