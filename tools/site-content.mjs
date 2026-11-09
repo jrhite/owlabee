@@ -364,6 +364,112 @@ export const pages = [
   },
 
   {
+    slug: 'public-tenders-api',
+    actor: 'tenders-scraper',
+    title: 'Public Tenders API: EU TED, UK Find a Tender and AusTender',
+    nav: 'EU, UK and Australian tenders',
+    description:
+      'Public tenders and contract awards from EU TED, UK Find a Tender, UK Contracts Finder and AusTender as one JSON record, filtered by keyword, country, CPV or UNSPSC code.',
+    lede:
+      'The EU, the UK and Australia each publish public procurement notices through an open API, with different query models and field names. This Actor searches all four sources and returns every notice in one record shape with the deadline, estimated value, buyer, classification codes and links to the notice and its documents, and on a schedule returns only notices you have not seen.',
+    source: `
+<table>
+<thead><tr><th>Source id</th><th>Source</th><th>What it returns</th><th>Keyword search</th><th>License</th></tr></thead>
+<tbody>
+<tr><td><code>ted</code></td><td>EU TED (Tenders Electronic Daily): above-threshold procurement in the 27 EU countries, the EEA and partner countries</td><td>Calls for competition, award and direct-award notices, prior information notices</td><td>TED full-text search, on the server</td><td>CC BY 4.0 (Commission Decision 2011/833/EU)</td></tr>
+<tr><td><code>findATender</code></td><td>UK Find a Tender: UK above-threshold notices</td><td>Tender, award and planning notices (OCDS)</td><td>Matched by the Actor in the date window</td><td>Open Government Licence v3.0</td></tr>
+<tr><td><code>contractsFinder</code></td><td>UK Contracts Finder: central government and below-threshold notices</td><td>Tender, award and pipeline notices (OCDS), with the "suitable for SMEs" flag</td><td>Matched by the Actor in the date window</td><td>Open Government Licence v3.0</td></tr>
+<tr><td><code>ausTender</code></td><td>AusTender: Australian Commonwealth contract notices</td><td>Contract notices (awards) with value, dates and UNSPSC code</td><td>Matched by the Actor in the date window</td><td>CC BY 3.0 AU</td></tr>
+</tbody>
+</table>
+<p>All four are official open APIs that need no key or account, and the Actor uses no login, proxy or browser. The UK and Australian APIs have no keyword parameter, so the Actor reads their date window once per run and keeps notices whose title, description, buyer name or code descriptions contain every word of the keyword. <code>countries</code> narrows TED; the UK and Australian sources are national.</p>
+<p>The record shape matches the opportunity records of the <a href="../grants-gov-api/">Grants.gov API</a> Actor (<code>opportunityId</code>, <code>title</code>, <code>agency</code>, <code>postedDate</code>, <code>closeDate</code>, <code>noticeType</code>, <code>classifications</code>, <code>estimatedValue</code>), so US and international results can go into one table. Every record and the run summary carry the source's license and attribution line; keep it with any redistribution.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>AusTender's open approaches to market are not in its open API, so AusTender returns awarded contracts only.</li>
+<li>TED reads up to <code>maxPagesPerSource</code> pages of 100 notices per keyword (default 10). The shared UK and Australian windows read at most 3 Find a Tender pages, 5 Contracts Finder pages or 7 AusTender days per keyword in a run; the run summary says when a cap was hit.</li>
+<li>Lots, procurement documents and submission links for TED come from one more request per notice, only with <code>fetchDetails</code> on.</li>
+<li>Buyer contact persons are left out by default (<code>omitContacts</code>), and award winners whose names read as private individuals are withheld with <code>nameWithheld: true</code>. Company winners are always named.</li>
+</ul>`,
+    fields: [
+      ['source, opportunityId, noticeId', 'Which source answered and the notice id'],
+      ['title, titleOriginal, description', 'The notice in English where the source has it, and in its original language'],
+      ['agency, buyer', 'The contracting authority, with country and city'],
+      ['status, postedDate, closeDate, deadline', 'ISO dates as published'],
+      ['noticeType, type, procurementMethod, contractNature', '<code>bid</code>, <code>award</code>, <code>planning</code>, <code>intent-to-award</code> or <code>other</code>, plus the source\'s own notice type'],
+      ['estimatedValue, awardedValue, currency', 'Values as published'],
+      ['classifications', 'CPV or UNSPSC codes'],
+      ['country, buyerCountries, jurisdiction, placeOfPerformance', 'Where the buyer is and where the work is done'],
+      ['awardees, lots', 'Award winners and lots, where published'],
+      ['url, documentsUrl, submissionUrl', 'The notice, its procurement documents and its e-submission page'],
+      ['sourceLicense, attribution', 'The source\'s license and the attribution line to keep'],
+      ['isNew, isUpdated', 'In monitor mode'],
+    ],
+    example: {
+      caption: 'A TED call for competition with details fetched (from the Actor\'s README; description shortened):',
+      json: {
+        source: 'ted',
+        recordType: 'opportunity',
+        keyword: '*',
+        opportunityId: 'ted:779189-2026',
+        noticeId: '779189-2026',
+        title: 'Slovakia – Financial transaction processing and clearing-house services – Akceptácia platobných kariet prostredníctvom internetu',
+        titleOriginal: 'Akceptácia platobných kariet prostredníctvom internetu',
+        agency: 'Železničná spoločnosť Slovensko, a.s.',
+        status: 'open',
+        postedDate: '2026-11-09',
+        closeDate: '2026-12-08',
+        deadline: '2026-12-08',
+        url: 'https://ted.europa.eu/en/notice/-/detail/779189-2026',
+        fetchedAt: '2026-11-09T06:02:33.288Z',
+        jurisdiction: 'Slovakia',
+        country: 'SK',
+        buyerCountries: ['SK'],
+        noticeType: 'bid',
+        type: 'cn-standard',
+        procurementMethod: 'open',
+        contractNature: ['services'],
+        description: 'Predmetom zákazky je poskytovanie služby platobnej brány …',
+        estimatedValue: 2794882,
+        currency: 'EUR',
+        awardedValue: null,
+        classifications: [{ scheme: 'CPV', code: '66172000', description: null }],
+        buyer: { name: 'Železničná spoločnosť Slovensko, a.s.', id: null, country: 'SK', city: 'Bratislava', website: null },
+        awardees: [],
+        placeOfPerformance: ['anyw'],
+        documentsUrl: 'https://www.uvo.gov.sk/vyhladavanie/vyhladavanie-zakaziek/dokumenty/566107',
+        submissionUrl: 'https://zssk.eranet.sk/#/tenderPublicDetails/85',
+        lots: [{ lotId: 'LOT-0001', title: 'Akceptácia platobných kariet prostredníctvom internetu', estimatedValue: 2794882, currency: 'EUR', deadline: '2026-12-08', durationValue: 48, durationUnit: 'MONTH' }],
+        sourceLicense: 'CC-BY-4.0 (Commission Decision 2011/833/EU)',
+        attribution: '© European Union, 1998–2026, data from TED (Decision 2011/833/EU)',
+        detailsFetched: true,
+      },
+    },
+    useCases: [
+      ['Daily tender alert for a sector', 'Search a CPV branch such as <code>72000000</code> (IT services) with <code>keywords: ["*"]</code>, turn on <code>onlyNewSinceLastRun</code>, and schedule it daily with a <code>webhookUrl</code>.'],
+      ['UK opportunities for small suppliers', 'Search <code>findATender</code> and <code>contractsFinder</code> together; Contracts Finder notices carry its "suitable for SMEs" flag.'],
+      ['Who won Australian Government contracts', 'Search <code>ausTender</code> with a UNSPSC code such as <code>80100000</code> (management consulting) to see recent awards, suppliers and values.'],
+    ],
+    input: {
+      keywords: ['*'],
+      sources: ['ted'],
+      countries: ['DE', 'FR'],
+      cpvCodes: ['72000000'],
+      postedWithinDays: 3,
+    },
+    inputCaption: 'IT services tenders published in Germany and France in the last three days (from the Actor\'s README):',
+    prompt: 'Find EU tenders for cybersecurity services published this week in Germany, Austria and the Netherlands, with deadlines and estimated values.',
+    faq: [
+      ['Does it need an API key or proxies?', 'No. All four sources are official open APIs that need no key or account.'],
+      ['Why do UK and Australian notices take longer to search?', 'Those APIs have no keyword search, so the Actor reads the date window and matches the keyword itself. Narrow the window or the codes to see more notices within the page caps.'],
+      ['Can I get only new tenders every day?', 'Yes. Turn on <code>onlyNewSinceLastRun</code> and schedule the task. The first run is a baseline; later runs return only new or changed notices, flagged <code>isNew</code> or <code>isUpdated</code>. Use a different <code>stateStoreName</code> per schedule.'],
+      ['Why are buyer contact names missing?', 'Contact persons are personal data under the GDPR and UK GDPR, so <code>omitContacts</code> is on by default. Turn it off to get the contact as the notice publishes it; you are then responsible for processing it lawfully.'],
+      ['Can I combine this with US federal opportunities?', 'Yes. The record shape matches the <a href="../grants-gov-api/">Grants.gov</a> and <a href="../sam-gov-contract-opportunities/">SAM.gov</a> opportunity records, so the datasets can be merged.'],
+    ],
+    related: ['sam-gov-contract-opportunities', 'grants-gov-api'],
+  },
+
+  {
     slug: 'osha-inspections-by-company',
     actor: 'osha-epa-inspections',
     title: 'OSHA Inspections by Company: DOL Data API Lookup',
@@ -1385,10 +1491,100 @@ ${courtTable(['nysd'], '../pacer-rss-feeds-by-court/')}
       ['Does it need a Shopify API key?', 'No. It reads the public <code>products.json</code> endpoint that Shopify serves for storefronts.'],
       ['Why does the first changes run return so many records?', 'There is nothing to compare against yet, so the full catalog is stored as <code>baseline</code> records. Later runs return only changes.'],
       ['What counts as a change?', 'Price, compare-at price, availability, product title and variant title, plus products and variants that appear or disappear. A new product is one event, not one per variant.'],
-      ['Can I track stores that are not on Shopify?', 'No. For other sites, the <a href="../sitemap-change-monitor/">sitemap change monitor</a> reports page and content changes.'],
+      ['Can I track stores that are not on Shopify?', 'Use the <a href="../ecommerce-price-tracker/">e-commerce price tracker</a>, which reads WooCommerce, Magento and other stores in the same record shape. For page and content changes on any site, use the <a href="../sitemap-change-monitor/">sitemap change monitor</a>.'],
       ['How do I start a fresh baseline?', 'Use a new <code>stateStoreName</code>, or delete the store\'s key in the existing one.'],
     ],
     related: ['sitemap-change-monitor', 'spf-dmarc-dkim-checker'],
+  },
+
+  {
+    slug: 'ecommerce-price-tracker',
+    actor: 'ecommerce-scraper',
+    title: 'E-commerce Price Tracker: WooCommerce, Magento and Any Store',
+    nav: 'E-commerce price tracker',
+    description:
+      'Export a WooCommerce, Magento, Shopify, Squarespace, BigCommerce or Wix store\'s catalog as JSON, every variant with price, stock and SKU, or track price and stock changes.',
+    lede:
+      'Most online stores publish their catalog somewhere public: WooCommerce and Magento through storefront APIs, Shopify through <code>products.json</code>, and almost every other platform as schema.org Product data on each product page. This Actor detects the platform, reads the catalog the cheapest public way, writes one record per variant or product in one shape, and in changes mode reports only what moved since the last run.',
+    source: `
+<table>
+<thead><tr><th>Platform</th><th>How it is read</th><th>Products per request</th></tr></thead>
+<tbody>
+<tr><td>WooCommerce</td><td>Store API <code>/wp-json/wc/store/v1/products</code>, the unauthenticated API WooCommerce's block checkout uses; variations by id</td><td>100</td></tr>
+<tr><td>Magento 2 / Adobe Commerce</td><td>Guest storefront GraphQL <code>/graphql</code>, configurable products with their variants</td><td>50</td></tr>
+<tr><td>Shopify</td><td>Public <code>products.json</code></td><td>250</td></tr>
+<tr><td>Squarespace, BigCommerce, Wix, Salesforce Commerce Cloud, custom stores</td><td>Product URLs from the store's XML sitemap, then the schema.org <code>Product</code> / <code>ProductGroup</code> JSON-LD on each product page</td><td>1 per page</td></tr>
+</tbody>
+</table>
+<p>The Actor looks at a store's home page once to detect the platform. If a catalog API is disabled, blocked or disallowed by robots.txt, <code>auto</code> mode falls back to the product pages' JSON-LD. You can also skip discovery and pass <code>productUrls</code> to watch a fixed set of product pages on any platform. Every record has the same shape as the <a href="../shopify-price-tracker/">Shopify price tracker</a>'s, plus <code>platform</code>, <code>source</code>, <code>currency</code> and <code>categories</code>, so datasets from both Actors line up. No browser, proxy, login or API key.</p>
+<p>In <strong>changes</strong> mode it keeps the previous snapshot of each store in a key-value store you name and writes only what changed, with <code>before</code> and <code>after</code> values and the percentage price move. Change types are <code>new-product</code>, <code>removed-product</code>, <code>new-variant</code>, <code>removed-variant</code>, <code>price-changed</code>, <code>availability-changed</code> and <code>title-changed</code>.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>robots.txt is read first and honored for every request. If it cannot be reached, the store is not read.</li>
+<li>Requests to one store are spaced at least 500 ms apart, and each store has a time budget (<code>maxSecondsPerStore</code>, default 900 seconds). When a store stops early, what was read is kept, and in changes mode no removals are reported for that store.</li>
+<li>The JSON-LD route needs one request per product page and reads at most 25 sitemap files per store. Product pages without Product JSON-LD and an offer are counted and reported, not guessed at.</li>
+<li>Ecwid and Shopware 6 are not supported, because their storefront APIs need the merchant's access token. Stores that block datacenter traffic return an error item; the Actor does not use proxies or browsers to get around that.</li>
+</ul>`,
+    fields: [
+      ['storeDomain, platform, source', 'The store, its detected platform and the reader used (<code>woocommerce-store-api</code>, <code>magento-graphql</code>, <code>shopify-products-json</code> or <code>json-ld</code>)'],
+      ['productId, productHandle, productTitle, productUrl', 'The product'],
+      ['vendor, productType, categories, tags', 'As set by the store'],
+      ['variantId, variantTitle, sku, barcode, option1-3', 'The variant; JSON-LD records take <code>barcode</code> from a GTIN'],
+      ['price, compareAtPrice, currency', 'Numbers in the store\'s currency; on JSON-LD pages <code>compareAtPrice</code> comes from a strike-through price'],
+      ['available', 'Availability; <code>null</code> when a JSON-LD offer does not say'],
+      ['imageUrl, fetchedAt', 'Image and read time'],
+      ['recordType, changeType, changedFields, before, after, percentChange', '<code>snapshot</code>, <code>baseline</code>, <code>change</code> or <code>error</code>; change fields in changes mode'],
+    ],
+    example: {
+      caption: 'A variant record from the WooCommerce Store API (from the Actor\'s README):',
+      json: {
+        storeDomain: 'mercantile.wordpress.org',
+        platform: 'woocommerce',
+        source: 'woocommerce-store-api',
+        productId: '34907',
+        productHandle: 'blue-wordpress-flannel-button-down',
+        productTitle: 'Blue WordPress Flannel Button-down',
+        vendor: null,
+        productType: 'Apparel',
+        categories: ['Apparel', 'Unisex'],
+        tags: [],
+        productUrl: 'https://mercantile.wordpress.org/product/blue-wordpress-flannel-button-down/',
+        variantId: '34916',
+        variantTitle: 'Adult Unisex MD',
+        sku: 'A8C-151-M',
+        barcode: null,
+        price: 48,
+        compareAtPrice: null,
+        currency: 'USD',
+        available: true,
+        option1: 'Adult Unisex MD',
+        imageUrl: 'https://mercantile.wordpress.org/wp-content/uploads/2026/10/Howdy-51.png',
+        fetchedAt: '2026-11-09T06:04:35.773Z',
+        recordType: 'snapshot',
+      },
+    },
+    useCases: [
+      ['Competitor price tracking across platforms', 'Run changes mode daily on competitor stores, whatever they run on, and send <code>price-changed</code> events with the percentage move to a webhook.'],
+      ['Watch specific products', 'Pass a list of product page URLs in <code>productUrls</code> to track price and availability of the items you care about, on any platform that publishes Product JSON-LD.'],
+      ['Catalog export', 'Snapshot mode exports every variant with price, currency, SKU, categories and image, for analysis, MAP checks or a product feed.'],
+    ],
+    input: {
+      storeUrls: ['mercantile.wordpress.org'],
+      mode: 'changes',
+      granularity: 'variant',
+      stateStoreName: 'mercantile-price-watch',
+      webhookUrl: 'https://hooks.example.com/price-changes',
+    },
+    inputCaption: 'A daily price and stock monitor on one WooCommerce store, posted to a webhook (from the Actor\'s README; the first run writes the baseline):',
+    prompt: 'Every morning check these three Magento and WooCommerce competitor stores for price drops and new products and post only the changes to my webhook.',
+    faq: [
+      ['Does it need an API key or proxies?', 'No. It reads public catalog endpoints and product pages with plain HTTP. Stores that block datacenter traffic return an error item.'],
+      ['Which platform will my store be read with?', 'The <code>platform</code> and <code>source</code> fields on every record say so. Set <code>platform</code> to force one.'],
+      ['Why does the first changes run return so many records?', 'There is nothing to compare against yet, so the full catalog is stored as <code>baseline</code> records. Later runs return only changes.'],
+      ['Is there a Shopify-only version?', 'Yes, the <a href="../shopify-price-tracker/">Shopify price tracker</a>, which also reports collection membership. This Actor reads Shopify stores too, without collections.'],
+      ['Does it touch carts, checkout or customer data?', 'No. It reads only the product data the store publishes to every visitor.'],
+    ],
+    related: ['shopify-price-tracker', 'sitemap-change-monitor'],
   },
 
   {

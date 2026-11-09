@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Public Tenders API: EU TED, UK Find a Tender and AusTender | owlabee</title>
+<meta name="description" content="Public tenders and contract awards from EU TED, UK Find a Tender, UK Contracts Finder and AusTender as one JSON record, filtered by keyword, country, CPV or UNSPSC code.">
+<link rel="canonical" href="https://owlabee.com/public-tenders-api/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="Public Tenders API: EU TED, UK Find a Tender and AusTender | owlabee">
+<meta property="og:description" content="Public tenders and contract awards from EU TED, UK Find a Tender, UK Contracts Finder and AusTender as one JSON record, filtered by keyword, country, CPV or UNSPSC code.">
+<meta property="og:url" content="https://owlabee.com/public-tenders-api/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Public Tenders API: EU TED, UK Find a Tender and AusTender","description":"Public tenders and contract awards from EU TED, UK Find a Tender, UK Contracts Finder and AusTender as one JSON record, filtered by keyword, country, CPV or UNSPSC code.","url":"https://owlabee.com/public-tenders-api/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/tenders-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/tenders-scraper","name":"Tenders Scraper: EU TED, UK Find a Tender & AusTender","description":"Public tenders and contract award notices from EU TED, UK Find a Tender, UK Contracts Finder and AusTender in one record shape","url":"https://apify.com/owlabee/tenders-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it need an API key or proxies?","acceptedAnswer":{"@type":"Answer","text":"No. All four sources are official open APIs that need no key or account."}},{"@type":"Question","name":"Why do UK and Australian notices take longer to search?","acceptedAnswer":{"@type":"Answer","text":"Those APIs have no keyword search, so the Actor reads the date window and matches the keyword itself. Narrow the window or the codes to see more notices within the page caps."}},{"@type":"Question","name":"Can I get only new tenders every day?","acceptedAnswer":{"@type":"Answer","text":"Yes. Turn on onlyNewSinceLastRun and schedule the task. The first run is a baseline; later runs return only new or changed notices, flagged isNew or isUpdated. Use a different stateStoreName per schedule."}},{"@type":"Question","name":"Why are buyer contact names missing?","acceptedAnswer":{"@type":"Answer","text":"Contact persons are personal data under the GDPR and UK GDPR, so omitContacts is on by default. Turn it off to get the contact as the notice publishes it; you are then responsible for processing it lawfully."}},{"@type":"Question","name":"Can I combine this with US federal opportunities?","acceptedAnswer":{"@type":"Answer","text":"Yes. The record shape matches the Grants.gov and SAM.gov opportunity records, so the datasets can be merged."}}]}]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../data/">Free data</a>
+<a href="../compare/">Compare</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> EU, UK and Australian tenders</nav>
+<p class="kicker">Government and public records</p>
+<h1>Public Tenders API: EU TED, UK Find a Tender and AusTender</h1>
+<p class="lede">The EU, the UK and Australia each publish public procurement notices through an open API, with different query models and field names. This Actor searches all four sources and returns every notice in one record shape with the deadline, estimated value, buyer, classification codes and links to the notice and its documents, and on a schedule returns only notices you have not seen.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/tenders-scraper">Open the Actor on Apify Store</a>
+<p class="note">Tenders Scraper: EU TED, UK Find a Tender &amp; AusTender. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<table>
+<thead><tr><th>Source id</th><th>Source</th><th>What it returns</th><th>Keyword search</th><th>License</th></tr></thead>
+<tbody>
+<tr><td><code>ted</code></td><td>EU TED (Tenders Electronic Daily): above-threshold procurement in the 27 EU countries, the EEA and partner countries</td><td>Calls for competition, award and direct-award notices, prior information notices</td><td>TED full-text search, on the server</td><td>CC BY 4.0 (Commission Decision 2011/833/EU)</td></tr>
+<tr><td><code>findATender</code></td><td>UK Find a Tender: UK above-threshold notices</td><td>Tender, award and planning notices (OCDS)</td><td>Matched by the Actor in the date window</td><td>Open Government Licence v3.0</td></tr>
+<tr><td><code>contractsFinder</code></td><td>UK Contracts Finder: central government and below-threshold notices</td><td>Tender, award and pipeline notices (OCDS), with the "suitable for SMEs" flag</td><td>Matched by the Actor in the date window</td><td>Open Government Licence v3.0</td></tr>
+<tr><td><code>ausTender</code></td><td>AusTender: Australian Commonwealth contract notices</td><td>Contract notices (awards) with value, dates and UNSPSC code</td><td>Matched by the Actor in the date window</td><td>CC BY 3.0 AU</td></tr>
+</tbody>
+</table>
+<p>All four are official open APIs that need no key or account, and the Actor uses no login, proxy or browser. The UK and Australian APIs have no keyword parameter, so the Actor reads their date window once per run and keeps notices whose title, description, buyer name or code descriptions contain every word of the keyword. <code>countries</code> narrows TED; the UK and Australian sources are national.</p>
+<p>The record shape matches the opportunity records of the <a href="../grants-gov-api/">Grants.gov API</a> Actor (<code>opportunityId</code>, <code>title</code>, <code>agency</code>, <code>postedDate</code>, <code>closeDate</code>, <code>noticeType</code>, <code>classifications</code>, <code>estimatedValue</code>), so US and international results can go into one table. Every record and the run summary carry the source's license and attribution line; keep it with any redistribution.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>AusTender's open approaches to market are not in its open API, so AusTender returns awarded contracts only.</li>
+<li>TED reads up to <code>maxPagesPerSource</code> pages of 100 notices per keyword (default 10). The shared UK and Australian windows read at most 3 Find a Tender pages, 5 Contracts Finder pages or 7 AusTender days per keyword in a run; the run summary says when a cap was hit.</li>
+<li>Lots, procurement documents and submission links for TED come from one more request per notice, only with <code>fetchDetails</code> on.</li>
+<li>Buyer contact persons are left out by default (<code>omitContacts</code>), and award winners whose names read as private individuals are withheld with <code>nameWithheld: true</code>. Company winners are always named.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>source, opportunityId, noticeId</code></td><td>Which source answered and the notice id</td></tr>
+<tr><td><code>title, titleOriginal, description</code></td><td>The notice in English where the source has it, and in its original language</td></tr>
+<tr><td><code>agency, buyer</code></td><td>The contracting authority, with country and city</td></tr>
+<tr><td><code>status, postedDate, closeDate, deadline</code></td><td>ISO dates as published</td></tr>
+<tr><td><code>noticeType, type, procurementMethod, contractNature</code></td><td><code>bid</code>, <code>award</code>, <code>planning</code>, <code>intent-to-award</code> or <code>other</code>, plus the source's own notice type</td></tr>
+<tr><td><code>estimatedValue, awardedValue, currency</code></td><td>Values as published</td></tr>
+<tr><td><code>classifications</code></td><td>CPV or UNSPSC codes</td></tr>
+<tr><td><code>country, buyerCountries, jurisdiction, placeOfPerformance</code></td><td>Where the buyer is and where the work is done</td></tr>
+<tr><td><code>awardees, lots</code></td><td>Award winners and lots, where published</td></tr>
+<tr><td><code>url, documentsUrl, submissionUrl</code></td><td>The notice, its procurement documents and its e-submission page</td></tr>
+<tr><td><code>sourceLicense, attribution</code></td><td>The source's license and the attribution line to keep</td></tr>
+<tr><td><code>isNew, isUpdated</code></td><td>In monitor mode</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>A TED call for competition with details fetched (from the Actor's README; description shortened):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;source&quot;: &quot;ted&quot;,
+  &quot;recordType&quot;: &quot;opportunity&quot;,
+  &quot;keyword&quot;: &quot;*&quot;,
+  &quot;opportunityId&quot;: &quot;ted:779189-2026&quot;,
+  &quot;noticeId&quot;: &quot;779189-2026&quot;,
+  &quot;title&quot;: &quot;Slovakia – Financial transaction processing and clearing-house services – Akceptácia platobných kariet prostredníctvom internetu&quot;,
+  &quot;titleOriginal&quot;: &quot;Akceptácia platobných kariet prostredníctvom internetu&quot;,
+  &quot;agency&quot;: &quot;Železničná spoločnosť Slovensko, a.s.&quot;,
+  &quot;status&quot;: &quot;open&quot;,
+  &quot;postedDate&quot;: &quot;2026-11-09&quot;,
+  &quot;closeDate&quot;: &quot;2026-12-08&quot;,
+  &quot;deadline&quot;: &quot;2026-12-08&quot;,
+  &quot;url&quot;: &quot;https://ted.europa.eu/en/notice/-/detail/779189-2026&quot;,
+  &quot;fetchedAt&quot;: &quot;2026-11-09T06:02:33.288Z&quot;,
+  &quot;jurisdiction&quot;: &quot;Slovakia&quot;,
+  &quot;country&quot;: &quot;SK&quot;,
+  &quot;buyerCountries&quot;: [
+    &quot;SK&quot;
+  ],
+  &quot;noticeType&quot;: &quot;bid&quot;,
+  &quot;type&quot;: &quot;cn-standard&quot;,
+  &quot;procurementMethod&quot;: &quot;open&quot;,
+  &quot;contractNature&quot;: [
+    &quot;services&quot;
+  ],
+  &quot;description&quot;: &quot;Predmetom zákazky je poskytovanie služby platobnej brány …&quot;,
+  &quot;estimatedValue&quot;: 2794882,
+  &quot;currency&quot;: &quot;EUR&quot;,
+  &quot;awardedValue&quot;: null,
+  &quot;classifications&quot;: [
+    {
+      &quot;scheme&quot;: &quot;CPV&quot;,
+      &quot;code&quot;: &quot;66172000&quot;,
+      &quot;description&quot;: null
+    }
+  ],
+  &quot;buyer&quot;: {
+    &quot;name&quot;: &quot;Železničná spoločnosť Slovensko, a.s.&quot;,
+    &quot;id&quot;: null,
+    &quot;country&quot;: &quot;SK&quot;,
+    &quot;city&quot;: &quot;Bratislava&quot;,
+    &quot;website&quot;: null
+  },
+  &quot;awardees&quot;: [],
+  &quot;placeOfPerformance&quot;: [
+    &quot;anyw&quot;
+  ],
+  &quot;documentsUrl&quot;: &quot;https://www.uvo.gov.sk/vyhladavanie/vyhladavanie-zakaziek/dokumenty/566107&quot;,
+  &quot;submissionUrl&quot;: &quot;https://zssk.eranet.sk/#/tenderPublicDetails/85&quot;,
+  &quot;lots&quot;: [
+    {
+      &quot;lotId&quot;: &quot;LOT-0001&quot;,
+      &quot;title&quot;: &quot;Akceptácia platobných kariet prostredníctvom internetu&quot;,
+      &quot;estimatedValue&quot;: 2794882,
+      &quot;currency&quot;: &quot;EUR&quot;,
+      &quot;deadline&quot;: &quot;2026-12-08&quot;,
+      &quot;durationValue&quot;: 48,
+      &quot;durationUnit&quot;: &quot;MONTH&quot;
+    }
+  ],
+  &quot;sourceLicense&quot;: &quot;CC-BY-4.0 (Commission Decision 2011/833/EU)&quot;,
+  &quot;attribution&quot;: &quot;© European Union, 1998–2026, data from TED (Decision 2011/833/EU)&quot;,
+  &quot;detailsFetched&quot;: true
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Daily tender alert for a sector</h3>
+<p>Search a CPV branch such as <code>72000000</code> (IT services) with <code>keywords: ["*"]</code>, turn on <code>onlyNewSinceLastRun</code>, and schedule it daily with a <code>webhookUrl</code>.</p>
+<h3>UK opportunities for small suppliers</h3>
+<p>Search <code>findATender</code> and <code>contractsFinder</code> together; Contracts Finder notices carry its "suitable for SMEs" flag.</p>
+<h3>Who won Australian Government contracts</h3>
+<p>Search <code>ausTender</code> with a UNSPSC code such as <code>80100000</code> (management consulting) to see recent awards, suppliers and values.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. IT services tenders published in Germany and France in the last three days (from the Actor's README):</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~tenders-scraper/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;keywords&quot;: [
+    &quot;*&quot;
+  ],
+  &quot;sources&quot;: [
+    &quot;ted&quot;
+  ],
+  &quot;countries&quot;: [
+    &quot;DE&quot;,
+    &quot;FR&quot;
+  ],
+  &quot;cpvCodes&quot;: [
+    &quot;72000000&quot;
+  ],
+  &quot;postedWithinDays&quot;: 3
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-tenders-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/tenders-scraper&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Find EU tenders for cybersecurity services published this week in Germany, Austria and the Netherlands, with deadlines and estimated values.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/tenders-scraper">examples/tenders-scraper</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does it need an API key or proxies?</h3>
+<p>No. All four sources are official open APIs that need no key or account.</p>
+<h3>Why do UK and Australian notices take longer to search?</h3>
+<p>Those APIs have no keyword search, so the Actor reads the date window and matches the keyword itself. Narrow the window or the codes to see more notices within the page caps.</p>
+<h3>Can I get only new tenders every day?</h3>
+<p>Yes. Turn on <code>onlyNewSinceLastRun</code> and schedule the task. The first run is a baseline; later runs return only new or changed notices, flagged <code>isNew</code> or <code>isUpdated</code>. Use a different <code>stateStoreName</code> per schedule.</p>
+<h3>Why are buyer contact names missing?</h3>
+<p>Contact persons are personal data under the GDPR and UK GDPR, so <code>omitContacts</code> is on by default. Turn it off to get the contact as the notice publishes it; you are then responsible for processing it lawfully.</p>
+<h3>Can I combine this with US federal opportunities?</h3>
+<p>Yes. The record shape matches the <a href="../grants-gov-api/">Grants.gov</a> and <a href="../sam-gov-contract-opportunities/">SAM.gov</a> opportunity records, so the datasets can be merged.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>Tenders Scraper: EU TED, UK Find a Tender &amp; AusTender. Public tenders and contract award notices from EU TED, UK Find a Tender, UK Contracts Finder and AusTender in one record shape.</p>
+<p><a class="button" href="https://apify.com/owlabee/tenders-scraper">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../sam-gov-contract-opportunities/">SAM.gov Contract Opportunities API Feed by Keyword</a></li>
+<li><a href="../grants-gov-api/">Grants.gov API: Federal Grant Opportunities as JSON</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p>Contact: <a href="mailto:jacob@owlabee.com">jacob@owlabee.com</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>

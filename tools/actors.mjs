@@ -75,6 +75,7 @@ const meta = {
       ['cpvCodes', 'CPV codes or prefixes (TED and UK); `unspscCodes` for AusTender.'],
       ['onlyNewSinceLastRun', 'Monitor mode: emit only notices that are new or changed.'],
     ],
+    page: 'public-tenders-api',
   },
   'pacer-docket-monitor': {
     group: 'Government and public records',
@@ -185,6 +186,7 @@ const meta = {
       ['platform', '`auto` (default), `woocommerce`, `magento`, `shopify` or `jsonld`.'],
       ['maxProductsPerStore', 'Cap per store (default 1000).'],
     ],
+    page: 'ecommerce-price-tracker',
   },
   'bluesky-monitor': {
     group: 'Web and domains',

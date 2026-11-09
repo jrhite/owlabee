@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/ecommerce-scraper](https://apify.com/owlabee/ecommerce-scraper) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/ecommerce-price-tracker/](https://owlabee.com/ecommerce-price-tracker/)
+
 Detects a store's platform and reads its catalog the cheapest public way: the WooCommerce Store API, Magento GraphQL, Shopify `products.json`, or, on Squarespace, BigCommerce, Wix and custom stores, the schema.org Product JSON-LD on each product page. Every product or variant becomes one record with price, compare-at price, currency, availability, SKU and image, in the Shopify Catalog Monitor's shape. Changes mode keeps the previous snapshot and writes only price, stock, title and new or removed product changes. No browser, proxy, login or API key.
 
 ## Inputs that matter

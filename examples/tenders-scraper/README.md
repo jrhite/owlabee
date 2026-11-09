@@ -2,6 +2,8 @@
 
 Apify Store: [apify.com/owlabee/tenders-scraper](https://apify.com/owlabee/tenders-scraper) · Pay per result; see the Store page for current pricing.
 
+Guide on the site: [https://owlabee.com/public-tenders-api/](https://owlabee.com/public-tenders-api/)
+
 Collects public tenders and contract award notices from four official open procurement APIs (EU TED, UK Find a Tender, UK Contracts Finder and AusTender) and returns them in one normalized record with the deadline, estimated value and currency, buyer, CPV or UNSPSC classifications, lots, notice and document links, and the source's license and attribution line. The record shape matches the Grants.gov API opportunity records. Monitor mode emits only new or updated notices. No API key, login or proxy.
 
 ## Inputs that matter

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-commerce Price Tracker: WooCommerce, Magento and Any Store | owlabee</title>
+<meta name="description" content="Export a WooCommerce, Magento, Shopify, Squarespace, BigCommerce or Wix store's catalog as JSON, every variant with price, stock and SKU, or track price and stock changes.">
+<link rel="canonical" href="https://owlabee.com/ecommerce-price-tracker/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="owlabee">
+<meta property="og:title" content="E-commerce Price Tracker: WooCommerce, Magento and Any Store | owlabee">
+<meta property="og:description" content="Export a WooCommerce, Magento, Shopify, Squarespace, BigCommerce or Wix store's catalog as JSON, every variant with price, stock and SKU, or track price and stock changes.">
+<meta property="og:url" content="https://owlabee.com/ecommerce-price-tracker/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://owlabee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="owlabee: public records and web data, as clean JSON.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://owlabee.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#FAF7F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#2E2E2E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"E-commerce Price Tracker: WooCommerce, Magento and Any Store","description":"Export a WooCommerce, Magento, Shopify, Squarespace, BigCommerce or Wix store's catalog as JSON, every variant with price, stock and SKU, or track price and stock changes.","url":"https://owlabee.com/ecommerce-price-tracker/","inLanguage":"en-US","dateModified":"2026-11-08","author":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"publisher":{"@type":"Organization","name":"owlabee","url":"https://owlabee.com/"},"about":{"@id":"https://apify.com/owlabee/ecommerce-scraper"}},{"@type":"SoftwareApplication","@id":"https://apify.com/owlabee/ecommerce-scraper","name":"E-commerce Scraper & Price Monitor — WooCommerce, Magento","description":"Products and variants of WooCommerce, Magento, Shopify and other stores (schema.org Product JSON-LD), or price, stock and new or removed product changes","url":"https://apify.com/owlabee/ecommerce-scraper","applicationCategory":"DeveloperApplication","operatingSystem":"Web"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it need an API key or proxies?","acceptedAnswer":{"@type":"Answer","text":"No. It reads public catalog endpoints and product pages with plain HTTP. Stores that block datacenter traffic return an error item."}},{"@type":"Question","name":"Which platform will my store be read with?","acceptedAnswer":{"@type":"Answer","text":"The platform and source fields on every record say so. Set platform to force one."}},{"@type":"Question","name":"Why does the first changes run return so many records?","acceptedAnswer":{"@type":"Answer","text":"There is nothing to compare against yet, so the full catalog is stored as baseline records. Later runs return only changes."}},{"@type":"Question","name":"Is there a Shopify-only version?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Shopify price tracker, which also reports collection membership. This Actor reads Shopify stores too, without collections."}},{"@type":"Question","name":"Does it touch carts, checkout or customer data?","acceptedAnswer":{"@type":"Answer","text":"No. It reads only the product data the store publishes to every visitor."}}]}]}</script>
+<script>
+(function (c) {
+  if (c.hosts.indexOf(location.hostname) === -1) return;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('consent', 'default', { analytics_storage: 'denied', region: c.regions });
+  gtag('js', new Date());
+  gtag('config', c.id);
+  document.addEventListener('click', function (e) {
+    var a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hostname !== 'apify.com' || u.pathname.indexOf('/owlabee') !== 0) return;
+    var where = a.closest('header, nav') ? 'nav' : a.closest('footer') ? 'footer' : 'page';
+    gtag('event', 'generate_lead', { lead_method: 'apify_store', link_location: where });
+  }, true);
+  var t = document.createElement('script');
+  t.async = true;
+  t.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(c.id);
+  document.head.appendChild(t);
+})({"id":"G-9BVRW7Q52V","hosts":["owlabee.com","www.owlabee.com"],"regions":["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"]});
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap wrap-wide header-row">
+<a class="brand" href="../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" class="logo" aria-hidden="true" focusable="false"><g transform="translate(0,2)"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"><polygon points="30.95,24 50,35 50,57 30.95,68 11.9,57 11.9,35"/><polygon points="69.05,24 88.1,35 88.1,57 69.05,68 50,57 50,35"/></g><circle cx="30.95" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="7.5" fill="currentColor"/><circle cx="69.05" cy="45" r="13.5" fill="none" stroke="#C29A45" stroke-width="3.4"/><polygon points="45,64.5 55,64.5 50,73" fill="#C29A45"/></g></svg><span class="wordmark">owlabee</span></a>
+<nav aria-label="Site">
+<a href="../#guides">Guides</a>
+<a href="../data/">Free data</a>
+<a href="../compare/">Compare</a>
+<a href="../#actors">All Actors</a>
+<a href="https://github.com/owlabee/owlabee">GitHub</a>
+<a class="nav-store" href="https://apify.com/owlabee">Apify Store</a>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
+
+<article>
+<div class="guide-head">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../">Guides</a> <span aria-hidden="true">›</span> E-commerce price tracker</nav>
+<p class="kicker">Web and domains</p>
+<h1>E-commerce Price Tracker: WooCommerce, Magento and Any Store</h1>
+<p class="lede">Most online stores publish their catalog somewhere public: WooCommerce and Magento through storefront APIs, Shopify through <code>products.json</code>, and almost every other platform as schema.org Product data on each product page. This Actor detects the platform, reads the catalog the cheapest public way, writes one record per variant or product in one shape, and in changes mode reports only what moved since the last run.</p>
+<div class="cta">
+<a class="button" href="https://apify.com/owlabee/ecommerce-scraper">Open the Actor on Apify Store</a>
+<p class="note">E-commerce Scraper &amp; Price Monitor — WooCommerce, Magento. Pay per result; see the Store page for current pricing.</p>
+</div>
+</div>
+<nav class="toc" aria-label="On this page">
+<a href="#source">The source</a><a href="#fields">Fields</a><a href="#example">Example output</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="#faq">FAQ</a>
+</nav>
+
+<section id="source">
+<h2>The source and its limits</h2>
+<table>
+<thead><tr><th>Platform</th><th>How it is read</th><th>Products per request</th></tr></thead>
+<tbody>
+<tr><td>WooCommerce</td><td>Store API <code>/wp-json/wc/store/v1/products</code>, the unauthenticated API WooCommerce's block checkout uses; variations by id</td><td>100</td></tr>
+<tr><td>Magento 2 / Adobe Commerce</td><td>Guest storefront GraphQL <code>/graphql</code>, configurable products with their variants</td><td>50</td></tr>
+<tr><td>Shopify</td><td>Public <code>products.json</code></td><td>250</td></tr>
+<tr><td>Squarespace, BigCommerce, Wix, Salesforce Commerce Cloud, custom stores</td><td>Product URLs from the store's XML sitemap, then the schema.org <code>Product</code> / <code>ProductGroup</code> JSON-LD on each product page</td><td>1 per page</td></tr>
+</tbody>
+</table>
+<p>The Actor looks at a store's home page once to detect the platform. If a catalog API is disabled, blocked or disallowed by robots.txt, <code>auto</code> mode falls back to the product pages' JSON-LD. You can also skip discovery and pass <code>productUrls</code> to watch a fixed set of product pages on any platform. Every record has the same shape as the <a href="../shopify-price-tracker/">Shopify price tracker</a>'s, plus <code>platform</code>, <code>source</code>, <code>currency</code> and <code>categories</code>, so datasets from both Actors line up. No browser, proxy, login or API key.</p>
+<p>In <strong>changes</strong> mode it keeps the previous snapshot of each store in a key-value store you name and writes only what changed, with <code>before</code> and <code>after</code> values and the percentage price move. Change types are <code>new-product</code>, <code>removed-product</code>, <code>new-variant</code>, <code>removed-variant</code>, <code>price-changed</code>, <code>availability-changed</code> and <code>title-changed</code>.</p>
+<h3>Limits worth knowing</h3>
+<ul>
+<li>robots.txt is read first and honored for every request. If it cannot be reached, the store is not read.</li>
+<li>Requests to one store are spaced at least 500 ms apart, and each store has a time budget (<code>maxSecondsPerStore</code>, default 900 seconds). When a store stops early, what was read is kept, and in changes mode no removals are reported for that store.</li>
+<li>The JSON-LD route needs one request per product page and reads at most 25 sitemap files per store. Product pages without Product JSON-LD and an offer are counted and reported, not guessed at.</li>
+<li>Ecwid and Shopware 6 are not supported, because their storefront APIs need the merchant's access token. Stores that block datacenter traffic return an error item; the Actor does not use proxies or browsers to get around that.</li>
+</ul>
+</section>
+
+<section id="fields">
+<h2>Fields you get</h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Field</th><th scope="col">What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>storeDomain, platform, source</code></td><td>The store, its detected platform and the reader used (<code>woocommerce-store-api</code>, <code>magento-graphql</code>, <code>shopify-products-json</code> or <code>json-ld</code>)</td></tr>
+<tr><td><code>productId, productHandle, productTitle, productUrl</code></td><td>The product</td></tr>
+<tr><td><code>vendor, productType, categories, tags</code></td><td>As set by the store</td></tr>
+<tr><td><code>variantId, variantTitle, sku, barcode, option1-3</code></td><td>The variant; JSON-LD records take <code>barcode</code> from a GTIN</td></tr>
+<tr><td><code>price, compareAtPrice, currency</code></td><td>Numbers in the store's currency; on JSON-LD pages <code>compareAtPrice</code> comes from a strike-through price</td></tr>
+<tr><td><code>available</code></td><td>Availability; <code>null</code> when a JSON-LD offer does not say</td></tr>
+<tr><td><code>imageUrl, fetchedAt</code></td><td>Image and read time</td></tr>
+<tr><td><code>recordType, changeType, changedFields, before, after, percentChange</code></td><td><code>snapshot</code>, <code>baseline</code>, <code>change</code> or <code>error</code>; change fields in changes mode</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section id="example">
+<h2>Example output</h2>
+<p>A variant record from the WooCommerce Store API (from the Actor's README):</p>
+<pre tabindex="0" aria-label="Example output record"><code>{
+  &quot;storeDomain&quot;: &quot;mercantile.wordpress.org&quot;,
+  &quot;platform&quot;: &quot;woocommerce&quot;,
+  &quot;source&quot;: &quot;woocommerce-store-api&quot;,
+  &quot;productId&quot;: &quot;34907&quot;,
+  &quot;productHandle&quot;: &quot;blue-wordpress-flannel-button-down&quot;,
+  &quot;productTitle&quot;: &quot;Blue WordPress Flannel Button-down&quot;,
+  &quot;vendor&quot;: null,
+  &quot;productType&quot;: &quot;Apparel&quot;,
+  &quot;categories&quot;: [
+    &quot;Apparel&quot;,
+    &quot;Unisex&quot;
+  ],
+  &quot;tags&quot;: [],
+  &quot;productUrl&quot;: &quot;https://mercantile.wordpress.org/product/blue-wordpress-flannel-button-down/&quot;,
+  &quot;variantId&quot;: &quot;34916&quot;,
+  &quot;variantTitle&quot;: &quot;Adult Unisex MD&quot;,
+  &quot;sku&quot;: &quot;A8C-151-M&quot;,
+  &quot;barcode&quot;: null,
+  &quot;price&quot;: 48,
+  &quot;compareAtPrice&quot;: null,
+  &quot;currency&quot;: &quot;USD&quot;,
+  &quot;available&quot;: true,
+  &quot;option1&quot;: &quot;Adult Unisex MD&quot;,
+  &quot;imageUrl&quot;: &quot;https://mercantile.wordpress.org/wp-content/uploads/2026/10/Howdy-51.png&quot;,
+  &quot;fetchedAt&quot;: &quot;2026-11-09T06:04:35.773Z&quot;,
+  &quot;recordType&quot;: &quot;snapshot&quot;
+}</code></pre>
+</section>
+
+<section id="use-cases">
+<h2>Use cases</h2>
+<h3>Competitor price tracking across platforms</h3>
+<p>Run changes mode daily on competitor stores, whatever they run on, and send <code>price-changed</code> events with the percentage move to a webhook.</p>
+<h3>Watch specific products</h3>
+<p>Pass a list of product page URLs in <code>productUrls</code> to track price and availability of the items you care about, on any platform that publishes Product JSON-LD.</p>
+<h3>Catalog export</h3>
+<p>Snapshot mode exports every variant with price, currency, SKU, categories and image, for analysis, MAP checks or a product feed.</p>
+</section>
+
+<section id="run">
+<h2>How to run it</h2>
+<p>You need an Apify account and its API token (Console → Settings → API &amp; Integrations). Each run is billed per result to your account; set a maximum total charge for the run to cap spend.</p>
+<h3>With curl</h3>
+<p>The sync endpoint starts a run, waits up to 300 seconds and returns the dataset items. A daily price and stock monitor on one WooCommerce store, posted to a webhook (from the Actor's README; the first run writes the baseline):</p>
+<pre tabindex="0" aria-label="curl command"><code>export APIFY_TOKEN=&lt;your Apify API token&gt;
+
+curl -sS -X POST \
+  &quot;https://api.apify.com/v2/acts/owlabee~ecommerce-scraper/run-sync-get-dataset-items&quot; \
+  -H &quot;Authorization: Bearer ${APIFY_TOKEN}&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+  &quot;storeUrls&quot;: [
+    &quot;mercantile.wordpress.org&quot;
+  ],
+  &quot;mode&quot;: &quot;changes&quot;,
+  &quot;granularity&quot;: &quot;variant&quot;,
+  &quot;stateStoreName&quot;: &quot;mercantile-price-watch&quot;,
+  &quot;webhookUrl&quot;: &quot;https://hooks.example.com/price-changes&quot;
+}'</code></pre>
+<h3>From an AI agent (MCP)</h3>
+<p>Apify hosts an MCP server. This config exposes only this Actor to the agent:</p>
+<pre tabindex="0" aria-label="MCP client configuration"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;owlabee-ecommerce-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com/?tools=owlabee/ecommerce-scraper&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${APIFY_TOKEN}&quot;
+      }
+    }
+  }
+}</code></pre>
+<p>Then ask, for example: <q>Every morning check these three Magento and WooCommerce competitor stores for price drops and new products and post only the changes to my webhook.</q></p>
+<h3>Python, Node.js and more examples</h3>
+<p>Runnable <code>curl.sh</code>, <code>python.py</code>, <code>node.mjs</code> and <code>mcp.json</code> files for this Actor are in <a href="https://github.com/owlabee/owlabee/tree/main/examples/ecommerce-scraper">examples/ecommerce-scraper</a> on GitHub.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ</h2>
+<h3>Does it need an API key or proxies?</h3>
+<p>No. It reads public catalog endpoints and product pages with plain HTTP. Stores that block datacenter traffic return an error item.</p>
+<h3>Which platform will my store be read with?</h3>
+<p>The <code>platform</code> and <code>source</code> fields on every record say so. Set <code>platform</code> to force one.</p>
+<h3>Why does the first changes run return so many records?</h3>
+<p>There is nothing to compare against yet, so the full catalog is stored as <code>baseline</code> records. Later runs return only changes.</p>
+<h3>Is there a Shopify-only version?</h3>
+<p>Yes, the <a href="../shopify-price-tracker/">Shopify price tracker</a>, which also reports collection membership. This Actor reads Shopify stores too, without collections.</p>
+<h3>Does it touch carts, checkout or customer data?</h3>
+<p>No. It reads only the product data the store publishes to every visitor.</p>
+</section>
+
+<aside class="cta-box">
+<h2>Try it on Apify Store</h2>
+<p>E-commerce Scraper &amp; Price Monitor — WooCommerce, Magento. Products and variants of WooCommerce, Magento, Shopify and other stores (schema.org Product JSON-LD), or price, stock and new or removed product changes.</p>
+<p><a class="button" href="https://apify.com/owlabee/ecommerce-scraper">Open on Apify Store</a></p>
+<p class="note">Pay per result; see the Store page for current pricing.</p>
+</aside>
+
+<section class="related">
+<h2>Related guides</h2>
+<ul>
+<li><a href="../shopify-price-tracker/">Shopify Price Tracker: Catalog and Changes as JSON</a></li>
+<li><a href="../sitemap-change-monitor/">Sitemap Monitor: Track New, Removed and Changed Pages</a></li>
+</ul>
+</section>
+</article>
+</main>
+<footer class="site-footer">
+<div class="wrap wrap-wide">
+<p>owlabee is an independent developer publishing Actors on Apify Store. This site is not affiliated with or endorsed by Apify or by any agency, court, registry or company it names. Data comes from public sources as each source publishes it; coverage and freshness vary, so check the linked source record before relying on a value.</p>
+<p><a href="https://apify.com/owlabee">owlabee on Apify Store</a> · <a href="https://github.com/owlabee/owlabee">Examples on GitHub</a> (MIT) · Google Analytics counts visits (cookieless in the EEA, UK and Switzerland); fonts load from Google Fonts. <a href="https://owlabee.com/privacy/">Privacy</a></p>
+<p>Contact: <a href="mailto:jacob@owlabee.com">jacob@owlabee.com</a></p>
+<p class="maker">© 2026 owlabee · <a href="https://owlabee.com/">owlabee.com</a> · Built with <span role="img" aria-label="love">❤️</span> by <a class="maker-link" href="https://jacobhite.com/">Jacob Hite</a></p>
+</div>
+</footer>
+</body>
+</html>
