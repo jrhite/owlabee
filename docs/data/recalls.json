@@ -2,7 +2,7 @@
  "dataset": "recalls",
  "actor": "product-recall-feed",
  "storeUrl": "https://apify.com/owlabee/product-recall-feed",
- "generatedAt": "2026-11-08T04:14:59.187Z",
+ "generatedAt": "2026-11-09T03:19:54.242Z",
  "runStatus": "SUCCEEDED",
  "inputs": [
   {
@@ -38,6 +38,23 @@
  "count": 53,
  "records": [
   {
+   "agency": "CFIA",
+   "source": "health-canada",
+   "jurisdiction": "CA",
+   "recallId": "77435",
+   "date": "2026-11-07",
+   "title": "T&T brand Organic Roasted Black Soybeans recalled due to undeclared milk",
+   "productType": "Candy, confectionary, snacks and sweeteners",
+   "productCategory": "food",
+   "hazard": "Milk",
+   "hazardCategories": [
+    "undeclared-allergen"
+   ],
+   "classification": "Class 1",
+   "severity": "high",
+   "url": "https://recalls-rappels.canada.ca/en/alert-recall/tt-brand-organic-roasted-black-soybeans-recalled-due-undeclared-milk"
+  },
+  {
    "agency": "OPSS",
    "source": "uk-opss",
    "jurisdiction": "GB",
@@ -55,6 +72,21 @@
    "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-recall-petite-amelie-wooden-mobile-holder-2611-0018"
   },
   {
+   "agency": "OPSS",
+   "source": "uk-opss",
+   "jurisdiction": "GB",
+   "recallId": "2610-0246",
+   "date": "2026-11-06",
+   "title": "Product Recall: 1000W Bagless Cylinder Vacuum Cleaner sold via eBay (2610-0246)",
+   "productType": "Electrical appliances equipment",
+   "productCategory": "consumer-product",
+   "hazard": "Product Recall for 1000W Bagless Cylinder Vacuum Cleaner presenting a risk of fire.",
+   "hazardCategories": [
+    "fire"
+   ],
+   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-recall-1000w-bagless-cylinder-vacuum-cleaner-sold-via-ebay-2610-0246"
+  },
+  {
    "agency": "HC",
    "source": "health-canada",
    "jurisdiction": "CA",
@@ -69,21 +101,6 @@
     "regulatory-violation"
    ],
    "url": "https://recalls-rappels.canada.ca/en/alert-recall/health-canada-warns-about-contaminated-unauthorized-injectable-peptides-and-non"
-  },
-  {
-   "agency": "OPSS",
-   "source": "uk-opss",
-   "jurisdiction": "GB",
-   "recallId": "2610-0246",
-   "date": "2026-11-06",
-   "title": "Product Recall: 1000W Bagless Cylinder Vacuum Cleaner sold via eBay (2610-0246)",
-   "productType": "Electrical appliances equipment",
-   "productCategory": "consumer-product",
-   "hazard": "Product Recall for 1000W Bagless Cylinder Vacuum Cleaner presenting a risk of fire.",
-   "hazardCategories": [
-    "fire"
-   ],
-   "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-recall-1000w-bagless-cylinder-vacuum-cleaner-sold-via-ebay-2610-0246"
   },
   {
    "agency": "HC",
@@ -218,22 +235,6 @@
    "classification": "High risk",
    "severity": "high",
    "url": "https://www.gov.uk/product-safety-alerts-reports-recalls/product-safety-report-cube-squeeze-ball-2609-0078"
-  },
-  {
-   "agency": "HC",
-   "source": "health-canada",
-   "jurisdiction": "CA",
-   "recallId": "82909",
-   "date": "2026-11-06",
-   "title": "Costway Convertible High Chairs recalled due to fall and entrapment hazards",
-   "productType": "Household items",
-   "productCategory": "consumer-product",
-   "hazard": "Fall hazard - Entrapment hazard",
-   "hazardCategories": [
-    "entrapment",
-    "fall"
-   ],
-   "url": "https://recalls-rappels.canada.ca/en/alert-recall/costway-convertible-high-chairs-recalled-due-fall-and-entrapment-hazards"
   },
   {
    "agency": "FSA",
@@ -638,96 +639,6 @@
   },
   {
    "agency": "FDA",
-   "source": "fda-drug",
-   "jurisdiction": "US",
-   "recallId": "D-0062-2027",
-   "date": "2026-10-28",
-   "title": "Brush Buddies, Mint Chocolate Chip Ice Cream Flavored Toothpaste, Anticavity Fluoride Toothpaste, (sodium fluoride 0.243%) Net Wt. 3.5 oz (99g), Distributed ...",
-   "productType": "Drugs",
-   "productCategory": "drug",
-   "hazard": "CGMP Deviations.",
-   "hazardCategories": [
-    "regulatory-violation"
-   ],
-   "classification": "Class II",
-   "severity": "medium",
-   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
-   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0062-2027%22"
-  },
-  {
-   "agency": "FDA",
-   "source": "fda-drug",
-   "jurisdiction": "US",
-   "recallId": "D-0082-2027",
-   "date": "2026-10-28",
-   "title": "Argatroban Injection, USP, 250 mg/2.5mL (100 mg/mL), 2.5 mL x 1 Single Dose Vial, Rx only, Manufactured for: Endo USA, Malvern,PA 19355/Argatroban Injection,...",
-   "productType": "Drugs",
-   "productCategory": "drug",
-   "hazard": "Particulate matter: particulate matter identified as cellulose, polystyrene, polyethylene teraphalate, stainless steel, or stopper material in the product solution.",
-   "hazardCategories": [
-    "impurity"
-   ],
-   "classification": "Class I",
-   "severity": "high",
-   "firm": "Par Health USA, LLC",
-   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0082-2027%22"
-  },
-  {
-   "agency": "FDA",
-   "source": "fda-drug",
-   "jurisdiction": "US",
-   "recallId": "D-0060-2027",
-   "date": "2026-10-28",
-   "title": "evo, Sensitive, Anticavity Fluoride Toothpaste, (potassium nitrate 5%, sodium fluoride 0.24%) Sweet Mint, Net Wt. 3.5 oz (99g), Distributed by Ashtel Studios...",
-   "productType": "Drugs",
-   "productCategory": "drug",
-   "hazard": "CGMP Deviations.",
-   "hazardCategories": [
-    "regulatory-violation"
-   ],
-   "classification": "Class II",
-   "severity": "medium",
-   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
-   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0060-2027%22"
-  },
-  {
-   "agency": "FDA",
-   "source": "fda-drug",
-   "jurisdiction": "US",
-   "recallId": "D-0056-2027",
-   "date": "2026-10-28",
-   "title": "Brush Buddies, Crayola, Silly Scents, Anticavity Fluoride Toothpaste, (sodium fluoride0.243%) Watermelon Flavor, Net Wt. 4.0 oz (113g), Distributed by Ashtel...",
-   "productType": "Drugs",
-   "productCategory": "drug",
-   "hazard": "CGMP Deviations.",
-   "hazardCategories": [
-    "regulatory-violation"
-   ],
-   "classification": "Class II",
-   "severity": "medium",
-   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
-   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0056-2027%22"
-  },
-  {
-   "agency": "FDA",
-   "source": "fda-drug",
-   "jurisdiction": "US",
-   "recallId": "D-0067-2027",
-   "date": "2026-10-28",
-   "title": "BB (Brush Buddies) Advanced Whitening, Anti-Cavity Fluoride Toothpaste, (sodium fluoride 0,24%) Peppermint, Net Wt 3.5 oz (99g), Distributed by Ashtel Studio...",
-   "productType": "Drugs",
-   "productCategory": "drug",
-   "hazard": "CGMP Deviations.",
-   "hazardCategories": [
-    "regulatory-violation"
-   ],
-   "classification": "Class II",
-   "severity": "medium",
-   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
-   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0067-2027%22"
-  },
-  {
-   "agency": "FDA",
    "source": "fda-device",
    "jurisdiction": "US",
    "recallId": "Z-0232-2027",
@@ -743,24 +654,6 @@
    "severity": "medium",
    "firm": "Boston Scientific Cork, Ltd.",
    "url": "https://api.fda.gov/device/enforcement.json?search=recall_number:%22Z-0232-2027%22"
-  },
-  {
-   "agency": "FDA",
-   "source": "fda-drug",
-   "jurisdiction": "US",
-   "recallId": "D-0058-2027",
-   "date": "2026-10-28",
-   "title": "Brush Buddies, My Little Pony Scents Anticavity Fluoride Toothpaste, (sodium fluoride 0.243%) Bubble Gum Flavor, Net Wt. 4.0 oz (113g), Distributed by Ashtel...",
-   "productType": "Drugs",
-   "productCategory": "drug",
-   "hazard": "CGMP Deviations.",
-   "hazardCategories": [
-    "regulatory-violation"
-   ],
-   "classification": "Class II",
-   "severity": "medium",
-   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
-   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0058-2027%22"
   },
   {
    "agency": "FDA",
@@ -871,23 +764,6 @@
    "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0130-2027%22"
   },
   {
-   "agency": "NHTSA",
-   "source": "nhtsa",
-   "jurisdiction": "US",
-   "recallId": "26E077000",
-   "date": "2026-10-28",
-   "title": "Driveline May Separate",
-   "productType": "Equipment — POWER TRAIN",
-   "productCategory": "vehicle-equipment",
-   "hazard": "A driveline separation can cause a loss of drive power, increasing the risk of a crash. Detached components can become a road hazard for other vehicles, increasing the risk of a crash.",
-   "hazardCategories": [
-    "crash"
-   ],
-   "severity": "medium",
-   "firm": "Cummins, Inc.",
-   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26E077000"
-  },
-  {
    "agency": "FDA",
    "source": "fda-food",
    "jurisdiction": "US",
@@ -976,6 +852,131 @@
    "severity": "low",
    "firm": "El Ruisenor De Mexico, Inc.",
    "url": "https://api.fda.gov/food/enforcement.json?search=recall_number:%22H-0104-2027%22"
+  },
+  {
+   "agency": "NHTSA",
+   "source": "nhtsa",
+   "jurisdiction": "US",
+   "recallId": "26E077000",
+   "date": "2026-10-28",
+   "title": "Driveline May Separate",
+   "productType": "Equipment — POWER TRAIN",
+   "productCategory": "vehicle-equipment",
+   "hazard": "A driveline separation can cause a loss of drive power, increasing the risk of a crash. Detached components can become a road hazard for other vehicles, increasing the risk of a crash.",
+   "hazardCategories": [
+    "crash"
+   ],
+   "severity": "medium",
+   "firm": "Cummins, Inc.",
+   "url": "https://www.nhtsa.gov/recalls?nhtsaId=26E077000"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0062-2027",
+   "date": "2026-10-28",
+   "title": "Brush Buddies, Mint Chocolate Chip Ice Cream Flavored Toothpaste, Anticavity Fluoride Toothpaste, (sodium fluoride 0.243%) Net Wt. 3.5 oz (99g), Distributed ...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0062-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0082-2027",
+   "date": "2026-10-28",
+   "title": "Argatroban Injection, USP, 250 mg/2.5mL (100 mg/mL), 2.5 mL x 1 Single Dose Vial, Rx only, Manufactured for: Endo USA, Malvern,PA 19355/Argatroban Injection,...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "Particulate matter: particulate matter identified as cellulose, polystyrene, polyethylene teraphalate, stainless steel, or stopper material in the product solution.",
+   "hazardCategories": [
+    "impurity"
+   ],
+   "classification": "Class I",
+   "severity": "high",
+   "firm": "Par Health USA, LLC",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0082-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0060-2027",
+   "date": "2026-10-28",
+   "title": "evo, Sensitive, Anticavity Fluoride Toothpaste, (potassium nitrate 5%, sodium fluoride 0.24%) Sweet Mint, Net Wt. 3.5 oz (99g), Distributed by Ashtel Studios...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0060-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0056-2027",
+   "date": "2026-10-28",
+   "title": "Brush Buddies, Crayola, Silly Scents, Anticavity Fluoride Toothpaste, (sodium fluoride0.243%) Watermelon Flavor, Net Wt. 4.0 oz (113g), Distributed by Ashtel...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0056-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0067-2027",
+   "date": "2026-10-28",
+   "title": "BB (Brush Buddies) Advanced Whitening, Anti-Cavity Fluoride Toothpaste, (sodium fluoride 0,24%) Peppermint, Net Wt 3.5 oz (99g), Distributed by Ashtel Studio...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0067-2027%22"
+  },
+  {
+   "agency": "FDA",
+   "source": "fda-drug",
+   "jurisdiction": "US",
+   "recallId": "D-0058-2027",
+   "date": "2026-10-28",
+   "title": "Brush Buddies, My Little Pony Scents Anticavity Fluoride Toothpaste, (sodium fluoride 0.243%) Bubble Gum Flavor, Net Wt. 4.0 oz (113g), Distributed by Ashtel...",
+   "productType": "Drugs",
+   "productCategory": "drug",
+   "hazard": "CGMP Deviations.",
+   "hazardCategories": [
+    "regulatory-violation"
+   ],
+   "classification": "Class II",
+   "severity": "medium",
+   "firm": "PRITAM INTERNATIONAL PRIVATE LIMITED",
+   "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number:%22D-0058-2027%22"
   }
  ]
 }
