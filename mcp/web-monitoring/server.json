@@ -2,18 +2,18 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.owlabee/web-monitoring",
   "title": "Web & Business Monitoring (DMARC, sitemaps, Shopify, jobs)",
-  "description": "Monitor domain SPF/DMARC/WHOIS, website changes, Shopify prices, ATS jobs, Bluesky and podcasts.",
+  "description": "Monitor DMARC/WHOIS, site changes, Shopify and WooCommerce prices, ATS jobs, Bluesky, podcasts.",
   "repository": {
     "url": "https://github.com/owlabee/owlabee",
     "source": "github",
     "subfolder": "mcp/web-monitoring"
   },
   "websiteUrl": "https://owlabee.com/",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=owlabee/spf-dmarc-dkim-checker,owlabee/website-change-monitor,owlabee/shopify-catalog-monitor,owlabee/job-postings-api,owlabee/bluesky-monitor,owlabee/podcast-rss-scraper",
+      "url": "https://mcp.apify.com/?tools=owlabee/spf-dmarc-dkim-checker,owlabee/website-change-monitor,owlabee/shopify-catalog-monitor,owlabee/job-postings-api,owlabee/bluesky-monitor,owlabee/podcast-rss-scraper,owlabee/ecommerce-scraper",
       "headers": [
         {
           "name": "Authorization",
