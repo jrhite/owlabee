@@ -2,18 +2,18 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.owlabee/us-public-records",
   "title": "US Public Records (permits, grants, OSHA/EPA, recalls)",
-  "description": "US public records as JSON: building permits, Grants.gov/SAM.gov, OSHA/EPA, recalls, licenses, PACER.",
+  "description": "Public records as JSON: US permits, grants, OSHA/EPA, recalls, licenses, PACER; EU/UK/AU tenders.",
   "repository": {
     "url": "https://github.com/owlabee/owlabee",
     "source": "github",
     "subfolder": "mcp/us-public-records"
   },
   "websiteUrl": "https://owlabee.com/",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.apify.com/?tools=owlabee/building-permits-scraper,owlabee/accela-energov-permit-scraper,owlabee/grants-gov-api,owlabee/grant-matching,owlabee/osha-epa-inspections,owlabee/product-recall-feed,owlabee/license-verification-api,owlabee/pacer-docket-monitor",
+      "url": "https://mcp.apify.com/?tools=owlabee/building-permits-scraper,owlabee/accela-energov-permit-scraper,owlabee/grants-gov-api,owlabee/grant-matching,owlabee/osha-epa-inspections,owlabee/product-recall-feed,owlabee/license-verification-api,owlabee/pacer-docket-monitor,owlabee/tenders-scraper",
       "headers": [
         {
           "name": "Authorization",
