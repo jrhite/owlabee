@@ -92,7 +92,7 @@ ${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('\n
 </table></div>`;
 }
 
-function datasetLd(ctx, { path, name, description, snap, credit, sources }) {
+function datasetLd(ctx, { path, name, description, snap, credit, sources, license }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
@@ -103,6 +103,9 @@ function datasetLd(ctx, { path, name, description, snap, credit, sources }) {
     creator: { '@type': 'Organization', name: ctx.SITE_NAME, url: ctx.BASE_URL },
     isAccessibleForFree: true,
     creditText: credit,
+    // Google's Dataset rich result expects `license`. These pages mix sources, so it names each source's terms and
+    // points to the section of the page that states them, instead of claiming one licence for everything.
+    license: { '@type': 'CreativeWork', name: license.name, url: ctx.BASE_URL + path + '#' + license.anchor },
     isBasedOn: sources,
     distribution: [{ '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `${ctx.BASE_URL}data/${snap.dataset}.json` }],
   };
@@ -180,7 +183,7 @@ ${agencySections.join('\n')}
     ],
     related: [['../../product-recalls-api/', 'Product recalls API guide'], ['../../compare/product-recall-data-sources/', 'Product recall data sources compared'], ['../', 'All free data pages']],
   });
-  const jsonld = datasetLd(ctx, { path: page.path, name: page.title, description: page.description, snap, credit: 'owlabee, from FDA (openFDA), NHTSA, CPSC, Health Canada (OGL – Canada), OPSS, MHRA and FSA (OGL v3.0) and EU Safety Gate (© European Union, CC BY 4.0)', sources: ['https://open.fda.gov/', 'https://www.nhtsa.gov/', 'https://www.cpsc.gov/', 'https://recalls-rappels.canada.ca/', 'https://www.gov.uk/', 'https://ec.europa.eu/safety-gate-alerts/'] });
+  const jsonld = datasetLd(ctx, { path: page.path, name: page.title, description: page.description, snap, credit: 'owlabee, from FDA (openFDA), NHTSA, CPSC, Health Canada (OGL – Canada), OPSS, MHRA and FSA (OGL v3.0) and EU Safety Gate (© European Union, CC BY 4.0)', sources: ['https://open.fda.gov/', 'https://www.nhtsa.gov/', 'https://www.cpsc.gov/', 'https://recalls-rappels.canada.ca/', 'https://www.gov.uk/', 'https://ec.europa.eu/safety-gate-alerts/'], license: { anchor: 'sources', name: 'Each source keeps its own terms: US federal data (FDA, NHTSA, CPSC); Open Government Licence – Canada; Open Government Licence v3.0 (UK); CC BY 4.0 (EU Safety Gate)' } });
   return { body, jsonld, lastmod: day(snap.generatedAt) };
 }
 
@@ -238,7 +241,7 @@ ${sledSections.join('\n')}
     ],
     related: [['../../grants-gov-api/', 'Grants.gov API guide'], ['../../sam-gov-contract-opportunities/', 'SAM.gov contract opportunities guide'], ['../../compare/grants-gov-api-alternatives/', 'Grants.gov API vs alternatives'], ['../', 'All free data pages']],
   });
-  const jsonld = datasetLd(ctx, { path: page.path, name: page.title, description: page.description, snap, credit: 'owlabee, from the Grants.gov search2 API and the open-data portals of the City of Los Angeles, Montgomery County (MD) and the State of Delaware', sources: ['https://www.grants.gov/', ...Object.values(SLED_SOURCES).map(([, u]) => u)] });
+  const jsonld = datasetLd(ctx, { path: page.path, name: page.title, description: page.description, snap, credit: 'owlabee, from the Grants.gov search2 API and the open-data portals of the City of Los Angeles, Montgomery County (MD) and the State of Delaware', sources: ['https://www.grants.gov/', ...Object.values(SLED_SOURCES).map(([, u]) => u)], license: { anchor: 'sources', name: 'Each source keeps its own terms: US federal data (Grants.gov) and the open-data terms of each city, county and state named' } });
   return { body, jsonld, lastmod: day(snap.generatedAt) };
 }
 
@@ -292,7 +295,7 @@ ${citySections.join('\n')}
     ],
     related: [['../../building-permits-api/', 'Building permits API guide'], ['../../accela-energov-permits/', 'Accela and EnerGov permits guide'], ['../../compare/building-permit-data-apis/', 'Building permit data APIs compared'], ['../', 'All free data pages']],
   });
-  const jsonld = datasetLd(ctx, { path: page.path, name: page.title, description: page.description, snap, credit: 'owlabee, from the open-data portals of the cities named', sources: Object.values(PERMIT_SOURCES).map(([, u]) => u).filter(Boolean) });
+  const jsonld = datasetLd(ctx, { path: page.path, name: page.title, description: page.description, snap, credit: 'owlabee, from the open-data portals of the cities named', sources: Object.values(PERMIT_SOURCES).map(([, u]) => u).filter(Boolean), license: { anchor: 'notice', name: 'Each city publishes its permit records under its own open-data terms' } });
   return { body, jsonld, lastmod: day(snap.generatedAt) };
 }
 
